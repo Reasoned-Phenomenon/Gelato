@@ -33,6 +33,9 @@
 </table>
 </form>
 <br>
+<button type="button" id="btnSave">저장</button>
+<button type="button" id="btnAdd">추가</button>
+<button type="button" id="btnDel">삭제</button>
 <hr>
 <br>
 <div id="grid"></div>
@@ -61,7 +64,13 @@ const columns = [
 			},
 			{
 			  header: '중분류',
-			  name: 'codeId'
+			  name: 'codeId',
+			  sortingType: 'desc',
+	          sortable: true,
+	          validation: {
+	              regExp: /[a-zA-Z0-9]{1,6}/
+	           },
+			  editor: 'text'
 			},
 			{
 			  header: '코드이름',
@@ -70,74 +79,73 @@ const columns = [
 			},
 			{
 			  header: '코드상세설명',
-			  name: 'codeIdDc'
+			  name: 'codeIdDc',
+			  editor: 'text'
 			},
 			{
 			    header: '사용여부',
-			    name: 'useAt'        
+			    name: 'useAt',
+			    editor: 'checkbox'
 			 }
 		];
 		
-//그리드 데이터
-const dataSource = {
+	//그리드 데이터
+	const dataSource = {
+			
 		  api: {
 		    readData: 	{ 	
 		    				url: '${path}/com/findComCode.do', 
 					    	method: 'GET'
-		    			}
-		   /*  			,
+		    			},
 		    modifyData : { 	
-							url: '${pageContext.request.contextPath}/modifyData', 
+							url: '${path}/com/modifyData.do', 
 					    	method: 'PUT'
-						} */
+						} 
 		  },
+		  
 		  contentType: 'application/json'
+		  
 	};
 		
-/* const dataSource = []; */
-		
-//그리드 생성
-const grid = new Grid({
+	//그리드 생성
+	const grid = new Grid({
 	  el: document.getElementById('grid'),
 	  data : dataSource,
-	  rowHeaders:['checkBox'],
+	  rowHeaders:['rowNum','checkbox'],
 	  columns
+	  /* ,draggable: true */
 	});
 	
 
 //그리드 이벤트	
-grid.on('click', (ev) => {
+	grid.on('click', (ev) => {
 	  	console.log('clicked!!');
 		console.log(ev)
 	});
 	
-/* grid.on('response', function(ev) {
+	btnSave.addEventListener("click",function(){
+		grid.request('modifyData');
+	})	
+
+	grid.on('response', function(ev) {
 		console.log('response')
 		console.log(ev)
 	})
 	
-	//버튼 - 이벤트 리스너
 	btnAdd.addEventListener("click",function(){
 		grid.appendRow({
-			"id": "11111",
-			"city": "Andong",
-			"country": "South Korea",
-			"wdate": "2022-02-01"
-		},{at:0,focus:true})
+			"clCode": "GEL"
+		},{focus:true})
 	})
-
+	
 	btnDel.addEventListener("click",function(){
 		//removeRow(rowKey, options)
 		grid.removeCheckedRows(true); //true -> 확인 받고 삭제 / false는 바로 삭제
 	})
 	
-	btnSave.addEventListener("click",function(){
-		grid.request('modifyData');
-	})
-	
 	btnFind.addEventListener("click",function(){
 		//grid.
-	}) */
+	})
 </script>
 </body>
 </html>
