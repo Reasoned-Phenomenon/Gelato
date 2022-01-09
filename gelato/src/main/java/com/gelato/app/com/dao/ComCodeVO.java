@@ -15,4 +15,10 @@ public class ComCodeVO {
 	String lastUpdtPnttm;         
 	String lastUpdusrId;
 	
+	//조인을 위한 필드
+	String code;
+	String codeNm;
+	String codeDc;
+	String codeIdUseAt;
+	String codeUseAt;
 }

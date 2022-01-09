@@ -38,7 +38,7 @@
 <button type="button" class="btn cur-p btn-outline-primary" id="btnAdd">추가</button>
 <button type="button" class="btn cur-p btn-outline-primary" id="btnDel">삭제</button>
 
-<button type="button" class="model_bt btn btn-primary" data-toggle="modal" data-target="#myModal" id="">Click Here to Open Model</button>
+<button type="button" class="model_bt btn btn-primary" data-toggle="modal" data-target="#myModal" id="">Modal</button>
 
 <hr>
 <br>
@@ -84,37 +84,61 @@ Grid.applyTheme('striped', {
 
 //그리드 컬럼	
 const columns = [
-			{
-			  header: '대분류',
+			/* {
+			  header: 'CL코드',
 			  name: 'clCode'
-			},
+			}, */
 			{
-			  header: '중분류',
+			  header: '코드ID',
 			  name: 'codeId',
 			  sortingType: 'desc',
 	          sortable: true,
 	          validation: {
 	              regExp: /^[a-zA-Z0-9]{1,6}$/
 	           },
-			  editor: 'text'
+	           editor:'text'
 			},
+			/* 
 			{
-			  header: '코드이름',
+			  header: '코드ID이름',
 			  name: 'codeIdNm',
 			  editor: 'text'
 			},
 			{
-			  header: '코드상세설명',
+			  header: '코드ID상세설명',
 			  name: 'codeIdDc',
 			  editor: 'text'
 			},
 			{
-			    header: '사용여부',
-			    name: 'useAt',
+			    header: '코드ID 사용여부',
+			    name: 'codeIdUseAt',
+			    align:'center',
+			    editor: 'checkbox'
+			 }, */
+			 {
+				  header: '코드',
+				  name: 'code',
+				  editor: 'text'
+			},
+			{
+				  header: '코드이름',
+				  name: 'codeNm',
+				  editor: 'text'
+			},
+			{
+				  header: '코드상세',
+				  name: 'codeDc',
+				  editor: 'text'
+			},
+			{
+			    header: '코드 사용여부',
+			    name: 'codeUseAt',
+			    align:'center',
 			    editor: 'checkbox'
 			 }
 		];
-		
+
+
 	//그리드 데이터
 	const dataSource = {
 			
@@ -139,9 +163,7 @@ const columns = [
 	  data : dataSource,
 	  rowHeaders:['rowNum','checkbox'],
 	  columns
-	  /* ,draggable: true */
 	});
-	
 
 //그리드 이벤트	
 	grid.on('click', (ev) => {
@@ -167,6 +189,7 @@ const columns = [
 	
 	btnDel.addEventListener("click",function(){
 		//removeRow(rowKey, options)
+		
 		grid.removeCheckedRows(true); //true -> 확인 받고 삭제 / false는 바로 삭제
 	})
 	
@@ -190,23 +213,30 @@ const columns = [
 	 const modalGrid = new tui.Grid({
 	      el: document.getElementById('modalGrid'),
 	      data: testData,
+	      width: 450,
+	      bodyHeight:200,
 	      columns: [
 	        {
-	          header: 'codeId',
-	          name: 'codeId'
+	          header: 'CODE_ID',
+	          name: 'CODE_ID'
 	        },
 	        {
-	          header: 'code',
-	          name: 'code'
+	          header: 'CODE',
+	          name: 'CODE'
 	        },
 	        {
-	          header: 'codeNm',
-	          name: 'codeNm'
+	          header: 'CODE_NM',
+	          name: 'CODE_NM'
 	        },
 	        {
-	          header: 'codeDc',
-	          name: 'codeDc'
-		    }
+	          header: 'CODE_DC',
+	          name: 'CODE_DC'
+		    },
+	        {
+	          header: 'USE_AT',
+	          name: 'USE_AT',
+	          align: 'center'
+			}
 	      ]
 	    });
 	 
@@ -233,6 +263,11 @@ const columns = [
 		console.log(result)
 	}) */
 	
+	grid.on("afterChange",function(ev){
+		console.log("변경됨")
+		console.log(ev.changes)
+		
+	})
 	
 </script>
 </body>

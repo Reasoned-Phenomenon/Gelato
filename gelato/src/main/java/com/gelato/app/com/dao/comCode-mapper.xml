@@ -3,18 +3,23 @@
 <mapper namespace="com.gelato.app.com.dao.ComCodeMapper">
 
 <select id="findComCode" resultType="ComCodeVO">
+
 	SELECT 
-			CODE_ID,   
-			CODE_ID_NM,  
-			CODE_ID_DC, 
-			USE_AT,      
-			CL_CODE,       
-			FRST_REGIST_PNTTM,         
-			FRST_REGISTER_ID, 
-			LAST_UPDT_PNTTM,         
-			LAST_UPDUSR_ID
+			c.CODE_ID 		as CODE_ID,   
+			c.CODE_ID_NM 	as CODE_ID_NM,  
+			c.CODE_ID_DC 	as CODE_ID_DC, 
+			c.USE_AT 		as code_id_use_at,      
+			c.CL_CODE 		as CL_CODE,
+			d.CODE 			as CODE,
+			d.USE_AT 		as code_use_at,
+			d.CODE_NM 		as codeNm,
+			d.CODE_DC 		as codeDc
 			 
-	FROM COMTCCMMNCODE
+	FROM COMTCCMMNCODE c
+	LEFT JOIN COMTCCMMNDETAILCODE d
+	ON c.CODE_ID = d.CODE_ID
+	WHERE c.USE_AT = 'Y'
+	
 </select>
 
 <insert id="insertComCode">
