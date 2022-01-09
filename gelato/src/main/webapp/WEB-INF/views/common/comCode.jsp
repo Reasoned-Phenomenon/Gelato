@@ -33,14 +33,40 @@
 </table>
 </form>
 <br>
-<button type="button" id="btnSave">저장</button>
-<button type="button" id="btnAdd">추가</button>
-<button type="button" id="btnDel">삭제</button>
+
+<button type="button" class="btn cur-p btn-outline-primary" id="btnSave">저장</button>
+<button type="button" class="btn cur-p btn-outline-primary" id="btnAdd">추가</button>
+<button type="button" class="btn cur-p btn-outline-primary" id="btnDel">삭제</button>
+
+<button type="button" class="model_bt btn btn-primary" data-toggle="modal" data-target="#myModal" id="">Click Here to Open Model</button>
+
 <hr>
 <br>
 <div id="grid"></div>
 
-
+<!-- model popup -->
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h4 class="modal-title">공통 코드 조회</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+         </div>
+         <!-- Modal body -->
+         <div class="modal-body">
+         <button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
+            <div id="modalGrid"></div>
+         </div>
+         <!-- Modal footer -->
+         <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- end model popup -->
 <script>
 var Grid = tui.Grid;
 
@@ -68,7 +94,7 @@ const columns = [
 			  sortingType: 'desc',
 	          sortable: true,
 	          validation: {
-	              regExp: /[a-zA-Z0-9]{1,6}/
+	              regExp: /^[a-zA-Z0-9]{1,6}$/
 	           },
 			  editor: 'text'
 			},
@@ -98,7 +124,7 @@ const columns = [
 					    	method: 'GET'
 		    			},
 		    modifyData : { 	
-							url: '${path}/com/modifyData.do', 
+							url: '${path}/com/comCodeModifyData.do', 
 					    	method: 'PUT'
 						} 
 		  },
@@ -134,7 +160,8 @@ const columns = [
 	
 	btnAdd.addEventListener("click",function(){
 		grid.appendRow({
-			"clCode": "GEL"
+			"clCode": "GEL",
+			"useAt":"Y"
 		},{focus:true})
 	})
 	
@@ -143,9 +170,70 @@ const columns = [
 		grid.removeCheckedRows(true); //true -> 확인 받고 삭제 / false는 바로 삭제
 	})
 	
-	btnFind.addEventListener("click",function(){
-		//grid.
+	let testData = [{
+			
+			  api: {
+			    readData: 	{ 	
+			    				url: '${path}/com/findComCodeDeta.do', 
+						    	method: 'GET'
+			    			},
+			    modifyData : { 	
+								url: '${path}/com/comCodeDetaModifyData.do', 
+						    	method: 'PUT'
+							} 
+			  },
+			  
+			  contentType: 'application/json'
+			  
+		}];
+	
+	 const modalGrid = new tui.Grid({
+	      el: document.getElementById('modalGrid'),
+	      data: testData,
+	      columns: [
+	        {
+	          header: 'codeId',
+	          name: 'codeId'
+	        },
+	        {
+	          header: 'code',
+	          name: 'code'
+	        },
+	        {
+	          header: 'codeNm',
+	          name: 'codeNm'
+	        },
+	        {
+	          header: 'codeDc',
+	          name: 'codeDc'
+		    }
+	      ]
+	    });
+	 
+	btnFind.addEventListener('click',function (ev) {
+		console.log(ev)
+		fetch("${path}/com/comCodeDetaCodeId.do", {
+		  method: 'POST',
+		  body: JSON.stringify({codeId:"INF001"}),
+		  headers:{
+		    'Content-Type': 'application/json'
+		  }})
+		.then(res=>res.json())
+		.then(result=> {
+			console.log(result)
+			testData = result
+			modalGrid.resetData(testData);
+		})
 	})
+	
+	/* fetch("${path}/com/comCodeDetaCodeId.do",{codeId:"INF001"})
+	.then(res=>res.json())
+	.then(result=> {
+		console.log("여기~~")
+		console.log(result)
+	}) */
+	
+	
 </script>
 </body>
 </html>

@@ -27,7 +27,7 @@ public class ComCodeController {
 		return "grid";
 	}
 	
-	@PutMapping("/com/modifyData.do")
+	@PutMapping("/com/comCodeModifyData.do")
 	@ResponseBody
 	public boolean modifyData (@RequestBody ComCodeModifyVO mvo) {
 		System.out.println(mvo);
