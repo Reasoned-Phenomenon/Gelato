@@ -16,4 +16,10 @@
 		where not os.st_fg = 'finish' group by os.order_id, os.order_dt, ve.vend_name, os.oust_dt
 		order by os.oust_dt asc, to_number(sum(osd.qy)) desc
 	</select>
+	
+<!-- 생산계획관리 - 검색창 modal -->
+	<select id="searchPlanList" resultType="prdPlanMngVO">
+		select plan_id, name, dt
+		from prod_plan
+	</select>
 </mapper>

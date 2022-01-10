@@ -18,5 +18,10 @@ public class PrdPlanMngServiceImpl implements PrdPlanMngService{
 	public List<PrdPlanMngVO> OrderShtList() {
 		return ppmMapper.OrderShtList();
 	}
+
+	@Override
+	public List<PrdPlanMngVO> searchPlanList() {
+		return ppmMapper.searchPlanList();
+	}
 	
 }
