@@ -82,26 +82,30 @@
                   
                   <!-- 자재관리 메뉴 -->
                   <li class="active">
-                     <a href="#MATERIAL" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog yellow_color"></i> <span>자재 관리</span></a>
+                     <a href="#MATERIAL" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>원자재 관리</span></a>
                      <ul class="collapse list-unstyled" id="MATERIAL">
                         <li>
-                           <a href="#">> <span>공통 코드 관리</span></a>
+                           <a href="#">> <span>원자재 발주관리</span></a>
                         </li>
                         
                         <li>
-                           <a href="#">> <span>자재 코드 관리</span></a>
+                           <a href="#">> <span>원자재 입고검사관리</span></a>
                         </li>
                         
                         <li>
-                           <a href="#">> <span>BOM 코드 관리</span></a>
+                           <a href="#">> <span>원자재 입고관리</span></a>
                         </li>
                         
                         <li>
-                           <a href="#">> <span>완제품 코드 관리</span></a>
+                           <a href="#">> <span>원자재 출고관리</span></a>
                         </li>
                         
                         <li>
-                           <a href="#">> <span>거래처 코드 관리</span></a>
+                           <a href="#">> <span>원자재 재고관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>원자재 불량관리</span></a>
                         </li>
                         
                      </ul>
