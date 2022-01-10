@@ -108,7 +108,7 @@
                      <a href="#production" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog yellow_color"></i> <span>생산 관리</span></a>
                      <ul class="collapse list-unstyled" id="production">
                         <li>
-                           <a href="#">> <span>생산 계획 관리</span></a>
+                           <a href="${path }/prd/prdPlanMng.do">> <span>생산 계획 관리</span></a>
                         </li>
                         
                         <li>
