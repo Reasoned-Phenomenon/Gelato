@@ -26,4 +26,5 @@ public class RwmatroVO {
 	String untprc;
 	String qy;
 	String vendId;
+	String vendName;
 }

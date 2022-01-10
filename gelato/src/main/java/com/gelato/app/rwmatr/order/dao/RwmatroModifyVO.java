@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class RwmatroModifyVO {
 
-	List<RwmatroModifyVO> createdRows;
-	List<RwmatroModifyVO> updatedRows;
-	List<RwmatroModifyVO> deletedRows;
+	List<RwmatroVO> createdRows;
+	List<RwmatroVO> updatedRows;
+	List<RwmatroVO> deletedRows;
 }
