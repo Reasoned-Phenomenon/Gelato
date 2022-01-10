@@ -19,7 +19,7 @@ public class EqmController {
 	}
 	
 	//등록
-	@PostMapping("/eqm/eqmRegister.do")
+	@PostMapping("insert")
 	public String insert(Eqm eqm) {
 		service.insertEqm(eqm);
 		return "redirect:eqmManagement";
