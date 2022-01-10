@@ -16,8 +16,8 @@ public class ComCodeServiceImpl implements ComCodeService {
 	@Autowired ComCodeMapper mapper;
 	
 	@Override
-	public List<ComCodeVO> findComCode() {
-		return mapper.findComCode();
+	public List<ComCodeVO> findComCode(ComCodeVO vo) {
+		return mapper.findComCode(vo);
 	}
 
 	@Override

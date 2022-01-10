@@ -7,7 +7,7 @@ import com.gelato.app.com.comCode.dao.ComCodeVO;
 
 public interface ComCodeService {
 	
-	List<ComCodeVO> findComCode ();
+	List<ComCodeVO> findComCode (ComCodeVO vo);
 	
 	int modifyComCode (ComCodeModifyVO mvo);
 }

@@ -27,17 +27,38 @@
 	</tbody>
 </table>
 
+<!-- model popup -->
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h4 class="modal-title">공통 코드 조회</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+         </div>
+         <!-- Modal body -->
+         <div class="modal-body">
+         <button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
+            <div id="modalGrid"></div>
+         </div>
+         <!-- Modal footer -->
+         <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- end model popup -->
 <br>
 
 <div align="right">
-	
-	<button type="button" class="btn cur-p btn-outline-primary" id="btnModal">모달창 테스트</button>
-	<button type="button" class="btn cur-p btn-outline-primary" id="btnAdd">CODE 추가</button>
-	<button type="button" class="btn cur-p btn-outline-primary" id="btnSave">저장</button>
-	<button type="button" class="btn cur-p btn-outline-primary" id="btnDel">삭제</button>
-</div>
+<button type="button" class="btn cur-p btn-outline-primary" id="btnAdd">CODE 추가</button>
+<button type="button" class="btn cur-p btn-outline-primary" id="btnSave">저장</button>
+<button type="button" class="btn cur-p btn-outline-primary" id="btnDel">삭제</button>
 
-<div id="dialog-form" title="모달창 테스트">여기에</div>
+<button type="button" class="model_bt btn btn-primary" data-toggle="modal" data-target="#myModal" id="">Modal</button>
+</div>
 
 <hr>
 <br>
@@ -77,17 +98,17 @@ const codeIdGrid = new Grid({
   	selectionUnit: 'row',
   	columns:[
 			{
-			  header: '코드 ID',
+			  header: '코드ID',
 			  name: 'codeId',
 			  sortingType: 'desc',
 	          sortable: true
 			},
 			{
-			  header: '코드 ID 이름',
+			  header: '코드ID이름',
 			  name: 'codeIdNm'
 			},
 			{
-			  header: '코드 ID 상세',
+			  header: '코드ID이름',
 			  name: 'codeIdDc',
 			  hidden:true
 			}
@@ -194,28 +215,15 @@ const codeGrid = new tui.Grid({
 	btnSearch.addEventListener("click", function() {
 		let targetName = document.getElementById("inputName").value;
 		codeIdGrid.readData(1, {codeIdNm:targetName}, true);
-	});
+	})
 
 	//모달창
-	$(function(){
-		let dialog = $( "#dialog-form" ).dialog({
-		      autoOpen: false,
-		      height: 500,
-		      width: 700,
-		      modal: true
-		     
-		});
-		
-		btnModal.addEventListener("click",function(){
-			console.log("모달클릭")
-			dialog.dialog( "open" );
-			$('#dialog-form').load("${path}/com/comModal.do",function () {console.log('로드됨')})
-		})
+	let dialog = $( "#dialog-form" ).dialog({
+
 		
 	})
-	
 
-	
+
 
 
 </script>

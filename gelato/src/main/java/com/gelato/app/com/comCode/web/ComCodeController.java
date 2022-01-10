@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gelato.app.com.comCode.dao.ComCodeModifyVO;
+import com.gelato.app.com.comCode.dao.ComCodeVO;
 import com.gelato.app.com.comCode.service.ComCodeService;
 
 @Controller
@@ -22,8 +23,8 @@ public class ComCodeController {
 	}
 	
 	@RequestMapping("/com/findComCode.do")
-	public String findComCode(Model model) {
-		model.addAttribute("datas",service.findComCode());
+	public String findComCode(Model model, ComCodeVO vo) {
+		model.addAttribute("datas",service.findComCode(vo));
 		return "grid";
 	}
 	
@@ -33,6 +34,12 @@ public class ComCodeController {
 		System.out.println(mvo);
 		service.modifyComCode(mvo);
 		return true;
+	}
+	
+	@RequestMapping("/com/comModal.do")
+	public String getModal() {
+		System.out.println("modal");
+		return "/common/comModal";
 	}
 	
 }
