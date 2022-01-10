@@ -10,38 +10,63 @@
 </head>
 <body>
 <h3>공통 코드 관리</h3>
-<form>
+
+<form id="frm" name="frm" action="">
 <table border="1">
 	<thead>
 		<tr>
-			<th>코드ID</th>
-			<th>코드</th>
+			<th colspan="2">코드</th>
 		</tr>
 	</thead>
 		
 	<tbody>
 		<tr>
-			<td>코드ID</td>
-			<td>코드 : <input type="text" id="" name=""></td>
+			<td>이름 검색</td>
+			<td><input type="text" id="inputName" name="inputName"></td>
+			<td><button id="btnSearch">검색</button></td>
 		</tr>
 	</tbody>
 </table>
 </form>
+
+<!-- model popup -->
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h4 class="modal-title">공통 코드 조회</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+         </div>
+         <!-- Modal body -->
+         <div class="modal-body">
+         <button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
+            <div id="modalGrid"></div>
+         </div>
+         <!-- Modal footer -->
+         <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- end model popup -->
 <br>
 
-<button type="button" class="btn cur-p btn-outline-primary" id="btnSave">저장</button>
+<div align="right">
 <button type="button" class="btn cur-p btn-outline-primary" id="btnAdd">추가</button>
+<button type="button" class="btn cur-p btn-outline-primary" id="btnSave">저장</button>
 <button type="button" class="btn cur-p btn-outline-primary" id="btnDel">삭제</button>
 
 <button type="button" class="model_bt btn btn-primary" data-toggle="modal" data-target="#myModal" id="">Modal</button>
-
+</div>
 <hr>
 <br>
 <div class="row">
 	<div id="codeIdGrid" class="col-sm-4"></div>
 	<div id="codeGrid" class="col-sm-8"></div>
 </div>
-
 
 <script>
 let codeParam;
@@ -90,31 +115,18 @@ const codeIdGrid = new Grid({
 			}
 		]
 });
-/* codeIdGrid.on('click', function (ev) {
-	  var record = {
-	    start: [ev.rowKey, 0],
-	    end: [ev.rowKey, codeIdGrid.getColumns().length]
-	  }
-	  codeIdGrid.setSelectionRange(record);
-}); */
-//그리드 이벤트	
-codeIdGrid.on('click', (ev) => {
-	if(ev.rowKey !=''){
-		codeParam = codeIdGrid.getRow(ev.rowKey).codeId;
-		
-		codeGrid.readData(1, {codeId:codeIdGrid.getRow(ev.rowKey).codeId}, true);
-	}
 
-	/* console.log(ev.rowKey)
-	console.log(ev.columnName)
-	console.log(codeIdGrid.getValue(ev.rowKey,ev.columnName)) */
+
+//그리드 이벤트	
+codeIdGrid.on('click', (ev) => {	
 	
-  	/* if(ev.targetType == 'cell'){
-  		if(ev.columnName == 'codeId') {
-  			codeParam = {codeId:codeIdGrid.getValue(ev.rowKey,ev.columnName)}
-  			codeGrid.request('modifyData');
-  		}
-  	} */
+	codeIdGrid.setSelectionRange({
+	      start: [ev.rowKey, 0],
+	      end: [ev.rowKey, codeIdGrid.getColumns().length-1]
+	  });
+	
+	codeParam = codeIdGrid.getRow(ev.rowKey).codeId;
+	codeGrid.readData(1, {codeId:codeIdGrid.getRow(ev.rowKey).codeId}, true);
 	
 });
 
@@ -134,58 +146,64 @@ const codeGrid = new tui.Grid({
 			contentType: 'application/json',
 			initialRequest: false
 	},
+	rowHeaders:['checkbox'],
+  	selectionUnit: 'row',
     columns: [
-				{
+    	{
+		  header: '코드ID',
+		  name: 'codeId',
+		  hidden:true
+		},
+		{
 		  header: 'CODE',
-		  name: 'CODE'
+		  name: 'code',
+		  editor:'text',
+          validation: {
+              regExp: /^[a-zA-Z0-9]{1,6}$/
+           }
 		},
 		{
 		  header: 'CODE_NM',
-		  name: 'CODE_NM'
+		  name: 'codeNm',
+		  editor:'text'
 		},
 		{
 		  header: 'CODE_DC',
-		  name: 'CODE_DC'
+		  name: 'codeDc',
+		  editor:'text'
 		},
 		{
 		  header: 'USE_AT',
-		  name: 'USE_AT',
-		  align: 'center'
+		  name: 'useAt',
+		  align: 'center',
+		  editor:'radio'
 		}
      ]
 });
 
 	//버튼 이벤트
 	btnSave.addEventListener("click",function(){
-		//grid.request('modifyData');
+		codeGrid.request('modifyData');
 	})	
 
 	btnAdd.addEventListener("click",function(){
-		//grid.appendRow({focus:true})
+		console.log(codeParam)
+		codeGrid.appendRow({codeId:codeParam},{focus:true})
 	})
 	
 	btnDel.addEventListener("click",function(){
 		//removeRow(rowKey, options)
-		//grid.removeCheckedRows(true); //true -> 확인 받고 삭제 / false는 바로 삭제
-		//grid.request('modifyData');
+		codeGrid.removeCheckedRows(true); //true -> 확인 받고 삭제 / false는 바로 삭제
+		codeGrid.request('modifyData');
 	})
 	 
-	/* btnFind.addEventListener('click',function (ev) {
-		console.log(ev)
-		fetch("${path}/com/comCodeDetaCodeId.do", {
-		  method: 'POST',
-		  body: JSON.stringify({codeId:"INF001"}),
-		  headers:{
-		    'Content-Type': 'application/json'
-		  }})
-		.then(res=>res.json())
-		.then(result=> {
-			console.log(result)
-			testData = result
-			modalGrid.resetData(testData);
-		})
-	}) */
 
+	/* btnSearch.addEventListener("click",function(){
+		
+		let nameVal = document.getElementById('inputName').value;
+		console.log(nameVal)
+		codeIdGrid.filter('codeIdNm', [{code: 'Contains', value: nameVal}]);
+	}) */
 	
 </script>
 </body>

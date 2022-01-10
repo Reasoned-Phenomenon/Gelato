@@ -4,6 +4,7 @@
 
 <select id="findComCodeDeta" resultType="ComCodeDetaVO">
 	SELECT 
+		CODE_ID,
 		CODE,
 		CODE_NM,
 		CODE_DC,
@@ -29,5 +30,35 @@
 
 </select>
 
+<insert id="insertComCodeDeta">
+	INSERT INTO COMTCCMMNDETAILCODE (
+										CODE_ID,
+										CODE,
+										CODE_NM,
+										CODE_DC,
+										USE_AT,
+										FRST_REGIST_PNTTM,
+										FRST_REGISTER_ID,
+										LAST_UPDT_PNTTM,
+										LAST_UPDUSR_ID
+									)
+							VALUES(
+										UPPER(#{codeId}),
+										UPPER(#{code}),
+										#{codeNm},
+										#{codeDc},
+										#{useAt},
+										sysdate,
+										'Admin',
+										sysdate,
+										'Admin'
+									)
+</insert>
+
+<delete id="deleteComCodeDeta">
+
+	DELETE FROM COMTCCMMNDETAILCODE
+	WHERE UPPER(CODE) = UPPER(#{code})
+</delete>
 
 </mapper>

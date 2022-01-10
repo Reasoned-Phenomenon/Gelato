@@ -1,4 +1,4 @@
-package com.gelato.app.com.dao;
+package com.gelato.app.com.comCode.dao;
 
 import java.util.List;
 
