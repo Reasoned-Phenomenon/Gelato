@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gelato.app.rwmatr.order.dao.RwmatroMapper">
+
+	<select id="rwmatrOrderList" resultType="RwmatroVO">
+		select rd.rwmatr_order_deta_id as rwmatr_order_deta_id, 
+		       r.nm, r.rwmatr_id as rwmatr_id, 
+		       rd.untprc as untprc, 
+		       rd.qy as qy, 
+		       v.vend_id as vend_id, 
+		       ro.order_dt as order_dt, 
+		       ro.dudt as dudt
+		from rwmatr_order_deta rd join rwmatr_order ro
+		    on(rd.order_id = ro.order_id)
+		join rwmatr r
+		    on(rd.rwmatr_id = r.rwmatr_id)
+		join vend v
+		    on(r.vend_id = v.vend_id)
+		order by 1 desc
+	</select>
+	
+	<insert id="rwmatrOrderInsert"></insert>
+
+</mapper>

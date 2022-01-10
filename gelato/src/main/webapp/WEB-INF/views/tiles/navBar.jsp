@@ -77,7 +77,7 @@
                      <a href="#MATERIAL" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>원자재 관리</span></a>
                      <ul class="collapse list-unstyled" id="MATERIAL">
                         <li>
-                           <a href="#">> <span>원자재 발주관리</span></a>
+                           <a href="${path }/rwmatr/rwmatrOrder.do">> <span>원자재 발주관리</span></a>
                         </li>
                         
                         <li>
