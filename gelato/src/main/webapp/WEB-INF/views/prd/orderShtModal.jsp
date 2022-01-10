@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,8 +19,9 @@ h1 {
 	<br>
 	<div id="ordershtGrid"></div>
 	
-	// rmf
-
+	<!-- 모달창에서 버튼구현 -->
+	<button type="button" id = "choOrderSht">선택</button>
+	<button type="button" id = "closeModal">취소</button>
 	<script>
 var Grid = tui.Grid;
 
@@ -39,8 +42,7 @@ const ordershtGrid = new Grid({
 	el: document.getElementById('ordershtGrid'),
   	data : {
 	  api: {
-	    readData: 	{ url: '', method: 'GET'},
-	    modifyData : { url: '', method: 'PUT'} 
+	    readData: { url:'${path}/prd/orderShtModal.do', method: 'GET'}
 	  },
 	  contentType: 'application/json'
 	},
@@ -49,27 +51,23 @@ const ordershtGrid = new Grid({
   	columns:[
   		  {
 		    header: '주문서코드',
-		    name: 'orderCd'
+		    name: 'orderId'
 		  },
 		  {
 		    header: '주문날짜',
 		    name: 'orderDt',
 		  },
 		  {
-		    header: '제품코드',
-		    name: 'prdt_id'
-		  },
-		  {
-			header: '제품명',
-			name:'prdt_nm',
-		  },
-		  {
-			header: '수량',
-			name:'qy',
+		    header: '고객사명',
+		    name: 'vendName'
 		  },
 		  {
 			header: '납기일자',
-			name:'oust_dt',
+			name:'oustDt',
+		  },
+		  {
+			header: '총량',
+			name:'qy',
 		  }
  		  
 		]

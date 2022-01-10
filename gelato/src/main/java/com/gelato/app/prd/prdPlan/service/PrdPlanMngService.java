@@ -8,6 +8,6 @@ import com.gelato.app.prd.prdPlan.dao.PrdPlanMngVO;
 
 public interface PrdPlanMngService {
 	
-	List<PrdPlanMngVO> findOrderSht();
+	List<PrdPlanMngVO> OrderShtList();
 
 }

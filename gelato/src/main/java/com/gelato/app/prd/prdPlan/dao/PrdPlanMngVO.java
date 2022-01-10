@@ -1,8 +1,11 @@
 package com.gelato.app.prd.prdPlan.dao;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
@@ -12,7 +15,12 @@ public class PrdPlanMngVO {
 	//order_sht
 	String orderId;
 	String vendId;
-	String oustDt;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	Date orderDt;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	Date oustDt;
 	String stFg;
 	String remk;
 	
@@ -24,8 +32,9 @@ public class PrdPlanMngVO {
 	//prod_plan
 	String planId;
 	String name;
-	@DateTimeFormat(pattern = "yyyyMMdd")
-	LocalDate dt;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	Date dt;
 	String prodDcnt;
 	String fg;
 	
@@ -47,6 +56,7 @@ public class PrdPlanMngVO {
 	String prcsId;
 	String useYn;
 	
-	
+	//vend
+	String vendName;
 	
 }

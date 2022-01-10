@@ -2,6 +2,7 @@ package com.gelato.app.prd.prdPlan.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gelato.app.prd.prdPlan.service.PrdPlanMngService;
@@ -9,17 +10,25 @@ import com.gelato.app.prd.prdPlan.service.PrdPlanMngService;
 @Controller
 public class PrdPlanMngController {
 
-	@Autowired PrdPlanMngService service;
+	@Autowired PrdPlanMngService prdPlanMngService;
 	
 	@RequestMapping("/prd/prdPlanMng.do")
 	public String prdPlanMng() {
-		System.out.println("11111");
+		System.out.println("생산계획관리 페이지 이동");
 		
 		// 생산계획관리 페이지
-		/* return "tiles/prd/prdPlanMng"; */
+		 return "tiles/prd/prdPlanMng"; 
 		
 		// 생산계획관리에 들어갈 주문서 modal jsp.
-		return "tiles/prd/orderShtModal";
+		/* return "tiles/prd/orderShtModal"; */
 	}
 	
+	// 주문서 list 출력
+	@RequestMapping("/prd/orderShtModal.do")
+	public String OrderShtList(Model model) {
+		System.out.println("주문서 list 출력");
+		System.out.println(model);
+		model.addAttribute("datas", prdPlanMngService.OrderShtList());
+		return "grid";
+	}
 }

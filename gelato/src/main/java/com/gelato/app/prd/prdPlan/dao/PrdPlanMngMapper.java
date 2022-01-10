@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface PrdPlanMngMapper {
 	
-	List<PrdPlanMngVO> findOrderSht();
+	List<PrdPlanMngVO> OrderShtList();
 }
