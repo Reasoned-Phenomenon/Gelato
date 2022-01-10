@@ -140,26 +140,26 @@
                   
                   <!-- 설비관리 메뉴 -->
                   <li class="active">
-                     <a href="#EQUIPMENT" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog yellow_color"></i> <span>설비 관리</span></a>
+                     <a href="#EQUIPMENT" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-wrench yellow_color"></i> <span>설비 관리</span></a>
                      <ul class="collapse list-unstyled" id="EQUIPMENT">
                         <li>
-                           <a href="#">> <span>공통 코드 관리</span></a>
+                           <a href="#">> <span>설비 등록</span></a>
                         </li>
                         
                         <li>
-                           <a href="#">> <span>자재 코드 관리</span></a>
+                           <a href="#">> <span>설비 관리</span></a>
                         </li>
                         
                         <li>
-                           <a href="#">> <span>BOM 코드 관리</span></a>
+                           <a href="#">> <span>설비 점검 관리</span></a>
                         </li>
                         
                         <li>
-                           <a href="#">> <span>완제품 코드 관리</span></a>
+                           <a href="#">> <span>설비 비가동 관리</span></a>
                         </li>
                         
                         <li>
-                           <a href="#">> <span>거래처 코드 관리</span></a>
+                           <a href="#">> <span>실시간 설비 상태</span></a>
                         </li>
                         
                      </ul>
