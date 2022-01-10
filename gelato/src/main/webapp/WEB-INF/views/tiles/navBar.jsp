@@ -116,25 +116,35 @@
                      <a href="#production" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog yellow_color"></i> <span>생산 관리</span></a>
                      <ul class="collapse list-unstyled" id="production">
                         <li>
-                           <a href="#">> <span>공통 코드 관리</span></a>
+                           <a href="#">> <span>생산 계획 관리</span></a>
                         </li>
                         
                         <li>
-                           <a href="#">> <span>자재 코드 관리</span></a>
+                           <a href="#">> <span>생산 계획 조회</span></a>
                         </li>
                         
                         <li>
-                           <a href="#">> <span>BOM 코드 관리</span></a>
+                           <a href="#">> <span>생산 지시 관리</span></a>
                         </li>
                         
                         <li>
-                           <a href="#">> <span>완제품 코드 관리</span></a>
+                           <a href="#">> <span>생산 지시 조회</span></a>
                         </li>
-                        
                         <li>
-                           <a href="#">> <span>거래처 코드 관리</span></a>
+                           <a href="#">> <span>생산 관리</span></a>
                         </li>
-                        
+                        <li>
+                           <a href="#">> <span>공정 실적</span></a>
+                        </li>
+                        <li>
+                           <a href="#">> <span>공정 관리</span></a>
+                        </li>
+                        <li>
+                           <a href="#">> <span>제품 공정 흐름도</span></a>
+                        </li>
+                        <li>
+                           <a href="#">> <span>완제품 품질 관리</span></a>
+                        </li>
                      </ul>
                   </li>
                   
