@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gelato.app.order.dao.OrderMapper">
+
+
+<select id="findOrder" resultType="OrderVO">
+	SELECT 
+		 a.order_id, a.vend_id, a.order_dt, a.oust_dt, a.st_fg, a.remk,
+	     b.order_sht_deta_id, b.prdt_id, b.qy
+	 FROM order_sht a JOIN order_sht_deta b
+      ON  a.order_id = b.order_id		
+</select>
+
+
+</mapper>
+
+	
+
+

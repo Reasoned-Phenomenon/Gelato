@@ -58,7 +58,7 @@
                      <a href="#sales" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog yellow_color"></i> <span>영업 관리</span></a>
                      <ul class="collapse list-unstyled" id="sales">
                         <li>
-                           <a href="#">> <span>주문서 관리</span></a>
+                           <a href="${path}/biz/ordSearch.do">> <span>주문서 관리</span></a>
                         </li>
                                                
                         <li>
@@ -73,7 +73,7 @@
                      <a href="#MATERIAL" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>원자재 관리</span></a>
                      <ul class="collapse list-unstyled" id="MATERIAL">
                         <li>
-                           <a href="#">> <span>원자재 발주관리</span></a>
+                           <a href="${path }/rwmatr/rwmatrOrder.do">> <span>원자재 발주관리</span></a>
                         </li>
                         
                         <li>
@@ -104,7 +104,7 @@
                      <a href="#production" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog yellow_color"></i> <span>생산 관리</span></a>
                      <ul class="collapse list-unstyled" id="production">
                         <li>
-                           <a href="#">> <span>생산 계획 관리</span></a>
+                           <a href="${path }/prd/prdPlanMng.do">> <span>생산 계획 관리</span></a>
                         </li>
                         
                         <li>
@@ -141,7 +141,7 @@
                      <a href="#EQUIPMENT" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-wrench yellow_color"></i> <span>설비 관리</span></a>
                      <ul class="collapse list-unstyled" id="EQUIPMENT">
                         <li>
-                           <a href="#">> <span>설비 등록</span></a>
+                           <a href="${path }/eqm/eqmRegister.do">> <span>설비 등록</span></a>
                         </li>
                         
                         <li>

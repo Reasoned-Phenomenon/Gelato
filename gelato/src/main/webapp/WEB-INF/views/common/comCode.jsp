@@ -61,6 +61,7 @@
 
 <button type="button" class="model_bt btn btn-primary" data-toggle="modal" data-target="#myModal" id="">Modal</button>
 </div>
+
 <hr>
 <br>
 <div class="row">
