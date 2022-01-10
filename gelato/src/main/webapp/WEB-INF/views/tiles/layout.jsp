@@ -41,7 +41,7 @@
    <!-- responsive css -->
    <link rel="stylesheet" href="${path}/resources/css/responsive.css" />
    <!-- color css -->
-   <link rel="stylesheet" href="${path}/resources/css/colors.css" />
+   <%-- <link rel="stylesheet" href="${path}/resources/css/colors.css" /> --%>
    <!-- select bootstrap -->
    <link rel="stylesheet" href="${path}/resources/css/bootstrap-select.css" />
    <!-- scrollbar css -->
@@ -94,6 +94,6 @@
       </script> 
       <!-- custom js -->
       <script src="${path}/resources/js/custom.js"></script>
-      <script src="${path}/resources/js/chart_custom_style1.js"></script>
+      <%-- <script src="${path}/resources/js/chart_custom_style1.js"></script> --%>
    </body>
 </html>

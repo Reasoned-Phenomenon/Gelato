@@ -21,8 +21,12 @@ public class ComCodeDetaController {
 	@Autowired ComCodeDetaService service;
 	
 	@RequestMapping("/com/findComCodeDeta.do")
-	public String findComCodeDeta(Model model) {
-		model.addAttribute("datas",service.findComCodeDeta());
+	public String findComCodeDeta(Model model, String codeId) {
+		System.out.println("111111111111111111111111111111111111111111111111111");
+		System.out.println(codeId);
+		
+		model.addAttribute("datas",service.findComCodeDeta(codeId));
+		System.out.println(service.findComCodeDeta(codeId));
 		return "grid";
 	}
 	

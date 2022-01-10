@@ -14,20 +14,15 @@
 <table border="1">
 	<thead>
 		<tr>
-			<th>대분류</th>
-			<th>중분류</th>
-			<th>소분류</th>
+			<th>코드ID</th>
+			<th>코드</th>
 		</tr>
 	</thead>
 		
 	<tbody>
 		<tr>
-			<td>대분류 : <input type="text" id="" name="" value="GEL" disabled></td>
-			<td>중분류 : <select>
-							<option>
-						</select>
-			</td>
-			<td>소분류 : <input type="text" id="" name=""></td>
+			<td>코드ID</td>
+			<td>코드 : <input type="text" id="" name=""></td>
 		</tr>
 	</tbody>
 </table>
@@ -42,32 +37,15 @@
 
 <hr>
 <br>
-<div id="grid"></div>
-
-<!-- model popup -->
-<!-- The Modal -->
-<div class="modal fade" id="myModal">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <!-- Modal Header -->
-         <div class="modal-header">
-            <h4 class="modal-title">공통 코드 조회</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-         </div>
-         <!-- Modal body -->
-         <div class="modal-body">
-         <button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
-            <div id="modalGrid"></div>
-         </div>
-         <!-- Modal footer -->
-         <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-         </div>
-      </div>
-   </div>
+<div class="row">
+	<div id="codeIdGrid" class="col-sm-4"></div>
+	<div id="codeGrid" class="col-sm-8"></div>
 </div>
-<!-- end model popup -->
+
+
 <script>
+let codeParam;
+
 var Grid = tui.Grid;
 
 //그리드 테마
@@ -82,165 +60,117 @@ Grid.applyTheme('striped', {
 	  }
 });
 
-//그리드 컬럼	
-const columns = [
-			/* {
-			  header: 'CL코드',
-			  name: 'clCode'
-			}, */
+//그리드 생성
+const codeIdGrid = new Grid({
+	el: document.getElementById('codeIdGrid'),
+  	data : {
+	  api: {
+	    readData: 	{ url: '${path}/com/findComCode.do', method: 'GET'},
+	    modifyData : { url: '${path}/com/comCodeModifyData.do', method: 'PUT'} 
+	  },
+	  contentType: 'application/json'
+	},
+  	rowHeaders:['rowNum'],
+  	selectionUnit: 'row',
+  	columns:[
 			{
 			  header: '코드ID',
 			  name: 'codeId',
 			  sortingType: 'desc',
-	          sortable: true,
-	          validation: {
-	              regExp: /^[a-zA-Z0-9]{1,6}$/
-	           },
-	           editor:'text'
+	          sortable: true
 			},
-			/* 
 			{
 			  header: '코드ID이름',
-			  name: 'codeIdNm',
-			  editor: 'text'
+			  name: 'codeIdNm'
 			},
 			{
-			  header: '코드ID상세설명',
+			  header: '코드ID이름',
 			  name: 'codeIdDc',
-			  editor: 'text'
-			},
-			{
-			    header: '코드ID 사용여부',
-			    name: 'codeIdUseAt',
-			    align:'center',
-			    editor: 'checkbox'
-			 }, */
-			 {
-				  header: '코드',
-				  name: 'code',
-				  editor: 'text'
-			},
-			{
-				  header: '코드이름',
-				  name: 'codeNm',
-				  editor: 'text'
-			},
-			{
-				  header: '코드상세',
-				  name: 'codeDc',
-				  editor: 'text'
-			},
-			{
-			    header: '코드 사용여부',
-			    name: 'codeUseAt',
-			    align:'center',
-			    editor: 'checkbox'
-			 }
-		];
-
-
-	//그리드 데이터
-	const dataSource = {
-			
-		  api: {
-		    readData: 	{ 	
-		    				url: '${path}/com/findComCode.do', 
-					    	method: 'GET'
-		    			},
-		    modifyData : { 	
-							url: '${path}/com/comCodeModifyData.do', 
-					    	method: 'PUT'
-						} 
-		  },
-		  
-		  contentType: 'application/json'
-		  
-	};
-		
-	//그리드 생성
-	const grid = new Grid({
-	  el: document.getElementById('grid'),
-	  data : dataSource,
-	  rowHeaders:['rowNum','checkbox'],
-	  columns
-	});
-
+			  hidden:true
+			}
+		]
+});
+/* codeIdGrid.on('click', function (ev) {
+	  var record = {
+	    start: [ev.rowKey, 0],
+	    end: [ev.rowKey, codeIdGrid.getColumns().length]
+	  }
+	  codeIdGrid.setSelectionRange(record);
+}); */
 //그리드 이벤트	
-	grid.on('click', (ev) => {
-	  	console.log('clicked!!');
-		console.log(ev)
-	});
+codeIdGrid.on('click', (ev) => {
+	if(ev.rowKey !=''){
+		codeParam = codeIdGrid.getRow(ev.rowKey).codeId;
+		
+		codeGrid.readData(1, {codeId:codeIdGrid.getRow(ev.rowKey).codeId}, true);
+	}
+
+	/* console.log(ev.rowKey)
+	console.log(ev.columnName)
+	console.log(codeIdGrid.getValue(ev.rowKey,ev.columnName)) */
 	
+  	/* if(ev.targetType == 'cell'){
+  		if(ev.columnName == 'codeId') {
+  			codeParam = {codeId:codeIdGrid.getValue(ev.rowKey,ev.columnName)}
+  			codeGrid.request('modifyData');
+  		}
+  	} */
+	
+});
+
+codeIdGrid.on('response', function(ev) {
+	console.log('response')
+	console.log(ev)
+})
+	
+	
+const codeGrid = new tui.Grid({
+	el: document.getElementById('codeGrid'),
+	data: {
+			api: {
+			    readData: 	{url: '${path}/com/findComCodeDeta.do', method: 'GET' },
+			    modifyData : { url: '${path}/com/comCodeDetaModifyData.do', method: 'PUT'} 
+		  	},
+			contentType: 'application/json',
+			initialRequest: false
+	},
+    columns: [
+				{
+		  header: 'CODE',
+		  name: 'CODE'
+		},
+		{
+		  header: 'CODE_NM',
+		  name: 'CODE_NM'
+		},
+		{
+		  header: 'CODE_DC',
+		  name: 'CODE_DC'
+		},
+		{
+		  header: 'USE_AT',
+		  name: 'USE_AT',
+		  align: 'center'
+		}
+     ]
+});
+
+	//버튼 이벤트
 	btnSave.addEventListener("click",function(){
-		grid.request('modifyData');
+		//grid.request('modifyData');
 	})	
 
-	grid.on('response', function(ev) {
-		console.log('response')
-		console.log(ev)
-	})
-	
 	btnAdd.addEventListener("click",function(){
-		grid.appendRow({
-			"clCode": "GEL",
-			"useAt":"Y"
-		},{focus:true})
+		//grid.appendRow({focus:true})
 	})
 	
 	btnDel.addEventListener("click",function(){
 		//removeRow(rowKey, options)
-		
-		grid.removeCheckedRows(true); //true -> 확인 받고 삭제 / false는 바로 삭제
+		//grid.removeCheckedRows(true); //true -> 확인 받고 삭제 / false는 바로 삭제
+		//grid.request('modifyData');
 	})
-	
-	let testData = [{
-			
-			  api: {
-			    readData: 	{ 	
-			    				url: '${path}/com/findComCodeDeta.do', 
-						    	method: 'GET'
-			    			},
-			    modifyData : { 	
-								url: '${path}/com/comCodeDetaModifyData.do', 
-						    	method: 'PUT'
-							} 
-			  },
-			  
-			  contentType: 'application/json'
-			  
-		}];
-	
-	 const modalGrid = new tui.Grid({
-	      el: document.getElementById('modalGrid'),
-	      data: testData,
-	      width: 450,
-	      bodyHeight:200,
-	      columns: [
-	        {
-	          header: 'CODE_ID',
-	          name: 'CODE_ID'
-	        },
-	        {
-	          header: 'CODE',
-	          name: 'CODE'
-	        },
-	        {
-	          header: 'CODE_NM',
-	          name: 'CODE_NM'
-	        },
-	        {
-	          header: 'CODE_DC',
-	          name: 'CODE_DC'
-		    },
-	        {
-	          header: 'USE_AT',
-	          name: 'USE_AT',
-	          align: 'center'
-			}
-	      ]
-	    });
 	 
-	btnFind.addEventListener('click',function (ev) {
+	/* btnFind.addEventListener('click',function (ev) {
 		console.log(ev)
 		fetch("${path}/com/comCodeDetaCodeId.do", {
 		  method: 'POST',
@@ -254,20 +184,8 @@ const columns = [
 			testData = result
 			modalGrid.resetData(testData);
 		})
-	})
-	
-	/* fetch("${path}/com/comCodeDetaCodeId.do",{codeId:"INF001"})
-	.then(res=>res.json())
-	.then(result=> {
-		console.log("여기~~")
-		console.log(result)
 	}) */
-	
-	grid.on("afterChange",function(ev){
-		console.log("변경됨")
-		console.log(ev.changes)
-		
-	})
+
 	
 </script>
 </body>

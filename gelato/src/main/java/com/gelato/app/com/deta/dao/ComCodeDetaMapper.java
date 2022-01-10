@@ -5,6 +5,6 @@ import java.util.Map;
 
 public interface ComCodeDetaMapper {
 
-	List<ComCodeDetaVO> findComCodeDeta();
+	List<ComCodeDetaVO> findComCodeDeta(String codeId);
 	Map findComCodeProcedure(Map map);
 }

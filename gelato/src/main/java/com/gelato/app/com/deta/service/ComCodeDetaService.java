@@ -7,6 +7,6 @@ import com.gelato.app.com.deta.dao.ComCodeDetaVO;
 
 public interface ComCodeDetaService {
 
-	List<ComCodeDetaVO> findComCodeDeta();
+	List<ComCodeDetaVO> findComCodeDeta(String codeId);
 	Map findComCodeProcedure(Map map);
 }
