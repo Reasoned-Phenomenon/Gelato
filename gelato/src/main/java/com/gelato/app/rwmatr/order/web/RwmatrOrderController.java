@@ -12,14 +12,23 @@ public class RwmatrOrderController {
 
 	@Autowired RwmatroService rwmatroService;
 	
-	@RequestMapping("/com/rwmatrOrder.do")
+	@RequestMapping("/rwmatr/rwmatrOrder.do")
 	public String comCode () {
-		return "tiles/common/rwmatrOrder";
+		return "tiles/rwmatr/rwmatrOrder";
 	}
 	
-	@RequestMapping("/com/rwmatrOrderList.do")
+	@RequestMapping("/rwmatr/rwmatrOrderList.do")
 	public String findComCode(Model model) {
+		System.out.println("111111111111111111");
 		model.addAttribute("datas",rwmatroService.rwmatrOrderList());
 		return "grid";
 	}
+	
+//	@PutMapping("/com/rwmatroModifyData.do")
+//	@ResponseBody
+//	public boolean modifyData (@RequestBody RwmatroModifyVO mvo) {
+//		System.out.println(mvo);
+//		service.;
+//		return true;
+//	}
 }

@@ -18,4 +18,12 @@ public class RwmatroVO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	Date dudt;
+	
+	//join 
+	String rwmatrId;
+	String rwmatrOrderDetaId;
+	String nm;
+	String untprc;
+	String qy;
+	String vendId;
 }
