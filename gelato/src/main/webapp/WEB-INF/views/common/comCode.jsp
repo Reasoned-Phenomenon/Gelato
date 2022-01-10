@@ -33,7 +33,7 @@
 <button type="button" class="btn cur-p btn-outline-primary" id="btnAdd">추가</button>
 <button type="button" class="btn cur-p btn-outline-primary" id="btnDel">삭제</button>
 
-<button type="button" class="model_bt btn btn-primary" data-toggle="modal" data-target="#myModal" id="">Modal</button>
+<button type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal" id="">Modal</button>
 
 <hr>
 <br>

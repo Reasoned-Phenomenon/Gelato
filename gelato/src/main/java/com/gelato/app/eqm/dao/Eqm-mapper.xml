@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gelato.app.eqm.dao.EqmMapper">
+
+	<!-- 설비 등록 페이지 - 설비등록 -->
+	<insert id="insertEqm" parameterType="Eqm">
+		insert into eqm(EQM_ID, EQM_NAME, model_no, VEND_ID, TEMP_MAX, TEMP_MIN, CHCK_PERD, REG_DT, MNGR, EQM_IMG, PURC_DT, FG, SPEC, USE_YN, UPH)
+		values(#{eqmId},#{eqmName},#{modelNo},#{vendId},#{tempMax},#{tempMin},#{chckPerd},#{regDt},#{mngr},#{eqmImg},#{purcDt},#{fg},#{spec},#{useYn},#{uph})
+	</insert>
+
+</mapper>

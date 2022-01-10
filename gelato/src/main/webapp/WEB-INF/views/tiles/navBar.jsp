@@ -145,7 +145,7 @@
                      <a href="#EQUIPMENT" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-wrench yellow_color"></i> <span>설비 관리</span></a>
                      <ul class="collapse list-unstyled" id="EQUIPMENT">
                         <li>
-                           <a href="#">> <span>설비 등록</span></a>
+                           <a href="${path }/eqm/eqmRegister.do">> <span>설비 등록</span></a>
                         </li>
                         
                         <li>
