@@ -19,8 +19,11 @@ public class GridViewResolver extends AbstractView{
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
+		System.out.println("gridVR");
 		ObjectMapper mapper = new ObjectMapper();
 		Object obj = model.get("datas");
+		
+		System.out.println(obj);
 		
 		HashMap map = new HashMap();
 		map.put("page", 1);

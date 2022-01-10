@@ -9,6 +9,5 @@
 	</settings>
 	<typeAliases>
 		<package name="com.gelato.app"/>
-		<!-- <typeAlias type="com.yedam.app.dept.dao.Department" alias="Dept"/> -->
 	</typeAliases>
 </configuration>

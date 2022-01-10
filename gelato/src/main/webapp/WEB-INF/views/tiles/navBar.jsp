@@ -22,8 +22,173 @@
                </div>
             </div>
             <div class="sidebar_blog_2">
-               <h4>General</h4>
+               <h4>Gelato</h4>
+               <!-- 메뉴 시작 -->
                <ul class="list-unstyled components">
+               
+               	<!-- 정보 메뉴 -->
+                  <li class="active">
+                     <a href="#common" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog yellow_color"></i> <span>정보 관리</span></a>
+                     <ul class="collapse list-unstyled" id="common">
+                        <li>
+                           <a href="${path }/com/comCode.do">> <span>공통 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>자재 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>BOM 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>완제품 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>거래처 코드 관리</span></a>
+                        </li>
+                      
+                     </ul>
+                  </li>
+                  
+                  <!-- 영업 관리 메뉴 -->
+                  <li class="active">
+                     <a href="#sales" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog yellow_color"></i> <span>영업 관리</span></a>
+                     <ul class="collapse list-unstyled" id="sales">
+                        <li>
+                           <a href="#">> <span>공통 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>자재 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>BOM 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>완제품 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>거래처 코드 관리</span></a>
+                        </li>
+                        
+                     </ul>
+                  </li>
+                  
+                  <!-- 자재관리 메뉴 -->
+                  <li class="active">
+                     <a href="#MATERIAL" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog yellow_color"></i> <span>자재 관리</span></a>
+                     <ul class="collapse list-unstyled" id="MATERIAL">
+                        <li>
+                           <a href="#">> <span>공통 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>자재 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>BOM 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>완제품 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>거래처 코드 관리</span></a>
+                        </li>
+                        
+                     </ul>
+                  </li>
+                  
+                <!-- 생산관리 메뉴 -->
+                  <li class="active">
+                     <a href="#production" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog yellow_color"></i> <span>생산 관리</span></a>
+                     <ul class="collapse list-unstyled" id="production">
+                        <li>
+                           <a href="#">> <span>공통 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>자재 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>BOM 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>완제품 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>거래처 코드 관리</span></a>
+                        </li>
+                        
+                     </ul>
+                  </li>
+                  
+                  <!-- 설비관리 메뉴 -->
+                  <li class="active">
+                     <a href="#EQUIPMENT" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog yellow_color"></i> <span>설비 관리</span></a>
+                     <ul class="collapse list-unstyled" id="EQUIPMENT">
+                        <li>
+                           <a href="#">> <span>공통 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>자재 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>BOM 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>완제품 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>거래처 코드 관리</span></a>
+                        </li>
+                        
+                     </ul>
+                  </li>
+                  
+                  <!-- 관리자 메뉴 -->
+                  <li class="active">
+                     <a href="#ADMIN" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog yellow_color"></i> <span>관리자</span></a>
+                     <ul class="collapse list-unstyled" id="ADMIN">
+                        <li>
+                           <a href="#">> <span>공통 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>자재 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>BOM 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>완제품 코드 관리</span></a>
+                        </li>
+                        
+                        <li>
+                           <a href="#">> <span>거래처 코드 관리</span></a>
+                        </li>
+                      
+                     </ul>
+                  </li>
+                  
+                  <!-- 
                   <li class="active">
                      <a href="#dashboard" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-dashboard yellow_color"></i> <span>Dashboard</span></a>
                      <ul class="collapse list-unstyled" id="dashboard">
@@ -79,6 +244,7 @@
                   <li><a href="#"><i class="fa fa-map purple_color2"></i> <span>Map</span></a></li>
                   <li><a href="#"><i class="fa fa-bar-chart-o green_color"></i> <span>Charts</span></a></li>
                   <li><a href="#"><i class="fa fa-cog yellow_color"></i> <span>Settings</span></a></li>
+                   -->
                </ul>
             </div>
          </nav>

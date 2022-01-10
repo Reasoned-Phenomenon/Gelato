@@ -24,6 +24,12 @@
    <link rel="stylesheet" href="${path}/resources/css/tui-grid.css" />
    <script src="${path}/resources/js/tui-grid.js"></script>
    
+   <!-- 데이트 픽커 -->
+   <!-- <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
+   <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script> -->
+   <link rel="stylesheet" href="${path}/resources/css/tui-date-picker.css">
+   <script src="${path}/resources/js/tui-date-picker.js"></script>
+	
    <!-- 아이콘 -->
    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
    <!-- site icon -->
@@ -34,8 +40,8 @@
    <link rel="stylesheet" href="${path}/resources/css/style.css" />
    <!-- responsive css -->
    <link rel="stylesheet" href="${path}/resources/css/responsive.css" />
-   <%-- <!-- color css -->
-   <link rel="stylesheet" href="${path}/resources/css/colors.css" /> --%>
+   <!-- color css -->
+   <%-- <link rel="stylesheet" href="${path}/resources/css/colors.css" /> --%>
    <!-- select bootstrap -->
    <link rel="stylesheet" href="${path}/resources/css/bootstrap-select.css" />
    <!-- scrollbar css -->

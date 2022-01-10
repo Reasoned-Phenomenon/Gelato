@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gelato.app.com.deta.dao.ComCodeDetaMapper">
+
+<select id="findComCodeDeta" resultType="ComCodeDetaVO">
+	SELECT 
+		CODE,
+		CODE_NM,
+		CODE_DC,
+		USE_AT
+	FROM COMTCCMMNDETAILCODE
+	
+	<where>
+		<if test="codeId !='' || codeId !=null">
+			CODE_ID = #{codeId}
+		</if>
+	</where> 
+	
+</select>
+
+<resultMap type="hashmap" id="ComCodeDetaMap" />
+
+<select id="findComCodeProcedure" parameterType="HashMap" statementType="CALLABLE">
+
+        { CALL p_com_select (
+                #{codeId, mode=IN, jdbcType=VARCHAR, javaType=String},
+                #{out_cursor_table, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ComCodeDetaMap}
+          )}
+
+</select>
+
+
+</mapper>
