@@ -18,17 +18,17 @@
 						<tr>
 							<th>설비코드 <strong>*</strong>
 							</th>
-							<td><input id="macNo"></td>
+							<td><input id="macNo" required></td>
 							<th>사용여부</th>
 							<td><input type="checkBox" id="Use">Y <input
 								type="checkBox" id="notUse">N</td>
 							<th>설비구분</th>
-							<td><input>
+							<td><input required>
 								<button type="button">찾아보기</button> <input></td>
 						</tr>
 						<tr>
 							<th>설비명</th>
-							<td><input></td>
+							<td><input required></td>
 							<th>설비규격</th>
 							<td><input></td>
 						</tr>
@@ -52,12 +52,16 @@
 							<th>구매금액</th>
 							<td><input></td>
 							<th>구매일자</th>
-							<td><input></td>
+							<td><input type="date" required></td>
 						</tr>
 						<tr>
 							<th>온도</th>
 							<td><input placeholder="최저온도">~<input
 								placeholder="최고온도">°C</td>
+						</tr>
+						<tr>
+							<th>UPH</th>
+							<td><input></td>
 						</tr>
 					</tbody>
 				</table>
