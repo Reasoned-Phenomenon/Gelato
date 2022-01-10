@@ -7,4 +7,9 @@ public interface ComCodeDetaMapper {
 
 	List<ComCodeDetaVO> findComCodeDeta(String codeId);
 	Map findComCodeProcedure(Map map);
+	
+	int insertComCodeDeta(ComCodeDetaVO vo);
+	int updateComCodeDeta(ComCodeDetaVO vo);
+	int deleteComCodeDeta(ComCodeDetaVO vo);
+	
 }

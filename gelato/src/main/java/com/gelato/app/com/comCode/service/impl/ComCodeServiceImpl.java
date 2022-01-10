@@ -1,14 +1,14 @@
-package com.gelato.app.com.service.impl;
+package com.gelato.app.com.comCode.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gelato.app.com.dao.ComCodeMapper;
-import com.gelato.app.com.dao.ComCodeModifyVO;
-import com.gelato.app.com.dao.ComCodeVO;
-import com.gelato.app.com.service.ComCodeService;
+import com.gelato.app.com.comCode.dao.ComCodeMapper;
+import com.gelato.app.com.comCode.dao.ComCodeModifyVO;
+import com.gelato.app.com.comCode.dao.ComCodeVO;
+import com.gelato.app.com.comCode.service.ComCodeService;
 
 @Service
 public class ComCodeServiceImpl implements ComCodeService {

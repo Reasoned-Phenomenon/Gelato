@@ -1,4 +1,4 @@
-package com.gelato.app.com.dao;
+package com.gelato.app.com.comCode.dao;
 
 import lombok.Data;
 
@@ -21,4 +21,5 @@ public class ComCodeVO {
 	String codeDc;
 	String codeIdUseAt;
 	String codeUseAt;
+	
 }

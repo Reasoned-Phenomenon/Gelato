@@ -60,11 +60,7 @@
                         <li>
                            <a href="${path}/biz/ordSearch.do">> <span>주문서 관리</span></a>
                         </li>
-                        
-                        <li>
-                           <a href="#">> <span>자재 코드 관리</span></a>
-                        </li>
-                        
+                                               
                         <li>
                            <a href="#">> <span>출고 관리</span></a>
                         </li>
@@ -172,25 +168,9 @@
                      <a href="#ADMIN" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog yellow_color"></i> <span>관리자</span></a>
                      <ul class="collapse list-unstyled" id="ADMIN">
                         <li>
-                           <a href="#">> <span>사용저 권한 관리</span></a>
+                           <a href="#">> <span>사용자 권한 관리</span></a>
                         </li>
                         
-                        <li>
-                           <a href="#">> <span>자재 코드 관리</span></a>
-                        </li>
-                        
-                        <li>
-                           <a href="#">> <span>BOM 코드 관리</span></a>
-                        </li>
-                        
-                        <li>
-                           <a href="#">> <span>완제품 코드 관리</span></a>
-                        </li>
-                        
-                        <li>
-                           <a href="#">> <span>거래처 코드 관리</span></a>
-                        </li>
-                      
                      </ul>
                   </li>
                   

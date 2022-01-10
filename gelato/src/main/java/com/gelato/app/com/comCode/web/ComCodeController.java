@@ -1,4 +1,4 @@
-package com.gelato.app.com.web;
+package com.gelato.app.com.comCode.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gelato.app.com.dao.ComCodeModifyVO;
-import com.gelato.app.com.service.ComCodeService;
+import com.gelato.app.com.comCode.dao.ComCodeModifyVO;
+import com.gelato.app.com.comCode.service.ComCodeService;
 
 @Controller
 public class ComCodeController {

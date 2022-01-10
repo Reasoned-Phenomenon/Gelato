@@ -2,7 +2,7 @@ package com.gelato.app.com.deta.dao;
 
 import java.util.List;
 
-import com.gelato.app.com.dao.ComCodeVO;
+import com.gelato.app.com.comCode.dao.ComCodeVO;
 
 import lombok.Data;
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gelato.app.com.dao.ComCodeModifyVO;
+import com.gelato.app.com.deta.dao.ComCodeDetaModifyVO;
 import com.gelato.app.com.deta.dao.ComCodeDetaVO;
 import com.gelato.app.com.deta.service.ComCodeDetaService;
 
@@ -22,8 +22,6 @@ public class ComCodeDetaController {
 	
 	@RequestMapping("/com/findComCodeDeta.do")
 	public String findComCodeDeta(Model model, String codeId) {
-		System.out.println("111111111111111111111111111111111111111111111111111");
-		System.out.println(codeId);
 		
 		model.addAttribute("datas",service.findComCodeDeta(codeId));
 		System.out.println(service.findComCodeDeta(codeId));
@@ -32,9 +30,9 @@ public class ComCodeDetaController {
 	
 	@PutMapping("/com/comCodeDetaModifyData.do")
 	@ResponseBody
-	public boolean modifyData (@RequestBody ComCodeModifyVO mvo) {
+	public boolean modifyData (@RequestBody ComCodeDetaModifyVO mvo) {
 		System.out.println(mvo);
-		//service.modifyComCode(mvo);
+		service.modifyComCodeDeta(mvo);
 		return true;
 	}
 	
