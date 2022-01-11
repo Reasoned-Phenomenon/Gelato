@@ -74,18 +74,22 @@ th, td {
 	</form>
 
 	<script>
-		//생산계획일자 현재날짜 기본 설정
-		document.getElementById('plandt').value = new Date().toISOString()
-				.substring(0, 10);
+	//생산계획일자 현재날짜 기본 설정
+	document.getElementById('plandt').value = new Date().toISOString()
+			.substring(0, 10);
 
 		
-		//주문서 조회 클릭하면 모달창 생성하기
-		// 주문코드 받아오기
+	//주문서 조회 클릭하면 모달창 생성하기
+
+		// 주문코드 받아서 readData에 파라미터값으로 넘겨주기
 		function chooseOI(osg){
+			console.log(osg);
+			PlanDetaGrid.readData(1,{orderId:osg}, true);
 			OrderShtDialog.dialog("close");
 		}
 		
-		let OrderShtDialog = $("#OrderShtDialog").dialog({
+		// 모달창 생성
+		var OrderShtDialog = $("#OrderShtDialog").dialog({
 			modal : true,
 			autoOpen : false,
 			height: 600,
@@ -106,7 +110,7 @@ th, td {
 		//종료
 
 		//검색 클릭하면 모달창 생성하기
-		let SearchPlanDialog = $("#SearchPlanDialog").dialog({
+		var SearchPlanDialog = $("#SearchPlanDialog").dialog({
 			modal : true,
 			autoOpen : false,
 			height: 600,
@@ -147,11 +151,12 @@ th, td {
 			data : {
 				api : {
 					readData : {
-						url : '${path}',
+						url : '${path}/prd/chooseOrder.do',
 						method : 'GET'
 					}
 				},
-				contentType : 'application/json'
+				contentType : 'application/json',
+				initialRequest: false
 			},
 			rowHeaders : [ 'checkbox', 'rowNum' ],
 			selectionUnit : 'row',

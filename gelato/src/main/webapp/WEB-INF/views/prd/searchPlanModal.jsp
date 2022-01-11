@@ -38,7 +38,7 @@ Grid.applyTheme('striped', {
 	});
 	
 // 그리드 생성
-const searchPlanGrid = new Grid({
+var searchPlanGrid = new Grid({
 	el: document.getElementById('searchPlanGrid'),
   	data : {
 	  api: {

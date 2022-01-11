@@ -13,13 +13,32 @@
 		    on (os.order_id = osd.order_id)
 		    join vend ve
 		    on (os.vend_id = ve.vend_id)
-		where not os.st_fg = 'finish' group by os.order_id, os.order_dt, ve.vend_name, os.oust_dt
+		where not os.st_fg = 'finish' 
+		group by os.order_id, os.order_dt, ve.vend_name, os.oust_dt
 		order by os.oust_dt asc, to_number(sum(osd.qy)) desc
 	</select>
 	
 <!-- 생산계획관리 - 검색창 modal -->
-	<select id="searchPlanList" resultType="prdPlanMngVO">
+	<select id="SearchPlanList" resultType="PrdPlanMngVO">
 		select plan_id, name, dt
 		from prod_plan
+	</select>
+	
+<!-- 생산계획관리 - 선택한 주문서 정보 출력 -->
+	<select id="ChooseOrder" resultType="PrdPlanMngVO">
+		select osd.prdt_id as prdt_id, 
+			   p.prdt_nm as prdt_nm, 
+			   os.order_id as order_id, 
+			   osd.qy as qy
+		from order_sht os join order_sht_deta osd
+		    on os.order_id = osd.order_id
+		    join prdt p
+		    on p.prdt_id = osd.prdt_id
+		<where>
+			<if test="orderId != null">
+				os.order_Id = #{orderId}
+			</if>
+			
+		</where>
 	</select>
 </mapper>

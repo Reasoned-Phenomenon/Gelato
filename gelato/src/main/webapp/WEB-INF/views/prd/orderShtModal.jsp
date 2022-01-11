@@ -19,10 +19,7 @@ h1 {
 	<br>
 	<div id="ordershtGrid"></div>
 
-	<!-- 모달창에서 버튼구현 -->
-	<button type="button" id="choOrderSht">선택</button>
-	<button type="button" id="closeModal">취소</button>
-	<script>
+<script>
 var Grid = tui.Grid;
 
 //그리드 테마
@@ -38,7 +35,7 @@ Grid.applyTheme('striped', {
 	});
 	
 // 그리드 생성
-const ordershtGrid = new Grid({
+var ordershtGrid = new Grid({
 	el: document.getElementById('ordershtGrid'),
   	data : {
 	  api: {
@@ -75,7 +72,7 @@ const ordershtGrid = new Grid({
 
 //그리드 이벤트
 // 클릭 이벤트
-ordershtGrid.on("click", (ev) => {
+/* ordershtGrid.on("click", (ev) => {
 		
 	//cell 선택시 row 선택되도록 하기
 	ordershtGrid.setSelectionRange({
@@ -83,13 +80,20 @@ ordershtGrid.on("click", (ev) => {
 	    end: [ev.rowKey, ordershtGrid.getColumns().length-1]
 	});
 	
-});
+}); */
 
 
 ordershtGrid.on("dblclick", (ev2) => {
+	
+	ordershtGrid.setSelectionRange({
+	    start: [ev2.rowKey, 0],
+	    end: [ev2.rowKey, ordershtGrid.getColumns().length-1]
+	});
+	
 	var osg = ordershtGrid.getRow(ev2.rowKey).orderId;
 	console.log(osg);
 	chooseOI(osg);
+
 });
 
 
