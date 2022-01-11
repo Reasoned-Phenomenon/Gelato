@@ -18,6 +18,11 @@
    <meta name="description" content="">
    <meta name="author" content="">
    
+   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+   
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+   <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+   
    <!-- grid -->
    <!-- <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
    <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script> -->
@@ -52,6 +57,10 @@
    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
    <![endif]-->
+   
+   <!-- 모달 -->
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+   
 </head>
    <body class="dashboard dashboard_1">
       <div class="full_container">
@@ -73,7 +82,7 @@
          </div>
       </div>
       <!-- jQuery -->
-      <script src="${path}/resources/js/jquery.min.js"></script>
+      
       <script src="${path}/resources/js/popper.min.js"></script>
       <script src="${path}/resources/js/bootstrap.min.js"></script>
       <!-- wow animation -->
@@ -95,5 +104,6 @@
       <!-- custom js -->
       <script src="${path}/resources/js/custom.js"></script>
       <%-- <script src="${path}/resources/js/chart_custom_style1.js"></script> --%>
+      
    </body>
 </html>
