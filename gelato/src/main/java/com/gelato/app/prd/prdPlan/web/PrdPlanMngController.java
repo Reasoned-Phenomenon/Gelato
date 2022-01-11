@@ -1,8 +1,11 @@
 package com.gelato.app.prd.prdPlan.web;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gelato.app.prd.prdPlan.dao.PrdPlanMngVO;
@@ -55,10 +58,11 @@ public class PrdPlanMngController {
 	
 	// 검색결과 list 출력
 	@RequestMapping("/prd/searchPlanList.do")
-	public String SearchPlanList(Model model) {
+	public String SearchPlanList(@RequestBody Map<String, String> map, Model model) {
 		System.out.println("검색결과 출력");
-		System.out.println(model);
-		model.addAttribute("datas", prdPlanMngService.SearchPlanList());
+		System.out.println(map);
+		model.addAttribute("datas", prdPlanMngService.SearchPlanList(map));
+		System.out.println(prdPlanMngService.SearchPlanList(map));
 		return "grid";
 	}
 	

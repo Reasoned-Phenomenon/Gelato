@@ -22,6 +22,12 @@
 	<select id="SearchPlanList" resultType="PrdPlanMngVO">
 		select plan_id, name, dt
 		from prod_plan
+		<where>
+			<if test="startD != null and endD != null">
+			<![CDATA[to_char(dt,'YYYY-MM-DD') >= #{startD} and to_char(dt,'YYYY-MM-DD') <= #{endD}]]> 
+			</if>
+		</where>
+		order by dt
 	</select>
 	
 <!-- 생산계획관리 - 선택한 주문서 정보 출력 -->
