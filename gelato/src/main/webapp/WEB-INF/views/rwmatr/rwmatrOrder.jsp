@@ -48,25 +48,7 @@
 	<div id="rwmatrDialog" title="원자재 목록"></div>
 
 <script>
-//자재 목록 모달띄움
-let rwmatrDialog = $( "#rwmatrDialog" ).dialog({
-	  modal:true,
-	  autoOpen:false,
-      height: 400,
-      width: 600,
-      /* pageOptions: {
-  	    type: 'scroll'
-      } */
-}); 
-
-$("#rwmatrList").on("click", function() {
-	  console.log("11111")
-	  rwmatrDialog.dialog( "open" );
-	  console.log("111112222")
-	  $("#rwmatrDialog").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
-});
-
-
+let rwmatrDialog;
 var Grid = tui.Grid;
 
 //그리드 테마
@@ -82,7 +64,7 @@ Grid.applyTheme('striped', {
 });
 
 //그리드 생성
-const rwmatrOrderList = new Grid({
+var rwmatrOrderList = new Grid({
 	el: document.getElementById('rwmatrOrderList'),
 	data : {
 	  api: {
@@ -141,12 +123,49 @@ const rwmatrOrderList = new Grid({
 		]
 });
 
-	rwmatrOrderList.on("click", (ev) => {
-		console.log(ev);
-		console.log(ev.nativeEvent.srcElement.innerHTML);
-		console.log(ev.nativeEvent.srcElement.innerText);
-		console.log("checked!!!!");
+function callRwmatrModal(){
+	//자재 목록 모달띄움
+	rwmatrDialog = $( "#rwmatrDialog" ).dialog({
+		  modal:true,
+		  autoOpen:false,
+	      height: 400,
+	      width: 600,
+	      modal: true
+	}); 
+
+    console.log("11111")
+    rwmatrDialog.dialog( "open" );
+    console.log("111112222")
+    $("#rwmatrDialog").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
+}
+	
+	//모달에서 선택한 값 세팅
+	let rk = '';
+	rwmatrOrderList.on('click', (ev) => {
+		rk = ev.rowKey;
+		console.log(ev)
+		console.log(ev.columnName)
+		console.log(ev.rowKey)
+	    if (ev.columnName === 'nm') {
+	    	console.log(rwmatrOrderList.getRow(ev.rowKey).nm);
+			if(!rwmatrOrderList.getRow(ev.rowKey).nm){
+				console.log("1111")
+	    		callRwmatrModal();
+				
+	    	}
+	    	
+		}
 	});
+
+	function getData(rmId, rmnm) {
+		console.log(11111111111111111111111111111)
+		console.log(rmId)
+		console.log(rmnm)
+		rwmatrOrderList.setValue(rk, "rwmatrId", rmId, true)
+		rwmatrOrderList.setValue(rk, "nm", rmnm, true)
+		rwmatrDialog.dialog( "close" );
+	}
+	
 	
 	rwmatrOrderList.on('response', function (ev) {
 		// 성공/실패와 관계 없이 응답을 받았을 경우

@@ -19,10 +19,7 @@ h1 {
 	<br>
 	<div id="rwmatrListGrid" style="width: 100%"></div>
 	
-	<!-- 모달창에서 버튼구현 -->
-	<button type="button" id="rwmatrSel">선택</button>
-	<button type="button" id="closeModal">취소</button>
-	<script>
+<script>
 var Grid = tui.Grid;
 //checkOnlyOne(element);
 //그리드 테마
@@ -37,19 +34,8 @@ Grid.applyTheme('striped', {
 	  }
 	});
 	
-/*function checkOnlyOne(element) {
-	  
-	  const checkboxes 
-	      = document.getElementsByName("animal");
-	  
-	  checkboxes.forEach((cb) => {
-	    cb.checked = false;
-	  })
-	  
-	  element.checked = true;
-} */
 // 그리드 생성
-const rwmatrListGrid = new Grid({
+var rwmatrListGrid = new Grid({
 	el: document.getElementById('rwmatrListGrid'),
   	data : {
 	  api: {
@@ -57,7 +43,7 @@ const rwmatrListGrid = new Grid({
 	  },
 	  contentType: 'application/json'
 	},
-  	rowHeaders:[ 'checkbox', 'rowNum'],
+  	rowHeaders:['rowNum'],
   	selectionUnit: 'row',
   	columns:[
   		  {
@@ -83,15 +69,33 @@ const rwmatrListGrid = new Grid({
 		]
 });
 
-rwmatrListGrid.on("click", (ev) => {
-	console.log(ev);
-	console.log(ev.nativeEvent.srcElement.innerHTML);
-	console.log(ev.nativeEvent.srcElement.innerText);
-	console.log("checked!!!!");
+/* rwmatrListGrid.on("click", (ev) => {
+	console.log(rwmatrListGrid.getRow(ev.rowKey).rwmatrId);
+	console.log(rwmatrListGrid.getRow(ev.rowKey).nm);
+	let rmId = rwmatrListGrid.getRow(ev.rowKey).rwmatrId;
+	let rmnm = rwmatrListGrid.getRow(ev.rowKey).nm;
+	
+	
+}); */
+
+//이벤트
+rwmatrListGrid.on('dblclick', (ev) => {	
+	
+	//cell 선택시 row 선택됨.
+	rwmatrListGrid.setSelectionRange({
+	      start: [ev.rowKey, 0],
+	      end: [ev.rowKey, rwmatrListGrid.getColumns().length-1]
+	  });
+	
+	//클릭한 row의 codeId에 해당하는 code를 읽어옴
+	//console.log(modalGrid.getRow(ev.rowKey))
+	let rmId = rwmatrListGrid.getRow(ev.rowKey).rwmatrId;
+	let rmnm = rwmatrListGrid.getRow(ev.rowKey).nm;
+	console.log(rmId)
+	console.log(rmnm)
+	getData(rmId, rmnm)
 });
 
-$("#closeModal").on("click", function(){
-});
 </script>
 </body>
 </html>

@@ -12,5 +12,7 @@
 		FROM RWMATR R JOIN VEND V
         ON R.VEND_ID = V.VEND_ID
 	</select>
+	
+	
 
 </mapper>
