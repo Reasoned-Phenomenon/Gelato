@@ -228,7 +228,7 @@ const codeGrid = new tui.Grid({
 	})
 	
 	function getModalData (str) {
-		
+		//목표 태그의 ID값을 입력하면 해당 태그의 value에 모달에서 가져온 값을 넣어줌.
 		let target = document.getElementById('inputName');
 		target.value = str;
 		dialog.dialog( "close" );
