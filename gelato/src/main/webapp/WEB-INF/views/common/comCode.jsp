@@ -199,6 +199,9 @@ const codeGrid = new tui.Grid({
 
 	//모달창
 	$(function(){
+		
+		//dialog는 상단에 전역변수로 선언해뒀음
+		//모달생성
 		dialog = $( "#dialog-form" ).dialog({
 		      autoOpen: false,
 		      height: 500,
@@ -212,6 +215,7 @@ const codeGrid = new tui.Grid({
 		     
 		});
 		
+		//모달 호출하는 버튼
 		btnModal.addEventListener("click",function(){
 			
 			console.log("모달클릭")
