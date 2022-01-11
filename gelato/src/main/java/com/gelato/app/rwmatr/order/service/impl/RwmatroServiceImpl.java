@@ -19,11 +19,12 @@ public class RwmatroServiceImpl implements RwmatroService {
 	public List<RwmatroVO> rwmatrOrderList() {
 		return rwmatroMapper.rwmatrOrderList();
 	}
+	
 
 	@Override
 	public int modifyRwmatro(RwmatroModifyVO mvo) {
 		for(RwmatroVO vo : mvo.getCreatedRows()) {
-			rwmatroMapper.insertRwmatro(vo);
+			rwmatroMapper.insertRwmatroDeta(vo);
 		}
 		
 		for(RwmatroVO vo : mvo.getUpdatedRows()) {

@@ -131,8 +131,8 @@ const codeIdGrid = new Grid({
 			  editor: 'text'
 			},
 			{
-			  header: '업체코드',
-			  name: 'vendId',
+			  header: '업체명',
+			  name: 'vendName',
 			  editor: 'text'
 			},
 			{
