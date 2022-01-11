@@ -1,5 +1,8 @@
 package com.gelato.app.eqm.dao;
 
+import java.util.List;
+
 public interface EqmMapper {
-	int insertEqm(Eqm eqm);
+	int insertEqm(EqmVO eqmVo);
+	List<EqmVO> eqmList();
 }

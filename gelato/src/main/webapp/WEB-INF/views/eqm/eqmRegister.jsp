@@ -14,7 +14,7 @@
 </head>
 <body>
 <!-- 설비구분 모달 -->
-<div id="dialog-form" title="설비구분 모달"></div>
+<div id="dialog-form" title="설비구분"></div>
 	<form action="${pageContext.request.contextPath}/insert" method="post" name="frm">
 		<div>
 			<br>
@@ -121,7 +121,9 @@ $(function(){
 	$("#btnFindFg").on("click",function(){
 		dialog.dialog("open");
 		$("#dialog-form").load("${path}/eqm/searchFg.do", 	//load가 익숙치 않으면 ajax를 써도됨
-				function(){console.log("로드됨")})
+				function(){
+			codeGrid.readData(1, {codeId:"EQM002"}, true);
+			console.log("로드됨")})
 	});
 })
 	</script>

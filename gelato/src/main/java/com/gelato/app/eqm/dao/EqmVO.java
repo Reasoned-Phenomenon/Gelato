@@ -3,7 +3,7 @@ package com.gelato.app.eqm.dao;
 import lombok.Data;
 
 @Data
-public class Eqm {
+public class EqmVO {
 	String eqmId;	//설비코드
 	String eqmName;	//설비명
 	String modelNo;	//제품고유번호
@@ -19,4 +19,7 @@ public class Eqm {
 	String spec;	//설비규격
 	String useYn;	//사용여부
 	String uph;		//uph
+	
+	String prcsId;
+	String nm;
 }
