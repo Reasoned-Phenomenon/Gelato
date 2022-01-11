@@ -13,7 +13,11 @@
      on a.vend_id = c.vend_id	
 </select>
 
-
+<!-- 주문서에서 거래처 검색 modal -->
+<select id="vendList" resultType="OrderVO">
+	select  vend_id, vend_name, bizno, telno
+ 	from vend
+</select>
 
 </mapper>
 

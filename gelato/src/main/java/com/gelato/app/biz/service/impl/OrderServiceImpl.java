@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gelato.app.biz.OrderVO;
 import com.gelato.app.biz.dao.OrderMapper;
+import com.gelato.app.biz.dao.OrderVO;
 import com.gelato.app.biz.service.OrderService;
 
 @Service
@@ -18,6 +18,12 @@ public class OrderServiceImpl implements  OrderService{
 	public List<OrderVO> findOrderList() {
 		
 		return orderMapper.findOrderList();
+	}
+
+	@Override
+	public List<OrderVO> vendList() {
+		
+		return orderMapper.vendList();
 	}
 
 }
