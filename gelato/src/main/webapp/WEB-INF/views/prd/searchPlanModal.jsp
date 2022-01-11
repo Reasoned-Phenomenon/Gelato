@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>주문서 조회 modal</title>
+<title>검색결과 조회 modal</title>
 </head>
 <style>
 h1 {
@@ -15,9 +15,9 @@ h1 {
 </style>
 <body>
 	<br>
-	<h1>주문서</h1>
+	<h1>생산계획 검색</h1>
 	<br>
-	<div id="ordershtGrid"></div>
+	<div id="searchPlanGrid"></div>
 	
 	<!-- 모달창에서 버튼구현 -->
 	<button type="button" id = "choOrderSht">선택</button>
@@ -39,10 +39,10 @@ Grid.applyTheme('striped', {
 	
 // 그리드 생성
 const ordershtGrid = new Grid({
-	el: document.getElementById('ordershtGrid'),
+	el: document.getElementById('searchPlanGrid'),
   	data : {
 	  api: {
-	    readData: { url:'${path}/prd/orderShtModal.do', method: 'GET'}
+	    readData: { url:'${path}/prd/searchPlanList.do', method: 'GET'}
 	  },
 	  contentType: 'application/json'
 	},
@@ -50,24 +50,16 @@ const ordershtGrid = new Grid({
   	selectionUnit: 'row',
   	columns:[
   		  {
-		    header: '주문서코드',
-		    name: 'orderId'
+		    header: '계획코드',
+		    name: 'planId'
 		  },
 		  {
-		    header: '주문날짜',
-		    name: 'orderDt',
+		    header: '계획명',
+		    name: 'name',
 		  },
 		  {
-		    header: '고객사명',
-		    name: 'vendName'
-		  },
-		  {
-			header: '납기일자',
-			name:'oustDt',
-		  },
-		  {
-			header: '총량',
-			name:'qy',
+		    header: '계획일자',
+		    name: 'dt'
 		  }
  		  
 		]

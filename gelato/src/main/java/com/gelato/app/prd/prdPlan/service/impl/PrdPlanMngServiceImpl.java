@@ -13,10 +13,15 @@ import com.gelato.app.prd.prdPlan.service.PrdPlanMngService;
 public class PrdPlanMngServiceImpl implements PrdPlanMngService{
 
 	@Autowired PrdPlanMngMapper ppmMapper;
-	
+
 	@Override
-	public List<PrdPlanMngVO> findOrderSht() {
-		return null;
+	public List<PrdPlanMngVO> OrderShtList() {
+		return ppmMapper.OrderShtList();
 	}
 
+	@Override
+	public List<PrdPlanMngVO> searchPlanList() {
+		return ppmMapper.searchPlanList();
+	}
+	
 }

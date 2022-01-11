@@ -8,6 +8,9 @@ import com.gelato.app.prd.prdPlan.dao.PrdPlanMngVO;
 
 public interface PrdPlanMngService {
 	
-	List<PrdPlanMngVO> findOrderSht();
-
+	//주문서 조회
+	List<PrdPlanMngVO> OrderShtList();
+	
+	//검색결과 조회
+	List<PrdPlanMngVO> searchPlanList();
 }

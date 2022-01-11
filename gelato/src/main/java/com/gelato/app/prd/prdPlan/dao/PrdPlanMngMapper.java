@@ -4,5 +4,9 @@ import java.util.List;
 
 public interface PrdPlanMngMapper {
 	
-	List<PrdPlanMngVO> findOrderSht();
+	//주문서 조회
+	List<PrdPlanMngVO> OrderShtList();
+	
+	//검색결과 조회
+	List<PrdPlanMngVO> searchPlanList();
 }

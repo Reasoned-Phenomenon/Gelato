@@ -2,4 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gelato.app.prd.prdPlan.dao.PrdPlanMngMapper">
 
+<!-- 생산계획관리 - 주문서 modal  -->
+	<select id="OrderShtList" resultType="PrdPlanMngVO">
+		select os.order_id as order_id, 
+			   os.order_dt as order_dt, 
+			   ve.vend_name as vend_name,
+			   os.oust_dt as oust_dt,
+			   sum(osd.qy) as qy
+		from order_sht os join order_sht_deta osd
+		    on (os.order_id = osd.order_id)
+		    join vend ve
+		    on (os.vend_id = ve.vend_id)
+		where not os.st_fg = 'finish' group by os.order_id, os.order_dt, ve.vend_name, os.oust_dt
+		order by os.oust_dt asc, to_number(sum(osd.qy)) desc
+	</select>
+	
+<!-- 생산계획관리 - 검색창 modal -->
+	<select id="searchPlanList" resultType="prdPlanMngVO">
+		select plan_id, name, dt
+		from prod_plan
+	</select>
 </mapper>
