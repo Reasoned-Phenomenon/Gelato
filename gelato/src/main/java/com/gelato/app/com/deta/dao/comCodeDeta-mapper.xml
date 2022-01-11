@@ -61,4 +61,17 @@
 	WHERE UPPER(CODE) = UPPER(#{code})
 </delete>
 
+<update id="updateComCodeDeta">
+
+	UPDATE COMTCCMMNDETAILCODE
+	SET CODE = #{code},
+		CODE_NM = #{codeNm},
+		CODE_DC = #{codeDc},
+		USE_AT = #{useAt},
+		LAST_UPDT_PNTTM = sysdate,
+		LAST_UPDUSR_ID = 'Admin'
+		
+</update>
+
+
 </mapper>

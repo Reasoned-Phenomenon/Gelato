@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 <h3>공통 코드 관리</h3>
@@ -158,19 +159,17 @@ const codeGrid = new tui.Grid({
 		{
 		  header: 'USE_AT',
 		  name: 'useAt',
-		  copyOptions: {
-	            useListItemText: true
-	      },
 		  formatter: 'listItemText',
-		  editor: {
-		      type: 'radio',
-		      options: {
-		        listItems: [
-		          { text: 'Y', value: 'Y' },
-		          { text: 'N', value: 'N' }
-		        ]
-		      }
-		    }
+		  editor : {
+			  type: 'radio',
+			  options: {
+				  listItems: [
+					  {text: 'Y', value: 'Y'},
+					  {text: 'N', value: 'N'}
+				  ]
+			  }
+		  }
+		  
 		}
      ]
 });

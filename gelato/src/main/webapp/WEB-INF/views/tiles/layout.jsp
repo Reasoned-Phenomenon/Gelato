@@ -105,5 +105,7 @@
       <script src="${path}/resources/js/custom.js"></script>
       <%-- <script src="${path}/resources/js/chart_custom_style1.js"></script> --%>
       
+    
+      
    </body>
 </html>
