@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gelato.app.rwmatr.order.dao.RwmatroModifyVO;
+import com.gelato.app.rwmatr.order.dao.RwmatroVO;
 import com.gelato.app.rwmatr.order.service.RwmatroService;
 import com.gelato.app.rwmatr.service.RwmatrService;
+import com.gelato.app.vr.ModifyVO;
 
 @Controller
 public class RwmatrOrderController {
@@ -33,14 +34,14 @@ public class RwmatrOrderController {
 	}
 	
 	//원자재 modal
-	@RequestMapping("rwmatr/searchRwmatrDialog.do")
+	@RequestMapping("/rwmatr/searchRwmatrDialog.do")
 	public String rwmatrDialog() {
 		System.out.println("원자재 모달");
 		return "rwmatr/searchRwmatrModal"; 
 	}
 	
 	//원자재리스트 출력
-	@RequestMapping("rwmatr/searchRwmatrList.do")
+	@RequestMapping("/rwmatr/searchRwmatrList.do")
 	public String searchRwmatrDialog(Model model) {
 		System.out.println("원자재리스트");
 		model.addAttribute("datas", rwmatrService.rwmatrList());
@@ -49,14 +50,14 @@ public class RwmatrOrderController {
 	}
 	
 	//거래처 modal
-	@RequestMapping("rwmatr/searchVendDialog.do")
+	@RequestMapping("/rwmatr/searchVendDialog.do")
 	public String vendDialog() {
 		System.out.println("거래처 모달");
 		return "rwmatr/searchVendModal"; 
 	}
 	
 	//거래처리스트 출력
-	@RequestMapping("rwmatr/searchVendList.do")
+	@RequestMapping("/rwmatr/searchVendList.do")
 	public String searchVendDialog(Model model) {
 		System.out.println("거래처리스트");
 		model.addAttribute("datas", rwmatroService.selectVendList());
@@ -64,9 +65,9 @@ public class RwmatrOrderController {
 		return "grid"; 
 	}
 	
-	@PutMapping("/com/rwmatroModifyData.do")
+	@PutMapping("/rwmatr/rwmatroModifyData.do")
 	@ResponseBody
-	public boolean modifyData (@RequestBody RwmatroModifyVO mvo) {
+	public boolean modifyData (@RequestBody ModifyVO<RwmatroVO> mvo) {
 		System.out.println(mvo);
 		rwmatroService.modifyRwmatro(mvo);
 		return true;

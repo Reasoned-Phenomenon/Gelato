@@ -8,10 +8,8 @@ public interface RwmatroMapper {
 	List<RwmatroVO> selectVendList();
 	
 	int insertRwmatro(RwmatroVO vo);
-	int updateRwmatro(RwmatroVO vo);
-	int deleteRwmatro(RwmatroVO vo);
 	
 	int insertRwmatroDeta(RwmatroVO vo);
-	//int updateRwmatroDeta(RwmatroVO vo);
-	//int deleteRwmatroDeta(RwmatroVO vo);
+	int updateRwmatroDeta(RwmatroVO vo);
+	int deleteRwmatroDeta(RwmatroVO vo);
 }

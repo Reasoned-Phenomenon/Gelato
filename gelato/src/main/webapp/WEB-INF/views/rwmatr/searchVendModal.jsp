@@ -70,7 +70,7 @@ var vendListGrid = new Grid({
 	
 }); */
 
-//이벤트
+//커스텀 이벤트
 vendListGrid.on('dblclick', (ev) => {	
 	
 	//cell 선택시 row 선택됨.
@@ -81,11 +81,9 @@ vendListGrid.on('dblclick', (ev) => {
 	
 	//클릭한 row의 codeId에 해당하는 code를 읽어옴
 	//console.log(modalGrid.getRow(ev.rowKey))
-	let rmId = vendListGrid.getRow(ev.rowKey).rwmatrId;
-	let rmnm = vendListGrid.getRow(ev.rowKey).nm;
-	console.log(rmId)
-	console.log(rmnm)
-	getData(rmId, rmnm)
+	let vdId = vendListGrid.getRow(ev.rowKey).vendId;
+	let vdnm = vendListGrid.getRow(ev.rowKey).vendName;
+	getVendData(vdId, vdnm)
 });
 
 </script>

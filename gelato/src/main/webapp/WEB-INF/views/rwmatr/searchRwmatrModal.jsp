@@ -69,16 +69,8 @@ var rwmatrListGrid = new Grid({
 		]
 });
 
-/* rwmatrListGrid.on("click", (ev) => {
-	console.log(rwmatrListGrid.getRow(ev.rowKey).rwmatrId);
-	console.log(rwmatrListGrid.getRow(ev.rowKey).nm);
-	let rmId = rwmatrListGrid.getRow(ev.rowKey).rwmatrId;
-	let rmnm = rwmatrListGrid.getRow(ev.rowKey).nm;
-	
-	
-}); */
 
-//이벤트
+//커스텀 이벤트
 rwmatrListGrid.on('dblclick', (ev) => {	
 	
 	//cell 선택시 row 선택됨.
@@ -88,12 +80,11 @@ rwmatrListGrid.on('dblclick', (ev) => {
 	  });
 	
 	//클릭한 row의 codeId에 해당하는 code를 읽어옴
-	//console.log(modalGrid.getRow(ev.rowKey))
 	let rmId = rwmatrListGrid.getRow(ev.rowKey).rwmatrId;
 	let rmnm = rwmatrListGrid.getRow(ev.rowKey).nm;
 	console.log(rmId)
 	console.log(rmnm)
-	getData(rmId, rmnm)
+	getRwmatrData(rmId, rmnm)
 });
 
 </script>

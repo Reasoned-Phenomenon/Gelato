@@ -7,8 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+<script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
+<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head>
 <body>
 <h3>원자재 발주관리</h3>
@@ -80,48 +84,53 @@ var rwmatrOrderList = new Grid({
 	    type: 'scroll'
     },
 	columns:[
-			{
-			  header: '발주코드',
-			  name: 'orderId',
-			  editor: 'text'
-			},
-			{
-			  header: '자재명',
-			  name: 'nm',
-			  editor: 'text'
-			},
-			{
-			  header: '자재코드',
-			  name: 'rwmatrId',
-			  editor: 'text'
-			},
-			{
-			  header: '단가',
-			  name: 'untprc',
-			  editor: 'text'
-			},
-			{
-			  header: '발주량',
-			  name: 'qy',
-			  editor: 'text'
-			},
-			{
-			  header: '업체명',
-			  name: 'vendName',
-			  editor: 'text'
-			},
-			{
-			  header: '발주신청일',
-			  name: 'orderDt',
-			  editor: 'text'
-			},
-			{
-			  header: '납기요청일',
-			  name: 'dudt',
-			  editor: 'text'
-			}
+				/* {
+				  header: '발주디테일코드',
+				  name: 'rwmatrOrderDetaId',
+				  hidden:true
+				}, */
+				{
+				  header: '발주코드',
+				  name: 'orderId',
+				},
+				{
+				  header: '자재명',
+				  name: 'nm',
+				  editor: 'text'
+				},
+				{
+				  header: '자재코드',
+				  name: 'rwmatrId',
+				  editor: 'text'
+				},
+				{
+				  header: '단가(원)',
+				  name: 'untprc',
+				  editor: 'text'
+				},
+				{
+				  header: '발주량',
+				  name: 'qy',
+				  editor: 'text'
+				},
+				{
+				  header: '업체명',
+				  name: 'vendName',
+				  editor: 'text'
+				},
+				{
+				  header: '발주신청일',
+				  name: 'orderDt',
+				},
+				{
+				  header: '납기요청일',
+				  name: 'dudt',
+				  editor: 'datePicker'
+				}
 		]
 });
+
+//최근에 클릭한값으로 발주번호
 
 //자재모달
 function callRwmatrModal(){
@@ -155,7 +164,7 @@ function callVendModal(){
     $("#dialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("거래처 목록")})
 }
 	
-	//모달에서 선택한 값 세팅
+	//모달에서 선택한 rowKey값 세팅
 	let rk = '';
 	rwmatrOrderList.on('click', (ev) => {
 		rk = ev.rowKey;
@@ -163,23 +172,28 @@ function callVendModal(){
 		console.log(ev.columnName)
 		console.log(ev.rowKey)
 	    if (ev.columnName === 'nm') {
-	    	console.log(rwmatrOrderList.getRow(ev.rowKey).nm);
-			if(!rwmatrOrderList.getRow(ev.rowKey).nm){
-				console.log("1111")
-	    		callRwmatrModal();
-	    	} 
+			console.log("1111")
+    		callRwmatrModal();
 		} else if(ev.columnName === 'vendName'){
     		console.log("2222")
     		callVendModal();
 		}
 	});
 
-	function getData(rmId, rmnm) {
-		console.log(11111111111111111111111111111)
+	function getRwmatrData(rmId, rmnm) {
+		console.log("Rwmatr정보 기입")
 		console.log(rmId)
 		console.log(rmnm)
 		rwmatrOrderList.setValue(rk, "rwmatrId", rmId, true)
 		rwmatrOrderList.setValue(rk, "nm", rmnm, true)
+		dialog.dialog( "close" );
+	}
+	
+	function getVendData(vdId, vdnm) {
+		console.log("Vend정보 기입")
+		console.log(vdId)
+		console.log(vdnm)
+		rwmatrOrderList.setValue(rk, "vendName", vdnm, true)
 		dialog.dialog( "close" );
 	}
 	
