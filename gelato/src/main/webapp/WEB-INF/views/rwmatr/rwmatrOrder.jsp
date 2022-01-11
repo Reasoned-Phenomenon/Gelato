@@ -84,11 +84,11 @@ var rwmatrOrderList = new Grid({
 	    type: 'scroll'
     },
 	columns:[
-				/* {
+				{
 				  header: '발주디테일코드',
 				  name: 'rwmatrOrderDetaId',
 				  hidden:true
-				}, */
+				},
 				{
 				  header: '발주코드',
 				  name: 'orderId',

@@ -4,6 +4,7 @@
 
 	<select id="rwmatrOrderList" resultType="RwmatroVO">
 		SELECT RD.ORDER_ID AS ORDER_ID, 
+       		   RD.rwmatr_order_deta_id AS rwmatr_order_deta_id, 
 		       R.NM, R.RWMATR_ID AS RWMATR_ID, 
 		       RD.UNTPRC AS UNTPRC, 
 		       RD.QY AS QY, 
