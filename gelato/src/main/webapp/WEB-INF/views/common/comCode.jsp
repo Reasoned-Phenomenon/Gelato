@@ -48,6 +48,7 @@
 
 <script>
 let codeParam;
+let dialog;
 
 var Grid = tui.Grid;
 
@@ -107,7 +108,7 @@ codeIdGrid.on('click', (ev) => {
 	
 	//클릭한 row의 codeId에 해당하는 code를 읽어옴
 	codeParam = codeIdGrid.getRow(ev.rowKey).codeId;
-	codeGrid.readData(1, {codeId:codeIdGrid.getRow(ev.rowKey).codeId}, true);
+	codeGrid.readData(1, {codeId:codeParam}, true);
 	
 });
 
@@ -198,23 +199,38 @@ const codeGrid = new tui.Grid({
 
 	//모달창
 	$(function(){
-		let dialog = $( "#dialog-form" ).dialog({
+		dialog = $( "#dialog-form" ).dialog({
 		      autoOpen: false,
 		      height: 500,
 		      width: 700,
-		      modal: true
+		      modal: true,
+		      buttons: {
+		          Cancel: function() {
+		            dialog.dialog( "close" );
+		          }
+		        }
 		     
 		});
 		
 		btnModal.addEventListener("click",function(){
+			
 			console.log("모달클릭")
 			dialog.dialog( "open" );
-			$('#dialog-form').load("${path}/com/comModal.do",function () {console.log('로드됨')})
+			console.log(codeParam)
+			
+			 $('#dialog-form').load("${path}/com/comModal.do",function () {
+				console.log('로드됨')
+				modalGrid.readData(1, {codeId:codeParam}, true);
+			})
+			
 		})
 		
 	})
 	
-
+	function getModalData (str) {
+		inputName.value = str;
+		dialog.dialog( "close" );
+	}
 	
 
 

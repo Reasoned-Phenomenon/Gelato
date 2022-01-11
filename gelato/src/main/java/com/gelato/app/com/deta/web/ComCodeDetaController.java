@@ -22,7 +22,7 @@ public class ComCodeDetaController {
 	
 	@RequestMapping("/com/findComCodeDeta.do")
 	public String findComCodeDeta(Model model, String codeId) {
-		
+		System.out.println("read");
 		model.addAttribute("datas",service.findComCodeDeta(codeId));
 		System.out.println(service.findComCodeDeta(codeId));
 		return "grid";
