@@ -9,44 +9,48 @@
 <title>Insert title here</title>
 </head>
 <body>
-성공입니다
+
 <div id="modalGrid"></div>
 
 <script>
 
-var modalGrid = new tui.Grid({
-	el: document.getElementById('modalGrid'),
-	data: {
+var modalDataSource = {
 		api: {
 		    readData: 	{url: '${path}/com/findComCodeDeta.do', method: 'GET' }
 	  	},
 		contentType: 'application/json'
-	},
+	};
+	
+var columns = 	[
+	  {
+		    header: 'CODE',
+		    name: 'code'
+		  },
+		  {
+		    header: 'CODE_NM',
+		    name: 'codeNm'
+		  },
+		  {
+		    header: 'CODE_DC',
+		    name: 'codeDc'
+		  },
+		  {
+		    header: 'USE_AT',
+		    name: 'useAt',
+		    align: 'center'
+		  }
+		];
+		
+var modalGrid = new tui.Grid({
+	el: document.getElementById('modalGrid'),
+	data: modalDataSource,
 	width: 450,
 	bodyHeight:300,
 	selectionUnit: 'row',
-	columns: [
-	  
-	  {
-	    header: 'CODE',
-	    name: 'code'
-	  },
-	  {
-	    header: 'CODE_NM',
-	    name: 'codeNm'
-	  },
-	  {
-	    header: 'CODE_DC',
-	    name: 'codeDc'
-	  },
-	  {
-	    header: 'USE_AT',
-	    name: 'useAt',
-	    align: 'center'
-	  }
-	]
+	columns 
 });
 
+//이벤트
 modalGrid.on('dblclick', (ev) => {	
 	
 	//cell 선택시 row 선택됨.
@@ -62,6 +66,7 @@ modalGrid.on('dblclick', (ev) => {
 	getModalData(codeParam);
 
 });
+
 </script>
 
 </body>

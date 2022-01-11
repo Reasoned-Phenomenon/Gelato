@@ -208,7 +208,7 @@ const codeGrid = new tui.Grid({
 		          Cancel: function() {
 		            dialog.dialog( "close" );
 		          }
-		        }
+		      }
 		     
 		});
 		
@@ -228,8 +228,11 @@ const codeGrid = new tui.Grid({
 	})
 	
 	function getModalData (str) {
-		inputName.value = str;
+		
+		let target = document.getElementById('inputName');
+		target.value = str;
 		dialog.dialog( "close" );
+		
 	}
 	
 
