@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gelato.app.prd.prdPlan.dao.PrdPlanMngVO;
 import com.gelato.app.prd.prdPlan.service.PrdPlanMngService;
 
 @Controller
@@ -57,7 +58,17 @@ public class PrdPlanMngController {
 	public String SearchPlanList(Model model) {
 		System.out.println("검색결과 출력");
 		System.out.println(model);
-		model.addAttribute("datas", prdPlanMngService.searchPlanList());
+		model.addAttribute("datas", prdPlanMngService.SearchPlanList());
 		return "grid";
 	}
+	
+	// 상세계획그리드에 출력
+	@RequestMapping("/prd/chooseOrder.do")
+	public String ChooseOrder(Model model, PrdPlanMngVO vo) {
+		System.out.println("상세계획 출력");
+		model.addAttribute("datas", prdPlanMngService.ChooseOrder(vo));
+		System.out.println(prdPlanMngService.ChooseOrder(vo));
+		return "grid";
+	}
+	
 }
