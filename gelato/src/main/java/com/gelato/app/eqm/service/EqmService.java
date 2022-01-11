@@ -8,5 +8,5 @@ public interface EqmService {
 	
 	int insertEqm(EqmVO eqmVo);
 	
-	List<EqmVO> eqmList();
+	List<EqmVO> eqmList(EqmVO eqmVo);
 }

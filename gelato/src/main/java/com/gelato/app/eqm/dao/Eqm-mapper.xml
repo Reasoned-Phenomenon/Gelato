@@ -14,12 +14,12 @@
 		from eqm e, prcs p 
 		where e.eqm_id = p.eqm_id 
 		
-		<if test="gubun == '전체'">
+		<if test='gubun == "전체"'>
 		</if>
-		<if test="gubun == '배합'">
+		<if test='gubun == "배합"'>
 			and e.fg = 'CLAS01'
 		</if>
-		<if test="gubun == '운송'">
+		<if test='gubun == "운송"'>
 			and e.fg = 'CLAS02'
 		</if>
 	</select>

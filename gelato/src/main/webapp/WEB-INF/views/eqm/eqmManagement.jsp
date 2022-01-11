@@ -18,14 +18,14 @@
 	<br>
 	<div>
 		<label>구분</label> 
-		<select name="gubun">
-			<option value="전체" <c:if test="${eqm.gubun == '전체'}">selected</c:if>>전체
-			<option value="배합" <c:if test="${eqm.gubun == '배합'}">selected</c:if>>배합
-			<option value="운송" <c:if test="${eqm.gubun == '운송'}">selected</c:if>>운송
-			<option value="측정" <c:if test="${eqm.gubun == '측정'}">selected</c:if>>측정
-			<option value="가공" <c:if test="${eqm.gubun == '가공'}">selected</c:if>>가공
+		<select id="gubun">
+			<option value="전체">전체
+			<option value="배합">배합
+			<option value="운송">운송
+			<option value="측정">측정
+			<option value="가공">가공
 		</select>
-		<button>조회</button>
+		<button id="btnFind">조회</button>
 	</div>
 	<div id="codeGrid" style="width: 500px;"></div>
 <script>	
@@ -41,9 +41,6 @@ const codeGrid = new Grid({
 	rowHeaders: ['checkbox'],
 	selectionUnit: 'row',
 	bodyHeight: 600,
-	pageOptions: {
-	    type: 'scroll'
-    },
 	columns:[
 			{
 	          header: '설비코드',
@@ -59,7 +56,7 @@ const codeGrid = new Grid({
 	        },
 	        {
 	          header: '공정명',
-	          name: 'name'
+	          name: 'nm'
 	        },
 	        {
 	          header: '사용여부',
@@ -68,6 +65,12 @@ const codeGrid = new Grid({
 		]
 });
 
+$('#btnFind').on("click", function(){
+	let gubun = $('#gubun option:selected').val();
+	
+	codeGrid.readData(1, {'gubun':gubun}, true);
+	//codeGrid.refreshLayout();
+})
 </script>
 </body>
 </html>

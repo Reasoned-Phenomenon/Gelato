@@ -21,7 +21,7 @@ public class EqmController {
 	}
 	
 	//등록
-	@PostMapping("/insert")
+	@PostMapping("/eqm/insertEqm.do")
 	public String insert(EqmVO eqmVo) {
 		service.insertEqm(eqmVo);
 		return "tiles/eqm/eqmManagement";
@@ -42,9 +42,9 @@ public class EqmController {
 	
 	//설비관리(조회)
 	@GetMapping("/eqm/eqmList.do")
-	public String findEqm(Model model) {
-		System.out.println(service.eqmList());
-		model.addAttribute("datas",service.eqmList());
+	public String findEqm(Model model, EqmVO eqmVo) {
+		System.out.println(service.eqmList(eqmVo));
+		model.addAttribute("datas",service.eqmList(eqmVo));
 		return "grid";
 	}
 	

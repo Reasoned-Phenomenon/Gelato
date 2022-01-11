@@ -15,7 +15,7 @@
 <body>
 <!-- 설비구분 모달 -->
 <div id="dialog-form" title="설비구분"></div>
-	<form action="${pageContext.request.contextPath}/insert" method="post" name="frm">
+	<form action="${pageContext.request.contextPath}/eqm/insertEqm.do" method="post" name="frm">
 		<div>
 			<br>
 			<h2 id="title">설비 등록</h2>

@@ -22,8 +22,8 @@ public class EqmServiceImpl implements EqmService{
 	
 	//전체 설비 목록조회
 	@Override
-	public List<EqmVO> eqmList() {
-		return eqmMapper.eqmList();
+	public List<EqmVO> eqmList(EqmVO eqmVo) {
+		return eqmMapper.eqmList(eqmVo);
 	}
 	
 }

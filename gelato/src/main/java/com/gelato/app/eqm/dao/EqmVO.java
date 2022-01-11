@@ -22,4 +22,6 @@ public class EqmVO {
 	
 	String prcsId;
 	String nm;
+	
+	String gubun;
 }
