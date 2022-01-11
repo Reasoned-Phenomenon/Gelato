@@ -18,17 +18,17 @@ public class PrdPlanMngController {
 		System.out.println("생산계획관리 페이지 이동");
 		
 		// 생산계획관리 페이지
-		/* return "tiles/prd/prdPlanMng"; */
+		 return "tiles/prd/prdPlanMng"; 
 		
 		// 생산계획관리에 들어갈 주문서 modal jsp.
 		/* return "tiles/prd/orderShtModal"; */
 		
 		// 생산계획관리에 들어갈 검색창 modal jsp.
-		return "tiles/prd/searchPlanModal"; 
+		/* return "tiles/prd/searchPlanModal"; */
 	}
 	
 	//주문서 modal
-	@RequestMapping("orderShtDialog")
+	@RequestMapping("prd/orderShtDialog.do")
 	public String orderShtDialog() {
 		System.out.println("주문서 이동");
 		// 생산계획관리에 들어갈 주문서 modal jsp.
@@ -36,7 +36,7 @@ public class PrdPlanMngController {
 	}
 	
 	//검색결과 modal
-	@RequestMapping("searchPlanDialog")
+	@RequestMapping("prd/searchPlanDialog.do")
 	public String searchPlanDialog() {
 		System.out.println("검색창 이동");
 		// 생산계획관리에 들어갈 검색창 modal jsp.

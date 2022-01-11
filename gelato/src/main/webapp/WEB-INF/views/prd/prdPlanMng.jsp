@@ -14,6 +14,7 @@
 	<script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
 	<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head>
 <style>
@@ -67,31 +68,31 @@ th,td {padding:5px;}
   document.getElementById('plandt').value = new Date().toISOString().substring(0, 10);
   
   //주문서 조회 클릭하면 모달창 생성하기
-  let dialog = $( "#OrderShtDialog" ).dialog({
+  let OrderShtDialog = $( "#OrderShtDialog" ).dialog({
 	  modal:true,
 	  autoOpen:false
   });
   
   $("#btnOrderSht").on("click", function() {
 	  console.log("11111")
-	  dialog.dialog( "open" );
+	  OrderShtDialog.dialog( "open" );
 	  console.log("111112222")
-	  $("#OrderShtDialog").load("orderShtDialog", function(){console.log("주문창 로드");})
+	  $("#OrderShtDialog").load("${path}/prd/orderShtDialog.do", function(){console.log("주문창 로드")})
   });
   
   ///////////////////문제 - 모달창 안에 주문서jsp가 들어가지 않음
   
   //검색 클릭하면 모달창 생성하기
-  let dialog = $( "#SearchPlanDialog" ).dialog({
+  let SearchPlanDialog = $( "#SearchPlanDialog" ).dialog({
 	  modal:true,
 	  autoOpen:false
   });
   
   $("#btnSearchPlan").on("click", function() {
 	  console.log("33333")
-	  dialog.dialog( "open" );
+	  SearchPlanDialog.dialog( "open" );
 	  console.log("44444")
-	  $("#SearchPlanDialog").load("searchPlanDialog", function(){console.log("검색창 로드");})
+	  $("#SearchPlanDialog").load("${path}/prd/searchPlanDialog.do", function(){console.log("검색창 로드");})
   });
   
 </script>
