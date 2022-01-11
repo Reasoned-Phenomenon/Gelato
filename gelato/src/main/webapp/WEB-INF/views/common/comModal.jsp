@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+성공입니다
 <div id="modalGrid"></div>
 
 <script>
