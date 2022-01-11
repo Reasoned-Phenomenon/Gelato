@@ -18,10 +18,6 @@ h1 {
 	<h1>생산계획 검색</h1>
 	<br>
 	<div id="searchPlanGrid"></div>
-	
-	<!-- 모달창에서 버튼구현 -->
-	<button type="button" id = "choOrderSht">선택</button>
-	<button type="button" id = "closeModal">취소</button>
 	<script>
 var Grid = tui.Grid;
 
@@ -64,6 +60,22 @@ var searchPlanGrid = new Grid({
  		  
 		]
 });
+
+// 그리드 이벤트
+// 클릭 이벤트
+
+searchPlanGrid.on("dblclick", (ev) => {
+	
+	searchPlanGrid.setSelectionRange({
+	    start: [ev.rowKey, 0],
+	    end: [ev.rowKey, searchPlanGrid.getColumns().length-1]
+	});
+	
+	var spg = searchPlanGrid.getRow(ev.rowKey).planId;
+	console.log(spg);
+	choosePI(spg);
+});
+
 
 </script>
 </body>

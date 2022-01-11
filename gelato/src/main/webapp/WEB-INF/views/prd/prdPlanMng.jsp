@@ -29,14 +29,13 @@ th, td {
 </style>
 <body>
 
-	<form action="" method="post" name="frm">
+	<form action="" method="post" name="frm"></form>
 		<div>
 			<br>
 			<h1 id="title">생산계획관리</h1>
 			<br>
-			<br>
 		</div>
-		<div style="float: left; width: 70%; padding: 10px;">
+		<div style="float: left; width: 80%; padding: 10px;">
 			<table>
 				<tbody>
 					<tr>
@@ -54,25 +53,23 @@ th, td {
 				</tbody>
 			</table>
 		</div>
-		<div style="float: left; width: 30%; padding: 10px;">
+		
+		<div style="float: left; width: 20%; padding: 10px;">
 			<button type="button" class="btn btn-secondary" id="btnOrderSht">주문서
 				조회</button>
 			<button type="button" class="btn btn-secondary" id="btnPlanIns">등록</button>
-			<button type="button" class="btn btn-secondary" id="btnPlanDel">삭제</button>
+			<button type="button" class="btn btn-secondary" id="btnPlanDel">삭제</button>			
 		</div>
-
-		
-		<!-- 계획 상세 그리드 -->
-		<div id="PlanDetaGrid"></div>
 
 		<!-- 주문서 모달창 -->
 		<div id="OrderShtDialog" title="주문서 목록"></div>
 
 		<!-- 검색 모달창 -->
 		<div id="SearchPlanDialog" title="검색 결과"></div>
-
-	</form>
-
+		
+		<!-- 계획 상세 그리드 -->
+		<div id="PlanDetaGrid"></div>
+	
 	<script>
 	//생산계획일자 현재날짜 기본 설정
 	document.getElementById('plandt').value = new Date().toISOString()
@@ -107,16 +104,25 @@ th, td {
 								console.log("주문창 로드")
 							})
 				});
-		//종료
+	//종료
 
-		//검색 클릭하면 모달창 생성하기
+	//검색 클릭하면 모달창 생성하기
+		
+		// 주문코드 받아서 readData에 파라미터값으로 넘겨주기
+		function choosePI(spg){
+			console.log(spg);
+			PlanDetaGrid.readData(1,{planId:spg}, true);
+			SearchPlanDialog.dialog("close");
+		}
+	
+		//모달창 생성
 		var SearchPlanDialog = $("#SearchPlanDialog").dialog({
 			modal : true,
 			autoOpen : false,
 			height: 600,
 			width: 1000
 		});
-
+		
 		$("#btnSearchPlan").on(
 				"click",
 				function() {
@@ -128,9 +134,9 @@ th, td {
 								console.log("검색창 로드")
 							})
 				});
-		//종료
+	//종료
 
-		//계획상세 그리드 생성
+	//계획상세 그리드 생성
 		var Grid = tui.Grid;
 
 		//그리드 테마
@@ -177,7 +183,7 @@ th, td {
 				name : 'qy',
 			}, {
 				header : '생산일수',
-				name : 'prod_dcnt',
+				name : 'prodDcnt',
 			}, {
 				header : '작업우선순위',
 				name : 'priort',
@@ -186,6 +192,7 @@ th, td {
 				name : 'fg',
 			}]
 		});
+	//종료
 	</script>
 </body>
 </html>
