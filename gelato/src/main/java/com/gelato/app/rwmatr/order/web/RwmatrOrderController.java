@@ -3,8 +3,12 @@ package com.gelato.app.rwmatr.order.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gelato.app.rwmatr.order.dao.RwmatroModifyVO;
 import com.gelato.app.rwmatr.order.service.RwmatroService;
 
 @Controller
@@ -24,11 +28,11 @@ public class RwmatrOrderController {
 		return "grid";
 	}
 	
-//	@PutMapping("/com/rwmatroModifyData.do")
-//	@ResponseBody
-//	public boolean modifyData (@RequestBody RwmatroModifyVO mvo) {
-//		System.out.println(mvo);
-//		service.;
-//		return true;
-//	}
+	@PutMapping("/com/rwmatroModifyData.do")
+	@ResponseBody
+	public boolean modifyData (@RequestBody RwmatroModifyVO mvo) {
+		System.out.println(mvo);
+		rwmatroService.modifyRwmatro(mvo);
+		return true;
+	}
 }

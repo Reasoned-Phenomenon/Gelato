@@ -3,22 +3,59 @@
 <mapper namespace="com.gelato.app.rwmatr.order.dao.RwmatroMapper">
 
 	<select id="rwmatrOrderList" resultType="RwmatroVO">
-		select rd.rwmatr_order_deta_id as rwmatr_order_deta_id, 
-		       r.nm, r.rwmatr_id as rwmatr_id, 
-		       rd.untprc as untprc, 
-		       rd.qy as qy, 
-		       v.vend_id as vend_id, 
-		       ro.order_dt as order_dt, 
-		       ro.dudt as dudt
-		from rwmatr_order_deta rd join rwmatr_order ro
-		    on(rd.order_id = ro.order_id)
-		join rwmatr r
-		    on(rd.rwmatr_id = r.rwmatr_id)
-		join vend v
-		    on(r.vend_id = v.vend_id)
-		order by 1 desc
+		SELECT RD.ORDER_ID AS ORDER_ID, 
+		       R.NM, R.RWMATR_ID AS RWMATR_ID, 
+		       RD.UNTPRC AS UNTPRC, 
+		       RD.QY AS QY, 
+		       V.VEND_NAME AS VEND_NAME, 
+		       RO.ORDER_DT AS ORDER_DT, 
+		       RO.DUDT AS DUDT
+		FROM RWMATR_ORDER_DETA RD JOIN RWMATR_ORDER RO
+		    ON(RD.ORDER_ID = RO.ORDER_ID)
+		JOIN RWMATR R
+		    ON(RD.RWMATR_ID = R.RWMATR_ID)
+		JOIN VEND V
+		    ON(R.VEND_ID = V.VEND_ID)
+		ORDER BY 1 DESC
 	</select>
 	
-	<insert id="rwmatrOrderInsert"></insert>
+	<!-- <insert id="insertRwmatro" parameterType="RwmatroVO">
+		<selectKey keyProperty="orderId" resultType="" order="BEFORE">
+			SELECT 'OAF-'||TO_CHAR(SYSDATE,'YYYYMMDD-')||
+					(SELECT LPAD(MAX(TO_NUMBER(SUBSTR(ORDER_ID, -3))) +1, 3, 0) 
+			FROM RWMATR_ORDER) as order_id FROM DUAL
+		</selectKey>
+		INSERT INTO RWMATR_ORDER (ORDER_ID, ORDER_DT, DUDT) 
+			VALUES(#{orderId},sysdate,#{dudt})
+	</insert> -->
+	
+	<!-- <insert id="insertRwmatroDeta" parameterType="RwmatroVO">
+		<selectKey keyProperty="rwmatrOrderDetaId" resultType="string" order="BEFORE">
+			SELECT 'OAD-'||TO_CHAR(SYSDATE,'YYYYMMDD-')||
+					(SELECT LPAD(MAX(TO_NUMBER(SUBSTR(ORDER_ID, -3))) +1, 3, 0) 
+			FROM RWMATR_ORDER) as rwmatr_order_deta_id FROM DUAL
+		</selectKey>
+		INSERT INTO RWMATR_ORDER_DETA (
+										RWMATR_ORDER_DETA_ID
+										ORDER_ID, 
+										RWMATR_ID,
+										UNTPRC, 
+										QY) 
+								VALUES (
+										#{rwmatrOrderDetaId},
+										#{orderId},
+										#{rwmatrId},
+										#{untprc},
+										#{qy}
+										)
+	</insert> -->
+	
+	<!-- <update id="updateRwmatroDeta" parameterType="RwmatroVO">
+			
+	</update>
+	
+	<delete id="deleteRwmatroDeta" parameterType="RwmatroVO">
+		
+	</delete> -->
 
 </mapper>

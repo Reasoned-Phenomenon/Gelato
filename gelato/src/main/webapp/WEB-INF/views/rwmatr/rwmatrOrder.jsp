@@ -100,10 +100,15 @@ const codeIdGrid = new Grid({
 	},
 	rowHeaders: ['checkbox'],
 	selectionUnit: 'row',
+	bodyHeight: 600,
+	pageOptions: {
+	    type: 'scroll'
+    },
 	columns:[
 			{
 			  header: '발주코드',
-			  name: 'rwmatrOrderDetaId'
+			  name: 'orderId',
+			  editor: 'text'
 			},
 			{
 			  header: '자재명',
@@ -126,8 +131,8 @@ const codeIdGrid = new Grid({
 			  editor: 'text'
 			},
 			{
-			  header: '업체코드',
-			  name: 'vendId',
+			  header: '업체명',
+			  name: 'vendName',
 			  editor: 'text'
 			},
 			{

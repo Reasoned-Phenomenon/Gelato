@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gelato.app.rwmatr.order.dao.RwmatroMapper;
+import com.gelato.app.rwmatr.order.dao.RwmatroModifyVO;
 import com.gelato.app.rwmatr.order.dao.RwmatroVO;
 import com.gelato.app.rwmatr.order.service.RwmatroService;
 
@@ -17,6 +18,24 @@ public class RwmatroServiceImpl implements RwmatroService {
 	@Override
 	public List<RwmatroVO> rwmatrOrderList() {
 		return rwmatroMapper.rwmatrOrderList();
+	}
+	
+
+	@Override
+	public int modifyRwmatro(RwmatroModifyVO mvo) {
+		for(RwmatroVO vo : mvo.getCreatedRows()) {
+			rwmatroMapper.insertRwmatroDeta(vo);
+		}
+		
+		for(RwmatroVO vo : mvo.getUpdatedRows()) {
+			rwmatroMapper.updateRwmatro(vo);
+		}
+		
+		for(RwmatroVO vo : mvo.getDeletedRows()) {
+			rwmatroMapper.deleteRwmatro(vo);
+		}
+		
+		return 0;
 	}
 
 }
