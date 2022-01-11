@@ -20,6 +20,10 @@ public class RwmatroServiceImpl implements RwmatroService {
 		return rwmatroMapper.rwmatrOrderList();
 	}
 	
+	@Override
+	public List<RwmatroVO> selectVendList() {
+		return rwmatroMapper.selectVendList();
+	}
 
 	@Override
 	public int modifyRwmatro(RwmatroModifyVO mvo) {

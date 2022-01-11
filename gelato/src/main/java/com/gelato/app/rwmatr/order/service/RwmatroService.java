@@ -8,6 +8,7 @@ import com.gelato.app.rwmatr.order.dao.RwmatroVO;
 public interface RwmatroService {
 
 	List<RwmatroVO> rwmatrOrderList();
+	List<RwmatroVO> selectVendList();
 	
 	int modifyRwmatro (RwmatroModifyVO mvo);
 	

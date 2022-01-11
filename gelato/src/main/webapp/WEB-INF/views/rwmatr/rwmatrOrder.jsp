@@ -44,11 +44,11 @@
 	<!-- 발주목록 조회 -->
 	<div id="rwmatrOrderList" style="width: 100%"></div>
 
-	<!-- 자재목록 모달창 -->
-	<div id="rwmatrDialog" title="원자재 목록"></div>
+	<!-- 모달창 -->
+	<div id="dialogFrm" title="원자재 목록"></div>
 
 <script>
-let rwmatrDialog;
+let dialog;
 var Grid = tui.Grid;
 
 //그리드 테마
@@ -123,9 +123,9 @@ var rwmatrOrderList = new Grid({
 		]
 });
 
+//자재모달
 function callRwmatrModal(){
-	//자재 목록 모달띄움
-	rwmatrDialog = $( "#rwmatrDialog" ).dialog({
+	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
 	      height: 400,
@@ -134,9 +134,25 @@ function callRwmatrModal(){
 	}); 
 
     console.log("11111")
-    rwmatrDialog.dialog( "open" );
+    dialog.dialog( "open" );
     console.log("111112222")
-    $("#rwmatrDialog").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
+    $("#dialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
+}
+
+//거래처모달
+function callVendModal(){
+	dialog = $( "#dialogFrm" ).dialog({
+		  modal:true,
+		  autoOpen:false,
+	      height: 400,
+	      width: 600,
+	      modal: true
+	}); 
+
+    console.log("11111")
+    dialog.dialog( "open" );
+    console.log("111112222")
+    $("#dialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("거래처 목록")})
 }
 	
 	//모달에서 선택한 값 세팅
@@ -151,9 +167,10 @@ function callRwmatrModal(){
 			if(!rwmatrOrderList.getRow(ev.rowKey).nm){
 				console.log("1111")
 	    		callRwmatrModal();
-				
-	    	}
-	    	
+	    	} 
+		} else if(ev.columnName === 'vendName'){
+    		console.log("2222")
+    		callVendModal();
 		}
 	});
 
@@ -163,7 +180,7 @@ function callRwmatrModal(){
 		console.log(rmnm)
 		rwmatrOrderList.setValue(rk, "rwmatrId", rmId, true)
 		rwmatrOrderList.setValue(rk, "nm", rmnm, true)
-		rwmatrDialog.dialog( "close" );
+		dialog.dialog( "close" );
 	}
 	
 	

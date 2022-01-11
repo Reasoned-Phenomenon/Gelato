@@ -34,7 +34,7 @@ public class RwmatrOrderController {
 	
 	//원자재 modal
 	@RequestMapping("rwmatr/searchRwmatrDialog.do")
-	public String orderShtDialog() {
+	public String rwmatrDialog() {
 		System.out.println("원자재 모달");
 		return "rwmatr/searchRwmatrModal"; 
 	}
@@ -45,6 +45,22 @@ public class RwmatrOrderController {
 		System.out.println("원자재리스트");
 		model.addAttribute("datas", rwmatrService.rwmatrList());
 		System.out.println(rwmatrService.rwmatrList());
+		return "grid"; 
+	}
+	
+	//거래처 modal
+	@RequestMapping("rwmatr/searchVendDialog.do")
+	public String vendDialog() {
+		System.out.println("거래처 모달");
+		return "rwmatr/searchVendModal"; 
+	}
+	
+	//거래처리스트 출력
+	@RequestMapping("rwmatr/searchVendList.do")
+	public String searchVendDialog(Model model) {
+		System.out.println("거래처리스트");
+		model.addAttribute("datas", rwmatroService.selectVendList());
+		System.out.println(rwmatroService.selectVendList());
 		return "grid"; 
 	}
 	

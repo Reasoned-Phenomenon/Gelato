@@ -5,6 +5,7 @@ import java.util.List;
 public interface RwmatroMapper {
 
 	List<RwmatroVO> rwmatrOrderList();
+	List<RwmatroVO> selectVendList();
 	
 	int insertRwmatro(RwmatroVO vo);
 	int updateRwmatro(RwmatroVO vo);

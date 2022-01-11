@@ -19,6 +19,12 @@
 		ORDER BY 1 DESC
 	</select>
 	
+	<select id="selectVendList" resultType="RwmatroVO">
+		SELECT VEND_ID, VEND_NAME, REMK
+			FROM VEND
+		WHERE FG = 'VEND01'
+	</select>
+	
 	<!-- <insert id="insertRwmatro" parameterType="RwmatroVO">
 		<selectKey keyProperty="orderId" resultType="" order="BEFORE">
 			SELECT 'OAF-'||TO_CHAR(SYSDATE,'YYYYMMDD-')||
