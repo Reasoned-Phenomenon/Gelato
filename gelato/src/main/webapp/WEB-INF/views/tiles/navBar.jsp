@@ -145,7 +145,7 @@
                         </li>
                         
                         <li>
-                           <a href="#">> <span>설비 관리</span></a>
+                           <a href="${path }/eqm/eqmManagement.do">> <span>설비 관리</span></a>
                         </li>
                         
                         <li>
