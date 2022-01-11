@@ -1,4 +1,4 @@
-package com.gelato.app.order;
+package com.gelato.app.biz;
 
 import java.util.Date;
 
@@ -23,8 +23,11 @@ public class OrderVO {
 	String remk; // 비고.
 	
 	
-	// 주문서 디테일
+	// 주문서 디테일(join)
 	String orderShtDetaId; // 주문서 디테일 코드.
 	String prdtId;         // 제품 코드.
 	String qy;             // 수량.
+	
+	// 거래처(join) 
+	String vendName;       // 업체명.
 }
