@@ -13,17 +13,32 @@ public class OrderController {
 
 	@Autowired OrderService ordService;
 	
-
+	// 주문서 관리 페이지로 이동.
 	@GetMapping("/biz/ordSearch.do")
-	public String comCode() {
+	public String ordSearch() {
 		return "tiles/biz/ordSearch";
 	}
 	
+	// 주문서 list 출력 조회.
 	@RequestMapping("/biz/findOrderList.do")
-	public String findComCode(Model model) {
+	public String findOrderList(Model model) {
 		System.out.println("aaaaaaaaaaa");
 		model.addAttribute("datas",ordService.findOrderList());
 		return "grid";
+	}
+	
+	// 거래처 모달로 조회.
+	@RequestMapping("/biz/vendList.do")
+	public String vendList(Model model) {
+		System.out.println("거래처 검색");
+		model.addAttribute("datas", ordService.vendList());
+		return "grid";
+	}
+	// 거래처 버튼 눌럿을때  모달 창 함수가 컨트롤러에 오고 리턴으로 모달창 띄울 jsp 적어줌.
+	@RequestMapping("/biz/vendModal.do")
+	public String vendModal(Model model) {
+		System.out.println("모달모달모달");
+		return "/biz/vendList";
 	}
 	
 }

@@ -6,9 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 
 <title>주문서 관리 조회</title>
 </head>
@@ -46,22 +44,23 @@
 	      			<li>
 	      				<div>
 	      					<label>해당일자</label>
+	      					<input type="date" id="orderDt">
 	      				</div>
 	      			</li>
 	      			<li>
 	      				<div>
 	      					<label>거래처</label>
-	      					<input type="text" id="" name="">
-	      					<button type="button" id="">찾아보기</button>&ensp;&ensp;&ensp;
+	      					<input type="text" id="vendId" name="vendId">
+	      					<button type="button" id="BtnVend">찾아보기</button>&ensp;&ensp;&ensp;
 	      					
 	      					<label>제품코드</label>
-	      					<input type="text" id="" name="">
+	      					<input type="text" id="prdtId" name="prdtId">
 	      					<button type="button" id="">찾아보기</button> &ensp;
 	      					
 	      				<button type="button" class="btn cur-p btn-outline-primary" id="btnRst">새자료</button>
 	      				<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
-						<button type="button" class="btn cur-p btn-outline-primary" id="btnAdd">Excel</button>
-						<button type="button" class="btn cur-p btn-outline-primary" id="btnDel">인쇄</button>
+						<button type="button" class="btn cur-p btn-outline-primary" id="btnExcel">Excel</button>
+						<button type="button" class="btn cur-p btn-outline-primary" id="btnprint">인쇄</button>
 					
 	      				</div>
 	      			</li>
@@ -71,10 +70,15 @@
 	     </div>
 	  </div> 
  </main>
-<div class="row">
-	<div id="codeGrid" style="width: 100%"></div>
-</div>
+
+	<div id="ordGrid" style="width: 100%"></div>
+	<div id="modal" style="width: 100%"></div>
+
+   	 
+	
 <script>
+let dialog;
+
 var Grid = tui.Grid;
 
 //그리드 테마
@@ -90,15 +94,15 @@ Grid.applyTheme('striped', {
 });
 
 //그리드 생성
-const codeGrid = new Grid({
-	el: document.getElementById('codeGrid'),
+const ordGrid = new Grid({
+	el: document.getElementById('ordGrid'),
 	data : {
 	  api: {
 	    readData: 	{ url: '${path}/biz/findOrderList.do', method: 'GET'},
 	  },
 	  contentType: 'application/json'
 	},
-	rowHeaders: ['checkbox'],
+	rowHeaders: ['rowNum'],
 	selectionUnit: 'row',
 	columns:[
 			{
@@ -141,13 +145,50 @@ const codeGrid = new Grid({
               header: '비고',
 			  name: 'remk',
 			  editor: 'text'
-			},
+			}
 		]
 });
+	
+	// 조회 버튼.
+	/* btnFind.addEventListener("click", function() {
+	let vendId = document.getElementById("vendId").value;
+	ordGrid.readData(1, {vendName:targetName}, true);
+	}); */
+	
+		
+	// 모달창 생성 함수.
+	$(function () {
+		dialog = $( "#modal" ).dialog({
+			autoOpen: false,
+			height: 500,
+			width: 700,
+			modal: true,
+			buttons: {
+			// 선택하는 버튼 넣어두기!. 옵션? 어떤거 잇는 지 찾아보기.
+			Cancel: function() {
+			dialog.dialog( "close" );
+			}
+			}
+		})
+	});
+	
+	// 거래처 찾아보기 버튼 
+	BtnVend.addEventListener("click", function() {
+		console.log("444444");
+		console.log("모달클릭")
+		dialog.dialog( "open" );
+		
+		 // 컨트롤러에 보내주고 따로 모달은 jsp 만들 필요가 없으니깐  
+		 $('#modal').load("${path}/biz/vendModal.do",function () {
+			console.log('로드됨')
+			vendListGrid.readData(1,{}, true);
+		})
+		
+	})
 
-	// 버튼 이벤트 만들기.
 	
 	
+		
 
 </script>	
 	
