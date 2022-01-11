@@ -38,7 +38,7 @@ Grid.applyTheme('striped', {
 	});
 	
 // 그리드 생성
-const ordershtGrid = new Grid({
+const searchPlanGrid = new Grid({
 	el: document.getElementById('searchPlanGrid'),
   	data : {
 	  api: {
@@ -46,7 +46,7 @@ const ordershtGrid = new Grid({
 	  },
 	  contentType: 'application/json'
 	},
-  	rowHeaders:[ 'checkbox', 'rowNum'],
+  	rowHeaders:['rowNum'],
   	selectionUnit: 'row',
   	columns:[
   		  {
