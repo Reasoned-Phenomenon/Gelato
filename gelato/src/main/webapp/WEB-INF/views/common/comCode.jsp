@@ -79,7 +79,8 @@ Grid.applyTheme('striped', {
 	      background: '#eef'
 	    },
 	    evenRow: {
-	      background: '#fee'
+	      /* background: '#fee' */
+	      background: '#898989'
 	    }
 	  }
 });
@@ -160,6 +161,11 @@ const codeGrid = new tui.Grid({
     	{
 		  header: '코드ID',
 		  name: 'codeId',
+		  hidden:true
+		},
+		{
+		  header: '이전코드',
+		  name: 'bcode',
 		  hidden:true
 		},
 		{

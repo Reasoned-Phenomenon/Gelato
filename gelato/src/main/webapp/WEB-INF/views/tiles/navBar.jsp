@@ -28,7 +28,7 @@
                
                	<!-- 정보 메뉴 -->
                   <li class="active">
-                     <a href="#common" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog yellow_color"></i> <span>정보 관리</span></a>
+                     <a href="#common" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-object-group blue2_color"></i> <span>정보 관리</span></a>
                      <ul class="collapse list-unstyled" id="common">
                         <li>
                            <a href="${path }/com/comCode.do">> <span>공통 코드 관리</span></a>
@@ -55,7 +55,7 @@
                   
                   <!-- 영업 관리 메뉴 -->
                   <li class="active">
-                     <a href="#sales" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog yellow_color"></i> <span>영업 관리</span></a>
+                     <a href="#sales" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-briefcase blue1_color"></i> <span>영업 관리</span></a>
                      <ul class="collapse list-unstyled" id="sales">
                         <li>
                            <a href="${path}/biz/ordSearch.do">> <span>주문서 관리</span></a>

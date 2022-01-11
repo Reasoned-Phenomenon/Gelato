@@ -5,6 +5,7 @@
 <select id="findComCodeDeta" resultType="ComCodeDetaVO">
 	SELECT 
 		CODE_ID,
+		CODE as bcode,
 		CODE,
 		CODE_NM,
 		CODE_DC,
@@ -59,18 +60,21 @@
 
 	DELETE FROM COMTCCMMNDETAILCODE
 	WHERE UPPER(CODE) = UPPER(#{code})
+	AND UPPER(CODE_ID) = UPPER(#{codeId})
+	
 </delete>
 
 <update id="updateComCodeDeta">
 
 	UPDATE COMTCCMMNDETAILCODE
-	SET 
+	SET CODE = #{code},
 		CODE_NM = #{codeNm},
 		CODE_DC = #{codeDc},
 		USE_AT = #{useAt},
 		LAST_UPDT_PNTTM = sysdate,
 		LAST_UPDUSR_ID = 'Admin'
-	WHERE CODE = #{code}
+	WHERE CODE = UPPER(#{bcode})
+	AND CODE_ID = #{codeId}
 		
 </update>
 
