@@ -1,9 +1,11 @@
 package com.gelato.app.eqm.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gelato.app.eqm.dao.Eqm;
+import com.gelato.app.eqm.dao.EqmVO;
 import com.gelato.app.eqm.dao.EqmMapper;
 import com.gelato.app.eqm.service.EqmService;
 
@@ -12,9 +14,16 @@ public class EqmServiceImpl implements EqmService{
 	
 	@Autowired EqmMapper eqmMapper;
 	
+	//설비 등록
 	@Override
-	public int insertEqm(Eqm eqm) {
-		return eqmMapper.insertEqm(eqm);
+	public int insertEqm(EqmVO eqmVo) {
+		return eqmMapper.insertEqm(eqmVo);
+	}
+	
+	//전체 설비 목록조회
+	@Override
+	public List<EqmVO> eqmList(EqmVO eqmVo) {
+		return eqmMapper.eqmList(eqmVo);
 	}
 	
 }
