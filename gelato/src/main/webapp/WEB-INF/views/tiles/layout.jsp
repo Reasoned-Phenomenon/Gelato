@@ -60,7 +60,7 @@
    
    <!-- 모달 -->
    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-   
+
 </head>
    <body class="dashboard dashboard_1">
       <div class="full_container">
@@ -104,6 +104,8 @@
       <!-- custom js -->
       <script src="${path}/resources/js/custom.js"></script>
       <%-- <script src="${path}/resources/js/chart_custom_style1.js"></script> --%>
+      
+    
       
    </body>
 </html>

@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gelato.app.com.comCode.dao.ComCodeModifyVO;
 import com.gelato.app.com.comCode.dao.ComCodeVO;
 import com.gelato.app.com.comCode.service.ComCodeService;
+import com.gelato.app.vr.ModifyVO;
 
 @Controller
 public class ComCodeController {
@@ -30,7 +30,7 @@ public class ComCodeController {
 	
 	@PutMapping("/com/comCodeModifyData.do")
 	@ResponseBody
-	public boolean modifyData (@RequestBody ComCodeModifyVO mvo) {
+	public boolean modifyData (@RequestBody ModifyVO<ComCodeVO> mvo) {
 		System.out.println(mvo);
 		service.modifyComCode(mvo);
 		return true;

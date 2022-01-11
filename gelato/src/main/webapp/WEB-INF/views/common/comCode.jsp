@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 <h3>공통 코드 관리</h3>
@@ -48,6 +49,7 @@
 
 <script>
 let codeParam;
+let dialog;
 
 var Grid = tui.Grid;
 
@@ -107,7 +109,7 @@ codeIdGrid.on('click', (ev) => {
 	
 	//클릭한 row의 codeId에 해당하는 code를 읽어옴
 	codeParam = codeIdGrid.getRow(ev.rowKey).codeId;
-	codeGrid.readData(1, {codeId:codeIdGrid.getRow(ev.rowKey).codeId}, true);
+	codeGrid.readData(1, {codeId:codeParam}, true);
 	
 });
 
@@ -157,19 +159,17 @@ const codeGrid = new tui.Grid({
 		{
 		  header: 'USE_AT',
 		  name: 'useAt',
-		  copyOptions: {
-	            useListItemText: true
-	      },
 		  formatter: 'listItemText',
-		  editor: {
-		      type: 'radio',
-		      options: {
-		        listItems: [
-		          { text: 'Y', value: 'Y' },
-		          { text: 'N', value: 'N' }
-		        ]
-		      }
-		    }
+		  editor : {
+			  type: 'radio',
+			  options: {
+				  listItems: [
+					  {text: 'Y', value: 'Y'},
+					  {text: 'N', value: 'N'}
+				  ]
+			  }
+		  }
+		  
 		}
      ]
 });
@@ -198,23 +198,45 @@ const codeGrid = new tui.Grid({
 
 	//모달창
 	$(function(){
-		let dialog = $( "#dialog-form" ).dialog({
+		
+		//dialog는 상단에 전역변수로 선언해뒀음
+		//모달생성
+		dialog = $( "#dialog-form" ).dialog({
 		      autoOpen: false,
 		      height: 500,
 		      width: 700,
-		      modal: true
+		      modal: true,
+		      buttons: {
+		          Cancel: function() {
+		            dialog.dialog( "close" );
+		          }
+		      }
 		     
 		});
 		
+		//모달 호출하는 버튼
 		btnModal.addEventListener("click",function(){
+			
 			console.log("모달클릭")
 			dialog.dialog( "open" );
-			$('#dialog-form').load("${path}/com/comModal.do",function () {console.log('로드됨')})
+			console.log(codeParam)
+			
+			 $('#dialog-form').load("${path}/com/comModal.do",function () {
+				console.log('로드됨')
+				modalGrid.readData(1, {codeId:codeParam}, true);
+			})
+			
 		})
 		
 	})
 	
-
+	function getModalData (str) {
+		//목표 태그의 ID값을 입력하면 해당 태그의 value에 모달에서 가져온 값을 넣어줌.
+		let target = document.getElementById('inputName');
+		target.value = str;
+		dialog.dialog( "close" );
+		
+	}
 	
 
 

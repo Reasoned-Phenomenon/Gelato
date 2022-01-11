@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gelato.app.com.deta.dao.ComCodeDetaMapper;
-import com.gelato.app.com.deta.dao.ComCodeDetaModifyVO;
 import com.gelato.app.com.deta.dao.ComCodeDetaVO;
 import com.gelato.app.com.deta.service.ComCodeDetaService;
+import com.gelato.app.vr.ModifyVO;
 
 @Service
 public class ComCodeDetaServiceImpl implements ComCodeDetaService {
@@ -27,14 +27,14 @@ public class ComCodeDetaServiceImpl implements ComCodeDetaService {
 	}
 
 	@Override
-	public int modifyComCodeDeta(ComCodeDetaModifyVO mvo) {
+	public int modifyComCodeDeta(ModifyVO<ComCodeDetaVO> mvo) {
 		
 		for(ComCodeDetaVO vo : mvo.getCreatedRows()) {
 			detaMapper.insertComCodeDeta(vo);
 		}
 		
 		for(ComCodeDetaVO vo : mvo.getUpdatedRows()) {
-			//detaMapper.updateComCodeDeta(vo);
+			detaMapper.updateComCodeDeta(vo);
 		}
 		
 		for(ComCodeDetaVO vo : mvo.getDeletedRows()) {
