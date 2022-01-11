@@ -11,4 +11,7 @@ public class RwmatrVO {
 	String spec;
 	String wkUnit;
 	String safStc;
+	
+	//join
+	String vendName;
 }
