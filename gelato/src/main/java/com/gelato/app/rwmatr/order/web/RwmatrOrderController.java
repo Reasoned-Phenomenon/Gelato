@@ -1,5 +1,7 @@
 package com.gelato.app.rwmatr.order.web;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,15 +23,15 @@ public class RwmatrOrderController {
 	
 	//발주 관리 페이지로 이동
 	@RequestMapping("/rwmatr/rwmatrOrder.do")
-	public String comCode () {
+	public String rwmatrOrder () {
 		return "tiles/rwmatr/rwmatrOrder";
 	}
 	
 	//발주 리스트 조회
 	@RequestMapping("/rwmatr/rwmatrOrderList.do")
-	public String findComCode(Model model) {
-		System.out.println("111111111111111111");
-		model.addAttribute("datas",rwmatroService.rwmatrOrderList());
+	public String rwmatrOrderList(@RequestBody Map<String, String> map, Model model) {
+		System.out.println("발주리스트 조회");
+		model.addAttribute("datas",rwmatroService.rwmatrOrderList(map));
 		return "grid";
 	}
 	

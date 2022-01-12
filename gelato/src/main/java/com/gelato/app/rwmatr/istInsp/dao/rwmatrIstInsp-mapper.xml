@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gelato.app.rwmatr.istInsp.dao.RwmatrIstInspMapper">
+	
+	<select id="RwmatrIstInspList" resultType="RwmatrIstInspVO">
+		SELECT 	   ROD.ORDER_ID AS ORDER_ID,
+	               RII.RWMATR_ORDER_DETA_ID AS RWMATR_ORDER_DETA_ID, 
+			       R.RWMATR_ID AS RWMATR_ID, 
+			       R.NM AS NM, 
+			       RII.DT AS DT, 
+			       RII.PASS_QY AS PASS_QY, 
+			       RII.INFER_QY AS INFER_QY, 
+			       RII.MNGR AS MNGR
+		FROM RWMATR_IST_INSP RII JOIN RWMATR R
+		ON RII.RWMATR_ID = R.RWMATR_ID
+        JOIN RWMATR_ORDER_DETA ROD
+        ON ROD.RWMATR_ORDER_DETA_ID = RII.RWMATR_ORDER_DETA_ID
+	</select>
+	
+</mapper>
