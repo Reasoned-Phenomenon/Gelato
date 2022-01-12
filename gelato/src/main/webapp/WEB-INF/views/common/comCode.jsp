@@ -133,17 +133,12 @@ codeIdGrid.on('click', (ev) => {
 	
 	//토스트
 	toastr.clear()
+	toastr.options.positionClass = "toast-top-center";
 	toastr.options.progressBar = true;
 	toastr.success('코드ID선택','Gelato',{timeOut:'1500'});
 	
 });
 
-//응답시 이벤트
-/* codeIdGrid.on('response', function(ev) {
-	console.log('response')
-	console.log(ev)
-}) */
-	
 //코드 그리드(화면 우측) 생성	
 const codeGrid = new tui.Grid({
 	el: document.getElementById('codeGrid'),
@@ -205,10 +200,19 @@ const codeGrid = new tui.Grid({
      ]
 });
 
+	//응답시 이벤트
+	codeGrid.on('response', function(ev) {
+		console.log(ev)
+	})
+	
 	//버튼 이벤트
 	//저장버튼
 	btnSave.addEventListener("click",function(){
-		codeGrid.request('modifyData');
+		//수정하고 있던 값 저장
+		codeGrid.blur()
+		
+		codeGrid.request('modifyData')
+		
 	})	
 
 	//추가버튼 -> 입력칸추가
@@ -278,8 +282,6 @@ const codeGrid = new tui.Grid({
 		dialog.dialog( "close" );
 	}
 	
-
-
 </script>
 </body>
 </html>

@@ -31,8 +31,12 @@ public class ComCodeDetaController {
 	@PutMapping("/com/comCodeDetaModifyData.do")
 	@ResponseBody
 	public boolean modifyData (@RequestBody ModifyVO<ComCodeDetaVO> mvo) {
+		
+		System.out.println("수정");
 		System.out.println(mvo);
+		
 		service.modifyComCodeDeta(mvo);
+		
 		return true;
 	}
 	
