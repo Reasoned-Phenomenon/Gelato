@@ -24,7 +24,7 @@
 		from prod_plan
 		<where>
 			<if test="startD != null and endD != null">
-			<![CDATA[to_char(dt,'YYYY-MM-DD') >= #{startD} and to_char(dt,'YYYY-MM-DD') <= #{endD}]]> 
+			<![CDATA[dt between to_date(#{startD}) and to_date(#{endD})]]> 
 			</if>
 		</where>
 		order by dt

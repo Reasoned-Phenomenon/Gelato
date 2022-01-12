@@ -16,10 +16,10 @@ public class PrdPlanMngVO {
 	String orderId;
 	String vendId;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	Date orderDt;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	Date oustDt;
 	String stFg;
 	String remk;
@@ -33,7 +33,7 @@ public class PrdPlanMngVO {
 	String planId;
 	String name;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	Date dt;
 	String prodDcnt;
 	String fg;
