@@ -26,4 +26,25 @@ public class EqmServiceImpl implements EqmService{
 		return eqmMapper.eqmList(eqmVo);
 	}
 	
+	//설비 한건조회
+	@Override
+	public EqmVO eqmSelect(EqmVO eqmVo) {
+		return eqmMapper.eqmSelect(eqmVo);
+	}
+	
+	//설비수정
+	@Override
+	public int eqmUpdate(EqmVO eqmVo) {
+		return eqmMapper.eqmUpdate(eqmVo);
+	}
+
+	/*
+	 * public EqmVO eqmUpdate(EqmVO eqmVo) { return eqmMapper.eqmUpdate(eqmVo); }
+	 */	
+	//설비삭제
+	@Override
+	public int deleteEqm(EqmVO eqmVo) {
+		return eqmMapper.deleteEqm(eqmVo);
+	}
+	
 }
