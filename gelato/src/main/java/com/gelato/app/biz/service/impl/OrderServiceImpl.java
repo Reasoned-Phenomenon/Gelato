@@ -26,4 +26,10 @@ public class OrderServiceImpl implements  OrderService{
 		return orderMapper.vendList();
 	}
 
+	@Override
+	public List<OrderVO> prdtList() {
+		
+		return orderMapper.prdtList();
+	}
+
 }

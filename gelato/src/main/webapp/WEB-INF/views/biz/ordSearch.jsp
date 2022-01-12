@@ -50,18 +50,18 @@
 	      			<li>
 	      				<div>
 	      					<label>거래처</label>
-	      					<input type="text" id="vendId" name="vendId">
+	      					<input type="text" id="vendIdText" name="vendIdText">
 	      					<button type="button" id="BtnVend">찾아보기</button>&ensp;&ensp;&ensp;
 	      					
 	      					<label>제품코드</label>
 	      					<input type="text" id="prdtId" name="prdtId">
-	      					<button type="button" id="">찾아보기</button> &ensp;
+	      					<button type="button" id="BtnPrdt">찾아보기</button> &ensp;
 	      					
 	      				<button type="button" class="btn cur-p btn-outline-primary" id="btnRst">새자료</button>
 	      				<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 						<button type="button" class="btn cur-p btn-outline-primary" id="btnExcel">Excel</button>
 						<button type="button" class="btn cur-p btn-outline-primary" id="btnprint">인쇄</button>
-					
+						  <br>
 	      				</div>
 	      			</li>
 	      		</ul>
@@ -78,6 +78,9 @@
 	
 <script>
 let dialog;
+
+
+//let prdtParam;
 
 var Grid = tui.Grid;
 
@@ -166,7 +169,7 @@ const ordGrid = new Grid({
 			buttons: {
 			// 선택하는 버튼 넣어두기!. 옵션? 어떤거 잇는 지 찾아보기.
 			Cancel: function() {
-			dialog.dialog( "close" );
+			
 			}
 			}
 		})
@@ -185,7 +188,28 @@ const ordGrid = new Grid({
 		})
 		
 	})
-
+	
+	// 제품코드 찾아보기 버튼
+	BtnPrdt.addEventListener("click", function() {
+		console.log("55555");
+		console.log("버튼클릭");
+		dialog.dialog("open");
+	
+		$("#modal").load("${path}/biz/prdtModal.do",function () {
+			console.log("모달로드");
+			prdtListGrid.readData(1,{}, true);
+		})
+	})
+	
+	
+	
+	
+	
+	 function  getModalData(vendParam) {
+		
+		console.log(vendParam);
+		dialog.dialog("close");
+	} 
 	
 	
 		
