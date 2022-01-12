@@ -54,7 +54,7 @@
 	      					<button type="button" id="BtnVend">찾아보기</button>&ensp;&ensp;&ensp;
 	      					
 	      					<label>제품코드</label>
-	      					<input type="text" id="prdtId" name="prdtId">
+	      					<input type="text" id="prdtIdText" name="prdtIdText">
 	      					<button type="button" id="BtnPrdt">찾아보기</button> &ensp;
 	      					
 	      				<button type="button" class="btn cur-p btn-outline-primary" id="btnRst">새자료</button>
@@ -79,8 +79,6 @@
 <script>
 let dialog;
 
-
-//let prdtParam;
 
 var Grid = tui.Grid;
 
@@ -153,10 +151,10 @@ const ordGrid = new Grid({
 });
 	
 	// 조회 버튼.
-	/* btnFind.addEventListener("click", function() {
-	let vendId = document.getElementById("vendId").value;
-	ordGrid.readData(1, {vendName:targetName}, true);
-	}); */
+/* 	btnFind.addEventListener("click", function() {
+		
+		ordGrid.readData(1,)
+	}) */
 	
 		
 	// 모달창 생성 함수.
@@ -203,14 +201,18 @@ const ordGrid = new Grid({
 	
 	
 	
-	
-	
-	 function  getModalData(vendParam) {
-		
+	//  거래처 인풋 태그에 값들어가게 함.	
+	 function  getModalData(vendParam) {	
 		console.log(vendParam);
+		$("#vendIdText").val(vendParam);
 		dialog.dialog("close");
 	} 
-	
+	// 제품코드 인풋 태그에 값들어가게 함.
+	function getModal(prdtParam) {
+		console.log(prdtParam);
+		$("#prdtIdText").val(prdtParam);
+		dialog.dialog("close");
+	}
 	
 		
 

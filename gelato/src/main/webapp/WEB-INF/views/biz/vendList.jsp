@@ -62,7 +62,7 @@ var vendListGrid = new Grid({
 });
 
 // 그리드 이벤트.
-/* vendListGrid.on("dblclick", (ev) => {
+/*  vendListGrid.on("dblclick", (ev) => {
 	console.log("777777777");
 	vendListGrid.setSelectionRange({
 		start : [ev.rowkey, 0],
@@ -74,13 +74,13 @@ var vendListGrid = new Grid({
 	chooseVI(vlg); */
 	
 	// 클릭한 row의 vendId에 해당하는 코드를 읽어옴.
-	var vendParam = vendListGrid.getRow(ev.rowKey).vendId;
-	console.log(vendParam);
-	getModalData(vendParam);
+//	var vendParam = vendListGrid.getRow(ev.rowKey).vendId;
+//	console.log(vendParam);
+//	getModalData(vendParam);
 	
-}); */
+//});  */
 	
-
+// 모달창에서 더블클릭하면 거래처 인풋태그에 넣어주기.
 vendListGrid.on("dblclick", (ev) => {
 	
 	vendListGrid.setSelectionRange({
@@ -91,6 +91,7 @@ vendListGrid.on("dblclick", (ev) => {
 	
 	
 	var vendParam = vendListGrid.getRow(ev.rowKey).vendId;
+	getModalData(vendParam);
 	console.log(vendParam);
 });
 	

@@ -56,6 +56,19 @@ var prdtListGrid = new Grid({
 			  }
 		]
 });
+// 모달창에서 더블클릭하면 제품코드 인풋태그에 넣어주기.
+prdtListGrid.on("dblclick", (ev) => {
+	prdtListGrid.setSelectionRange({
+	    start: [ev.rowKey, 0],
+	    end: [ev.rowKey, prdtListGrid.getColumns().length-1]
+});
+	
+	var prdtParam = prdtListGrid.getRow(ev.rowKey).prdtId;
+	getModal(prdtParam);
+	console.log(prdtParam);
+});
+
+
 </script>
 </body>
 </html>
