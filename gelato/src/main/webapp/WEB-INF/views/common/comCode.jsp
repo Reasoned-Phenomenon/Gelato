@@ -213,6 +213,12 @@ const codeGrid = new tui.Grid({
 		
 		codeGrid.request('modifyData')
 		
+		/* var chkchk = new Promise((resolve, reject) => { 
+			codeGrid.request('modifyData')
+		})
+		
+		chkchk.then(codeGrid.readData(1)); */
+		
 	})	
 
 	//추가버튼 -> 입력칸추가
