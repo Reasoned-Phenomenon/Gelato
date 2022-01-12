@@ -29,6 +29,9 @@ public class PrdPlanMngController {
 		
 		// 생산계획관리에 들어갈 검색창 modal jsp.
 		/* return "tiles/prd/searchPlanModal"; */
+		 
+		// 생산계획관리에 들어갈 검색창 modal jsp.
+		/* return "tiles/prd/prdtListModal"; */
 	}
 	
 	//주문서 modal
@@ -47,6 +50,14 @@ public class PrdPlanMngController {
 		return "prd/searchPlanModal"; 
 	}
 	
+	//제품목록 modal
+	@RequestMapping("prd/prdtDialog.do")
+	public String prdtDialog() {
+		System.out.println("제품목록");
+		// 생산계획관리에 들어갈 검색창 modal jsp.
+		return "prd/prdtListModal"; 
+	}
+	
 	// 주문서 list 출력
 	@RequestMapping("/prd/orderShtModal.do")
 	public String OrderShtList(Model model) {
@@ -63,6 +74,15 @@ public class PrdPlanMngController {
 		System.out.println(map);
 		model.addAttribute("datas", prdPlanMngService.SearchPlanList(map));
 		System.out.println(prdPlanMngService.SearchPlanList(map));
+		return "grid";
+	}
+	
+	// 제품목록 list 출력
+	@RequestMapping("/prd/prdtList.do")
+	public String PrdtList(Model model) {
+		System.out.println("제품목록 출력");
+		System.out.println(model);
+		model.addAttribute("datas", prdPlanMngService.PrdtList());
 		return "grid";
 	}
 	

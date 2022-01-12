@@ -19,15 +19,15 @@
 	</select>
 	
 <!-- 생산계획관리 - 검색창 modal -->
+	<select id="PrdtList" resultType="PrdPlanMngVO">
+		select prdt_id, prdt_nm
+		from prdt
+	</select>
+	
+<!-- 생산계획관리 - 제품목록 modal -->
 	<select id="SearchPlanList" resultType="PrdPlanMngVO">
 		select plan_id, name, dt
 		from prod_plan
-		<where>
-			<if test="startD != null and endD != null">
-			<![CDATA[dt between to_date(#{startD}) and to_date(#{endD})]]> 
-			</if>
-		</where>
-		order by dt
 	</select>
 	
 <!-- 생산계획관리 - 선택한 주문서 정보 출력 -->

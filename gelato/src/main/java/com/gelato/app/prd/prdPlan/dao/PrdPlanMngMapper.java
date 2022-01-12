@@ -13,6 +13,9 @@ public interface PrdPlanMngMapper {
 	//검색결과 조회
 	List<PrdPlanMngVO> SearchPlanList(Map<String, String> map);
 	
+	//제품 목록 조회
+	List<PrdPlanMngVO> PrdtList();
+	
 	//상세생산계획 그리드에 출력
 	List<PrdPlanMngVO> ChooseOrder(PrdPlanMngVO vo);
 

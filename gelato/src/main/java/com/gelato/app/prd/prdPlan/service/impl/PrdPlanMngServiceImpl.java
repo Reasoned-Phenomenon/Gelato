@@ -31,6 +31,11 @@ public class PrdPlanMngServiceImpl implements PrdPlanMngService{
 		return ppmMapper.ChooseOrder(vo);
 	}
 
+	@Override
+	public List<PrdPlanMngVO> PrdtList() {
+		return ppmMapper.PrdtList();
+	}
+
 
 
 	

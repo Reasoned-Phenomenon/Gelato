@@ -90,10 +90,14 @@ th, td {
 		<!-- 검색 모달창 -->
 		<div id="SearchPlanDialog" title="검색 결과"></div>
 		
+		<!-- 제품 목록 모달창 -->
+		<div id="PrdtDialog" title="제품 목록"></div>
+		
 		<!-- 계획 상세 그리드 -->
 		<div id="PlanDetaGrid"></div>
 	
 	<script>
+	let rk = '';
 	//생산계획일자 현재날짜 기본 설정
 	document.getElementById('planDt').value = new Date().toISOString()
 			.substring(0, 10);
@@ -216,33 +220,35 @@ th, td {
 				header : '생산계획코드',
 				name : 'planDetaId'
 			}, {
+				header : '제품명',
+				name : 'prdtNm',
+			}, {
 				header : '제품코드',
 				name : 'prdtId',
-			}, {
-				header : '제품명',
-				name : 'prdtNm'
 			}, {
 				header : '주문코드',
 				name : 'orderId',
 			}, {
 				header : '계획량',
 				name : 'qy',
+				editor : 'text'
 			}, {
 				header : '생산일수',
 				name : 'prodDcnt',
+				editor : 'text'
 			}, {
 				header : '작업우선순위',
 				name : 'priort',
+				editor : 'text'
 			}, {
 				header : '작업구분',
 				name : 'fg',
 				editor: {
 					type: 'select',
-					placeholder : '진행상황구분',
 				    options: {
 				      listItems: [
-				        { text: '접수완료', value: '접수완료' },
-				        { text: '출고완료', value: '출고완료' },
+				        { text: '접수완료', value: 'ACCEPT' },
+				        { text: '출고완료', value: 'OUTSTC' },
 				      ]
 				    }
 				}
@@ -250,6 +256,48 @@ th, td {
 		});
 	//종료
 	
+	//제품목록 클릭하면 모달창 생성하기
+		function selectPr(prid,prnm){
+			console.log(prnm);
+			console.log(prid);
+			PlanDetaGrid.setValue(rk, "prdtNm", prnm, true);
+			PlanDetaGrid.setValue(rk, "prdtId", prid, true);
+			PrdtDialog.dialog( "close" );
+		}
+	
+		function callPrdtModal(){
+			// 모달창 생성
+			PrdtDialog = $("#PrdtDialog").dialog({
+				modal : true,
+				autoOpen : false,
+				height: 600,
+				width: 400
+			});
+			
+		    console.log("11111")
+		    PrdtDialog.dialog( "open" );
+		    $("#PrdtDialog").load(
+								"${path}/prd/prdtDialog.do", function() {
+									console.log("검색창 로드")
+								})
+		}
+			
+			//그리드 선택한 값 세팅
+			
+			PlanDetaGrid.on('click', (ev) => {
+				rk = ev.rowKey;
+				console.log(ev)
+			    if (ev.columnName === 'prdtNm') {
+			    	console.log(PlanDetaGrid.getRow(ev.rowKey).prdtNm);
+					if(!PlanDetaGrid.getRow(ev.rowKey).prdtNm){
+						console.log("1111")
+			    		callPrdtModal();
+						
+			    	}
+			    	
+				}
+			});
+	//종료
 	// 행추가
 	btnAdd.addEventListener("click", function() {
 		console.log('등록');
@@ -262,6 +310,7 @@ th, td {
 		PlanDetaGrid.removeCheckedRows(true);
 	});
 	
+	// 생산계획코드 유무
 	</script>
 </body>
 </html>
