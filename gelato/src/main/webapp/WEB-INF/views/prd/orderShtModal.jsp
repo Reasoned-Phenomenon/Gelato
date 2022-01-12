@@ -96,20 +96,6 @@ ordershtGrid.on("dblclick", (ev2) => {
 
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 </body>
 </html>
