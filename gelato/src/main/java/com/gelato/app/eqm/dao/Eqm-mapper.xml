@@ -20,8 +20,32 @@
 			and e.fg = 'CLAS01'
 		</if>
 		<if test='gubun == "운송"'>
-			and e.fg = 'CLAS02'
+			and e.fg = 'CLAS02'    
 		</if>
 	</select>
-
-</mapper>
+     
+    <!-- 설비 관리 페이지 - 설비 한 건 조회(모달창) -->
+	<select id="eqmSelect" parameterType="EqmVO" resultType="EqmVO">
+		select e.*, p.prcs_id, p.nm
+		from eqm e, prcs p 
+		where e.eqm_id = p.eqm_id
+		and e.eqm_id = 'EQM-001'<!-- #{eqmId} 클릭시 넘긴 인자값 -->
+	</select>
+	
+	<!-- 설비 관리 페이지 - 설비 한 건 조회(모달창) 수정 -->
+	<update id="eqmUpdate" parameterType="EqmVO">
+		update eqm set
+		temp_max = #{tempMax},
+		temp_min = #{tempMin},
+		chck_perd = #{chckPerd},
+		eqm_img = #{eqmImg},
+		use_yn = #{useYn}
+		where eqm_id = #{eqmId}
+	</update>
+	
+	<!-- 설비 관리 페이지 - 설비 한 건 조회(모달창) 삭제 -->
+	<delete id="eqmDelete" parameterType="EqmVO">
+		delete from eqm 
+		where eqm_id = #{eqmId}
+	</delete>
+</mapper>                       

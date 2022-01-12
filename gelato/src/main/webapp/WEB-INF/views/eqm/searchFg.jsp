@@ -15,6 +15,42 @@ let codeParam;
 
 var Grid = tui.Grid;
 
+/* var modalDataSource = {
+		api: {
+		    readData: 	{url: '${path}/com/findComCodeDeta.do', method: 'GET' }
+	  	},
+		contentType: 'application/json'
+	};
+	
+var columns = 	[
+	  {
+		    header: 'CODE',
+		    name: 'code'
+		  },
+		  {
+		    header: 'CODE_NM',
+		    name: 'codeNm'
+		  },
+		  {
+		    header: 'CODE_DC',
+		    name: 'codeDc'
+		  },
+		  {
+		    header: 'USE_AT',
+		    name: 'useAt',
+		    align: 'center'
+		  }
+		];
+		
+var modalGrid = new tui.Grid({
+	el: document.getElementById('modalGrid'),
+	data: modalDataSource,
+	width: 450,
+	bodyHeight:300,
+	selectionUnit: 'row',
+	columns 
+}); */
+
 //그리드 테마
 Grid.applyTheme('striped', {
 	  cell: {

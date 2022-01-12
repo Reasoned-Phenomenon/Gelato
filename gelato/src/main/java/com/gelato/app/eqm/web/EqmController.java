@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gelato.app.eqm.dao.EqmVO;
@@ -44,9 +46,44 @@ public class EqmController {
 	@GetMapping("/eqm/eqmList.do")
 	public String findEqm(Model model, EqmVO eqmVo) {
 		System.out.println(service.eqmList(eqmVo));
-		model.addAttribute("datas",service.eqmList(eqmVo));
+		model.addAttribute("datas", service.eqmList(eqmVo));
 		return "grid";
 	}
 	
+	//설비관리(단건조회)
+	@GetMapping("/eqm/eqmSelect.do")
+	public String eqmSelectList(Model model, EqmVO eqmVo) {
+		System.out.println(service.eqmSelect(eqmVo));
+		model.addAttribute(service.eqmSelect(eqmVo));
+		return "tiles/eqm/eqmManagement";
+	}
 	
+	//설비수정
+	@GetMapping("/eqm/eqmUpdate.do")
+	public String eqmUpdate(EqmVO eqmVo) {
+		int r = service.eqmUpdate(eqmVo);
+		System.out.println(r+"건====================");
+		return "tiles/eqm/eqmManagement";
+	}
+	
+	//설비삭제
+	@GetMapping("/eqm/eqmDelete.do")
+	public String eqmDelete(EqmVO eqmVo) {
+		service.deleteEqm(eqmVo);
+		return null;  /////////////이거 고쳐라
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

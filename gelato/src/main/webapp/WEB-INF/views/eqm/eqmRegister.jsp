@@ -76,10 +76,10 @@
 						<div class="image-container">
 							<img style="width: 250px;" id="preview-image"
 								src="../resources/images/img/이미지프리뷰.jpg">
-							<input style="display: block;" type="file" id="input-image" >
+							<input style="display: block;" type="file" id="eqmImg" >
 						</div>
-						<img id="eqmImg" name="eqmImg" src="">
-						<button type="button" class="btn cur-p btn-outline-dark">이미지업로드</button>
+						<!-- <img id="eqmImg" name="eqmImg" src="">
+						<button type="button" class="btn cur-p btn-outline-dark">이미지업로드</button> -->
 				</div>
 				<div>
 					<button type="reset" value="내용초기화"
@@ -103,10 +103,11 @@
 	        }
 	        // reader가 이미지 읽도록 하기
 	        reader.readAsDataURL(input.files[0])
+			console.log(input.files[0]);
 	    }
 	}
 	// input file에 change 이벤트 부여
-	const inputImage = document.getElementById("input-image")
+	const inputImage = document.getElementById("eqmImg")
 	inputImage.addEventListener("change", e => {
 	    readImage(e.target)
 	})
