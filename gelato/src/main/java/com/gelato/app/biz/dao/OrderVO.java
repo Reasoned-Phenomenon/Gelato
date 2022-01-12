@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class OrderVO {
 	
-	//order_sht
+	//order_sht 주문서.
 	String orderId; // 주문코드.
 	String vendId;  // 업체 코드.
 	@JsonFormat(pattern="yyyy-MM-dd")
@@ -33,5 +33,10 @@ public class OrderVO {
 	String vendName;       // 업체명.
 	String bizno;          // 사업자 등록번호.
 	String telno;          // 업체연락처.
-	String fg;             // 구분
+	String fg;             // 구분.
+	
+	//prdt(완제품).(join)
+	String prdtNm;         //제품명.
+	String spec;           //규격.
+	
 }

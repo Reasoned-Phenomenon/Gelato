@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gelato.app.biz.dao.OrderMapper">
 
-
+<!--주문서 전체 조회. -->
 <select id="findOrderList" resultType="OrderVO">
 	select 
 	 	 a.order_id, a.vend_id, a.order_dt, a.oust_dt, a.st_fg, a.remk,
@@ -17,6 +17,12 @@
 <select id="vendList" resultType="OrderVO">
 	select  vend_id, vend_name, bizno, telno
  	from vend
+</select>
+
+<!-- 주문서에서 제품코드 검색 modal -->
+<select id="prdtList" resultType="OrderVO">
+	 select prdt_id, prdt_nm, spec
+	 from prdt
 </select>
 
 </mapper>

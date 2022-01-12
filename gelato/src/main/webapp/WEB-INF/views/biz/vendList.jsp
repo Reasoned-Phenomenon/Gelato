@@ -15,6 +15,7 @@
 	<div id="vendListGrid" style="width: 100%"></div>
 	
 <script>
+
 var Grid = tui.Grid;
 
 //그리드 테마
@@ -30,7 +31,7 @@ Grid.applyTheme('striped', {
 	});
 	
 // 그리드 생성
-const vendListGrid = new Grid({
+var vendListGrid = new Grid({
 	el: document.getElementById('vendListGrid'),
   	data : {
 	  api: {
@@ -47,7 +48,7 @@ const vendListGrid = new Grid({
 		  },
 		  {
 		    header: '업체 명',
-		    name: 'vendName',
+		    name: 'vendName'
 		  },
 		  {
 		    header: '사업자 등록번호',
@@ -55,10 +56,45 @@ const vendListGrid = new Grid({
 		  },
 		  {
 			header: '전화 번호',
-			name:'telno',
+			name:'telno'
 		  }
 		]
 });
+
+// 그리드 이벤트.
+/*  vendListGrid.on("dblclick", (ev) => {
+	console.log("777777777");
+	vendListGrid.setSelectionRange({
+		start : [ev.rowkey, 0],
+		end : [ev.rowKey, vendListGrid.getColumns().length-1]
+	});
+	console.log("88888888");
+	/* var vlg = vendListGrid.getRow(ev2.rowKey).vendId;
+	console.log(vlg);
+	chooseVI(vlg); */
+	
+	// 클릭한 row의 vendId에 해당하는 코드를 읽어옴.
+//	var vendParam = vendListGrid.getRow(ev.rowKey).vendId;
+//	console.log(vendParam);
+//	getModalData(vendParam);
+	
+//});  */
+	
+// 모달창에서 더블클릭하면 거래처 인풋태그에 넣어주기.
+vendListGrid.on("dblclick", (ev) => {
+	
+	vendListGrid.setSelectionRange({
+	    start: [ev.rowKey, 0],
+	    end: [ev.rowKey, vendListGrid.getColumns().length-1]
+	});
+	
+	
+	
+	var vendParam = vendListGrid.getRow(ev.rowKey).vendId;
+	getModalData(vendParam);
+	console.log(vendParam);
+});
+	
 	
 </script>
 </body>

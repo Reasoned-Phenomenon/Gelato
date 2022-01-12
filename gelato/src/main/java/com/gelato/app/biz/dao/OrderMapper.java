@@ -4,9 +4,12 @@ import java.util.List;
 
 public interface OrderMapper {
 	
-	//주문서 조회.
+	// 주문서 조회.
 	List<OrderVO> findOrderList();
 	
-	// 거래처 조회
+	// 거래처 조회.
 	List<OrderVO> vendList();
+	
+	// 제품코드 조회.
+	List<OrderVO> prdtList();
 }
