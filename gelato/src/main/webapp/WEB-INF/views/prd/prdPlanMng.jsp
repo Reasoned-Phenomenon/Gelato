@@ -32,6 +32,9 @@ th, td {
 #btnDel{
 	margin-top: 25px;
 }
+#btnOrderSht{
+	margin-top: 25px;
+}
 </style>
 <body>
 
@@ -49,8 +52,10 @@ th, td {
 							<th>생산 계획명</th>
 							<td><input type="text" id="planName" required></td>
 							<td rowspan="2">
-								<button type="button" class="btn btn-secondary"
-									id="btnSearchPlan">검색</button>
+								<button type="button" class="btn btn-secondary" id="btnPlanIns">계획등록</button>
+							</td>
+							<td rowspan="2">
+								<button type="button" class="btn btn-secondary" id="btnClear">초기화</button>
 							</td>
 						</tr>
 						<tr>
@@ -62,8 +67,7 @@ th, td {
 			</div>
 			
 			<div style="float: left; width: 20%; padding: 10px;">
-				<button type="button" class="btn btn-secondary" id="btnOrderSht">주문서조회</button>
-				<button type="button" class="btn btn-secondary" id="btnPlanIns">계획등록</button>
+				<button type="button" class="btn btn-secondary" id="btnSearchPlan">계획조회</button>
 				<button type="button" class="btn btn-secondary" id="btnPlanDel">계획삭제</button>	
 			</div>
 			<br><br>
@@ -75,6 +79,7 @@ th, td {
 				<h4>상세생산계획</h4>
 			</div>	
 			<div style="float: left; width: 20%; padding: 10px;">
+				<button type="button" class="btn btn-secondary" id="btnOrderSht">주문서조회</button>
 				<button type="button" class="btn btn-secondary" id="btnAdd">행 추가</button>
 				<button type="button" class="btn btn-secondary" id="btnDel">행 삭제</button>
 			</div>	
@@ -93,6 +98,14 @@ th, td {
 	document.getElementById('planDt').value = new Date().toISOString()
 			.substring(0, 10);
 
+	//초기화버튼
+	$("#btnClear").on(
+				"click",
+				function() {
+					$("#planName").val('');
+					document.getElementById('planDt').value = new Date().toISOString().substring(0, 10);
+					PlanDetaGrid.readData(1,{planId:null}, true);
+				});
 		
 	//주문서 조회 클릭하면 모달창 생성하기
 
@@ -115,6 +128,8 @@ th, td {
 				"click",
 				function() {
 					console.log("11111")
+					$("#planName").val('');
+					document.getElementById('planDt').value = new Date().toISOString().substring(0, 10);
 					OrderShtDialog.dialog("open");
 					console.log("111112222")
 					$("#OrderShtDialog").load("${path}/prd/orderShtDialog.do",
@@ -153,17 +168,17 @@ th, td {
 		$("#btnSearchPlan").on(
 				"click",
 				function() {
-					if(!$("#planName").val()) {
+					/* if(!$("#planName").val()) { */
 						console.log("33333")
+						$("#planName").val('');
+						document.getElementById('planDt').value = new Date().toISOString().substring(0, 10);
 						SearchPlanDialog.dialog("open");
 						console.log("44444")
 						$("#SearchPlanDialog").load(
 								"${path}/prd/searchPlanDialog.do", function() {
 									console.log("검색창 로드")
 								})
-					}else {
-						
-					}
+					//}
 				});
 	//종료
 
@@ -221,9 +236,32 @@ th, td {
 			}, {
 				header : '작업구분',
 				name : 'fg',
+				editor: {
+					type: 'select',
+					placeholder : '진행상황구분',
+				    options: {
+				      listItems: [
+				        { text: '접수완료', value: '접수완료' },
+				        { text: '출고완료', value: '출고완료' },
+				      ]
+				    }
+				}
 			}]
 		});
 	//종료
+	
+	// 행추가
+	btnAdd.addEventListener("click", function() {
+		console.log('등록');
+		PlanDetaGrid.appendRow({});
+	});
+	
+	// 행삭제
+	btnDel.addEventListener("click", function() {
+		console.log('삭제')
+		PlanDetaGrid.removeCheckedRows(true);
+	});
+	
 	</script>
 </body>
 </html>
