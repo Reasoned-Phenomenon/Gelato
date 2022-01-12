@@ -6,9 +6,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<title>Insert title here</title> 
+<link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+<script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
+<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head>
 <body>
 <h3>원자재 발주관리</h3>
@@ -42,13 +45,13 @@
 <br>
 
 	<!-- 발주목록 조회 -->
-	<div id="rwmatrOrderList" style="width: 100%"></div>
+	<div id="rwmatrOrderList" style="width: 80%"></div>
 
-	<!-- 자재목록 모달창 -->
-	<div id="rwmatrDialog" title="원자재 목록"></div>
+	<!-- 모달창 -->
+	<div id="dialogFrm" title="원자재 목록"></div>
 
 <script>
-let rwmatrDialog;
+let dialog;
 var Grid = tui.Grid;
 
 //그리드 테마
@@ -80,52 +83,61 @@ var rwmatrOrderList = new Grid({
 	    type: 'scroll'
     },
 	columns:[
-			{
-			  header: '발주코드',
-			  name: 'orderId',
-			  editor: 'text'
-			},
-			{
-			  header: '자재명',
-			  name: 'nm',
-			  editor: 'text'
-			},
-			{
-			  header: '자재코드',
-			  name: 'rwmatrId',
-			  editor: 'text'
-			},
-			{
-			  header: '단가',
-			  name: 'untprc',
-			  editor: 'text'
-			},
-			{
-			  header: '발주량',
-			  name: 'qy',
-			  editor: 'text'
-			},
-			{
-			  header: '업체명',
-			  name: 'vendName',
-			  editor: 'text'
-			},
-			{
-			  header: '발주신청일',
-			  name: 'orderDt',
-			  editor: 'text'
-			},
-			{
-			  header: '납기요청일',
-			  name: 'dudt',
-			  editor: 'text'
-			}
+				{
+				  header: '발주디테일코드',
+				  name: 'rwmatrOrderDetaId',
+				  hidden:true
+				},
+				{
+				  header: '발주코드',
+				  name: 'orderId',
+				},
+				{
+				  header: '자재명',
+				  name: 'nm',
+				  editor: 'text'
+				},
+				{
+				  header: '자재코드',
+				  name: 'rwmatrId',
+				  editor: 'text'
+				},
+				{
+				  header: '단가(원)',
+				  name: 'untprc',
+				  editor: 'text'
+				},
+				{
+				  header: '발주량',
+				  name: 'qy',
+				  editor: 'text'
+				},
+				{
+				  header: '업체명',
+				  name: 'vendId',
+				  hidden:true
+				},
+				{
+				  header: '업체명',
+				  name: 'vendName',
+				},
+				{
+				  header: '발주신청일',
+				  name: 'orderDt',
+				},
+				{
+				  header: '납기요청일',
+				  name: 'dudt',
+				  editor: 'datePicker'
+				}
 		]
 });
 
+//최근에 클릭한값으로 발주번호
+
+//자재모달
 function callRwmatrModal(){
-	//자재 목록 모달띄움
-	rwmatrDialog = $( "#rwmatrDialog" ).dialog({
+	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
 	      height: 400,
@@ -134,12 +146,28 @@ function callRwmatrModal(){
 	}); 
 
     console.log("11111")
-    rwmatrDialog.dialog( "open" );
+    dialog.dialog( "open" );
     console.log("111112222")
-    $("#rwmatrDialog").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
+    $("#dialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
+}
+
+//거래처모달
+function callVendModal(){
+	dialog = $( "#dialogFrm" ).dialog({
+		  modal:true,
+		  autoOpen:false,
+	      height: 400,
+	      width: 600,
+	      modal: true
+	}); 
+
+    console.log("11111")
+    dialog.dialog( "open" );
+    console.log("111112222")
+    $("#dialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("거래처 목록")})
 }
 	
-	//모달에서 선택한 값 세팅
+	//모달에서 선택한 rowKey값 세팅
 	let rk = '';
 	rwmatrOrderList.on('click', (ev) => {
 		rk = ev.rowKey;
@@ -147,25 +175,35 @@ function callRwmatrModal(){
 		console.log(ev.columnName)
 		console.log(ev.rowKey)
 	    if (ev.columnName === 'nm') {
-	    	console.log(rwmatrOrderList.getRow(ev.rowKey).nm);
-			if(!rwmatrOrderList.getRow(ev.rowKey).nm){
-				console.log("1111")
-	    		callRwmatrModal();
-				
-	    	}
-	    	
-		}
+			console.log("1111")
+    		callRwmatrModal();
+		} /* else if(ev.columnName === 'vendName'){
+    		console.log("2222")
+    		callVendModal();
+		} */
 	});
 
-	function getData(rmId, rmnm) {
-		console.log(11111111111111111111111111111)
+	function getRwmatrData(rmId, rmnm, vdnm) {
+		console.log("Rwmatr정보 기입")
 		console.log(rmId)
 		console.log(rmnm)
 		rwmatrOrderList.setValue(rk, "rwmatrId", rmId, true)
 		rwmatrOrderList.setValue(rk, "nm", rmnm, true)
-		rwmatrDialog.dialog( "close" );
+		rwmatrOrderList.setValue(rk, "vendName", vdnm, true)
+		dialog.dialog( "close" );
 	}
 	
+	/* function getVendData(vdId, vdnm) {
+		console.log("Vend정보 기입")
+		console.log(vdId)
+		console.log(vdnm)
+		rwmatrOrderList.setValue(rk, "vendId", vdId, true)
+		rwmatrOrderList.setValue(rk, "vendName", vdnm, true)
+		dialog.dialog( "close" );
+	} */
+	
+	
+	    
 	
 	rwmatrOrderList.on('response', function (ev) {
 		// 성공/실패와 관계 없이 응답을 받았을 경우
@@ -177,13 +215,18 @@ function callRwmatrModal(){
 	btnFind.addEventListener("click", function(){
 		
 	});
+	
 	btnAdd.addEventListener("click", function(){
 		rwmatrOrderList.appendRow();
 	});
+	
 	btnDel.addEventListener("click", function(){
 		rwmatrOrderList.removeCheckedRows(true);
+		rwmatrOrderList.request('modifyData');
 	});
+	
 	btnSave.addEventListener("click", function(){
+		rwmatrOrderList.blur();
 		rwmatrOrderList.request('modifyData');
 	});
 

@@ -13,6 +13,5 @@
         ON R.VEND_ID = V.VEND_ID
 	</select>
 	
-	
 
 </mapper>

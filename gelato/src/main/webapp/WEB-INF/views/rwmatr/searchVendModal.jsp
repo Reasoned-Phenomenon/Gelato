@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>원자재 목록</title>
+<title>거래처 목록</title>
 </head>
 <style>
 h1 {
@@ -15,9 +15,9 @@ h1 {
 </style>
 <body>
 	<br>
-	<h1>원자재</h1>
+	<h1>거래처</h1>
 	<br>
-	<div id="rwmatrListGrid" style="width: 100%"></div>
+	<div id="vendListGrid" style="width: 100%"></div>
 	
 <script>
 var Grid = tui.Grid;
@@ -35,11 +35,11 @@ Grid.applyTheme('striped', {
 	});
 	
 // 그리드 생성
-var rwmatrListGrid = new Grid({
-	el: document.getElementById('rwmatrListGrid'),
+var vendListGrid = new Grid({
+	el: document.getElementById('vendListGrid'),
   	data : {
 	  api: {
-	    readData: { url:'${path}/rwmatr/searchRwmatrList.do', method: 'GET'}
+	    readData: { url:'${path}/rwmatr/searchVendList.do', method: 'GET'}
 	  },
 	  contentType: 'application/json'
 	},
@@ -47,45 +47,43 @@ var rwmatrListGrid = new Grid({
   	selectionUnit: 'row',
   	columns:[
   		  {
-		    header: '자재코드',
-		    name: 'rwmatrId'
-		  },
-		  {
-		    header: '자재명',
-		    name: 'nm',
+		    header: '업체코드',
+		    name: 'vendId'
 		  },
 		  {
 		    header: '업체명',
 		    name: 'vendName',
 		  },
 		  {
-		    header: '규격',
-		    name: 'spec'
-		  },
-		  {
-		    header: '작업단위',
-		    name: 'wkUnit'
+		    header: '비고',
+		    name: 'remk',
 		  }
 		]
 });
 
+/* rwmatrListGrid.on("click", (ev) => {
+	console.log(rwmatrListGrid.getRow(ev.rowKey).rwmatrId);
+	console.log(rwmatrListGrid.getRow(ev.rowKey).nm);
+	let rmId = rwmatrListGrid.getRow(ev.rowKey).rwmatrId;
+	let rmnm = rwmatrListGrid.getRow(ev.rowKey).nm;
+	
+	
+}); */
 
 //커스텀 이벤트
-rwmatrListGrid.on('dblclick', (ev) => {	
+vendListGrid.on('dblclick', (ev) => {	
 	
 	//cell 선택시 row 선택됨.
-	rwmatrListGrid.setSelectionRange({
+	vendListGrid.setSelectionRange({
 	      start: [ev.rowKey, 0],
-	      end: [ev.rowKey, rwmatrListGrid.getColumns().length-1]
+	      end: [ev.rowKey, vendListGrid.getColumns().length-1]
 	  });
 	
 	//클릭한 row의 codeId에 해당하는 code를 읽어옴
-	let rmId = rwmatrListGrid.getRow(ev.rowKey).rwmatrId;
-	let rmnm = rwmatrListGrid.getRow(ev.rowKey).nm;
-	let vdnm = rwmatrListGrid.getRow(ev.rowKey).vendName;
-	console.log(rmId)
-	console.log(rmnm)
-	getRwmatrData(rmId, rmnm, vdnm)
+	//console.log(modalGrid.getRow(ev.rowKey))
+	let vdId = vendListGrid.getRow(ev.rowKey).vendId;
+	let vdnm = vendListGrid.getRow(ev.rowKey).vendName;
+	getVendData(vdId, vdnm)
 });
 
 </script>

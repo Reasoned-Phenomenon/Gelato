@@ -5,12 +5,14 @@ import java.util.List;
 public interface RwmatroMapper {
 
 	List<RwmatroVO> rwmatrOrderList();
+	List<RwmatroVO> selectVendList();
 	
+	//발주 Insert
 	int insertRwmatro(RwmatroVO vo);
 	int updateRwmatro(RwmatroVO vo);
-	int deleteRwmatro(RwmatroVO vo);
 	
+	//발주 디테일
 	int insertRwmatroDeta(RwmatroVO vo);
-	//int updateRwmatroDeta(RwmatroVO vo);
-	//int deleteRwmatroDeta(RwmatroVO vo);
+	int updateRwmatroDeta(RwmatroVO vo);
+	int deleteRwmatroDeta(RwmatroVO vo);
 }

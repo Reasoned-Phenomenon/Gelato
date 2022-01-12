@@ -60,6 +60,11 @@
    
    <!-- 모달 -->
    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+   
+   <!-- toastr css라이브러리 -->
+   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+   <!-- toastr cdn 라이브러리 둘다 제이쿼리 밑에 있어야함 -->
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 </head>
    <body class="dashboard dashboard_1">
