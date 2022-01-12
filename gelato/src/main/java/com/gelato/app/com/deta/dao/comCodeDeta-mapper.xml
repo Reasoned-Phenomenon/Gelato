@@ -24,7 +24,7 @@
 
 <select id="findComCodeProcedure" parameterType="HashMap" statementType="CALLABLE">
 
-        { CALL p_com_select (
+        { CALL p_com_code_list (
                 #{codeId, mode=IN, jdbcType=VARCHAR, javaType=String},
                 #{out_cursor_table, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ComCodeDetaMap}
           )}
