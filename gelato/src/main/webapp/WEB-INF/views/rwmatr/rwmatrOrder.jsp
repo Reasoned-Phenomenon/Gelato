@@ -6,9 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Insert title here</title> 
 <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
-<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
@@ -46,7 +45,7 @@
 <br>
 
 	<!-- 발주목록 조회 -->
-	<div id="rwmatrOrderList" style="width: 100%"></div>
+	<div id="rwmatrOrderList" style="width: 80%"></div>
 
 	<!-- 모달창 -->
 	<div id="dialogFrm" title="원자재 목록"></div>
@@ -92,6 +91,7 @@ var rwmatrOrderList = new Grid({
 				{
 				  header: '발주코드',
 				  name: 'orderId',
+				  editor: 'text'
 				},
 				{
 				  header: '자재명',
@@ -112,6 +112,11 @@ var rwmatrOrderList = new Grid({
 				  header: '발주량',
 				  name: 'qy',
 				  editor: 'text'
+				},
+				{
+				  header: '업체명',
+				  name: 'vendId',
+				  hidden:true
 				},
 				{
 				  header: '업체명',
@@ -193,10 +198,13 @@ function callVendModal(){
 		console.log("Vend정보 기입")
 		console.log(vdId)
 		console.log(vdnm)
+		rwmatrOrderList.setValue(rk, "vendId", vdId, true)
 		rwmatrOrderList.setValue(rk, "vendName", vdnm, true)
 		dialog.dialog( "close" );
 	}
 	
+	
+	    
 	
 	rwmatrOrderList.on('response', function (ev) {
 		// 성공/실패와 관계 없이 응답을 받았을 경우
@@ -208,13 +216,18 @@ function callVendModal(){
 	btnFind.addEventListener("click", function(){
 		
 	});
+	
 	btnAdd.addEventListener("click", function(){
 		rwmatrOrderList.appendRow();
 	});
+	
 	btnDel.addEventListener("click", function(){
 		rwmatrOrderList.removeCheckedRows(true);
+		rwmatrOrderList.request('modifyData');
 	});
+	
 	btnSave.addEventListener("click", function(){
+		rwmatrOrderList.blur();
 		rwmatrOrderList.request('modifyData');
 	});
 

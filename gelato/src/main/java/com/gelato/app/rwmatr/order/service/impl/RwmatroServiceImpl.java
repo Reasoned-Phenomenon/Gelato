@@ -27,21 +27,29 @@ public class RwmatroServiceImpl implements RwmatroService {
 
 	@Override
 	public int modifyRwmatro(ModifyVO<RwmatroVO> mvo) {
+		
+		if(mvo.getCreatedRows().get(0).getOrderId() == "") {
+			System.out.println("발주번호 추가");
+			rwmatroMapper.insertRwmatro(mvo.getCreatedRows().get(0));
+		}
 		for(RwmatroVO vo : mvo.getCreatedRows()) {
-			if(vo.getOrderId() == "") {
-				System.out.println("발주번호 추가");
-				rwmatroMapper.insertRwmatro(vo);
-			}
+//			if(vo.getOrderId() == "") {
+//				System.out.println("발주번호 추가");
+//				rwmatroMapper.insertRwmatro(vo);
+//			}
 			System.out.println("발주디테일코드 추가");
 			rwmatroMapper.insertRwmatroDeta(vo);
 		}
 		
 		for(RwmatroVO vo : mvo.getUpdatedRows()) {
+			System.out.println("수정");
+			rwmatroMapper.updateRwmatro(vo);
 			rwmatroMapper.updateRwmatroDeta(vo);
 		}
 		
 		for(RwmatroVO vo : mvo.getDeletedRows()) {
-			rwmatroMapper.updateRwmatroDeta(vo);
+			System.out.println("삭제");
+			rwmatroMapper.deleteRwmatroDeta(vo);
 		}
 		
 		return 0;
