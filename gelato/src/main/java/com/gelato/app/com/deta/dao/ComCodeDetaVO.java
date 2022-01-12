@@ -15,4 +15,7 @@ public class ComCodeDetaVO {
 	String lastUpdtPnttm;
 	String lastUPdusrId;
 	
+	//update를 위한 코드
+	String bcode;
+	
 }

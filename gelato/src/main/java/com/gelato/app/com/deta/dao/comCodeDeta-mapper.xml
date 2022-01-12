@@ -5,6 +5,7 @@
 <select id="findComCodeDeta" resultType="ComCodeDetaVO">
 	SELECT 
 		CODE_ID,
+		CODE as bcode,
 		CODE,
 		CODE_NM,
 		CODE_DC,
@@ -23,7 +24,7 @@
 
 <select id="findComCodeProcedure" parameterType="HashMap" statementType="CALLABLE">
 
-        { CALL p_com_select (
+        { CALL p_com_code_list (
                 #{codeId, mode=IN, jdbcType=VARCHAR, javaType=String},
                 #{out_cursor_table, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=ComCodeDetaMap}
           )}
@@ -59,6 +60,8 @@
 
 	DELETE FROM COMTCCMMNDETAILCODE
 	WHERE UPPER(CODE) = UPPER(#{code})
+	AND UPPER(CODE_ID) = UPPER(#{codeId})
+	
 </delete>
 
 <update id="updateComCodeDeta">
@@ -70,6 +73,8 @@
 		USE_AT = #{useAt},
 		LAST_UPDT_PNTTM = sysdate,
 		LAST_UPDUSR_ID = 'Admin'
+	WHERE CODE = UPPER(#{bcode})
+	AND CODE_ID = #{codeId}
 		
 </update>
 

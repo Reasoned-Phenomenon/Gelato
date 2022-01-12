@@ -34,6 +34,7 @@ public class ComCodeDetaServiceImpl implements ComCodeDetaService {
 		}
 		
 		for(ComCodeDetaVO vo : mvo.getUpdatedRows()) {
+			System.out.println(vo.getCode());
 			detaMapper.updateComCodeDeta(vo);
 		}
 		

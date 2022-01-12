@@ -43,11 +43,30 @@
 <hr>
 <br>
 <div class="row">
+
 	<div id="codeIdGrid" class="col-sm-4"></div>
-	<div id="codeGrid" class="col-sm-8"></div>
+	
+	<div id="tabs" class="col-sm-8">
+	
+	  <ul>
+	    <li><a href="#fragment-1">조회</a></li>
+	    <li><a href="#fragment-2">입력</a></li>
+	  </ul>
+	  
+  		<div id="fragment-1" class="col-sm-8">
+  			<div id="codeGrid"></div>
+  		</div>
+  	
+		<div id="fragment-2" class="col-sm-8">
+			<div>입력폼</div>
+		</div>
+		
+	</div>
+	
 </div>
 
 <script>
+//전역변수 선언
 let codeParam;
 let dialog;
 
@@ -60,12 +79,13 @@ Grid.applyTheme('striped', {
 	      background: '#eef'
 	    },
 	    evenRow: {
-	      background: '#fee'
+	      /* background: '#fee' */
+	      background: '#898989'
 	    }
 	  }
 });
 
-//코드ID 그리드 생성
+//코드ID 그리드(화면 좌측) 생성
 const codeIdGrid = new Grid({
 	el: document.getElementById('codeIdGrid'),
   	data : {
@@ -111,15 +131,20 @@ codeIdGrid.on('click', (ev) => {
 	codeParam = codeIdGrid.getRow(ev.rowKey).codeId;
 	codeGrid.readData(1, {codeId:codeParam}, true);
 	
+	//토스트
+	toastr.clear()
+	toastr.options.progressBar = true;
+	toastr.success('코드ID선택','Gelato',{timeOut:'1500'});
+	
 });
 
 //응답시 이벤트
-codeIdGrid.on('response', function(ev) {
+/* codeIdGrid.on('response', function(ev) {
 	console.log('response')
 	console.log(ev)
-})
+}) */
 	
-//코드 그리드 생성	
+//코드 그리드(화면 우측) 생성	
 const codeGrid = new tui.Grid({
 	el: document.getElementById('codeGrid'),
 	data: {
@@ -136,6 +161,11 @@ const codeGrid = new tui.Grid({
     	{
 		  header: '코드ID',
 		  name: 'codeId',
+		  hidden:true
+		},
+		{
+		  header: '이전코드',
+		  name: 'bcode',
 		  hidden:true
 		},
 		{
@@ -159,6 +189,7 @@ const codeGrid = new tui.Grid({
 		{
 		  header: 'USE_AT',
 		  name: 'useAt',
+		  align: 'center',
 		  formatter: 'listItemText',
 		  editor : {
 			  type: 'radio',
@@ -175,20 +206,28 @@ const codeGrid = new tui.Grid({
 });
 
 	//버튼 이벤트
+	//저장버튼
 	btnSave.addEventListener("click",function(){
 		codeGrid.request('modifyData');
 	})	
 
+	//추가버튼 -> 입력칸추가
 	btnAdd.addEventListener("click",function(){
+		
 		console.log(codeParam)
-		//현재 선택된 row의 codeId값을 가진 row를 생성
+		
+		//현재 선택된 row의 codeId값을 가진 row를 생성-> hidden
 		codeGrid.appendRow({codeId:codeParam},{focus:true})
 	})
 	
+	//삭제버튼
 	btnDel.addEventListener("click",function(){
-		//removeRow(rowKey, options)
-		codeGrid.removeCheckedRows(true); //true -> 확인 받고 삭제 / false는 바로 삭제
-		codeGrid.request('modifyData');
+		
+		if(codeGrid.removeCheckedRows(true)){ //true -> 확인 받고 삭제 / false는 바로 삭제
+			console.log("확인")
+			codeGrid.request('modifyData');
+		}
+		
 	})
 	 
 	btnSearch.addEventListener("click", function() {
@@ -227,6 +266,8 @@ const codeGrid = new tui.Grid({
 			})
 			
 		})
+		
+		$( "#tabs" ).tabs();
 		
 	})
 	
