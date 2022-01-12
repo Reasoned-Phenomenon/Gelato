@@ -82,9 +82,10 @@ rwmatrListGrid.on('dblclick', (ev) => {
 	//클릭한 row의 codeId에 해당하는 code를 읽어옴
 	let rmId = rwmatrListGrid.getRow(ev.rowKey).rwmatrId;
 	let rmnm = rwmatrListGrid.getRow(ev.rowKey).nm;
+	let vdnm = rwmatrListGrid.getRow(ev.rowKey).vendName;
 	console.log(rmId)
 	console.log(rmnm)
-	getRwmatrData(rmId, rmnm)
+	getRwmatrData(rmId, rmnm, vdnm)
 });
 
 </script>

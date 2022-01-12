@@ -91,7 +91,6 @@ var rwmatrOrderList = new Grid({
 				{
 				  header: '발주코드',
 				  name: 'orderId',
-				  editor: 'text'
 				},
 				{
 				  header: '자재명',
@@ -121,7 +120,6 @@ var rwmatrOrderList = new Grid({
 				{
 				  header: '업체명',
 				  name: 'vendName',
-				  editor: 'text'
 				},
 				{
 				  header: '발주신청일',
@@ -179,29 +177,30 @@ function callVendModal(){
 	    if (ev.columnName === 'nm') {
 			console.log("1111")
     		callRwmatrModal();
-		} else if(ev.columnName === 'vendName'){
+		} /* else if(ev.columnName === 'vendName'){
     		console.log("2222")
     		callVendModal();
-		}
+		} */
 	});
 
-	function getRwmatrData(rmId, rmnm) {
+	function getRwmatrData(rmId, rmnm, vdnm) {
 		console.log("Rwmatr정보 기입")
 		console.log(rmId)
 		console.log(rmnm)
 		rwmatrOrderList.setValue(rk, "rwmatrId", rmId, true)
 		rwmatrOrderList.setValue(rk, "nm", rmnm, true)
+		rwmatrOrderList.setValue(rk, "vendName", vdnm, true)
 		dialog.dialog( "close" );
 	}
 	
-	function getVendData(vdId, vdnm) {
+	/* function getVendData(vdId, vdnm) {
 		console.log("Vend정보 기입")
 		console.log(vdId)
 		console.log(vdnm)
 		rwmatrOrderList.setValue(rk, "vendId", vdId, true)
 		rwmatrOrderList.setValue(rk, "vendName", vdnm, true)
 		dialog.dialog( "close" );
-	}
+	} */
 	
 	
 	    
