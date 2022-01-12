@@ -33,6 +33,23 @@ public class RwmatrIstInspController {
 		return "grid";
 	}
 	
+	//발주 modal
+	@RequestMapping("/rwmatr/searchOrderDialog.do")
+	public String rwmatrOrderDialog() {
+		System.out.println("발주리스트 모달");
+		return "rwmatr/searchOrderModal"; 
+	}
+	
+	//발주리스트 출력
+	@RequestMapping("/rwmatr/orderDetailList.do")
+	public String searchOrderList(Model model) {
+		System.out.println("원자재리스트");
+		model.addAttribute("datas", rwmatrIstInspService.selectOrderDetail());
+		System.out.println(rwmatrIstInspService.selectOrderDetail());
+		return "grid"; 
+	}
+	
+	
 	@PutMapping("/rwmatr/rwmatrIstInspModifyData.do")
 	@ResponseBody
 	public boolean modifyData (@RequestBody ModifyVO<RwmatrIstInspVO> mvo) {

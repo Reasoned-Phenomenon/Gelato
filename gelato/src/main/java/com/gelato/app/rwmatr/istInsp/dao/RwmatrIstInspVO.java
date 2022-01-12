@@ -24,4 +24,5 @@ public class RwmatrIstInspVO {
 	//join
 	String orderId;
 	String nm;
+	String qy;
 }

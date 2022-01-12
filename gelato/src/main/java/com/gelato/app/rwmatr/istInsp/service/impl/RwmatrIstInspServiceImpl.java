@@ -20,6 +20,11 @@ public class RwmatrIstInspServiceImpl implements RwmatrIstInspService {
 	public List<RwmatrIstInspVO> RwmatrIstInspList(Map<String, String> map) {
 		return rwmatrIstInspMapper.RwmatrIstInspList(map);
 	}
+	
+	@Override
+	public List<RwmatrIstInspVO> selectOrderDetail() {
+		return rwmatrIstInspMapper.selectOrderDetail();
+	}
 
 	@Override
 	public int modifyIstInsp(ModifyVO<RwmatrIstInspVO> mvo) {

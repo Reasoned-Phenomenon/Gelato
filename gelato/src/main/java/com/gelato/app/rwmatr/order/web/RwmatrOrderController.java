@@ -44,7 +44,7 @@ public class RwmatrOrderController {
 	
 	//원자재리스트 출력
 	@RequestMapping("/rwmatr/searchRwmatrList.do")
-	public String searchRwmatrDialog(Model model) {
+	public String searchRwmatrList(Model model) {
 		System.out.println("원자재리스트");
 		model.addAttribute("datas", rwmatrService.rwmatrList());
 		System.out.println(rwmatrService.rwmatrList());

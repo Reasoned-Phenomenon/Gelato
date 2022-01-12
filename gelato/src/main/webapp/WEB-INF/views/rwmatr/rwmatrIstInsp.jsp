@@ -80,11 +80,11 @@ var rwmatrIstInspList = new Grid({
 				{
 				  header: '발주디테일코드',
 				  name: 'rwmatrOrderDetaId',
-				  hidden:true
 				},
 				{
 				  header: '발주코드',
 				  name: 'orderId',
+				  hidden:true,
 				  sortable: true
 				},
 				{
@@ -99,9 +99,9 @@ var rwmatrIstInspList = new Grid({
 				  sortable: true
 				},
 				{
-				  header: '검사일자',
-				  name: 'dt',
-				  editor: 'datePicker',
+				  header: '발주총량',
+				  name: 'qy',
+				  editor: 'text',
 				  sortable: true
 				},
 				{
@@ -113,7 +113,6 @@ var rwmatrIstInspList = new Grid({
 				{
 				  header: '불량량',
 				  name: 'inferQy',
-				  editor: 'text',
 				  sortable: true
 				},
 				{
@@ -122,12 +121,18 @@ var rwmatrIstInspList = new Grid({
 				  editor: 'text',
 				  sortable: true
 				},
+				{
+				  header: '검사일자',
+				  name: 'dt',
+				  editor: 'datePicker',
+				  sortable: true
+				},
 		]
 });
 
 
 //자재모달
-function callRwmatrModal(){
+function callModal(){
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
@@ -136,10 +141,9 @@ function callRwmatrModal(){
 	      modal: true
 	}); 
 
-    console.log("11111")
     dialog.dialog( "open" );
     console.log("111112222")
-    $("#dialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
+    $("#dialogFrm").load("${path}/rwmatr/searchOrderDialog.do", function(){console.log("발주 목록")})
 }
 	
 	
@@ -149,21 +153,31 @@ function callRwmatrModal(){
 		console.log(ev)
 		console.log(ev.columnName)
 		console.log(ev.rowKey)
-	    if (ev.columnName === 'nm') {
-			console.log("자재리스트")
-    		callRwmatrModal();
+	    if (ev.columnName === 'rwmatrOrderDetaId') {
+			console.log("발주디테일리스트")
+    		callModal();
 		}
 	});
 
-	function getRwmatrData(rmId, rmnm, vdnm) {
-		console.log("Rwmatr정보 기입")
-		console.log(rmId)
-		console.log(rmnm)
-		rwmatrIstInspList.setValue(rk, "rwmatrId", rmId, true)
-		rwmatrIstInspList.setValue(rk, "nm", rmnm, true)
-		rwmatrIstInspList.setValue(rk, "vendName", vdnm, true)
+	function getOrderData(orderCd, orderdCd, rwnm, rwid, q) {
+		console.log("발주정보 기입")
+		rwmatrIstInspList.setValue(rk, "rwmatrOrderDetaId", orderdCd, true)
+		rwmatrIstInspList.setValue(rk, "orderId", orderCd, true)
+		rwmatrIstInspList.setValue(rk, "nm", rwnm, true)
+		rwmatrIstInspList.setValue(rk, "rwmatrId", rwid, true)
+		rwmatrIstInspList.setValue(rk, "qy", q, true)
 		dialog.dialog( "close" );
 	}
+	
+	//불량량 자동계산... 구현중..
+	if(rwmatrIstInspList.getValue(rk, "passQy") != '') {
+		console.log("sdfjklsdfjsdfljsdlf")
+		let totalq = parseInt(rwmatrIstInspList.getValue(rk, "qy"));
+		let passq = parseInt(rwmatrIstInspList.getValue(rk, "passQy"));
+		let inferq = totalq - passq;
+		rwmatrIstInspList.setValue(rk, "inferQy", inferq, true);
+	}
+
 	
 	rwmatrIstInspList.on('response', function (ev) {
 		console.log("1111");
