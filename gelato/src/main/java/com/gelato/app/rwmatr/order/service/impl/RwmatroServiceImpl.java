@@ -28,7 +28,7 @@ public class RwmatroServiceImpl implements RwmatroService {
 	@Override
 	public int modifyRwmatro(ModifyVO<RwmatroVO> mvo) {
 		RwmatroVO oi = null;
-		if(mvo.getCreatedRows().get(0).getOrderId() == "") {
+		if(!mvo.getCreatedRows().isEmpty()) {
 			System.out.println("발주번호 추가");
 			oi = mvo.getCreatedRows().get(0);
 			rwmatroMapper.insertRwmatro(oi);

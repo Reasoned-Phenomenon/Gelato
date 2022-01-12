@@ -100,7 +100,6 @@ var rwmatrOrderList = new Grid({
 				{
 				  header: '자재코드',
 				  name: 'rwmatrId',
-				  editor: 'text'
 				},
 				{
 				  header: '단가(원)',
@@ -221,8 +220,10 @@ function callVendModal(){
 	});
 	
 	btnDel.addEventListener("click", function(){
-		rwmatrOrderList.removeCheckedRows(true);
-		rwmatrOrderList.request('modifyData');
+		
+		if(rwmatrOrderList.removeCheckedRows(true)){
+			rwmatrOrderList.request('modifyData');
+		}
 	});
 	
 	btnSave.addEventListener("click", function(){
