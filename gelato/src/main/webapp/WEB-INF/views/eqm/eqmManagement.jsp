@@ -15,7 +15,7 @@
 <body>
 	<div class="container">
 		<div class="flex row">
-			<div class="col-8">
+			<div class="col-7">
 				<h2 class="title">설비관리</h2>
 				<label>구분</label> <select id="gubun">
 					<option value="전체">전체
@@ -27,7 +27,7 @@
 				<button id="btnFind">조회</button>
 				<div id="codeGrid"></div>
 			</div>
-			<div class="col-4">
+			<div class="col-5">
 				<h2 class="detailTitle">상세조회</h2>
 				<div>설비 이미지</div>
 				<div id="imageView">
@@ -44,9 +44,15 @@
 					<tbody>
 						<tr>
 							<th>설비코드</th>
-							<td><input id="eqmId"></td>
+							<td><input id="eqmId" disabled></td>
 							<th>설비명</th>
 							<td><input id="eqmName"></td>
+						</tr>
+						<tr>
+							<th>공정코드</th>
+							<td><input id="prcsId"></td>
+							<th>공정명</th>
+							<td><input id="prcsName"></td>
 						</tr>
 						<tr>
 							<th>최고온도</th>
@@ -78,6 +84,7 @@
 	</div>
 	<script>
 		var Grid = tui.Grid;
+		
 		const codeGrid = new Grid({
 			el : document.getElementById('codeGrid'),
 			data : {
@@ -88,8 +95,7 @@
 					}
 				},
 				contentType : 'application/json'
-			},
-			rowHeaders : [ 'checkbox' ],
+			},rowHeaders:['rowNum'],
 			selectionUnit : 'row',
 			bodyHeight : 600,
 			columns : [ {
@@ -107,6 +113,22 @@
 			}, {
 				header : '사용여부',
 				name : 'useYn'
+			}, {
+				header : '최고온도',
+				name : 'tempMax',
+				hidden:true
+			}, {
+				header : '최저온도',
+				name : 'tempMin',
+				hidden:true
+			}, {
+				header : '점검주기',
+				name : 'chckPerd',
+				hidden:true
+			}, {
+				header : '이미지',
+				name : 'eqmImg',
+				hidden:true
 			} ]
 		});
 
@@ -118,6 +140,22 @@
 			}, true);
 			//codeGrid.refreshLayout();
 		})
+	
+		//한 행 선택
+		codeGrid.on("click", (ev) => {
+			
+			//cell 선택시 row 선택됨.
+			codeGrid.setSelectionRange({
+			      start: [ev.rowKey, 0],
+			      end: [ev.rowKey, codeGrid.getColumns().length-1]
+			  });
+			
+			//클릭한 row의 eqmId에 해당하는 code를 읽어옴
+			codeParam = codeGrid.getRow(ev.rowKey).eqmId;
+			console.log(codeParam);
+		
+		}) 
+		
 	</script>
 </body>
 </html>

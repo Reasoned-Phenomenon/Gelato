@@ -235,7 +235,6 @@ const codeGrid = new tui.Grid({
 		let target = document.getElementById('inputName');
 		target.value = str;
 		dialog.dialog( "close" );
-		
 	}
 	
 
