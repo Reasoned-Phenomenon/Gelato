@@ -8,7 +8,7 @@ import com.gelato.app.vr.ModifyVO;
 
 public interface ComCodeDetaService {
 
-	List<ComCodeDetaVO> findComCodeDeta(String codeId);
+	List<ComCodeDetaVO> findComCodeDeta(ComCodeDetaVO vo);
 	Map findComCodeProcedure(Map map);
 	
 	int modifyComCodeDeta (ModifyVO<ComCodeDetaVO> mvo);

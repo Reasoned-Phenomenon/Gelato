@@ -67,14 +67,14 @@
 <update id="updateComCodeDeta">
 
 	UPDATE COMTCCMMNDETAILCODE
-	SET CODE = #{code},
+	SET UPPER(CODE) = UPPER(#{code}),
 		CODE_NM = #{codeNm},
 		CODE_DC = #{codeDc},
 		USE_AT = #{useAt},
 		LAST_UPDT_PNTTM = sysdate,
 		LAST_UPDUSR_ID = 'Admin'
-	WHERE CODE = UPPER(#{bcode})
-	AND CODE_ID = #{codeId}
+	WHERE UPPER(CODE) = UPPER(#{bcode})
+	AND UPPER(CODE_ID) = UPPER(#{codeId})
 		
 </update>
 
