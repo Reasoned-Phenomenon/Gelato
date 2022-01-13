@@ -69,6 +69,7 @@
 //전역변수 선언
 let codeParam;
 let dialog;
+let flag;
 
 var Grid = tui.Grid;
 
@@ -97,11 +98,6 @@ const codeIdGrid = new Grid({
 	},
   	rowHeaders:['rowNum'],
   	selectionUnit: 'row',
-  	treeColumnOptions: {
-  	    name: 'codeId',
-  	    useIcon: true,
-  	    useCascadingCheckbox: true
-  	  },
   	columns:[
   			{
 			  header: 'CL 코드',
@@ -146,6 +142,8 @@ codeIdGrid.on('click', (ev) => {
 	toastr.options.positionClass = "toast-top-center";
 	toastr.options.progressBar = true;
 	toastr.success('코드ID선택','Gelato',{timeOut:'1500'});
+	
+	
 	
 });
 
@@ -213,6 +211,10 @@ const codeGrid = new tui.Grid({
 	//응답시 이벤트
 	codeGrid.on('response', function(ev) {
 		console.log(ev)
+		if(flag == 'O') {
+			codeGrid.readData(1);
+			flag = 'X';
+		}
 	})
 	
 	//버튼 이벤트
@@ -222,6 +224,7 @@ const codeGrid = new tui.Grid({
 		codeGrid.blur()
 		
 		codeGrid.request('modifyData')
+		flag = 'O'
 		
 		/* var chkchk = new Promise((resolve, reject) => { 
 			codeGrid.request('modifyData')
