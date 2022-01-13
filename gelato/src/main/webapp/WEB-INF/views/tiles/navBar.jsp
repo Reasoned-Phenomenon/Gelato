@@ -77,7 +77,7 @@
                         </li>
                         
                         <li>
-                           <a href="#">> <span>원자재 입고검사관리</span></a>
+                           <a href="${path }/rwmatr/rwmatrIstInsp.do">> <span>원자재 입고검사관리</span></a>
                         </li>
                         
                         <li>

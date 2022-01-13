@@ -1,10 +1,11 @@
 package com.gelato.app.rwmatr.order.dao;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RwmatroMapper {
 
-	List<RwmatroVO> rwmatrOrderList();
+	List<RwmatroVO> rwmatrOrderList(Map<String, String> map);
 	List<RwmatroVO> selectVendList();
 	
 	//발주 Insert
