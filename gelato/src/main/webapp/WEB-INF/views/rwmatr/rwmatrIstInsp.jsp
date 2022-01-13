@@ -31,8 +31,7 @@
 <hr>
 <br>
 
-
-	<!-- 발주목록 조회 -->
+	<!-- 입고검사내역 조회 -->
 	<div id="rwmatrIstInspList" style="width: 80%"></div>
 
 	<!-- 모달창 -->
