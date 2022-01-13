@@ -2,6 +2,7 @@ package com.gelato.app.eqm.service;
 
 import java.util.List;
 
+import com.gelato.app.eqm.dao.EqmNonVO;
 import com.gelato.app.eqm.dao.EqmVO;
 
 public interface EqmService {
@@ -16,4 +17,6 @@ public interface EqmService {
 	int eqmUpdate(EqmVO eqmVo);
 
 	int eqmDelete(EqmVO eqmVo);
+	
+	List<EqmNonVO> eqmNon(EqmNonVO eqmNonVo);
 }

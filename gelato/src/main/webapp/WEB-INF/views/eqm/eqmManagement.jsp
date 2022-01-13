@@ -167,9 +167,9 @@
 			gubun = $('#gubun option:selected').val();
 			
 			var yn = $("input[name=useYn]:checked").val();
-			
+			var eqmId = $("#eqmId").val();
 			var params = {
-			eqmId : $("#eqmId").val(),
+			eqmId : eqmId,
 			eqmName : $("#eqmName").val(),
 			prcsId : $("#prcsId").val(),
 			nm : $("#nm").val(),
@@ -188,7 +188,15 @@
 					eqmListGrid.readData(1,{'gubun':gubun},true);
 					if(yn == 'N'){
 						if(confirm("비가동관리 페이지로 이동하시겠습니까?")){
-							console.log("1111111111111");
+							location.href= "${path}/eqm/eqmNonMoving.do?eqmId="+eqmId;
+							/* $.ajax({
+								url : "${path}/eqm/eqmNonMoving.do",
+								data : params,
+								method : 'GET',
+								success:function(){
+									console.log("성공");
+								}
+							}) */
 						}
 					}else{
 						toastr.options.positionClass = "toast-top-center";

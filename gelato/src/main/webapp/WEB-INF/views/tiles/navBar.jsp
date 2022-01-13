@@ -153,7 +153,7 @@
                         </li>
                         
                         <li>
-                           <a href="#">> <span>설비 비가동 관리</span></a>
+                           <a href="${path }/eqm/eqmNonMoving.do">> <span>설비 비가동 관리</span></a>
                         </li>
                         
                         <li>
