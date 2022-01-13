@@ -38,7 +38,6 @@ th, td {
 </style>
 <body>
 
-	<form action="" method="post" name="frm"></form>
 		<div>
 			<br>
 			<h2 id="title">생산계획관리</h2>
@@ -72,7 +71,9 @@ th, td {
 			</div>
 			<br><br>
 		</div>
-		<div>
+		
+		<!-- 기존--------------------------------------------------------- -->
+		<!-- <div>
 		
 			<div style="float: left; width: 80%; padding: 10px;">
 				<hr>
@@ -83,18 +84,46 @@ th, td {
 				<button type="button" class="btn btn-secondary" id="btnAdd">행 추가</button>
 				<button type="button" class="btn btn-secondary" id="btnDel">행 삭제</button>
 			</div>	
+		</div> -->
+		<!-- ------------------------------------------------------------ -->
+		
+		<div>
+			<div style="float: left; width: 100%; padding: 10px;">
+				<hr>
+				<h4>상세생산계획</h4>
+				<div id="tabs">
+					<ul>
+						<li><a href="#orderShtTab">주문서</a></li>
+						<li><a href="#InventoryTab">추가계획</a></li>
+					</ul>
+					
+					<div id="orderShtTab">
+							<div id="PlanDetaOsGrid" ></div> <br>
+							<button type="button" class="btn btn-secondary" id="btnOrderSht">주문서조회</button>
+					</div>
+					<div id="InventoryTab">
+							<div id="PlanDetaIvGrid"></div> <br>
+							<button type="button" class="btn btn-secondary" id="btnAdd">행 추가</button>
+							<button type="button" class="btn btn-secondary" id="btnDel">행 삭제</button>
+					</div>
+				</div>
+			</div>	
 		</div>
+		
 		<!-- 주문서 모달창 -->
 		<div id="OrderShtDialog" title="주문서 목록"></div>
 
-		<!-- 검색 모달창 -->
-		<div id="SearchPlanDialog" title="검색 결과"></div>
+		<!-- 계획조회 모달창 -->
+		<div id="SearchPlanDialog" title="계획조회 결과"></div>
 		
 		<!-- 제품 목록 모달창 -->
 		<div id="PrdtDialog" title="제품 목록"></div>
 		
-		<!-- 계획 상세 그리드 -->
-		<div id="PlanDetaGrid"></div>
+		<!-- 계획 상세 그리드 - 주문서 -->
+		<div id="PlanDetaOsGrid"></div>
+		
+		<!-- 계획 상세 그리드 - 추가-->
+		<div id="PlanDetaIvGrid"></div>
 	
 	<script>
 	let rk = '';
@@ -102,90 +131,19 @@ th, td {
 	document.getElementById('planDt').value = new Date().toISOString()
 			.substring(0, 10);
 
+	//탭 생성
+	$( "#tabs" ).tabs();
+	
 	//초기화버튼
 	$("#btnClear").on(
 				"click",
 				function() {
 					$("#planName").val('');
 					document.getElementById('planDt').value = new Date().toISOString().substring(0, 10);
-					PlanDetaGrid.readData(1,{planId:null}, true);
+					PlanDetaOsGrid.readData(1,{planId:null}, true);
+					PlanDetaIvGrid.readData(1,{planId:null}, true);
 				});
 		
-	//주문서 조회 클릭하면 모달창 생성하기
-
-		// 주문코드 받아서 readData에 파라미터값으로 넘겨주기
-		function chooseOI(osg){
-			console.log(osg);
-			PlanDetaGrid.readData(1,{orderId:osg}, true);
-			OrderShtDialog.dialog("close");
-		}
-		
-		// 모달창 생성
-		var OrderShtDialog = $("#OrderShtDialog").dialog({
-			modal : true,
-			autoOpen : false,
-			height: 600,
-			width: 1000
-		});
-
-		$("#btnOrderSht").on(
-				"click",
-				function() {
-					console.log("11111")
-					$("#planName").val('');
-					document.getElementById('planDt').value = new Date().toISOString().substring(0, 10);
-					OrderShtDialog.dialog("open");
-					console.log("111112222")
-					$("#OrderShtDialog").load("${path}/prd/orderShtDialog.do",
-							function() {
-								console.log("주문창 로드")
-							})
-				});
-	//종료
-
-	//검색 클릭하면 모달창 생성하기
-		// 주문코드 받아서 검색창에 띄우기
-		function selectPnm(pnm){
-			console.log(pnm);
-			$("#planName").val(pnm);
-		}
-		function selectPdt(pdt){
-			console.log(pdt);
-			$("#planDt").val(pdt);
-		}
-	
-		// 주문코드 받아서 readData에 파라미터값으로 넘겨주기
-		function choosePI(spg){
-			console.log(spg);
-			PlanDetaGrid.readData(1,{planId:spg}, true);
-			SearchPlanDialog.dialog("close");
-		}
-	
-		//모달창 생성
-		var SearchPlanDialog = $("#SearchPlanDialog").dialog({
-			modal : true,
-			autoOpen : false,
-			height: 600,
-			width: 1000
-		});
-		
-		$("#btnSearchPlan").on(
-				"click",
-				function() {
-					/* if(!$("#planName").val()) { */
-						console.log("33333")
-						$("#planName").val('');
-						document.getElementById('planDt').value = new Date().toISOString().substring(0, 10);
-						SearchPlanDialog.dialog("open");
-						console.log("44444")
-						$("#SearchPlanDialog").load(
-								"${path}/prd/searchPlanDialog.do", function() {
-									console.log("검색창 로드")
-								})
-					//}
-				});
-	//종료
-
 	//계획상세 그리드 생성
 		var Grid = tui.Grid;
 
@@ -201,9 +159,9 @@ th, td {
 			}
 		});
 
-		// 그리드 생성
-		const PlanDetaGrid = new Grid({
-			el : document.getElementById('PlanDetaGrid'),
+		// 그리드 생성 : 주문서
+		const PlanDetaOsGrid = new Grid({
+			el : document.getElementById('PlanDetaOsGrid'),
 			data : {
 				api : {
 					readData : {
@@ -231,15 +189,24 @@ th, td {
 			}, {
 				header : '계획량',
 				name : 'qy',
-				editor : 'text'
+				editor : 'text',
+				editable({ value }) {
+		        	return value === '1';
+				}
 			}, {
 				header : '생산일수',
 				name : 'prodDcnt',
-				editor : 'text'
+				editor : 'text',
+				editable({ value }) {
+		        	return value === '1';
+				}
 			}, {
 				header : '작업우선순위',
 				name : 'priort',
-				editor : 'text'
+				editor : 'text',
+				editable({ value }) {
+		        	return value === '1';
+				}
 			}, {
 				header : '작업구분',
 				name : 'fg',
@@ -254,14 +221,153 @@ th, td {
 				}
 			}]
 		});
+		
+		// 그리드 생성 : 안전재고용
+		const PlanDetaIvGrid = new Grid({
+			el : document.getElementById('PlanDetaIvGrid'),
+			data : {
+				api : {
+					readData : {
+						url : '${path}/prd/chooseOrder.do',
+						method : 'GET'
+					}
+				},
+				contentType : 'application/json',
+				initialRequest: false
+			},
+			rowHeaders : [ 'checkbox', 'rowNum' ],
+			selectionUnit : 'row',
+			columns : [ {
+				header : '생산계획코드',
+				name : 'planDetaId'
+			}, {
+				header : '제품명',
+				name : 'prdtNmIv',
+			}, {
+				header : '제품코드',
+				name : 'prdtId',
+			}, {
+				header : '주문코드',
+				name : 'orderId',
+			}, {
+				header : '계획량',
+				name : 'qy',
+				editor : 'text',
+				editable({ value }) {
+		        	return value === '1';
+				}
+			}, {
+				header : '생산일수',
+				name : 'prodDcnt',
+				editor : 'text',
+				editable({ value }) {
+		        	return value === '1';
+				}
+			}, {
+				header : '작업우선순위',
+				name : 'priort',
+				editor : 'text',
+				editable({ value }) {
+		        	return value === '1';
+				}
+			}, {
+				header : '작업구분',
+				name : 'fg',
+				editor: {
+					type: 'select',
+				    options: {
+				      listItems: [
+				        { text: '접수완료', value: 'ACCEPT' },
+				        { text: '출고완료', value: 'OUTSTC' },
+				      ]
+				    }
+				}
+			}]
+		});
+		
+	// 종료
+	
+	//주문서 조회 클릭하면 모달창 생성하기
+
+		// 주문코드 받아서 readData에 파라미터값으로 넘겨주기
+		function chooseOI(osg){
+			console.log(osg);
+			PlanDetaOsGrid.readData(1,{orderId:osg}, true);
+			OrderShtDialog.dialog("close");
+		}
+		
+		// 모달창 생성
+		var OrderShtDialog = $("#OrderShtDialog").dialog({
+			modal : true,
+			autoOpen : false,
+			height: 600,
+			width: 1000
+		});
+
+		$("#btnOrderSht").on(
+				"click",
+				function() {
+					console.log("11111")
+					$("#planName").val('');
+					document.getElementById('planDt').value = new Date().toISOString().substring(0, 10);
+					OrderShtDialog.dialog("open");
+					console.log("111112222")
+					$("#OrderShtDialog").load("${path}/prd/orderShtDialog.do",
+							function() {
+								console.log("주문창 로드")
+							})
+				});
+	//종료
+
+	//계획조회 클릭하면 모달창 생성하기
+		// 주문코드 받아서 검색창에 띄우기
+		function selectPnm(pnm){
+			console.log(pnm);
+			$("#planName").val(pnm);
+		}
+		function selectPdt(pdt){
+			console.log(pdt);
+			$("#planDt").val(pdt);
+		}
+	
+		// 주문코드 받아서 readData에 파라미터값으로 넘겨주기
+		function choosePI(spg){
+			console.log(spg);
+			PlanDetaOsGrid.readData(1,{planId:spg}, true);
+			SearchPlanDialog.dialog("close");
+		}
+	
+		//모달창 생성
+		var SearchPlanDialog = $("#SearchPlanDialog").dialog({
+			modal : true,
+			autoOpen : false,
+			height: 600,
+			width: 1000
+		});
+		
+		$("#btnSearchPlan").on(
+				"click",
+				function() {
+					/* if(!$("#planName").val()) { */
+						console.log("33333")
+						$("#planName").val('');
+						document.getElementById('planDt').value = new Date().toISOString().substring(0, 10);
+						SearchPlanDialog.dialog("open");
+						console.log("44444")
+						$("#SearchPlanDialog").load(
+								"${path}/prd/searchPlanDialog.do", function() {
+									console.log("계획조회창 로드")
+								})
+					//}
+				});
 	//종료
 	
 	//제품목록 클릭하면 모달창 생성하기
 		function selectPr(prid,prnm){
 			console.log(prnm);
 			console.log(prid);
-			PlanDetaGrid.setValue(rk, "prdtNm", prnm, true);
-			PlanDetaGrid.setValue(rk, "prdtId", prid, true);
+			PlanDetaIvGrid.setValue(rk, "prdtNm", prdtNmIv, true);
+			PlanDetaIvGrid.setValue(rk, "prdtId", prid, true);
 			PrdtDialog.dialog( "close" );
 		}
 	
@@ -278,36 +384,37 @@ th, td {
 		    PrdtDialog.dialog( "open" );
 		    $("#PrdtDialog").load(
 								"${path}/prd/prdtDialog.do", function() {
-									console.log("검색창 로드")
+									console.log("계획조회창 로드")
 								})
 		}
 			
 			//그리드 선택한 값 세팅
-			
-			PlanDetaGrid.on('click', (ev) => {
+			PlanDetaIvGrid.on('dblclick', (ev) => {
 				rk = ev.rowKey;
 				console.log(ev)
-			    if (ev.columnName === 'prdtNm') {
-			    	console.log(PlanDetaGrid.getRow(ev.rowKey).prdtNm);
-					if(!PlanDetaGrid.getRow(ev.rowKey).prdtNm){
+			    if (ev.columnName === 'prdtNmIv') {
+			    	console.log(PlanDetaIvGrid.getRow(ev.rowKey).prdtNm);
+					if(!PlanDetaIvGrid.getRow(ev.rowKey).prdtNm){
 						console.log("1111")
 			    		callPrdtModal();
 						
 			    	}
 			    	
 				}
+				console.log("1111111")
 			});
 	//종료
+	
 	// 행추가
 	btnAdd.addEventListener("click", function() {
 		console.log('등록');
-		PlanDetaGrid.appendRow({});
+		PlanDetaIvGrid.appendRow({});
 	});
 	
 	// 행삭제
 	btnDel.addEventListener("click", function() {
 		console.log('삭제')
-		PlanDetaGrid.removeCheckedRows(true);
+		PlanDetaIvGrid.removeCheckedRows(true);
 	});
 	
 	// 생산계획코드 유무
