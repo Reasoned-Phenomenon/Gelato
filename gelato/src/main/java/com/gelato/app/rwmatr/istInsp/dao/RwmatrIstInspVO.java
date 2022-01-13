@@ -21,6 +21,10 @@ public class RwmatrIstInspVO {
 	String mngr;
 	String rwmatrOrderDetaId;
 	
+	String startDate;
+	String endDate;
+	String rwmName;
+	
 	//join
 	String orderId;
 	String nm;

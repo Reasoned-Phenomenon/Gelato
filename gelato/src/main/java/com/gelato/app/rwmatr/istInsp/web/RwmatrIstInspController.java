@@ -1,7 +1,5 @@
 package com.gelato.app.rwmatr.istInsp.web;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +25,9 @@ public class RwmatrIstInspController {
 	
 	//원자재 입고내역 조회
 	@RequestMapping("/rwmatr/rwmatrIstInspList.do")
-	public String rwmatrIstInspList(@RequestBody Map<String, String> map, Model model) {
+	public String rwmatrIstInspList(RwmatrIstInspVO vo, Model model) {
 		System.out.println("원자재 입고내역 조회");
-		model.addAttribute("datas",rwmatrIstInspService.RwmatrIstInspList(map));
+		model.addAttribute("datas",rwmatrIstInspService.RwmatrIstInspList(vo));
 		return "grid";
 	}
 	
@@ -54,7 +52,7 @@ public class RwmatrIstInspController {
 	@ResponseBody
 	public boolean modifyData (@RequestBody ModifyVO<RwmatrIstInspVO> mvo) {
 		System.out.println(mvo);
-		//rwmatroService.modifyRwmatro(mvo);
+		rwmatrIstInspService.modifyIstInsp(mvo);
 		return true;
 	}
 }

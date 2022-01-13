@@ -84,14 +84,8 @@ orderDetailListGrid.on('dblclick', (ev) => {
 	      end: [ev.rowKey, orderDetailListGrid.getColumns().length-1]
 	  });
 	
-	//클릭한 row의 codeId에 해당하는 code를 읽어옴
-	let orderCd = orderDetailListGrid.getRow(ev.rowKey).orderId;
-	let orderdCd = orderDetailListGrid.getRow(ev.rowKey).rwmatrOrderDetaId;
-	let rwnm = orderDetailListGrid.getRow(ev.rowKey).nm;
-	let rwid = orderDetailListGrid.getRow(ev.rowKey).rwmatrId;
-	let q = orderDetailListGrid.getRow(ev.rowKey).qy;
 	
-	getOrderData(orderCd, orderdCd, rwnm, rwid, q);
+	getOrderData(orderDetailListGrid.getRow(ev.rowKey));
 });
 
 </script>
