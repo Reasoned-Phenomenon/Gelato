@@ -4,7 +4,7 @@
 
 <select id="findComCode" resultType="ComCodeVO">
 
-	SELECT 
+	SELECT 	CL_CODE,
 			CODE_ID,  
 			CODE_ID_NM, 
 			CODE_ID_DC
