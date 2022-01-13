@@ -53,4 +53,14 @@
 		delete from eqm 
 		where eqm_id = #{eqmId}
 	</delete>
+	
+	<!-- 점검페이지관리/비가동페이지관리 - 등록 전 조회 -->
+	<select id="eqmNon" resultType="EqmNonVO">
+		select e.eqm_id, e.eqm_name, p.prcs_id, p.name
+		from Eqm e, prcs p 
+		where e.eqm_id = p.eqm_id 
+		<if test='gubun != "전체"'>
+			and e.fg = f_com_nm_to_code(#{gubun})
+		</if>
+	</select>
 </mapper>                       

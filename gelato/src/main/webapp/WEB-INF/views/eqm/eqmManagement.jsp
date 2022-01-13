@@ -32,8 +32,8 @@
 				<div>설비 이미지</div>
 				<div id="imageView">
 					<img style="width: 200px;" id="preview-image"
-						src="../resources/images/img/이미지프리뷰.jpg">
-						<input style="display: block;" type="file" id="eqmImg" >
+						src="../resources/images/img/이미지프리뷰.jpg"> <input
+						style="display: block;" type="file" id="eqmImg">
 				</div>
 				<div>
 					<button type="button" id="btnImgUpd"
@@ -73,10 +73,10 @@
 								<button type="button" id="btnUpd"
 									class="btn cur-p btn-outline-dark">수정</button>
 							</td>
-							<td>
+							<!-- 	<td>
 								<button type="button" id="btnDel"
 									class="btn cur-p btn-outline-dark">삭제</button>
-							</td>
+							</td> -->
 						</tr>
 					</tbody>
 				</table>
@@ -166,6 +166,8 @@
 			
 			gubun = $('#gubun option:selected').val();
 			
+			var yn = $("input[name=useYn]:checked").val();
+			
 			var params = {
 			eqmId : $("#eqmId").val(),
 			eqmName : $("#eqmName").val(),
@@ -175,20 +177,29 @@
 			tempMin : $("#tempMin").val(),
 			chckPerd : $("#chckPerd").val(),
 			//eqmImg : $("#eqmImg").val(),
-			useYn : $("input[name=useYn]:checked").val()
+			useYn : yn
 			}
+			
 			$.ajax({
 				url : "${path}/eqm/eqmUpdate.do",
 				data : params,
 				method :'GET',
 				success : function(res){ 
 					eqmListGrid.readData(1,{'gubun':gubun},true);
-					alert("수정성공");
+					if(yn == 'N'){
+						if(confirm("비가동관리 페이지로 이동하시겠습니까?")){
+							console.log("1111111111111");
+						}
+					}else{
+						toastr.options.positionClass = "toast-top-center";
+						toastr.options.progressBar = true;
+						toastr.success('수정성공','설비관리',{timeOut:'1500'});
+					}
                 }
 			})
 		})
 		
-		//삭제버튼 클릭
+		/* //삭제버튼 클릭
 		$('#btnDel').on("click",function(){
 			var eqmId = $("#eqmId").val();
 			var result = confirm(eqmId + "설비를 정말로 삭제하시겠습니까?")
@@ -202,7 +213,7 @@
 			}).done(function(xhr){
 				eqmListGrid.readData(1,{'gubun':gubun},true);
 			})
-		})
+		}) */
 	</script>
 </body>
 </html>
