@@ -79,8 +79,8 @@ Grid.applyTheme('striped', {
 	      background: '#eef'
 	    },
 	    evenRow: {
-	      background: '#fee'
-	      //background: '#898989'
+	      /* background: '#fee' */
+	      background: '#898989'
 	    }
 	  }
 });
@@ -97,17 +97,7 @@ const codeIdGrid = new Grid({
 	},
   	rowHeaders:['rowNum'],
   	selectionUnit: 'row',
-  	treeColumnOptions: {
-  	    name: 'codeId',
-  	    useIcon: true,
-  	    useCascadingCheckbox: true
-  	  },
   	columns:[
-  			{
-			  header: 'CL 코드',
-			  name: 'clCode',
-			  hidden:true
-			},
 			{
 			  header: '코드 ID',
 			  name: 'codeId',
