@@ -42,7 +42,7 @@
 	      			</li>
 	      			<li>
 	      				<div>
-	      					<label>해당일자</label>
+	      					<label>주문일자</label>
 	      					<input type="date" id="orderDt"> ~ <input type ="date" id="oustDt">
 	      				</div>
 	      			</li>
