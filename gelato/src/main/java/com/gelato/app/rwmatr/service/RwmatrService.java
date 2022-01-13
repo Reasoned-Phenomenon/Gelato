@@ -6,5 +6,5 @@ import com.gelato.app.rwmatr.dao.RwmatrVO;
 
 public interface RwmatrService {
 	
-	List<RwmatrVO> rwmatrList();
+	List<RwmatrVO> rwmatrList(RwmatrVO vo);
 }

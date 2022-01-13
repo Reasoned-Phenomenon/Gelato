@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>원자재 목록</title>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.4.0/tui-pagination.js"></script>
 </head>
 <style>
 h1 {
@@ -15,13 +18,28 @@ h1 {
 </style>
 <body>
 	<br>
-	<h1>원자재</h1>
-	<br>
+	<h1>원자재</h1><br>
+	<form action="">
+		자재명 : <input type="text" id="rwmNameM">
+		<button type="button" id="rwmatrSearch" class="btn cur-p btn-outline-primary">조회</button>
+		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
+	</form>
+	
+	
 	<div id="rwmatrListGrid" style="width: 100%"></div>
 	
 <script>
 var Grid = tui.Grid;
-//checkOnlyOne(element);
+
+//검색조건
+var rwmNameM;
+
+document.getElementById("rwmatrSearch").addEventListener("click", function () {
+	rwmNameM = document.getElementById("rwmNameM").value;
+	
+	rwmatrListGrid.readData(1,{'rwmName':rwmNameM}, true);
+});
+
 //그리드 테마
 Grid.applyTheme('striped', {
 	  cell: {
@@ -68,7 +86,6 @@ var rwmatrListGrid = new Grid({
 		  }
 		]
 });
-
 
 //커스텀 이벤트
 rwmatrListGrid.on('dblclick', (ev) => {	

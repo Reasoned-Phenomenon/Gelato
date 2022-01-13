@@ -4,5 +4,6 @@ import java.util.List;
 
 public interface RwmatrMapper {
 
-	List<RwmatrVO> rwmatrList();
+	//원자재 리스트
+	List<RwmatrVO> rwmatrList(RwmatrVO vo);
 }

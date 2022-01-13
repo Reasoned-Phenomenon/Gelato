@@ -17,11 +17,27 @@ h1 {
 	<br>
 	<h1>거래처</h1>
 	<br>
+	
+	<form action="">
+		거래처 : <input type="text" id="vendNameM">
+		<button type="button" id="vendSearch" class="btn cur-p btn-outline-primary">조회</button>
+		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
+	</form>
+	
 	<div id="vendListGrid" style="width: 100%"></div>
 	
 <script>
 var Grid = tui.Grid;
-//checkOnlyOne(element);
+
+//검색조건
+var vendNameM;
+
+document.getElementById("vendSearch").addEventListener("click", function () {
+	vendNameM = document.getElementById("vendNameM").value;
+	
+	vendListGrid.readData(1,{'vendName':vendNameM}, true);
+});
+
 //그리드 테마
 Grid.applyTheme('striped', {
 	  cell: {
@@ -79,11 +95,7 @@ vendListGrid.on('dblclick', (ev) => {
 	      end: [ev.rowKey, vendListGrid.getColumns().length-1]
 	  });
 	
-	//클릭한 row의 codeId에 해당하는 code를 읽어옴
-	//console.log(modalGrid.getRow(ev.rowKey))
-	let vdId = vendListGrid.getRow(ev.rowKey).vendId;
-	let vdnm = vendListGrid.getRow(ev.rowKey).vendName;
-	getVendData(vdId, vdnm)
+	getVendData(vendListGrid.getRow(ev.rowKey))
 });
 
 </script>
