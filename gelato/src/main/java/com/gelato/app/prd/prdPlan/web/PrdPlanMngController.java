@@ -69,11 +69,11 @@ public class PrdPlanMngController {
 	
 	// 검색결과 list 출력
 	@RequestMapping("/prd/searchPlanList.do")
-	public String SearchPlanList(@RequestBody Map<String, String> map, Model model) {
+	public String SearchPlanList(PrdPlanMngVO vo, Model model) {
 		System.out.println("검색결과 출력");
-		System.out.println(map);
-		model.addAttribute("datas", prdPlanMngService.SearchPlanList(map));
-		System.out.println(prdPlanMngService.SearchPlanList(map));
+		System.out.println(vo);
+		model.addAttribute("datas", prdPlanMngService.SearchPlanList(vo));
+		System.out.println(prdPlanMngService.SearchPlanList(vo));
 		return "grid";
 	}
 	
