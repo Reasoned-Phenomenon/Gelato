@@ -11,6 +11,12 @@
      on a.order_id = b.order_id
      join vend c
      on a.vend_id = c.vend_id	
+     <where>
+     	<if test="orderDt != null and oustDt != null">
+     		<![CDATA[dt between to_date(#{orderDt}) and to_date(#{oustDt})]]> 
+     	</if>
+     </where>
+    	
 </select>
 
 <!-- 주문서에서 거래처 검색 modal -->

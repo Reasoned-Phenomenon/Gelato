@@ -17,7 +17,6 @@
 		<h3>주문서 관리 조회</h3>
 	     <div>
 	     	
-	     	
 	      <form id="" name="" method="">
 	      	<div>
 	      		<ul>
@@ -44,7 +43,7 @@
 	      			<li>
 	      				<div>
 	      					<label>해당일자</label>
-	      					<input type="date" id="orderDt">
+	      					<input type="date" id="orderDt"> ~ <input type ="date" id="oustDt">
 	      				</div>
 	      			</li>
 	      			<li>
@@ -108,54 +107,64 @@ const ordGrid = new Grid({
 	columns:[
 			{
 			  header: '주문코드',
-			  name: 'orderId',
-		      editor: 'text'
+			  name: 'orderId'
+		      
 			},
 			{
 			  header: '업체명',
-			  name: 'vendName',
-	          editor: 'text'
+			  name: 'vendName'
+	          
 			},
 			{
 			  header: '주무일자',
-			  name: 'orderDt',
-		      editor: 'text'
+			  name: 'orderDt'
+		      
 			},
 			{
 			  header: '납기일자',
-			  name: 'oustDt',
-			  editor: 'text'
+			  name: 'oustDt'
+			  
 			},
 			{
 			  header: '진행상황구분',
-			  name: 'stFg',
-		      editor: 'text'
+			  name: 'stFg'
+		     
 			},
 			
 			{
 			  header: '제품코드',
-			  name: 'prdtId',
-			  editor: 'text'
+			  name: 'prdtId'
+			  
 			},
 			{
         	  header: '수량',
-		      name: 'qy',
-		      editor: 'text'
+		      name: 'qy'
+		      
 			},
 			{
               header: '비고',
-			  name: 'remk',
-			  editor: 'text'
+			  name: 'remk'
+			  
 			}
 		]
 });
 	
-	// 조회 버튼.
-/* 	btnFind.addEventListener("click", function() {
-		
-		ordGrid.readData(1,)
-	}) */
 	
+	var orderDt;
+	var oustDt;
+	// 조회 버튼. // 해당날짜 조회
+ 	$("#btnFind").on(
+ 			"click", function choicDate() {
+ 			orderDt = document.getElementById("orderDt").value;
+ 			oustDt = document.getElementById("oustDt").value;
+ 			
+ 			console.log(orderDt);
+ 			console.log(oustDt);
+ 			
+ 			ordGrid.readData(1,{'orderDt':orderDt, 'oustDt':oustDt}, true);
+ 		});
+	
+	// 
 		
 	// 모달창 생성 함수.
 	$(function () {
