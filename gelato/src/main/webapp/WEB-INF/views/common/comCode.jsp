@@ -67,8 +67,11 @@
 
 <script>
 //전역변수 선언
+//클릭한 Row의 CodeId를 담기위한 전역변수
 let codeParam;
+//모달
 let dialog;
+//Response의 종류를 구분하기 위한 전역변수
 let flag;
  
 var Grid = tui.Grid;
@@ -82,7 +85,13 @@ Grid.applyTheme('striped', {
 	    evenRow: {
 	      background: '#fee'
 	      //background: '#898989'
-	    }
+	    },
+	    /* selectedHeader : {
+	    	background : '#FFFFFF'
+	    }, 
+	    selectedRowHeader : {
+	    	background : '#FFFFFF'
+	    } */
 	  }
 });
 
