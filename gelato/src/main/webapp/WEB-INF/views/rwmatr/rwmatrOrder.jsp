@@ -49,7 +49,9 @@ var rwmName;
 var startDate;
 var endDate;
 
-
+document.getElementById("rwmName").addEventListener("click", function() {
+  callRwmatrModal();
+});
 
 //그리드 테마
 Grid.applyTheme('striped', {
@@ -71,7 +73,8 @@ var rwmatrOrderList = new Grid({
 	    readData: 	{ url: '${path}/rwmatr/rwmatrOrderList.do', method: 'POST'},
 	    modifyData : { url: '${path}/rwmatr/rwmatroModifyData.do', method: 'PUT'} 
 	  },
-	  contentType: 'application/json'
+	  contentType: 'application/json',
+	  initialRequest: false
 	},
 	rowHeaders: ['checkbox'],
 	selectionUnit: 'row',
@@ -184,13 +187,17 @@ function callVendModal(){
 		} */
 	});
 
-	function getRwmatrData(rmId, rmnm, vdnm) {
+	//자재리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌
+	function getRwmatrData(rwmatrData) {
 		console.log("Rwmatr정보 기입")
-		console.log(rmId)
-		console.log(rmnm)
-		rwmatrOrderList.setValue(rk, "rwmatrId", rmId, true)
-		rwmatrOrderList.setValue(rk, "nm", rmnm, true)
-		rwmatrOrderList.setValue(rk, "vendName", vdnm, true)
+		
+		//검색자재명 정보입력
+		document.getElementById("rwmName").value = rwmatrData.nm;
+		
+		rwmatrOrderList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
+		rwmatrOrderList.setValue(rk, "nm", rwmatrData.nm, true)
+		rwmatrOrderList.setValue(rk, "vendName", rwmatrData.vendName, true)
+		
 		dialog.dialog( "close" );
 	}
 	
@@ -217,10 +224,11 @@ function callVendModal(){
 	btnFind.addEventListener("click", function(){
 		startDate = document.getElementById("startDate").value;
 		endDate = document.getElementById("endDate").value;
+		rwmName = document.getElementById("rwmName").value;
 		console.log(startDate);
 		console.log(endDate);
 		
-		rwmatrOrderList.readData(1,{'startDate':startDate, 'endDate':endDate}, true);
+		rwmatrOrderList.readData(1,{'startDate':startDate, 'endDate':endDate, 'rwmName':rwmName}, true);
 	});
 	
 	//추가

@@ -91,7 +91,6 @@ var rwmatrIstInspList = new Grid({
 				{
 				  header: '자재명',
 				  name: 'nm',
-				  editor: 'text',
 				  sortable: true
 				},
 				{
@@ -102,7 +101,6 @@ var rwmatrIstInspList = new Grid({
 				{
 				  header: '발주총량',
 				  name: 'qy',
-				  editor: 'text',
 				  sortable: true
 				},
 				{
@@ -160,13 +158,15 @@ function callModal(){
 		}
 	});
 
-	function getOrderData(orderCd, orderdCd, rwnm, rwid, q) {
+	function getOrderData(orderData) {
 		console.log("발주정보 기입")
-		rwmatrIstInspList.setValue(rk, "rwmatrOrderDetaId", orderdCd, true)
-		rwmatrIstInspList.setValue(rk, "orderId", orderCd, true)
-		rwmatrIstInspList.setValue(rk, "nm", rwnm, true)
-		rwmatrIstInspList.setValue(rk, "rwmatrId", rwid, true)
-		rwmatrIstInspList.setValue(rk, "qy", q, true)
+		
+		rwmatrIstInspList.setValue(rk, "rwmatrOrderDetaId", orderData.rwmatrOrderDetaId, true)
+		rwmatrIstInspList.setValue(rk, "orderId", orderData.orderId, true)
+		rwmatrIstInspList.setValue(rk, "nm", orderData.nm, true)
+		rwmatrIstInspList.setValue(rk, "rwmatrId", orderData.rwmatrId, true)
+		rwmatrIstInspList.setValue(rk, "qy", orderData.qy, true)
+		
 		dialog.dialog( "close" );
 	}
 	

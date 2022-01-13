@@ -19,26 +19,15 @@
 		JOIN VEND V
 		    ON(R.VEND_ID = V.VEND_ID)
 	    <where>
-			<!-- <if test="startDate != null and endDate != null">
-				<![CDATA[RO.ORDER_DT between to_date(#{startDate}) and to_date(#{endDate})]]> 
+	    	<if test="startDate != ''">
+	    		<![CDATA[RO.ORDER_DT >= to_date(#{startDate})]]>
+	    	</if>
+	    	<if test="endDate != ''">
+	    		AND <![CDATA[RO.ORDER_DT <= to_date(#{endDate})]]>
+	    	</if>
+			<if test="rwmName != ''">
+				AND R.NM LIKE '%'||#{rwmName}||'%'
 			</if>
-			<if test="startDate != null and endDate == ''">
-				<![CDATA[RO.ORDER_DT > to_date(#{startDate})]]> 
-			</if>
-	    	<if test="startDate == '' and endDate != null">
-	    		<![CDATA[RO.ORDER_DT < to_date(#{endDate})]]> 
-	    	</if> -->
-	    	<choose>
-			 	<when test="startDate != null and endDate != null">
-		    		<![CDATA[RO.ORDER_DT between to_date(#{startDate}) and to_date(#{endDate})]]>
-			   	</when>
-			 	<when test="startDate != null and endDate == ''">
-			  	  	<![CDATA[RO.ORDER_DT > to_date(#{startDate})]]> 
-			  	</when>   
-			  	<when test="startDate == '' and endDate != null">
-			  	  	<![CDATA[RO.ORDER_DT < to_date(#{endDate})]]>   
-			  	</when>   
-			</choose>
 		</where>
 		ORDER BY 1 DESC
 	</select>
