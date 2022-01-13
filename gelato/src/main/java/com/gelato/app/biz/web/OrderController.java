@@ -1,11 +1,15 @@
 package com.gelato.app.biz.web;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gelato.app.biz.dao.OrderVO;
 import com.gelato.app.biz.service.OrderService;
 
 @Controller
@@ -21,9 +25,9 @@ public class OrderController {
 	
 	// 주문서 list 출력 조회.
 	@RequestMapping("/biz/findOrderList.do")
-	public String findOrderList(Model model) {
+	public String findOrderList(Model model, OrderVO vo) {
 		System.out.println("aaaaaaaaaaa");
-		model.addAttribute("datas",ordService.findOrderList());
+		model.addAttribute("datas",ordService.findOrderList(vo));
 		return "grid";
 	}
 	

@@ -49,11 +49,11 @@
 	      			<li>
 	      				<div>
 	      					<label>거래처</label>
-	      					<input type="text" id="vendIdText" name="vendIdText">
+	      					<input type="text" id="vendId" name="vendId">
 	      					<button type="button" id="BtnVend">찾아보기</button>&ensp;&ensp;&ensp;
 	      					
 	      					<label>제품코드</label>
-	      					<input type="text" id="prdtIdText" name="prdtIdText">
+	      					<input type="text" id="prdtId" name="prdtId">
 	      					<button type="button" id="BtnPrdt">찾아보기</button> &ensp;
 	      					
 	      				<button type="button" class="btn cur-p btn-outline-primary" id="btnRst">새자료</button>
@@ -116,7 +116,7 @@ const ordGrid = new Grid({
 	          
 			},
 			{
-			  header: '주무일자',
+			  header: '주문일자',
 			  name: 'orderDt'
 		      
 			},
@@ -149,19 +149,24 @@ const ordGrid = new Grid({
 		]
 });
 	
+
 	
-	var orderDt;
-	var oustDt;
-	// 조회 버튼. // 해당날짜 조회
+	// 조회 버튼. // 해당날짜 조회 // 거래처 조회 // 제품코드 조회// =>  mapper-xml에서 if로 조건으로 나눔.
  	$("#btnFind").on(
  			"click", function choicDate() {
- 			orderDt = document.getElementById("orderDt").value;
- 			oustDt = document.getElementById("oustDt").value;
+ 			var orderDt = document.getElementById("orderDt").value;
+ 			var oustDt = document.getElementById("oustDt").value;
+ 			
+ 			var vendId = document.getElementById("vendId").value;
+ 			var prdtId = document.getElementById("prdtId").value;
  			
  			console.log(orderDt);
  			console.log(oustDt);
+ 			console.log(vendId);
+ 			console.log(prdtId);
  			
- 			ordGrid.readData(1,{'orderDt':orderDt, 'oustDt':oustDt}, true);
+ 			ordGrid.readData(1, {'orderDt':orderDt, 'oustDt':oustDt, 'vendId':vendId, 'prdtId':prdtId }, true);
+ 			
  		});
 	
 	// 
@@ -213,13 +218,13 @@ const ordGrid = new Grid({
 	//  거래처 인풋 태그에 값들어가게 함.	
 	 function  getModalData(vendParam) {	
 		console.log(vendParam);
-		$("#vendIdText").val(vendParam);
+		$("#vendId").val(vendParam);
 		dialog.dialog("close");
 	} 
 	// 제품코드 인풋 태그에 값들어가게 함.
 	function getModal(prdtParam) {
 		console.log(prdtParam);
-		$("#prdtIdText").val(prdtParam);
+		$("#prdtId").val(prdtParam);
 		dialog.dialog("close");
 	}
 	
