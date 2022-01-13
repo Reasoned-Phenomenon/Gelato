@@ -1,7 +1,5 @@
 package com.gelato.app.rwmatr.order.web;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +27,9 @@ public class RwmatrOrderController {
 	
 	//발주 리스트 조회
 	@RequestMapping("/rwmatr/rwmatrOrderList.do")
-	public String rwmatrOrderList(@RequestBody Map<String, String> map, Model model) {
+	public String rwmatrOrderList(RwmatroVO vo, Model model) {
 		System.out.println("발주리스트 조회");
-		model.addAttribute("datas",rwmatroService.rwmatrOrderList(map));
+		model.addAttribute("datas",rwmatroService.rwmatrOrderList(vo));
 		return "grid";
 	}
 	

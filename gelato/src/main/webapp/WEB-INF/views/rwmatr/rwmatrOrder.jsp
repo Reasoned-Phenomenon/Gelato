@@ -38,20 +38,22 @@
 	<div id="dialogFrm" title="원자재 목록"></div>
 
 <script>
-let dialog;
 var Grid = tui.Grid;
+let dialog;
+
+//modify구분하기위한 변수
+let flag;
+
+//모달 구분하기위한 변수
+let ig;
 
 //모달에서 선택한 rowKey값 세팅
 let rk = '';
 
-//검색 조건
-var rwmName;
+//날짜검색 조건
 var startDate;
 var endDate;
-
-document.getElementById("rwmName").addEventListener("click", function() {
-  callRwmatrModal();
-});
+var rwmName;
 
 //그리드 테마
 Grid.applyTheme('striped', {
@@ -70,7 +72,7 @@ var rwmatrOrderList = new Grid({
 	el: document.getElementById('rwmatrOrderList'),
 	data : {
 	  api: {
-	    readData: 	{ url: '${path}/rwmatr/rwmatrOrderList.do', method: 'POST'},
+	    readData: 	{ url: '${path}/rwmatr/rwmatrOrderList.do', method: 'GET'},
 	    modifyData : { url: '${path}/rwmatr/rwmatroModifyData.do', method: 'PUT'} 
 	  },
 	  contentType: 'application/json',
@@ -137,7 +139,6 @@ var rwmatrOrderList = new Grid({
 		]
 });
 
-//최근에 클릭한값으로 발주번호
 
 //자재모달
 function callRwmatrModal(){
@@ -148,7 +149,7 @@ function callRwmatrModal(){
 	      width: 600,
 	      modal: true
 	}); 
-
+	
     console.log("11111")
     dialog.dialog( "open" );
     console.log("111112222")
@@ -180,41 +181,39 @@ function callVendModal(){
 		console.log(ev.rowKey)
 	    if (ev.columnName === 'nm') {
 			console.log("자재리스트")
+			ig = 'g';
     		callRwmatrModal();
-		} /* else if(ev.columnName === 'vendName'){
-    		console.log("2222")
-    		callVendModal();
-		} */
+		} 
 	});
 
 	//자재리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌
 	function getRwmatrData(rwmatrData) {
 		console.log("Rwmatr정보 기입")
-		
-		rwmatrOrderList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
-		rwmatrOrderList.setValue(rk, "nm", rwmatrData.nm, true)
-		rwmatrOrderList.setValue(rk, "vendName", rwmatrData.vendName, true)
+		if(ig == 'g'){
+			rwmatrOrderList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
+			rwmatrOrderList.setValue(rk, "nm", rwmatrData.nm, true)
+			rwmatrOrderList.setValue(rk, "vendName", rwmatrData.vendName, true)
+		} else if(ig == 'i'){
+			document.getElementById("rwmName").value = rwmatrData.nm;
+		}
 		
 		dialog.dialog( "close" );
 	}
 	
-	/* function getVendData(vdId, vdnm) {
-		console.log("Vend정보 기입")
-		console.log(vdId)
-		console.log(vdnm)
-		rwmatrOrderList.setValue(rk, "vendId", vdId, true)
-		rwmatrOrderList.setValue(rk, "vendName", vdnm, true)
-		dialog.dialog( "close" );
-	} */
-	
-	
-	    
-	
+	//자재명 textbox
+	document.getElementById("rwmName").addEventListener("click", function() {
+		  ig = 'i';
+		  callRwmatrModal();
+	});
+
+	//
 	rwmatrOrderList.on('response', function (ev) {
-		// 성공/실패와 관계 없이 응답을 받았을 경우
-		console.log("1111");
-		//console.log(ev);
-		rwmatrOrderList.resetOriginData();
+		console.log(ev)
+		if(flag == 'O') {
+			rwmatrOrderList.readData(1);
+			flag = 'X';
+		}
+		//rwmatrOrderList.resetOriginData();
 	});
 
 	//조회
@@ -245,7 +244,7 @@ function callVendModal(){
 	btnSave.addEventListener("click", function(){
 		rwmatrOrderList.blur();
 		rwmatrOrderList.request('modifyData');
-		rwmatrOrderList.clearModifiedData();
+		flag = 'O'
 	});
 
 </script>

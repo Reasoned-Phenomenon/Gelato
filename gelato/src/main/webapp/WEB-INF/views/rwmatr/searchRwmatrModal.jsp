@@ -81,6 +81,7 @@ rwmatrListGrid.on('dblclick', (ev) => {
 	
 	//해당 행의 모든값 객체형태로 매개값으로 담음	
 	getRwmatrData(rwmatrListGrid.getRow(ev.rowKey))
+	
 });
 
 </script>

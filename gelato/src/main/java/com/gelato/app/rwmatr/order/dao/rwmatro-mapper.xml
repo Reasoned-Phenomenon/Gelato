@@ -20,10 +20,10 @@
 		    ON(R.VEND_ID = V.VEND_ID)
 	    <where>
 	    	<if test="startDate != ''">
-	    		<![CDATA[RO.ORDER_DT >= to_date(#{startDate})]]>
+	    		<![CDATA[TRUNC(RO.ORDER_DT) >= to_date(#{startDate})]]>
 	    	</if>
 	    	<if test="endDate != ''">
-	    		AND <![CDATA[RO.ORDER_DT <= to_date(#{endDate})]]>
+	    		AND <![CDATA[TRUNC(RO.ORDER_DT) <= to_date(#{endDate})]]>
 	    	</if>
 			<if test="rwmName != ''">
 				AND R.NM LIKE '%'||#{rwmName}||'%'

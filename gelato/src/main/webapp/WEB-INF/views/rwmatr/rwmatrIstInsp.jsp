@@ -42,11 +42,13 @@
 let dialog;
 var Grid = tui.Grid;
 
+//modify구분하기위한 변수
+let flag;
+
 //모달에서 선택한 rowKey값 세팅
 let rk = '';
 
 //검색 조건
-var rwmName;
 var startDate;
 var endDate;
 
@@ -69,21 +71,22 @@ var rwmatrIstInspList = new Grid({
 	el: document.getElementById('rwmatrIstInspList'),
 	data : {
 	  api: {
-	    readData: 	{ url: '${path}/rwmatr/rwmatrIstInspList.do', method: 'POST'},
+	    readData: 	{ url: '${path}/rwmatr/rwmatrIstInspList.do', method: 'GET'},
 	    modifyData : { url: '${path}/rwmatr/rwmatrIstInspModifyData.do', method: 'PUT'} 
 	  },
-	  contentType: 'application/json'
+	  contentType: 'application/json',
+	  initialRequest: false
 	},
 	rowHeaders: ['checkbox'],
 	selectionUnit: 'row',
 	bodyHeight: 600,
 	columns:[
 				{
-				  header: '발주디테일코드',
+				  header: '발주코드',  //발주디테일코드
 				  name: 'rwmatrOrderDetaId',
 				},
 				{
-				  header: '발주코드',
+				  header: '발주코드', //코드
 				  name: 'orderId',
 				  hidden:true,
 				  sortable: true
@@ -112,6 +115,7 @@ var rwmatrIstInspList = new Grid({
 				{
 				  header: '불량량',
 				  name: 'inferQy',
+				  editor: 'text',
 				  sortable: true
 				},
 				{
@@ -126,11 +130,16 @@ var rwmatrIstInspList = new Grid({
 				  editor: 'datePicker',
 				  sortable: true
 				},
+				{
+				  header: '비고',
+				  name: 'remk',
+				  editor: 'text',
+				}
 		]
 });
 
 
-//자재모달
+//발주 모달
 function callModal(){
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
@@ -144,9 +153,25 @@ function callModal(){
     console.log("111112222")
     $("#dialogFrm").load("${path}/rwmatr/searchOrderDialog.do", function(){console.log("발주 목록")})
 }
+
+//자재모달
+function callRwmatrModal(){
+	dialog = $( "#dialogFrm" ).dialog({
+		  modal:true,
+		  autoOpen:false,
+	      height: 400,
+	      width: 600,
+	      modal: true
+	}); 
+	
+    console.log("11111")
+    dialog.dialog( "open" );
+    console.log("111112222")
+    $("#dialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
+}
 	
 	
-	//자재명 클릭시 모달
+	//발주코드 클릭시 모달
 	rwmatrIstInspList.on('click', (ev) => {
 		rk = ev.rowKey;
 		console.log(ev)
@@ -156,6 +181,21 @@ function callModal(){
 			console.log("발주디테일리스트")
     		callModal();
 		}
+		
+		//불량량 자동계산... 구현중..
+		rwmatrIstInspList.on('editingFinish', (ev) => {
+			console.log("11111111")
+			console.log(ev);
+			console.log("11111111")
+			rk = ev.rowKey;
+			if(rwmatrIstInspList.getValue(rk, "passQy") != '') {
+				console.log("sdfjklsdfjsdfljsdlf")
+				let totalq = parseInt(rwmatrIstInspList.getValue(rk, "qy"));
+				let passq = parseInt(rwmatrIstInspList.getValue(rk, "passQy"));
+				let inferq = totalq - passq;
+				rwmatrIstInspList.setValue(rk, "inferQy", inferq, true);
+			} 
+		});
 	});
 
 	function getOrderData(orderData) {
@@ -170,14 +210,20 @@ function callModal(){
 		dialog.dialog( "close" );
 	}
 	
-	//불량량 자동계산... 구현중..
-	if(rwmatrIstInspList.getValue(rk, "passQy") != '') {
-		console.log("sdfjklsdfjsdfljsdlf")
-		let totalq = parseInt(rwmatrIstInspList.getValue(rk, "qy"));
-		let passq = parseInt(rwmatrIstInspList.getValue(rk, "passQy"));
-		let inferq = totalq - passq;
-		rwmatrIstInspList.setValue(rk, "inferQy", inferq, true);
+	//자재명 textbox
+	document.getElementById("rwmName").addEventListener("click", function() {
+		  callRwmatrModal();
+	});
+	
+	//자재리스트 모달에서 받아온 데이터 인풋박스에 세팅
+	function getRwmatrData(rwmatrData) {
+		console.log("Rwmatr정보 기입")
+		document.getElementById("rwmName").value = rwmatrData.nm;
+		
+		dialog.dialog( "close" );
 	}
+	
+	
 
 	
 	rwmatrIstInspList.on('response', function (ev) {
@@ -186,7 +232,13 @@ function callModal(){
 
 	//조회
 	btnFind.addEventListener("click", function(){
+		startDate = document.getElementById("startDate").value;
+		endDate = document.getElementById("endDate").value;
+		rwmName = document.getElementById("rwmName").value;
+		console.log(startDate);
+		console.log(endDate);
 		
+		rwmatrIstInspList.readData(1,{'startDate':startDate, 'endDate':endDate, 'rwmName':rwmName}, true);
 	});
 	
 	//추가

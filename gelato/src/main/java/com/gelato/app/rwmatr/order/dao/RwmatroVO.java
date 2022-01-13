@@ -19,6 +19,10 @@ public class RwmatroVO {
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	Date dudt;
 	
+	String startDate;
+	String endDate;
+	String rwmName;
+	
 	//join 
 	String rwmatrId;
 	String rwmatrOrderDetaId;

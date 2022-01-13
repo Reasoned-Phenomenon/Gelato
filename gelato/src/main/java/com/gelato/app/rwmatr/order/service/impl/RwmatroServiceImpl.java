@@ -1,7 +1,6 @@
 package com.gelato.app.rwmatr.order.service.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +16,8 @@ public class RwmatroServiceImpl implements RwmatroService {
 	@Autowired RwmatroMapper rwmatroMapper;
 	
 	@Override
-	public List<RwmatroVO> rwmatrOrderList(Map<String, String> map) {
-		return rwmatroMapper.rwmatrOrderList(map);
+	public List<RwmatroVO> rwmatrOrderList(RwmatroVO vo) {
+		return rwmatroMapper.rwmatrOrderList(vo);
 	}
 	
 	@Override
