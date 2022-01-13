@@ -17,8 +17,8 @@ public class ComCodeDetaServiceImpl implements ComCodeDetaService {
 	@Autowired ComCodeDetaMapper detaMapper;
 	
 	@Override
-	public List<ComCodeDetaVO> findComCodeDeta(String codeId) {
-		return detaMapper.findComCodeDeta(codeId);
+	public List<ComCodeDetaVO> findComCodeDeta(ComCodeDetaVO vo) {
+		return detaMapper.findComCodeDeta(vo);
 	}
 
 	@Override

@@ -165,7 +165,7 @@
                   
                   <!-- 관리자 메뉴 -->
                   <li class="active">
-                     <a href="#ADMIN" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog yellow_color"></i> <span>관리자</span></a>
+                     <a href="#ADMIN" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-lock green_color"></i> <span>관리자</span></a>
                      <ul class="collapse list-unstyled" id="ADMIN">
                         <li>
                            <a href="#">> <span>사용자 권한 관리</span></a>

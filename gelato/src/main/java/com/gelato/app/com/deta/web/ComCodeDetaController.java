@@ -21,18 +21,22 @@ public class ComCodeDetaController {
 	@Autowired ComCodeDetaService service;
 	
 	@RequestMapping("/com/findComCodeDeta.do")
-	public String findComCodeDeta(Model model,String codeId) {
+	public String findComCodeDeta(Model model,ComCodeDetaVO vo) {
 		System.out.println("read");
-		model.addAttribute("datas",service.findComCodeDeta(codeId));
-		System.out.println(service.findComCodeDeta(codeId));
+		model.addAttribute("datas",service.findComCodeDeta(vo));
+		System.out.println(service.findComCodeDeta(vo));
 		return "grid";
 	}
 	
 	@PutMapping("/com/comCodeDetaModifyData.do")
 	@ResponseBody
 	public boolean modifyData (@RequestBody ModifyVO<ComCodeDetaVO> mvo) {
+		
+		System.out.println("수정");
 		System.out.println(mvo);
+		
 		service.modifyComCodeDeta(mvo);
+		
 		return true;
 	}
 	
@@ -43,6 +47,7 @@ public class ComCodeDetaController {
 		param.put("codeId", mvo.getCodeId());
 		service.findComCodeProcedure(param);
 		return param.get("out_cursor_table");
+		
 	}
 	
 }
