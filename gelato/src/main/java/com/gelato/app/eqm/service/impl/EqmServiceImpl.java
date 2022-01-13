@@ -43,8 +43,8 @@ public class EqmServiceImpl implements EqmService{
 	 */	
 	//설비삭제
 	@Override
-	public int deleteEqm(EqmVO eqmVo) {
-		return eqmMapper.deleteEqm(eqmVo);
+	public int eqmDelete(EqmVO eqmVo) {
+		return eqmMapper.eqmDelete(eqmVo);
 	}
 	
 }

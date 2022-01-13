@@ -25,7 +25,7 @@
 					<option value="가공">가공
 				</select>
 				<button id="btnFind">조회</button>
-				<div id="codeGrid"></div>
+				<div id="eqmListGrid"></div>
 			</div>
 			<div class="col-5">
 				<h2 class="detailTitle">상세조회</h2>
@@ -33,6 +33,7 @@
 				<div id="imageView">
 					<img style="width: 200px;" id="preview-image"
 						src="../resources/images/img/이미지프리뷰.jpg">
+						<input style="display: block;" type="file" id="eqmImg" >
 				</div>
 				<div>
 					<button type="button" id="btnImgUpd"
@@ -46,26 +47,26 @@
 							<th>설비코드</th>
 							<td><input id="eqmId" disabled></td>
 							<th>설비명</th>
-							<td><input id="eqmName"></td>
+							<td><input id="eqmName" disabled></td>
 						</tr>
 						<tr>
 							<th>공정코드</th>
-							<td><input id="prcsId"></td>
+							<td><input id="prcsId" disabled></td>
 							<th>공정명</th>
-							<td><input id="prcsName"></td>
+							<td><input id="nm" disabled></td>
 						</tr>
 						<tr>
 							<th>최고온도</th>
-							<td><input id="tempMax"></td>
+							<td><input id="tempMax" disabled></td>
 							<th>최저온도</th>
-							<td><input id="tempMin"></td>
+							<td><input id="tempMin" disabled></td>
 						</tr>
 						<tr>
 							<th>점검주기</th>
-							<td><input id="chckPerd"></td>
+							<td><input id="chckPerd" disabled></td>
 							<th>사용여부</th>
-							<td><input type="checkBox" id="useYn" name="useYn">Y
-								<input type="checkBox" id="notUse">N</td>
+							<td><input type="radio" id="useYn" name="useYn" value="Y">Y
+								<input type="radio" id="notUse" name="useYn" value="N">N</td>
 						</tr>
 						<tr>
 							<td>
@@ -85,13 +86,14 @@
 	<script>
 		var Grid = tui.Grid;
 		
-		const codeGrid = new Grid({
-			el : document.getElementById('codeGrid'),
+		const eqmListGrid = new Grid({
+			el : document.getElementById('eqmListGrid'),
 			data : {
 				api : {
 					readData : {
 						url : '${path}/eqm/eqmList.do',
-						method : 'GET'
+						method : 'GET',
+						initParams : {gubun : "전체"} //초기값!!
 					}
 				},
 				contentType : 'application/json'
@@ -132,30 +134,75 @@
 			} ]
 		});
 
+		//조회버튼 실행
 		$('#btnFind').on("click", function() {
 			let gubun = $('#gubun option:selected').val();
 
-			codeGrid.readData(1, {
+			eqmListGrid.readData(1, {
 				'gubun' : gubun
 			}, true);
-			//codeGrid.refreshLayout();
 		})
 	
-		//한 행 선택
-		codeGrid.on("click", (ev) => {
+		//더블 클릭시 한 행 선택
+		eqmListGrid.on("dblclick", (ev) => {
 			
-			//cell 선택시 row 선택됨.
-			codeGrid.setSelectionRange({
-			      start: [ev.rowKey, 0],
-			      end: [ev.rowKey, codeGrid.getColumns().length-1]
-			  });
+			$("#eqmId").val(eqmListGrid.getValue(ev["rowKey"],"eqmId"));
+			$("#eqmName").val(eqmListGrid.getValue(ev["rowKey"],"eqmName"));
+			$("#prcsId").val(eqmListGrid.getValue(ev["rowKey"],"prcsId"));
+			$("#nm").val(eqmListGrid.getValue(ev["rowKey"],"nm"));
+			$("#tempMax").val(eqmListGrid.getValue(ev["rowKey"],"tempMax"));
+			$("#tempMin").val(eqmListGrid.getValue(ev["rowKey"],"tempMin"));
+			$("#chckPerd").val(eqmListGrid.getValue(ev["rowKey"],"chckPerd"));
+			//$("#eqmImg").val(eqmListGrid.getValue(ev["rowKey"],"eqmImg"));
+			eqmListGrid.getValue(ev["rowKey"],"useYn")=='Y'?$("#useYn").prop("checked",true):$("#notUse").prop("checked",true);
 			
-			//클릭한 row의 eqmId에 해당하는 code를 읽어옴
-			codeParam = codeGrid.getRow(ev.rowKey).eqmId;
-			console.log(codeParam);
-		
+			$("#tempMax").attr("disabled",false);
+			$("#tempMin").attr("disabled",false);
+			$("#chckPerd").attr("disabled",false);
 		}) 
 		
+		//수정버튼 클릭
+		$("#btnUpd").on("click", function(){
+			
+			gubun = $('#gubun option:selected').val();
+			
+			var params = {
+			eqmId : $("#eqmId").val(),
+			eqmName : $("#eqmName").val(),
+			prcsId : $("#prcsId").val(),
+			nm : $("#nm").val(),
+			tempMax : $("#tempMax").val(),
+			tempMin : $("#tempMin").val(),
+			chckPerd : $("#chckPerd").val(),
+			//eqmImg : $("#eqmImg").val(),
+			useYn : $("input[name=useYn]:checked").val()
+			}
+			$.ajax({
+				url : "${path}/eqm/eqmUpdate.do",
+				data : params,
+				method :'GET',
+				success : function(res){ 
+					eqmListGrid.readData(1,{'gubun':gubun},true);
+					alert("수정성공");
+                }
+			})
+		})
+		
+		//삭제버튼 클릭
+		$('#btnDel').on("click",function(){
+			var eqmId = $("#eqmId").val();
+			var result = confirm(eqmId + "설비를 정말로 삭제하시겠습니까?")
+			if(! result)
+				return;
+			
+			$.ajax({
+				url : "${path}/eqm/eqmDelete.do",
+				data : {'eqmId': eqmId},
+				type : 'GET'
+			}).done(function(xhr){
+				eqmListGrid.readData(1,{'gubun':gubun},true);
+			})
+		})
 	</script>
 </body>
 </html>

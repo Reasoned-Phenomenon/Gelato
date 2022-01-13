@@ -17,5 +17,5 @@ public interface EqmMapper {
 	int eqmUpdate(EqmVO eqmVo);
 	
 	//설비삭제
-	int deleteEqm(EqmVO eqmVo);
+	int eqmDelete(EqmVO eqmVo);
 }

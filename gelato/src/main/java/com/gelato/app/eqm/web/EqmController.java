@@ -73,7 +73,7 @@ public class EqmController {
 	// 설비삭제
 	@GetMapping("/eqm/eqmDelete.do")
 	public String eqmDelete(EqmVO eqmVo) {
-		service.deleteEqm(eqmVo);
-		return null; ///////////// 이거 고쳐라
+		service.eqmDelete(eqmVo);
+		return ""; ///////////// 이거 고쳐라
 	}
 }
