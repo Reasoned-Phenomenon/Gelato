@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.gelato.app.eqm.dao.EqmVO;
 import com.gelato.app.eqm.dao.EqmMapper;
+import com.gelato.app.eqm.dao.EqmNonVO;
 import com.gelato.app.eqm.service.EqmService;
 
 @Service	
@@ -45,6 +46,12 @@ public class EqmServiceImpl implements EqmService{
 	@Override
 	public int eqmDelete(EqmVO eqmVo) {
 		return eqmMapper.eqmDelete(eqmVo);
+	}
+
+	//설비비가동 조회
+	@Override
+	public List<EqmNonVO> eqmNon(EqmNonVO eqmNonVo) {
+		return eqmMapper.eqmNon(eqmNonVo);
 	}
 	
 }

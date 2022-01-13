@@ -1,10 +1,5 @@
 package com.gelato.app.eqm.web;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,10 +65,18 @@ public class EqmController {
 		return "tiles/eqm/eqmManagement";
 	}
 
-	// 설비삭제
+	/*// 설비삭제
 	@GetMapping("/eqm/eqmDelete.do")
 	public String eqmDelete(EqmVO eqmVo) {
 		service.eqmDelete(eqmVo);
 		return ""; ///////////// 이거 고쳐라
+	}*/
+	
+	//설비비가동관리 페이지
+	@GetMapping("/eqm/eqmNonMoving.do")
+	public String eqmNonMoving(Model model, EqmVO eqmVo) {
+		model.addAttribute("datas", eqmVo.getEqmId());
+		System.out.println(eqmVo.getEqmId());
+		return "tiles/eqm/eqmNonMoving";
 	}
 }

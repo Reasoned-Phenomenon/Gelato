@@ -10,14 +10,17 @@
 	<div>
 		<br>
 		<h2>비가동 등록</h2>
-		<br> <label>설비구분</label> <select>
-			<option>측정기</option>
-			<option>배합기</option>
-			<option>가공기</option>
-		</select>
+		${datas} <br> <label>설비구분</label>  
+		<select>
+			<option value="전체">전체
+			<option value="배합">배합
+			<option value="운송">운송
+			<option value="측정">측정
+			<option value="가공">가공
+		</select> 
 	</div>
 	<div>
-		<div id="grid" style="width: 600px;"></div>
+		<div id="eqmNonListGrid" style="width: 600px;"></div>
 		<div>
 			<form>
 				<table>
@@ -63,12 +66,7 @@
 	<div>
 		<br>
 		<h2>내역 조회</h2>
-		<br> <label>구분</label> <select>
-			<option>전체</option>
-			<option>생산설비</option>
-			<option>가공기</option>
-			<option>측정기</option>
-		</select> <label>공정코드</label> <select>
+		<br><label>공정코드</label> <select>
 			<option>공정코드1</option>
 			<option>공정코드2</option>
 			<option>공정코드3</option>
@@ -78,69 +76,42 @@
 	</div>
 	<div id="grid2" style="width: 500px;"></div>
 	<script>
-	let arr=[];
-		fetch("${pageContext.request.contextPath}/testAjax/info")
-		.then(response=> response.json())
-		.then(result => {
-			for (item of result) {
-				arr.push(item)
-			}
-			grid.resetData(arr);
-		})
-			
-	const grid = new tui.Grid({
-	      el: document.getElementById('grid'),
-		  data: arr,
-	      scrollX: false,
-	      scrollY: false,
-	      columns: [
-	        {
-	          header: '설비코드',
-	          name: 'employeeId'
-	        },
-	        {
-	          header: '설비명',
-	          name: 'lastName'
-	        },
-	        {
-	          header: '공정명',
-	          name: 'salary'
-	        },
-	        {
-	          header: '정기점검',
-	          name: 'salary'
-	        }
-	      ]
-	    });
+		var Grid = tui.Grid;
+
+		const eqmNonListGrid = new Grid({
+			el : document.getElementById('eqmNonListGrid'),
+			data : {
+				api : {
+					readData : {
+						url : '${path}/eqm/eqmNonMoving.do',
+						method : 'GET',
+						initParams : {
+							gubun : "전체"
+						}
+					//초기값!!
+					}
+				},
+				contentType : 'application/json'
+			},
+			rowHeaders : [ 'rowNum' ],
+			selectionUnit : 'row',
+			bodyHeight : 600,
+			columns : [ {
+				header : '설비코드',
+				name : 'eqmId'
+			}, {
+				header : '설비명',
+				name : 'eqmName'
+			}, {
+				header : '공정명',
+				name : 'nm'
+			}, {
+				header : '점검주기',
+				name : 'chckPerd',
+			} ]
+		});
+
 		
-		const grid2 = new tui.Grid({
-		      el: document.getElementById('grid2'),
-			  data: arr,
-		      scrollX: false,
-		      scrollY: false,
-		      columns: [
-		        {
-		          header: '설비코드',
-		          name: 'employeeId'
-		        },
-		        {
-		          header: '설비명',
-		          name: 'lastName'
-		        },
-		        {
-		          header: '점검일자',
-		          name: 'salary'
-		        },
-		        {
-		          header: '판정',
-		          name: 'salary'
-		        },
-		        {
-		          header: '점검내역',
-		          name: 'salary'
-		        }
-		      ]
-		    });
-</script>
+	</script>
 </body>
 </html>
