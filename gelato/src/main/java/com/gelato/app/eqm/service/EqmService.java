@@ -15,5 +15,5 @@ public interface EqmService {
 	//EqmVO eqmUpdate(EqmVO eqmVo);
 	int eqmUpdate(EqmVO eqmVo);
 
-	int deleteEqm(EqmVO eqmVo);
+	int eqmDelete(EqmVO eqmVo);
 }

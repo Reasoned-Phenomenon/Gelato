@@ -16,21 +16,17 @@
 		p.nm as nm, 
 		e.use_yn as use_yn, 
 		e.fg as fg,
-		e.tmep_max as temp_max,
+		e.temp_max as temp_max,
 		e.temp_min as temp_min,
 		e.chck_perd as chck_perd,
 		e.eqm_img as eqm_img
 		from eqm e, prcs p 
 		where e.eqm_id = p.eqm_id 
 		
-		<if test='gubun == "전체"'>
+		<if test='gubun != "전체"'>
+			and e.fg = f_com_nm_to_code(#{gubun})
 		</if>
-		<if test='gubun == "배합"'>
-			and e.fg = 'CLAS01'
-		</if>
-		<if test='gubun == "운송"'>
-			and e.fg = 'CLAS02'    
-		</if>
+		
 	</select>
      
     <!-- 설비 관리 페이지 - 설비 한 건 조회(모달창) -->
