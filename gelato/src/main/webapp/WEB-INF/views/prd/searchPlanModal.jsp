@@ -66,7 +66,7 @@ $("#selectDate").on(
 		el: document.getElementById('searchPlanGrid'),
 	  	data : {
 		  api: {
-		    readData: { url:'${path}/prd/searchPlanList.do', method: 'POST'}
+		    readData: { url:'${path}/prd/searchPlanList.do', method: 'GET'}
 		  },
 		  contentType: 'application/json',
 		},

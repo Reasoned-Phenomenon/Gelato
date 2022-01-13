@@ -14,7 +14,7 @@ public interface PrdPlanMngService {
 	List<PrdPlanMngVO> OrderShtList();
 	
 	//검색결과 조회
-	List<PrdPlanMngVO> SearchPlanList(Map<String, String> map);
+	List<PrdPlanMngVO> SearchPlanList(PrdPlanMngVO vo);
 	
 	//제품 목록 조회
 	List<PrdPlanMngVO> PrdtList();

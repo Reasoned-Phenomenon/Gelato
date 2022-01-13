@@ -59,6 +59,7 @@ public class PrdPlanMngVO {
 	//vend
 	String vendName;
 	
-	
+	String startD;
+	String endD;
 	
 }

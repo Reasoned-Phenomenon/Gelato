@@ -44,7 +44,7 @@ th, td {
 		<div id="ManageTab">
 				<div id="PlanDetaGrid" ></div> <br>
 				<button type="button" class="btn btn-secondary" id="btnSearchPlan">계획조회</button>
-				<button type="button" class="btn btn-secondary" id="btnPlanDel">계획삭제</button>	
+				<button type="button" class="btn btn-secondary" id="btnPlanDel">계획취소</button>	
 		</div>
 		
 		<div id="InsertTab">
@@ -122,7 +122,7 @@ th, td {
 			}
 		});
 
-		// 그리드 생성 : 주문서
+		// 그리드 생성 : 관리
 		const PlanDetaGrid = new Grid({
 			el : document.getElementById('PlanDetaGrid'),
 			data : {
@@ -135,7 +135,7 @@ th, td {
 				contentType : 'application/json',
 				initialRequest: false
 			},
-			rowHeaders : [ 'checkbox', 'rowNum' ],
+			rowHeaders : ['rowNum' ],
 			selectionUnit : 'row',
 			columns : [ {
 				header : '생산계획코드',
@@ -159,21 +159,12 @@ th, td {
 				header : '작업우선순위',
 				name : 'priort',
 			}, {
-				header : '작업구분',
+				header : '작업상태',
 				name : 'fg',
-				editor: {
-					type: 'select',
-				    options: {
-				      listItems: [
-				        { text: '접수완료', value: 'ACCEPT' },
-				        { text: '출고완료', value: 'OUTSTC' },
-				      ]
-				    }
-				}
 			}]
 		});
 		
-		// 그리드 생성 : 안전재고용
+		// 그리드 생성 : 등록
 		const PlanDetaInsGrid = new Grid({
 			el : document.getElementById('PlanDetaInsGrid'),
 			data : {
@@ -190,8 +181,8 @@ th, td {
 			selectionUnit : 'row',
 			width:1500,
 			columns : [ {
-				header : '생산계획코드',
-				name : 'planDetaId',
+				header : '주문코드',
+				name : 'orderId',
 			}, {
 				header : '제품명',
 				name : 'prdtNm',
@@ -199,41 +190,21 @@ th, td {
 				header : '제품코드',
 				name : 'prdtId',
 			}, {
-				header : '주문코드',
-				name : 'orderId',
-			}, {
 				header : '계획량',
 				name : 'qy',
 				editor : 'text',
-				editable({ value }) {
-		        	return value === '1';
-				}
 			}, {
 				header : '생산일수',
 				name : 'prodDcnt',
 				editor : 'text',
-				editable({ value }) {
-		        	return value === '1';
-				}
 			}, {
 				header : '작업우선순위',
 				name : 'priort',
 				editor : 'text',
-				editable({ value }) {
-		        	return value === '1';
-				}
 			}, {
-				header : '작업구분',
-				name : 'fg',
-				editor: {
-					type: 'select',
-				    options: {
-				      listItems: [
-				        { text: '접수완료', value: 'ACCEPT' },
-				        { text: '출고완료', value: 'OUTSTC' },
-				      ]
-				    }
-				}
+				header : '비고',
+				name : 'remk',
+				editor : 'text',
 			}]
 		});
 		

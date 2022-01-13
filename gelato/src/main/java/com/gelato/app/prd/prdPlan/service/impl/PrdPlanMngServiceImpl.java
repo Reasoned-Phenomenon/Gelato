@@ -22,8 +22,8 @@ public class PrdPlanMngServiceImpl implements PrdPlanMngService{
 	}
 
 	@Override
-	public List<PrdPlanMngVO> SearchPlanList(Map<String, String> map) {
-		return ppmMapper.SearchPlanList(map);
+	public List<PrdPlanMngVO> SearchPlanList(PrdPlanMngVO vo) {
+		return ppmMapper.SearchPlanList(vo);
 	}
 
 	@Override
