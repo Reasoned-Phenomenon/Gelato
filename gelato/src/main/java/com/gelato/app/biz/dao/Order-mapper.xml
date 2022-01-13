@@ -13,7 +13,13 @@
      on a.vend_id = c.vend_id	
      <where>
      	<if test="orderDt != null and oustDt != null">
-     		<![CDATA[dt between to_date(#{orderDt}) and to_date(#{oustDt})]]> 
+     		<![CDATA[a.order_dt between (#{orderDt}) and (#{oustDt})]]> 
+     	</if>
+     	<if test="vendId !=null and vendId != ''">
+     		and a.vend_id = #{vendId}
+     	</if>
+     	<if test="prdtId !=null and prdtId != ''">
+     		and b.prdt_id = #{prdtId}
      	</if>
      </where>
     	
