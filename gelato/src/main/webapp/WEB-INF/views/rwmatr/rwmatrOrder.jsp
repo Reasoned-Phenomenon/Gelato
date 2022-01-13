@@ -191,9 +191,6 @@ function callVendModal(){
 	function getRwmatrData(rwmatrData) {
 		console.log("Rwmatr정보 기입")
 		
-		//검색자재명 정보입력
-		document.getElementById("rwmName").value = rwmatrData.nm;
-		
 		rwmatrOrderList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
 		rwmatrOrderList.setValue(rk, "nm", rwmatrData.nm, true)
 		rwmatrOrderList.setValue(rk, "vendName", rwmatrData.vendName, true)
@@ -217,7 +214,7 @@ function callVendModal(){
 		// 성공/실패와 관계 없이 응답을 받았을 경우
 		console.log("1111");
 		//console.log(ev);
-		/* grid.resetOriginData(); */
+		rwmatrOrderList.resetOriginData();
 	});
 
 	//조회
