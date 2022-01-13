@@ -67,8 +67,9 @@
 <update id="updateComCodeDeta">
 
 	UPDATE COMTCCMMNDETAILCODE
-	SET UPPER(CODE) = UPPER(#{code}),
+	SET 
 		CODE_NM = #{codeNm},
+		CODE = UPPER(#{code}),
 		CODE_DC = #{codeDc},
 		USE_AT = #{useAt},
 		LAST_UPDT_PNTTM = sysdate,

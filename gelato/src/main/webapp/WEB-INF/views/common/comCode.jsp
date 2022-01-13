@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="${path }/resources/js/gelatoCom.js"></script>
 </head>
 <body>
 <h3>공통 코드 관리</h3>
@@ -193,7 +193,11 @@ const codeGrid = new tui.Grid({
 		  header: 'USE_AT',
 		  name: 'useAt',
 		  align: 'center',
-		  formatter: 'listItemText',
+		  renderer: {
+	            type: GelatoRadio,
+	      }
+		  
+		  /* formatter: 'listItemText',
 		  editor : {
 			  type: 'radio',
 			  options: {
@@ -202,7 +206,7 @@ const codeGrid = new tui.Grid({
 					  {text: 'N', value: 'N'}
 				  ]
 			  }
-		  }
+		  } */
 		  
 		}
      ]
@@ -210,7 +214,7 @@ const codeGrid = new tui.Grid({
 
 	//응답시 이벤트
 	codeGrid.on('response', function(ev) {
-		console.log(ev)
+		console.log('response',ev)
 		if(flag == 'O') {
 			codeGrid.readData(1);
 			flag = 'X';
@@ -224,7 +228,7 @@ const codeGrid = new tui.Grid({
 		codeGrid.blur()
 		
 		codeGrid.request('modifyData')
-		flag = 'O'
+		flag = 'O';
 		
 		/* var chkchk = new Promise((resolve, reject) => { 
 			codeGrid.request('modifyData')
