@@ -23,17 +23,18 @@
    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
    
-   <!-- grid -->
-   <!-- <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
-   <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script> -->
-   <link rel="stylesheet" href="${path}/resources/css/tui-grid.css" />
-   <script src="${path}/resources/js/tui-grid.js"></script>
-   
    <!-- 데이트 픽커 -->
-   <!-- <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
-   <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script> -->
-   <link rel="stylesheet" href="${path}/resources/css/tui-date-picker.css">
-   <script src="${path}/resources/js/tui-date-picker.js"></script>
+   <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
+   <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
+   
+   <!-- grid -->
+   <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+   <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
+   <%-- <link rel="stylesheet" href="${path}/resources/css/tui-grid.css" />
+   <script src="${path}/resources/js/tui-grid.js"></script> --%>
+   
+   <%-- <link rel="stylesheet" href="${path}/resources/css/tui-date-picker.css">
+   <script src="${path}/resources/js/tui-date-picker.js"></script> --%>
 	
    <!-- 아이콘 -->
    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -69,6 +70,9 @@
 	<!-- ToastR -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="${path }/resources/js/gelatoCom.js"></script>
 </head>
    <body class="dashboard dashboard_1">
       <div class="full_container">
@@ -112,7 +116,7 @@
       <!-- custom js -->
       <script src="${path}/resources/js/custom.js"></script>
       <%-- <script src="${path}/resources/js/chart_custom_style1.js"></script> --%>
-      <script src="${path }/resources/js/gelatoCom.js"></script>
+      
       
    </body>
 </html>

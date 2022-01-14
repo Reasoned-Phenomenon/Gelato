@@ -6,15 +6,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>원자재 발주관리</title> 
- <!-- <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
+<title>원자재 입고관리</title> 
+<link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
-<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script> -->
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head>
 <body>
-<h3>원자재 발주관리</h3>
+<h3>원자재 입고관리</h3>
 <div style="margin: 20px;">
 	<form action="">
 		자재명 : <input type="text" id="rwmName">업체명 : <input type="text" id="vendName"><br>
@@ -31,8 +31,8 @@
 <hr>
 <br>
 
-	<!-- 발주목록 조회 -->
-	<div id="rwmatrOrderList" style="width: 80%"></div>
+	<!-- 입고내역 조회 -->
+	<div id="rwmatrIstList" style="width: 80%"></div>
 
 	<!-- 모달창 -->
 	<div id="dialogFrm"></div>
@@ -69,12 +69,12 @@ Grid.applyTheme('striped', {
 });
 
 //그리드 생성
-var rwmatrOrderList = new Grid({
-	el: document.getElementById('rwmatrOrderList'),
+var rwmatrIstList = new Grid({
+	el: document.getElementById('rwmatrIstList'),
 	data : {
 	  api: {
-	    readData: 	{ url: '${path}/rwmatr/rwmatrOrderList.do', method: 'GET'},
-	    modifyData : { url: '${path}/rwmatr/rwmatroModifyData.do', method: 'PUT'} 
+	    readData: 	{ url: '${path}/rwmatr/rwmatrIstList.do', method: 'GET'},
+	    modifyData : { url: '${path}/rwmatr/rwmatrIstModifyData.do', method: 'PUT'} 
 	  },
 	  contentType: 'application/json',
 	  initialRequest: false
@@ -84,62 +84,13 @@ var rwmatrOrderList = new Grid({
 	bodyHeight: 600,
 	columns:[
 				{
-				  header: '발주디테일코드',
-				  name: 'rwmatrOrderDetaId',
-				  hidden:true
-				},
-				{
-				  header: '발주코드',
-				  name: 'orderId',
-				  sortable: true
+				  header: '자재코드',
+				  name: 'rwmatrId',
 				},
 				{
 				  header: '자재명',
 				  name: 'nm',
-				  editor: 'text',
 				  sortable: true
-				},
-				{
-				  header: '자재코드',
-				  name: 'rwmatrId',
-				  sortable: true
-				},
-				{
-				  header: '단가(원)',
-				  name: 'untprc',
-				  editor: 'text',
-				  formatter({value}) { // 추가
-					  let a = `\${value}`
-				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-				      return b;
-				   }, 
-				  sortable: true
-				},
-				{
-				  header: '발주량',
-				  name: 'qy',
-				  editor: 'text',
-				  formatter({value}) { // 추가
-					  let a = `\${value}`
-				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-				      return b;
-				   }, 
-				  sortable: true
-				},
-				{
-				  header: '총액',
-				  name: 'totalPrice',
-				  formatter({value}) { // 추가
-					  let a = `\${value}`
-				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-				      return b;
-				   },
-				  sortable: true
-				},
-				{
-				  header: '업체명',
-				  name: 'vendId',
-				  hidden:true
 				},
 				{
 				  header: '업체명',
@@ -147,14 +98,24 @@ var rwmatrOrderList = new Grid({
 				  sortable: true
 				},
 				{
-				  header: '발주신청일',
-				  name: 'orderDt',
+				  header: '입고량',
+				  name: 'istQy',
+				  editor: 'text',
 				  sortable: true
 				},
 				{
-				  header: '납기요청일',
-				  name: 'dudt',
-				  editor: 'datePicker',
+				  header: '입고일',
+				  name: 'istOustDttm',
+				  sortable: true
+				},
+				{
+				  header: '자재LOT번호',
+				  name: 'lotNo',
+				  sortable: true
+				},
+				{
+				  header: '유통기한',
+				  name: 'expdate',
 				  sortable: true
 				}
 		]
@@ -194,7 +155,7 @@ function callVendModal(){
 	
 	
 	//자재명 클릭시 모달
-	rwmatrOrderList.on('click', (ev) => {
+	rwmatrIstList.on('click', (ev) => {
 		rk = ev.rowKey;
 		console.log(ev)
 		console.log(ev.columnName)
@@ -205,16 +166,16 @@ function callVendModal(){
     		callRwmatrModal();
 		} 
 		//총액 자동계산
-		rwmatrOrderList.on('editingFinish', (ev) => {
+		rwmatrIstList.on('editingFinish', (ev) => {
 			console.log("11111111")
 			console.log(ev);
 			console.log("11111111")
 			rk = ev.rowKey;
-			let untprc = parseInt(rwmatrOrderList.getValue(rk, "untprc"));
-			let qy = parseInt(rwmatrOrderList.getValue(rk, "qy"));
+			let untprc = parseInt(rwmatrIstList.getValue(rk, "untprc"));
+			let qy = parseInt(rwmatrIstList.getValue(rk, "qy"));
 			let totalPrice = untprc * qy;
-			if(rwmatrOrderList.getValue(rk, "untprc") != '' && rwmatrOrderList.getValue(rk, "qy") != '') {
-				rwmatrOrderList.setValue(rk, 
+			if(rwmatrIstList.getValue(rk, "untprc") != '' && rwmatrIstList.getValue(rk, "qy") != '') {
+				rwmatrIstList.setValue(rk, 
 										"totalPrice", 
 										totalPrice, 
 										true);
@@ -226,12 +187,9 @@ function callVendModal(){
 	function getRwmatrData(rwmatrData) {
 		console.log("Rwmatr정보 기입")
 		if(ig == 'g'){
-			console.log(rwmatrData.rwmatrId);
-			console.log(rwmatrData.nm);
-			console.log(rwmatrData.vendName);
-			rwmatrOrderList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
-			rwmatrOrderList.setValue(rk, "nm", rwmatrData.nm, true)
-			rwmatrOrderList.setValue(rk, "vendName", rwmatrData.vendName, true)
+			rwmatrIstList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
+			rwmatrIstList.setValue(rk, "nm", rwmatrData.nm, true)
+			rwmatrIstList.setValue(rk, "vendName", rwmatrData.vendName, true)
 		} else if(ig == 'i'){
 			document.getElementById("rwmName").value = rwmatrData.nm;
 		}
@@ -259,13 +217,13 @@ function callVendModal(){
 	
 	
 	//컨트롤러 응답
-	rwmatrOrderList.on('response', function (ev) {
+	rwmatrIstList.on('response', function (ev) {
 		console.log(ev)
 		if(flag == 'O') {
-			rwmatrOrderList.readData(1);
+			rwmatrIstList.readData(1);
 			flag = 'X';
 		}
-		//rwmatrOrderList.resetOriginData();
+		//rwmatrIstList.resetOriginData();
 	});
 
 	//조회
@@ -277,7 +235,7 @@ function callVendModal(){
 		console.log(startDate);
 		console.log(endDate);
 		
-		rwmatrOrderList.readData(1,{'startDate':startDate,
+		rwmatrIstList.readData(1,{'startDate':startDate,
 									'endDate':endDate, 
 									'rwmName':rwmName,
 									'vendName': vendName}, true);
@@ -285,21 +243,21 @@ function callVendModal(){
 	
 	//추가
 	btnAdd.addEventListener("click", function(){
-		rwmatrOrderList.prependRow();
+		rwmatrIstList.prependRow();
 	});
 	
 	//삭제
 	btnDel.addEventListener("click", function(){
 		
-		if(rwmatrOrderList.removeCheckedRows(true)){
-			rwmatrOrderList.request('modifyData');
+		if(rwmatrIstList.removeCheckedRows(true)){
+			rwmatrIstList.request('modifyData');
 		}
 	});
 	
 	//저장
 	btnSave.addEventListener("click", function(){
-		rwmatrOrderList.blur();
-		rwmatrOrderList.request('modifyData');
+		rwmatrIstList.blur();
+		rwmatrIstList.request('modifyData');
 		flag = 'O'
 	});
 
