@@ -110,10 +110,6 @@ searchPlanGrid.on("dblclick", (ev) => {
 	console.log(spg);
 	choosePI(spg);
 	
-	var pnm = searchPlanGrid.getRow(ev.rowKey).name;
-	var pdt = searchPlanGrid.getRow(ev.rowKey).dt;
-	selectPnm(pnm); 
-	selectPdt(pdt);
 });
 
 

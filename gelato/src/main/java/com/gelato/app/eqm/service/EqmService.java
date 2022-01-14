@@ -18,5 +18,8 @@ public interface EqmService {
 
 	int eqmDelete(EqmVO eqmVo);
 	
-	List<EqmNonVO> eqmNon(EqmNonVO eqmNonVo);
+	List<EqmVO> eqmNonList(EqmVO eqmVo);
+	
+	//비가동관리 내역조회
+	List<EqmNonVO> eqmNonSelect(EqmNonVO eqmNonVo);
 }

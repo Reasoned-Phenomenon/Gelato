@@ -4,67 +4,106 @@
 
 	<!-- 설비 등록 페이지 - 설비등록 -->
 	<insert id="insertEqm" parameterType="EqmVO">
-		insert into eqm(EQM_ID, EQM_NAME, model_no, VEND_ID, TEMP_MAX, TEMP_MIN, CHCK_PERD, REG_DT, MNGR, EQM_IMG, PURC_DT, FG, SPEC, USE_YN, UPH)
-		values(#{eqmId},#{eqmName},#{modelNo},#{vendId},#{tempMax},#{tempMin},#{chckPerd},#{regDt},#{mngr},#{eqmImg},#{purcDt},#{fg},#{spec},#{useYn},#{uph})
+		INSERT INTO EQM(
+					EQM_ID, 
+					EQM_NAME, 
+					MODEL_NO, 
+					VEND_ID, 
+					TEMP_MAX, 
+					TEMP_MIN, 
+					CHCK_PERD, 
+					REG_DT, 
+					MNGR, 
+					EQM_IMG, 
+					PURC_DT, 
+					FG, 
+					SPEC, 
+					USE_YN, 
+					UPH
+					)
+		VALUES
+		(#{eqmId},#{eqmName},#{modelNo},#{vendId},#{tempMax},#{tempMin},#{chckPerd},#{regDt},#{mngr},#{eqmImg},#{purcDt},#{fg},#{spec},#{useYn},#{uph})
 	</insert>
 	
 	<!--설비 관리 페이지 - 설비조회  -->
 	<select id="eqmList" resultType="EqmVO">
-		select e.eqm_id as eqm_id, 
-		e.eqm_name as eqm_name, 
-		p.prcs_id as prcs_id, 
-		p.nm as nm, 
-		e.use_yn as use_yn, 
-		e.fg as fg,
-		e.temp_max as temp_max,
-		e.temp_min as temp_min,
-		e.chck_perd as chck_perd,
-		e.eqm_img as eqm_img
-		from eqm e, prcs p 
-		where e.eqm_id = p.eqm_id 
+		SELECT E.EQM_ID AS EQM_ID, 
+			   E.EQM_NAME AS EQM_NAME, 
+			   P.PRCS_ID AS PRCS_ID, 
+			   P.NM AS NM, 
+			   E.USE_YN AS USE_YN, 
+			   E.FG AS FG,
+			   E.TEMP_MAX AS TEMP_MAX,
+			   E.TEMP_MIN AS TEMP_MIN,
+			   E.CHCK_PERD AS CHCK_PERD,
+			   E.EQM_IMG AS EQM_IMG
+		FROM EQM E, 
+			 PRCS P 
+		WHERE E.EQM_ID = P.EQM_ID 
 		
-		<if test='gubun != "전체"'>
-			and e.fg = f_com_nm_to_code(#{gubun})
+		<if test='gubun != "전체" and gubun != null and gubun != ""'>
+			AND E.FG = F_COM_NM_TO_CODE(#{gubun})
 		</if>
 		
 	</select>
      
     <!-- 설비 관리 페이지 - 설비 한 건 조회(모달창) -->
 	<select id="eqmSelect" parameterType="EqmVO" resultType="EqmVO">
-		select e.*, p.prcs_id, p.nm
-		from eqm e, prcs p 
-		where e.eqm_id = p.eqm_id
-		and e.eqm_id = #{eqmId} <!-- #{eqmId} 클릭시 넘긴 인자값 -->
+		SELECT E.*, 
+			   P.PRCS_ID, P.NM
+		FROM EQM E, 
+			 PRCS P 
+		WHERE E.EQM_ID = P.EQM_ID
+		AND E.EQM_ID = #{eqmId} <!-- #{eqmId} 클릭시 넘긴 인자값 -->
 	</select>
 	
 	<!-- 설비 관리 페이지 - 설비 한 건 조회(모달창) 수정 -->
 	<update id="eqmUpdate" parameterType="EqmVO">
-		update eqm set
-		temp_max = #{tempMax},
-		temp_min = #{tempMin},
-		chck_perd = #{chckPerd},
-		eqm_img = #{eqmImg},
-		use_yn = #{useYn}
-		where eqm_id = #{eqmId}
+		UPDATE EQM 
+		SET 
+			TEMP_MAX = #{tempMax},
+			TEMP_MIN = #{tempMin},
+			CHCK_PERD = #{chckPerd},
+			EQM_IMG = #{eqmImg},
+			USE_YN = #{useYn}
+		WHERE EQM_ID = #{eqmId}
 	</update>
 	
 	<!-- 설비 관리 페이지 - 설비 한 건 조회(모달창) 삭제 -->
 	<delete id="eqmDelete" parameterType="EqmVO">
-		delete from eqm 
-		where eqm_id = #{eqmId}
+		DELETE FROM EQM
+		 
+		WHERE EQM_ID = #{eqmId}
 	</delete>
 	
 	<!-- 점검페이지관리/비가동페이지관리 - 등록 전 조회 -->
-	<select id="eqmNon" resultType="EqmNonVO">
-		select e.eqm_id as eqm_id, 
-		e.eqm_name as eqm_name, 
-		e.chck_perd as chck_perd,
-		p.prcs_id as prcs_id, 
-		p.nm as nm
-		from Eqm e, prcs p 
-		where e.eqm_id = p.eqm_id 
-		<if test='gubun != "전체"'>
-			and e.fg = f_com_nm_to_code(#{gubun})
+	<select id="eqmNonList" resultType="EqmVO">
+		SELECT E.EQM_ID AS EQM_ID, 
+			   E.EQM_NAME AS EQM_NAME, 
+			   E.CHCK_PERD AS CHCK_PERD,
+			   P.PRCS_ID AS PRCS_ID, 
+			   P.NM AS NM
+		FROM EQM E, PRCS P 
+		WHERE E.EQM_ID = P.EQM_ID 
+		<if test='gubun != "전체" and gubun != null and gubun != ""'>
+			AND E.FG = F_COM_NM_TO_CODE(#{gubun})
 		</if>
+	</select>
+	
+	<!-- 비가동 내역조회 -->
+	<select id="eqmNonSelect" resultType="EqmNonVO">
+       	SELECT A.*,
+       		   E.EQM_NAME 
+     	FROM
+        	(
+        	 SELECT O.*, 
+        	 		R.RESN_NAME
+			 FROM EQM_NON_OPR O, 
+			 	  EQM_NON_OPR_RESN R
+        	 WHERE O.RESN_ID = R.RESN_ID 
+        	 AND EQM_ID = 'EQM-001'	<!-- 인자값으로 바꾸기 -->
+        	 ) A,
+        	 EQM E 
+        WHERE A.EQM_ID = E.EQM_ID
 	</select>
 </mapper>                       

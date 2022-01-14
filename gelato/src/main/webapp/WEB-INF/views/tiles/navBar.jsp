@@ -81,11 +81,11 @@
                         </li>
                         
                         <li>
-                           <a href="#">> <span>원자재 입고관리</span></a>
+                           <a href="${path }/rwmatr/rwmatrIst.do">> <span>원자재 입고관리</span></a>
                         </li>
                         
                         <li>
-                           <a href="#">> <span>원자재 출고관리</span></a>
+                           <a href="${path }/rwmatr/rwmatrOust.do">> <span>원자재 출고관리</span></a>
                         </li>
                         
                         <li>
@@ -149,7 +149,7 @@
                         </li>
                         
                         <li>
-                           <a href="#">> <span>설비 점검 관리</span></a>
+                           <a href="${path }/eqm/eqmInspection.do">> <span>설비 점검 관리</span></a>
                         </li>
                         
                         <li>

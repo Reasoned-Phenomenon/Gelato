@@ -14,13 +14,21 @@ public class RwmatrioVO {
 	String rwmatrId;
 	String lotNo;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	Date istOustDttm;
 	String istQy;
 	String oustQy;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	Date expdate;
+	
+	String startDate;
+	String endDate;
+	String rwmName;
+	
+	//join
+	String nm;
+	String vendName;
 	
 	
 	

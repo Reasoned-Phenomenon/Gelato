@@ -6,12 +6,13 @@
 		SELECT RD.ORDER_ID AS ORDER_ID, 
        		   RD.rwmatr_order_deta_id AS rwmatr_order_deta_id, 
 		       R.NM, R.RWMATR_ID AS RWMATR_ID, 
-		       RD.UNTPRC AS UNTPRC, 
-		       RD.QY AS QY,
+		       TO_CHAR(RD.UNTPRC, '999,999,999') AS UNTPRC, 
+		       TO_CHAR(RD.QY, '999,999,999') AS QY,
 		       V.VEND_ID AS VEND_ID, 
 		       V.VEND_NAME AS VEND_NAME, 
 		       RO.ORDER_DT AS ORDER_DT, 
-		       RO.DUDT AS DUDT
+		       RO.DUDT AS DUDT,
+               TO_CHAR(RD.QY*RD.UNTPRC, '999,999,999') AS TOTALPRICE
 		FROM RWMATR_ORDER_DETA RD JOIN RWMATR_ORDER RO
 		    ON(RD.ORDER_ID = RO.ORDER_ID)
 		JOIN RWMATR R

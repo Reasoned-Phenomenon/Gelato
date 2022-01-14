@@ -6,4 +6,9 @@ public interface BomCodeMapper { //이 맵퍼 이름이 -mapper.xml 맵퍼 네�
 	
 	// BOM 전체 조회.
 	List<BomCodeVO> findBomList(BomCodeVO vo);
+	
+	
+	// 등록.
+	int insertBomCode(BomCodeVO vo);
+	
 }

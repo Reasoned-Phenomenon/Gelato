@@ -24,4 +24,7 @@ public interface PrdPlanMngMapper {
 	
 	//계획 디테일 insert
 	int insertPrdPlanDeta(PrdPlanMngVO vo);
+	
+	//계획 취소 update
+	int updatePrdPlanDeta(PrdPlanMngVO vo);
 }

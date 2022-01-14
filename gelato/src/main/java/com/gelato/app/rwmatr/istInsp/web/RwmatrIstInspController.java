@@ -19,14 +19,14 @@ public class RwmatrIstInspController {
 	
 	//원자재 검사 페이지로 이동
 	@RequestMapping("/rwmatr/rwmatrIstInsp.do")
-	public String comCode () {
+	public String rwmatrIstInsp () {
 		return "tiles/rwmatr/rwmatrIstInsp";
 	}
 	
-	//원자재 입고내역 조회
+	//원자재 입고검사내역 조회
 	@RequestMapping("/rwmatr/rwmatrIstInspList.do")
 	public String rwmatrIstInspList(RwmatrIstInspVO vo, Model model) {
-		System.out.println("원자재 입고내역 조회");
+		System.out.println("원자재 입고검사내역 조회");
 		model.addAttribute("datas",rwmatrIstInspService.RwmatrIstInspList(vo));
 		return "grid";
 	}
