@@ -14,14 +14,13 @@
 			<h3>BOM 코드 관리</h3>
 		</div>
 		
-		
 		<form id="" name="" method="">
-			
+
 			<div>
 			<br>
 				<label>제품코드</label>
 	      			<input type="text" id="" name="">
-	      			<button type="button" id="">검색</button>&ensp;&ensp;&ensp;
+	      			<button type="button" id="serach">검색</button>&ensp;&ensp;&ensp;
 	      					
 	      		<label>제품명</label>
 	      			<input type="text" id="" name=""> &ensp;
@@ -69,10 +68,11 @@ const bomGrid = new Grid({
 	data : {
 	  api: {
 	    readData: 	{ url: '${path}/com/findBomList.do', method: 'GET'},
+	    modifyData : { url: '${path}/com/bomCodeModifyData.do', method: 'PUT'} 
 	  },
 	  contentType: 'application/json'
 	},
-	rowHeaders: ['checkbox','rowNum'],
+	rowHeaders: ['rowNum'],
 	selectionUnit: 'row',
 	columns:[
 			{
@@ -134,7 +134,17 @@ const bomGrid = new Grid({
 			}
 		]
 });
-
+	
+	// 추가 버튼 이벤트.
+	btnAdd.addEventListener("click", function(){
+		bomGrid.prependRow();
+	});
+	
+	// 저장 버튼 이벤트.
+	
+	
+	// 검색 버튼 이벤트.
+	
 
 </script>		
 		
