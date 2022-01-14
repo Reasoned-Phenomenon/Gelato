@@ -24,6 +24,9 @@ public interface PrdPlanMngService {
 	//상세생산계획 그리드에 출력
 	List<PrdPlanMngVO> ChooseOrder(PrdPlanMngVO vo);
 	
-	//modify
+	//modify - 등록
 	public int modifyPrdPlan(ModifyVO<PrdPlanMngVO> mvo);
+	
+	//modify - 취소
+	public int modifyCanPrdPlan(ModifyVO<PrdPlanMngVO> mvo);
 }
