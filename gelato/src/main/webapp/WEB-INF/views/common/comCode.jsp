@@ -18,7 +18,7 @@
 			<th colspan="2">코드</th>
 		</tr>
 	</thead>
-		
+		 
 	<tbody>
 		<tr>
 			<td>이름 검색</td>
