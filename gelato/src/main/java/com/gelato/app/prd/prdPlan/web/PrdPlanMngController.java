@@ -99,14 +99,25 @@ public class PrdPlanMngController {
 		return "grid";
 	}
 	
-	// modify
-	@PutMapping("/prd/prdModifyData.do")
+	// modify - 등록
+	@PutMapping("/prd/modifyPrdPlan.do")
 	@ResponseBody
-	public boolean modifyData (@RequestBody ModifyVO<PrdPlanMngVO> mvo) {
+	public boolean modifyPrdPlan (@RequestBody ModifyVO<PrdPlanMngVO> mvo) {
 		System.out.println("modi 컨트롤러");
 		System.out.println(mvo);
 		prdPlanMngService.modifyPrdPlan(mvo);
 		System.out.println("modi 컨트롤러2222");
+		return true;
+	}
+	
+	// modify - 관리
+	@PutMapping("/prd/modifyCanPrdPlan.do")
+	@ResponseBody
+	public boolean modifyCanPrdPlan (@RequestBody ModifyVO<PrdPlanMngVO> mvo) {
+		System.out.println("modi 컨트롤러3333");
+		System.out.println(mvo);
+		prdPlanMngService.modifyCanPrdPlan(mvo);
+		System.out.println("modi 컨트롤러4444");
 		return true;
 	}
 }

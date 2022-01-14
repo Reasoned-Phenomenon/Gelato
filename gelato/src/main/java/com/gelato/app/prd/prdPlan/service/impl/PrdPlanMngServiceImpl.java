@@ -41,7 +41,8 @@ public class PrdPlanMngServiceImpl implements PrdPlanMngService{
 	@Override
 	public int modifyPrdPlan(ModifyVO<PrdPlanMngVO> mvo) {
 		PrdPlanMngVO pvo = null;
-		if(mvo.getCreatedRows().isEmpty()) {
+		// 주문서 - 테이블 insert
+		if(!mvo.getUpdatedRows().isEmpty()) {
 			System.out.println("주문코드 추가");
 			pvo = mvo.getUpdatedRows().get(0);
 			System.out.println(pvo);
@@ -49,17 +50,52 @@ public class PrdPlanMngServiceImpl implements PrdPlanMngService{
 			System.out.println("성공");
 		}
 		for(PrdPlanMngVO vo : mvo.getUpdatedRows()) {
-			System.out.println(9999);
-			System.out.println(mvo.getUpdatedRows());
-			System.out.println(pvo.getPlanId());
+			/*
+			 * System.out.println(9999); System.out.println(mvo.getUpdatedRows());
+			 * System.out.println(pvo.getPlanId());
+			 */
+			System.out.println(vo);
 			vo.setPlanId(pvo.getPlanId());
 			System.out.println("주문디테일코드 추가");
-			ppmMapper.insertPrdPlanDeta(pvo);
+			ppmMapper.insertPrdPlanDeta(vo);
 		}
+		
+		// 안전재고 - insert
+		if(!mvo.getCreatedRows().isEmpty()) {
+			System.out.println("주문코드 추가 - 재고추가");
+			pvo = mvo.getCreatedRows().get(0);
+			System.out.println(pvo);
+			ppmMapper.insertPrdPlan(pvo);
+			System.out.println("성공");
+		}
+		for(PrdPlanMngVO vo : mvo.getCreatedRows()) {
+			/*
+			 * System.out.println(9999); System.out.println(mvo.getUpdatedRows());
+			 * System.out.println(pvo.getPlanId());
+			 */
+			System.out.println(vo);
+			vo.setPlanId(pvo.getPlanId());
+			System.out.println("주문디테일코드 - 재고추가");
+			ppmMapper.insertPrdPlanDeta(vo);
+		}
+		
 		return 0;
 	}
 
+	@Override
+	public int modifyCanPrdPlan(ModifyVO<PrdPlanMngVO> mvo) {
+		PrdPlanMngVO pvo = null;
 
+		// 계획취소 - update
+		if(!mvo.getUpdatedRows().isEmpty()) {
+			System.out.println("계획취소");
+			ppmMapper.updatePrdPlanDeta(mvo.getUpdatedRows().get(0));
+			System.out.println("계획취소impl 끝");
+		}
+		
+		return 0;
+		
+	}
 
 	
 	

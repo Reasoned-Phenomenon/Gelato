@@ -130,10 +130,8 @@ th, td {
 			el : document.getElementById('PlanDetaGrid'),
 			data : {
 				api : {
-					readData : {
-						url : '${path}/prd/chooseOrder.do',
-						method : 'GET'
-					}
+					readData : {url : '${path}/prd/chooseOrder.do',method : 'GET'},
+					modifyData : { url: '${path}/prd/modifyCanPrdPlan.do', method: 'PUT'} 
 				},
 				contentType : 'application/json',
 				initialRequest: false
@@ -173,7 +171,7 @@ th, td {
 			data : {
 				api : {
 					readData : {url : '${path}/prd/chooseOrder.do',method : 'GET'},
-					modifyData : { url: '${path}/prd/prdModifyData.do', method: 'PUT'} 
+					modifyData : { url: '${path}/prd/modifyPrdPlan.do', method: 'PUT'} 
 				},
 				contentType : 'application/json',
 				initialRequest: false
@@ -210,7 +208,11 @@ th, td {
 				header : '생산계획명',
 				name : 'name',
 				hidden : true
-			}]
+			}],
+			summary : {
+				positioin : 'bottom',
+				
+			}
 		});
 	
 		//컨트롤러 응답
@@ -360,6 +362,17 @@ th, td {
 		PlanDetaInsGrid.request('modifyData');
 		console.log(22223333);
 	});
+	
+	//계획 취소
+	btnPlanDel.addEventListener("click", function() {
+		PlanDetaGrid.blur();
+		console.log(454545);
+		for ( i =0 ; i <= PlanDetaGrid.getRowCount(); i++) {
+			PlanDetaGrid.setValue(i,'fg','cancel');
+		}
+		PlanDetaGrid.request('modifyData');
+		console.log(565656);
+	})
 	</script>
 </body>
 </html>
