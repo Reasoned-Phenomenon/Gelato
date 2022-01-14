@@ -208,6 +208,7 @@ function callRwmatrModal(){
 		});
 	});
 
+	
 	function getOrderData(orderData) {
 		console.log("발주정보 기입")
 		
