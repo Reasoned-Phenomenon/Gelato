@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="${path }/resources/js/gelatoCom.js"></script>
 </head>
 <body>
 <h3>공통 코드 관리</h3>
@@ -29,7 +29,7 @@
 </table>
 
 <br>
-
+ 
 <div align="right">
 	
 	<button type="button" class="btn cur-p btn-outline-primary" id="btnModal">모달창 테스트</button>
@@ -67,8 +67,11 @@
 
 <script>
 //전역변수 선언
+//클릭한 Row의 CodeId를 담기위한 전역변수
 let codeParam;
+//모달
 let dialog;
+//Response의 종류를 구분하기 위한 전역변수
 let flag;
  
 var Grid = tui.Grid;
@@ -82,7 +85,13 @@ Grid.applyTheme('striped', {
 	    evenRow: {
 	      background: '#fee'
 	      //background: '#898989'
-	    }
+	    },
+	    /* selectedHeader : {
+	    	background : '#FFFFFF'
+	    }, 
+	    selectedRowHeader : {
+	    	background : '#FFFFFF'
+	    } */
 	  }
 });
 
@@ -193,7 +202,11 @@ const codeGrid = new tui.Grid({
 		  header: 'USE_AT',
 		  name: 'useAt',
 		  align: 'center',
-		  formatter: 'listItemText',
+		  renderer: {
+	            type: GelatoRadio,
+	      }
+		  
+		  /* formatter: 'listItemText',
 		  editor : {
 			  type: 'radio',
 			  options: {
@@ -202,7 +215,7 @@ const codeGrid = new tui.Grid({
 					  {text: 'N', value: 'N'}
 				  ]
 			  }
-		  }
+		  } */
 		  
 		}
      ]
@@ -210,7 +223,7 @@ const codeGrid = new tui.Grid({
 
 	//응답시 이벤트
 	codeGrid.on('response', function(ev) {
-		console.log(ev)
+		console.log('response',ev)
 		if(flag == 'O') {
 			codeGrid.readData(1);
 			flag = 'X';
@@ -224,7 +237,7 @@ const codeGrid = new tui.Grid({
 		codeGrid.blur()
 		
 		codeGrid.request('modifyData')
-		flag = 'O'
+		flag = 'O';
 		
 		/* var chkchk = new Promise((resolve, reject) => { 
 			codeGrid.request('modifyData')
