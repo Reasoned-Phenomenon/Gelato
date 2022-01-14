@@ -16,7 +16,7 @@
 	<div class="container">
 		<div class="flex row">
 			<div class="col-7">
-				<h2 class="title">설비관리</h2>
+				<h2>설비관리</h2>
 				<label>구분</label> <select id="gubun">
 					<option value="전체">전체
 					<option value="배합">배합
@@ -92,8 +92,7 @@
 				api : {
 					readData : {
 						url : '${path}/eqm/eqmList.do',
-						method : 'GET',
-						initParams : {gubun : "전체"} //초기값!!
+						method : 'GET'
 					}
 				},
 				contentType : 'application/json'
