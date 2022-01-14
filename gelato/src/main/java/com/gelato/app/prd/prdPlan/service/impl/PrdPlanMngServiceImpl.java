@@ -41,13 +41,18 @@ public class PrdPlanMngServiceImpl implements PrdPlanMngService{
 	@Override
 	public int modifyPrdPlan(ModifyVO<PrdPlanMngVO> mvo) {
 		PrdPlanMngVO pvo = null;
-		if(!mvo.getCreatedRows().isEmpty()) {
+		if(mvo.getCreatedRows().isEmpty()) {
 			System.out.println("주문코드 추가");
-			pvo = mvo.getCreatedRows().get(0);
+			pvo = mvo.getUpdatedRows().get(0);
+			System.out.println(pvo);
 			ppmMapper.insertPrdPlan(pvo);
+			System.out.println("성공");
 		}
-		for(PrdPlanMngVO vo : mvo.getCreatedRows()) {
-			vo.setOrderId(pvo.getPlanId());
+		for(PrdPlanMngVO vo : mvo.getUpdatedRows()) {
+			System.out.println(9999);
+			System.out.println(mvo.getUpdatedRows());
+			System.out.println(pvo.getPlanId());
+			vo.setPlanId(pvo.getPlanId());
 			System.out.println("주문디테일코드 추가");
 			ppmMapper.insertPrdPlanDeta(pvo);
 		}

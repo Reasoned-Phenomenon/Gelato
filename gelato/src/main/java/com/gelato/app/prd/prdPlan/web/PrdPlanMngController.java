@@ -105,8 +105,8 @@ public class PrdPlanMngController {
 	public boolean modifyData (@RequestBody ModifyVO<PrdPlanMngVO> mvo) {
 		System.out.println("modi 컨트롤러");
 		System.out.println(mvo);
-		//createRows 타야하는데 updateRows 타러감.
 		prdPlanMngService.modifyPrdPlan(mvo);
+		System.out.println("modi 컨트롤러2222");
 		return true;
 	}
 }

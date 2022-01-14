@@ -88,6 +88,7 @@ th, td {
 	
 	<script>
 	let rk = '';
+	
 	//생산계획일자 현재날짜 기본 설정
 	document.getElementById('planDt').value = new Date().toISOString()
 			.substring(0, 10);
@@ -101,8 +102,7 @@ th, td {
 				function() {
 					$("#planName").val('');
 					document.getElementById('planDt').value = new Date().toISOString().substring(0, 10);
-					PlanDetaGrid.readData(1,{planId:null}, true);
-					PlanDetaInsGrid.readData(1,{planId:null}, true);
+					PlanDetaInsGrid.clear();
 					$("#btnAdd").show();
 					$("#btnDel").show();
 				});
@@ -206,7 +206,16 @@ th, td {
 				header : '비고',
 				name : 'remk',
 				editor : 'text',
+			},{
+				header : '생산계획명',
+				name : 'name',
+				hidden : true
 			}]
+		});
+	
+		//컨트롤러 응답
+		PlanDetaInsGrid.on('response', function (ev) {
+			console.log(ev)
 		});
 		
 	// 종료
@@ -340,11 +349,16 @@ th, td {
 	
 	//계획 등록
 	btnPlanIns.addEventListener("click", function() {
+		PlanDetaInsGrid.blur();
+		//입력값 없을 때, toast 띄우기.
+		var planName = document.getElementById('planName').value;
+		console.log(planName);
+		for ( i =0 ; i <= PlanDetaInsGrid.getRowCount(); i++) {
+			PlanDetaInsGrid.setValue(i,'name',planName);
+		}
 		console.log(2222);
 		PlanDetaInsGrid.request('modifyData');
 		console.log(22223333);
-		// planName 값이랑 그리드 값을 같이 담아서 modifyData로 보내줘야 함
-		// 어떻게?????!?
 	});
 	</script>
 </body>
