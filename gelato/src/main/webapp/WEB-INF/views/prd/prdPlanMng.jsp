@@ -118,7 +118,10 @@ th, td {
 				},
 				evenRow : {
 					background : '#fee'
-				}
+				},
+				selectedHeader : {
+			    	background : '#FFFFFF'
+			    }
 			}
 		});
 
@@ -169,10 +172,8 @@ th, td {
 			el : document.getElementById('PlanDetaInsGrid'),
 			data : {
 				api : {
-					readData : {
-						url : '${path}/prd/chooseOrder.do',
-						method : 'GET'
-					}
+					readData : {url : '${path}/prd/chooseOrder.do',method : 'GET'},
+					modifyData : { url: '${path}/prd/prdModifyData.do', method: 'PUT'} 
 				},
 				contentType : 'application/json',
 				initialRequest: false
@@ -337,12 +338,14 @@ th, td {
 		PlanDetaInsGrid.removeCheckedRows(true);
 	});
 	
-	// 생산계획코드 유무
-	
-	$(function(){
-		//그리드 선택한 값 세팅
-		
-	})
+	//계획 등록
+	btnPlanIns.addEventListener("click", function() {
+		console.log(2222);
+		PlanDetaInsGrid.request('modifyData');
+		console.log(22223333);
+		// planName 값이랑 그리드 값을 같이 담아서 modifyData로 보내줘야 함
+		// 어떻게?????!?
+	});
 	</script>
 </body>
 </html>

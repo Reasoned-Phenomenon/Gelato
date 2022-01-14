@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.gelato.app.prd.prdPlan.dao.PrdPlanMngVO;
+import com.gelato.app.rwmatr.order.dao.RwmatroVO;
+import com.gelato.app.vr.ModifyVO;
 
 public interface PrdPlanMngService {
 	
@@ -21,4 +23,7 @@ public interface PrdPlanMngService {
 	
 	//상세생산계획 그리드에 출력
 	List<PrdPlanMngVO> ChooseOrder(PrdPlanMngVO vo);
+	
+	//modify
+	public int modifyPrdPlan(ModifyVO<PrdPlanMngVO> mvo);
 }

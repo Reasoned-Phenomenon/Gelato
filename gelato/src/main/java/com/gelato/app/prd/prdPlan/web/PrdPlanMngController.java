@@ -5,11 +5,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gelato.app.prd.prdPlan.dao.PrdPlanMngVO;
 import com.gelato.app.prd.prdPlan.service.PrdPlanMngService;
+import com.gelato.app.rwmatr.order.dao.RwmatroVO;
+import com.gelato.app.vr.ModifyVO;
 
 @Controller
 public class PrdPlanMngController {
@@ -95,4 +99,14 @@ public class PrdPlanMngController {
 		return "grid";
 	}
 	
+	// modify
+	@PutMapping("/prd/prdModifyData.do")
+	@ResponseBody
+	public boolean modifyData (@RequestBody ModifyVO<PrdPlanMngVO> mvo) {
+		System.out.println("modi 컨트롤러");
+		System.out.println(mvo);
+		//createRows 타야하는데 updateRows 타러감.
+		prdPlanMngService.modifyPrdPlan(mvo);
+		return true;
+	}
 }
