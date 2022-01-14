@@ -44,15 +44,18 @@ var prdtListGrid = new Grid({
   	columns:[
   		  {
 		    header: '제품 코드',
-		    name: 'prdtId'
+		    name: 'prdtId',
+		    align: 'center'
 		  },
 		  {
 		    header: '제품 명',
-		    name: 'prdtNm'
+		    name: 'prdtNm',
+		    align: 'center'
 		  },
 		  {
 		    header: '규격',
-		    name: 'spec'
+		    name: 'spec',
+		    align: 'center'
 			  }
 		]
 });

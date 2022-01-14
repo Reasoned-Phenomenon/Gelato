@@ -21,6 +21,10 @@
      	<if test="prdtId !=null and prdtId != ''">
      		and b.prdt_id = #{prdtId}
      	</if>
+     	<if test="stFg !='전체'">
+     		 and a.st_fg = #{stFg}
+     	</if>
+     	
      </where>
     	
 </select>
