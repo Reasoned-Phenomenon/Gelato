@@ -7,18 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>원자재 입고검사관리</title> 
-<link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
-<link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
-<script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
-<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
-<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head>
 <body>
 <h3>원자재 입고검사관리</h3>
 <div style="margin: 20px;">
 	<form action="">
 		자재명 : <input type="text" id="rwmName">담당자 : <input type="text" id="mngr"><br>
-		기간 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
+		검사일자 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
 		<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
 	</form>
@@ -35,7 +30,7 @@
 	<div id="rwmatrIstInspList" style="width: 80%"></div>
 
 	<!-- 모달창 -->
-	<div id="dialogFrm" title=""></div>
+	<div id="dialogFrm"></div>
 
 <script>
 let dialog;
@@ -105,17 +100,32 @@ var rwmatrIstInspList = new Grid({
 				{
 				  header: '발주총량',
 				  name: 'qy',
+				  formatter({value}) { // 추가
+					  let a = `\${value}`
+				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+				      return b;
+				    },
 				  sortable: true
 				},
 				{
 				  header: '합격량',
 				  name: 'passQy',
 				  editor: 'text',
+				  formatter({value}) { // 추가
+					  let a = `\${value}`
+				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+				      return b;
+				    },
 				  sortable: true
 				},
 				{
 				  header: '불량량',
 				  name: 'inferQy',
+				  formatter({value}) { // 추가
+					  let a = `\${value}`
+				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+				      return b;
+				    },
 				  sortable: true
 				},
 				{
@@ -182,7 +192,7 @@ function callRwmatrModal(){
     		callModal();
 		}
 		
-		//불량량 자동계산... 구현중..
+		//불량량 자동계산
 		rwmatrIstInspList.on('editingFinish', (ev) => {
 			console.log("11111111")
 			console.log(ev);

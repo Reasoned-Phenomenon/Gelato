@@ -7,11 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>원자재 발주관리</title> 
- <!-- <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
+<link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
-<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script> -->
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head>
 <body>
 <h3>원자재 발주관리</h3>
@@ -35,7 +35,7 @@
 	<div id="rwmatrOrderList" style="width: 80%"></div>
 
 	<!-- 모달창 -->
-	<div id="dialogFrm"></div>
+	<div id="dialogFrm" title="원자재 목록"></div>
 
 <script>
 var Grid = tui.Grid;
@@ -112,7 +112,7 @@ var rwmatrOrderList = new Grid({
 					  let a = `\${value}`
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 				      return b;
-				   }, 
+				    },
 				  sortable: true
 				},
 				{
@@ -123,7 +123,7 @@ var rwmatrOrderList = new Grid({
 					  let a = `\${value}`
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 				      return b;
-				   }, 
+				    },
 				  sortable: true
 				},
 				{
@@ -133,7 +133,7 @@ var rwmatrOrderList = new Grid({
 					  let a = `\${value}`
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 				      return b;
-				   },
+				    },
 				  sortable: true
 				},
 				{
@@ -226,9 +226,6 @@ function callVendModal(){
 	function getRwmatrData(rwmatrData) {
 		console.log("Rwmatr정보 기입")
 		if(ig == 'g'){
-			console.log(rwmatrData.rwmatrId);
-			console.log(rwmatrData.nm);
-			console.log(rwmatrData.vendName);
 			rwmatrOrderList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
 			rwmatrOrderList.setValue(rk, "nm", rwmatrData.nm, true)
 			rwmatrOrderList.setValue(rk, "vendName", rwmatrData.vendName, true)
