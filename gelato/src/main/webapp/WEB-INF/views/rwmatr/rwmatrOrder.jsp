@@ -140,7 +140,6 @@ var rwmatrOrderList = new Grid({
 		]
 });
 
-
 //자재모달
 function callRwmatrModal(){
 	dialog = $( "#dialogFrm" ).dialog({
