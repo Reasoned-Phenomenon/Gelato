@@ -17,7 +17,7 @@
 <h3>원자재 발주관리</h3>
 <div style="margin: 20px;">
 	<form action="">
-		자재명 : <input type="text" id="rwmName"><br>
+		자재명 : <input type="text" id="rwmName">업체명 : <input type="text" id="vendName"><br>
 		기간 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
 		<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
@@ -54,6 +54,7 @@ let rk = '';
 var startDate;
 var endDate;
 var rwmName;
+var vendName;
 
 //그리드 테마
 Grid.applyTheme('striped', {
@@ -139,7 +140,6 @@ var rwmatrOrderList = new Grid({
 		]
 });
 
-
 //자재모달
 function callRwmatrModal(){
 	dialog = $( "#dialogFrm" ).dialog({
@@ -156,7 +156,7 @@ function callRwmatrModal(){
     $("#dialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
 }
 
-//거래처모달
+//업체명 모달
 function callVendModal(){
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
@@ -169,7 +169,7 @@ function callVendModal(){
     console.log("11111")
     dialog.dialog( "open" );
     console.log("111112222")
-    $("#dialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("거래처 목록")})
+    $("#dialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("업체명 목록")})
 }
 	
 	
@@ -186,7 +186,7 @@ function callVendModal(){
 		} 
 	});
 
-	//자재리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌
+	//자재리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
 	function getRwmatrData(rwmatrData) {
 		console.log("Rwmatr정보 기입")
 		if(ig == 'g'){
@@ -205,8 +205,21 @@ function callVendModal(){
 		  ig = 'i';
 		  callRwmatrModal();
 	});
-
-	//
+	
+	//업체리스트 모달에서 받아온 텍스트박스에 넣어줌
+	function getVendData(vendData) {
+		document.getElementById("vendName").value = vendData.vendName;
+		
+		dialog.dialog( "close" );
+	}
+	
+	//업체명 textbox
+	document.getElementById("vendName").addEventListener("click", function() {
+		callVendModal();
+	});
+	
+	
+	//컨트롤러 응답
 	rwmatrOrderList.on('response', function (ev) {
 		console.log(ev)
 		if(flag == 'O') {
@@ -221,10 +234,14 @@ function callVendModal(){
 		startDate = document.getElementById("startDate").value;
 		endDate = document.getElementById("endDate").value;
 		rwmName = document.getElementById("rwmName").value;
+		vendName = document.getElementById("vendName").value;
 		console.log(startDate);
 		console.log(endDate);
 		
-		rwmatrOrderList.readData(1,{'startDate':startDate, 'endDate':endDate, 'rwmName':rwmName}, true);
+		rwmatrOrderList.readData(1,{'startDate':startDate,
+									'endDate':endDate, 
+									'rwmName':rwmName,
+									'vendName': vendName}, true);
 	});
 	
 	//추가

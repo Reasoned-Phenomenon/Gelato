@@ -15,8 +15,8 @@ public class RwmatrServiceImpl implements RwmatrService {
 	@Autowired RwmatrMapper rwmatrMapper;
 	
 	@Override
-	public List<RwmatrVO> rwmatrList() {
-		return rwmatrMapper.rwmatrList();
+	public List<RwmatrVO> rwmatrList(RwmatrVO vo) {
+		return rwmatrMapper.rwmatrList(vo);
 	}
 
 }

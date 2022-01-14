@@ -9,7 +9,7 @@ public interface RwmatroService {
 
 	List<RwmatroVO> rwmatrOrderList(RwmatroVO vo);
 	
-	List<RwmatroVO> selectVendList();
+	List<RwmatroVO> selectVendList(RwmatroVO vo);
 	
 	public int modifyRwmatro(ModifyVO<RwmatroVO> mvo);
 	

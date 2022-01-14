@@ -28,14 +28,22 @@
 			<if test="rwmName != ''">
 				AND R.NM LIKE '%'||#{rwmName}||'%'
 			</if>
+			<if test="vendName != ''">
+				AND V.VEND_NAME LIKE '%'||#{vendName}||'%'
+			</if>
 		</where>
 		ORDER BY 1 DESC
 	</select>
 	
 	<select id="selectVendList" resultType="RwmatroVO">
-		SELECT VEND_ID, VEND_NAME, REMK
-			FROM VEND
+		SELECT VEND_ID, 
+			   VEND_NAME, 
+			   REMK
+		FROM VEND
 		WHERE FG = 'VEND01'
+		<if test="vendName != ''">
+			AND VEND_NAME LIKE '%'||#{vendName}||'%'
+		</if>
 	</select>
 	
 	<insert id="insertRwmatro" parameterType="RwmatroVO">

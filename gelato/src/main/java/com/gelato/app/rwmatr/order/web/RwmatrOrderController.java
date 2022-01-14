@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gelato.app.rwmatr.dao.RwmatrVO;
 import com.gelato.app.rwmatr.order.dao.RwmatroVO;
 import com.gelato.app.rwmatr.order.service.RwmatroService;
 import com.gelato.app.rwmatr.service.RwmatrService;
@@ -42,10 +43,10 @@ public class RwmatrOrderController {
 	
 	//원자재리스트 출력
 	@RequestMapping("/rwmatr/searchRwmatrList.do")
-	public String searchRwmatrList(Model model) {
+	public String searchRwmatrList(RwmatrVO vo, Model model) {
 		System.out.println("원자재리스트");
-		model.addAttribute("datas", rwmatrService.rwmatrList());
-		System.out.println(rwmatrService.rwmatrList());
+		model.addAttribute("datas", rwmatrService.rwmatrList(vo));
+		System.out.println(rwmatrService.rwmatrList(vo));
 		return "grid"; 
 	}
 	
@@ -58,10 +59,10 @@ public class RwmatrOrderController {
 	
 	//거래처리스트 출력
 	@RequestMapping("/rwmatr/searchVendList.do")
-	public String searchVendDialog(Model model) {
+	public String searchVendDialog(RwmatroVO vo, Model model) {
 		System.out.println("거래처리스트");
-		model.addAttribute("datas", rwmatroService.selectVendList());
-		System.out.println(rwmatroService.selectVendList());
+		model.addAttribute("datas", rwmatroService.selectVendList(vo));
+		System.out.println(rwmatroService.selectVendList(vo));
 		return "grid"; 
 	}
 	

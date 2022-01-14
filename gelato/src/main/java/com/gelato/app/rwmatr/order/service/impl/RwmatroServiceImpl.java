@@ -21,8 +21,8 @@ public class RwmatroServiceImpl implements RwmatroService {
 	}
 	
 	@Override
-	public List<RwmatroVO> selectVendList() {
-		return rwmatroMapper.selectVendList();
+	public List<RwmatroVO> selectVendList(RwmatroVO vo) {
+		return rwmatroMapper.selectVendList(vo);
 	}
 
 	@Override

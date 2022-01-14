@@ -17,7 +17,7 @@
 <h3>원자재 입고검사관리</h3>
 <div style="margin: 20px;">
 	<form action="">
-		자재명 : <input type="text" id="rwmName"><br>
+		자재명 : <input type="text" id="rwmName">담당자 : <input type="text" id="mngr"><br>
 		기간 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
 		<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
@@ -31,8 +31,7 @@
 <hr>
 <br>
 
-
-	<!-- 발주목록 조회 -->
+	<!-- 입고검사내역 조회 -->
 	<div id="rwmatrIstInspList" style="width: 80%"></div>
 
 	<!-- 모달창 -->
@@ -51,6 +50,8 @@ let rk = '';
 //검색 조건
 var startDate;
 var endDate;
+var rwmName;
+var mngr;
 
 
 
@@ -115,7 +116,6 @@ var rwmatrIstInspList = new Grid({
 				{
 				  header: '불량량',
 				  name: 'inferQy',
-				  editor: 'text',
 				  sortable: true
 				},
 				{
@@ -235,10 +235,14 @@ function callRwmatrModal(){
 		startDate = document.getElementById("startDate").value;
 		endDate = document.getElementById("endDate").value;
 		rwmName = document.getElementById("rwmName").value;
+		mngr = document.getElementById("mngr").value;
 		console.log(startDate);
 		console.log(endDate);
 		
-		rwmatrIstInspList.readData(1,{'startDate':startDate, 'endDate':endDate, 'rwmName':rwmName}, true);
+		rwmatrIstInspList.readData(1,{'startDate':startDate, 
+									  'endDate':endDate, 
+									  'rwmName':rwmName,
+									  'mngr':mngr}, true);
 	});
 	
 	//추가

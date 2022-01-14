@@ -27,6 +27,9 @@
 			<if test="rwmName != ''">
 				AND R.NM LIKE '%'||#{rwmName}||'%'
 			</if>
+			<if test="mngr != ''">
+				AND RII.MNGR LIKE '%'||#{mngr}||'%'
+			</if>
 		</where>
         ORDER BY 1 DESC
 	</select>
