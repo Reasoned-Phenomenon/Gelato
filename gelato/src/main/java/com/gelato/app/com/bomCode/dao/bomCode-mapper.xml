@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gelato.app.com.bomCode.dao.bomCode-mapper">
+<mapper namespace="com.gelato.app.com.bomCode.dao.BomCodeMapper">
 
 	<!-- BOM 전체 조회.-->
 	
-	<select id=""></select>
+	<select id="findBomList" resultType="BomCodeVO">
+		SELECT BOM_ID,
+			   PRDT_ID,
+			   RWMATR_ID,
+			   QY,
+			   PRCS_ID,
+			   FG,
+			   REMK,
+			   USE_YN
+		FROM BOM	   
+	</select>
+
+
+
+
+
+
+
+
+
+
 
 </mapper>
