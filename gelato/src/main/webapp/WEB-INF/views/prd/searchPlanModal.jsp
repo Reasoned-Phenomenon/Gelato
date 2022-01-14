@@ -57,6 +57,9 @@ $("#selectDate").on(
 		    },
 		    evenRow: {
 		      background: '#fee'
+		    },
+			selectedHeader : {
+		    	background : '#FFFFFF'
 		    }
 		  }
 		});

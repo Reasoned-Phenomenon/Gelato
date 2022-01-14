@@ -30,6 +30,9 @@ Grid.applyTheme('striped', {
 	    },
 	    evenRow: {
 	      background: '#fee'
+	    },
+	    selectedHeader : {
+	    	background : '#FFFFFF'
 	    }
 	  }
 	});
