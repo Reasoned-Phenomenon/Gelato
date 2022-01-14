@@ -22,6 +22,7 @@ public class RwmatroVO {
 	String startDate;
 	String endDate;
 	String rwmName;
+	String totalPrice;
 	
 	//join 
 	String rwmatrId;

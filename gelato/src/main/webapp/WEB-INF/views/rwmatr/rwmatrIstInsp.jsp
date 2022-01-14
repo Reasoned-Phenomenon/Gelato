@@ -182,7 +182,7 @@ function callRwmatrModal(){
     		callModal();
 		}
 		
-		//불량량 자동계산... 구현중..
+		//불량량 자동계산
 		rwmatrIstInspList.on('editingFinish', (ev) => {
 			console.log("11111111")
 			console.log(ev);
