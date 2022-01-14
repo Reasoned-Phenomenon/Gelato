@@ -44,19 +44,23 @@ var vendListGrid = new Grid({
   	columns:[
   		  {
 		    header: '업체 코드',
-		    name: 'vendId'
+		    name: 'vendId',
+		    align: 'center'
 		  },
 		  {
 		    header: '업체 명',
-		    name: 'vendName'
+		    name: 'vendName',
+		    align: 'center'
 		  },
 		  {
 		    header: '사업자 등록번호',
-		    name: 'bizno'
+		    name: 'bizno',
+		    align: 'center'
 		  },
 		  {
 			header: '전화 번호',
-			name:'telno'
+			name:'telno',
+			align: 'center'
 		  }
 		]
 });

@@ -6,22 +6,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BOM 관리 페이지</title>
+<title>BOM 코드 관리 페이지</title>
 </head>
 <body>
 		<div>
 			<br>
-			<h3>BOM 관리</h3>
+			<h3>BOM 코드 관리</h3>
 		</div>
 		
-		
 		<form id="" name="" method="">
-			
+
 			<div>
 			<br>
 				<label>제품코드</label>
 	      			<input type="text" id="" name="">
-	      			<button type="button" id="">검색</button>&ensp;&ensp;&ensp;
+	      			<button type="button" id="serach">검색</button>&ensp;&ensp;&ensp;
 	      					
 	      		<label>제품명</label>
 	      			<input type="text" id="" name=""> &ensp;
@@ -37,6 +36,7 @@
 			    <br>
 	      	 </div>
 				<div>
+					<button type="button" class="btn cur-p btn-outline-primary" id="btnAdd">추가</button>
 					<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 					<button type="button" class="btn cur-p btn-outline-primary" id="btnSave">저장</button>
 				
@@ -44,8 +44,8 @@
 		</form>
 		
 
-<div id="BomGrid" style="width: 100%"></div>
-<div id="BomModal" style="width: 100%"></div>
+<div id="bomGrid" style="width: 100%"></div>
+<div id="bomModal" style="width: 100%"></div>
 		
 <script>
 var Grid = tui.Grid;
@@ -63,11 +63,12 @@ Grid.applyTheme('striped', {
 });
 
 //그리드 생성.
-const BomGrid = new Grid({
-	el: document.getElementById('BomGrid'),
+const bomGrid = new Grid({
+	el: document.getElementById('bomGrid'),
 	data : {
 	  api: {
 	    readData: 	{ url: '${path}/com/findBomList.do', method: 'GET'},
+	    modifyData : { url: '${path}/com/bomCodeModifyData.do', method: 'PUT'} 
 	  },
 	  contentType: 'application/json'
 	},
@@ -76,48 +77,74 @@ const BomGrid = new Grid({
 	columns:[
 			{
 			  header: 'BOM코드',
-			  name: 'bomId'
+			  name: 'bomId',
+			  editor:'text',
+			  align: 'center'
 		      
 			},
 			{
 			  header: '제품코드',
-			  name: 'prdtId'
+			  name: 'prdtId',
+			  editor:'text',
+			  align: 'center'
 	          
 			},
 			{
 			  header: '자재코드',
-			  name: 'rwmatrId'
+			  name: 'rwmatrId',
+			  editor:'text',
+			  align: 'center'
 		      
 			},
 			{
 			  header: '소모량',
-			  name: 'qy'
+			  name: 'qy',
+			  editor:'text',
+			  align: 'center'
 			  
 			},
 			{
 			  header: '공정코드',
-			  name: 'prcsId'
+			  name: 'prcsId',
+			  editor:'text',
+			  align: 'center'
 		     
 			},
 			
 			{
 			  header: '단계구분',
-			  name: 'fg'
+			  name: 'fg',
+			  editor:'text',
+			  align: 'center'
 			  
 			},
 			{
         	  header: '비고',
-		      name: 'remk'
+		      name: 'remk',
+		      editor:'text',
+		      align: 'center'
 		      
 			},
 			{
               header: '사용여부',
-			  name: 'useYn'
+			  name: 'useYn',
+			  editor:'text',
+			  align: 'center'
 			  
 			}
 		]
 });
-
+	
+	// 추가 버튼 이벤트.
+	btnAdd.addEventListener("click", function(){
+		bomGrid.prependRow();
+	});
+	
+	// 저장 버튼 이벤트.
+	
+	
+	// 검색 버튼 이벤트.
+	
 
 </script>		
 		

@@ -25,16 +25,16 @@
 	      					
 	      				  		<br>
 	      				  	    <label>진행 구분</label>
-	      				  		<label for="radio-3">
-	      				  			<input type="radio" name="" id="" value="1">
+	      				  		<label for="radio-1">
+	      				  			<input type="radio" name="stFgRadio" id="stFg" value="진행">
 	      				  			<span>진행</span>
 	      				  		</label>
-	      				  		<label for="radio-4">
-	      				  			<input type="radio" name="" id="" value="2">
+	      				  		<label for="radio-2">
+	      				  			<input type="radio" name="stFgRadio" id="stFgR" value="완료">
 	      				  			<span>완료</span>
 	      				  		</label>
-	      				  		<label for="radio-5">
-	      				  			<input type="radio" name="" id="" value="3">
+	      				  		<label for="radio-3">
+	      				  			<input type="radio" name="stFgRadio" id="stFgRi" value="전체" checked> 
 	      				  			<span>전체</span>
 	      				  		</label>
 	      				  	
@@ -107,43 +107,51 @@ const ordGrid = new Grid({
 	columns:[
 			{
 			  header: '주문코드',
-			  name: 'orderId'
+			  name: 'orderId',
+			  align: 'center'
 		      
 			},
 			{
 			  header: '업체명',
-			  name: 'vendName'
+			  name: 'vendName',
+			  align: 'center'
 	          
 			},
 			{
 			  header: '주문일자',
-			  name: 'orderDt'
+			  name: 'orderDt',
+			  align: 'center'
 		      
 			},
 			{
 			  header: '납기일자',
-			  name: 'oustDt'
+			  name: 'oustDt',
+			  align: 'center'
 			  
 			},
 			{
 			  header: '진행상황구분',
-			  name: 'stFg'
+			  name: 'stFg',
+			  align: 'center'
 		     
 			},
 			
 			{
 			  header: '제품코드',
-			  name: 'prdtId'
+			  name: 'prdtId',
+			  align: 'center'
 			  
 			},
 			{
         	  header: '수량',
-		      name: 'qy'
+		      name: 'qy',
+		      align: 'center'
 		      
 			},
 			{
               header: '비고',
-			  name: 'remk'
+			  name: 'remk',
+			  align: 'center'
 			  
 			}
 		]
@@ -151,7 +159,7 @@ const ordGrid = new Grid({
 	
 
 	
-	// 조회 버튼. // 해당날짜 조회 // 거래처 조회 // 제품코드 조회// =>  mapper-xml에서 if로 조건으로 나눔.
+	// 조회 버튼. // 해당날짜 조회 // 거래처 조회 // 제품코드 조회// 진행구분 라디오로 조회 =>  mapper-xml에서 if로 조건으로 나눔.
  	$("#btnFind").on(
  			"click", function choicDate() {
  			var orderDt = document.getElementById("orderDt").value;
@@ -159,13 +167,15 @@ const ordGrid = new Grid({
  			
  			var vendId = document.getElementById("vendId").value;
  			var prdtId = document.getElementById("prdtId").value;
+ 			var stFg = $('input[name="stFgRadio"]:checked').val();
  			
  			console.log(orderDt);
  			console.log(oustDt);
  			console.log(vendId);
  			console.log(prdtId);
+ 			console.log(stFg);
  			
- 			ordGrid.readData(1, {'orderDt':orderDt, 'oustDt':oustDt, 'vendId':vendId, 'prdtId':prdtId }, true);
+ 			ordGrid.readData(1, {'orderDt':orderDt, 'oustDt':oustDt, 'vendId':vendId, 'prdtId':prdtId, 'stFg':stFg }, true);
  			
  		});
 	

@@ -4,13 +4,13 @@
 
 <!--주문서 전체 조회. -->
 <select id="findOrderList" resultType="OrderVO">
-	select 
+	SELECT 
 	 	 a.order_id, a.vend_id, a.order_dt, a.oust_dt, a.st_fg, a.remk,
 		 b.order_sht_deta_id, b.prdt_id, b.qy, c.vend_name
-     from order_sht a join order_sht_deta b
-     on a.order_id = b.order_id
-     join vend c
-     on a.vend_id = c.vend_id	
+     FROM order_sht a JOIN order_sht_deta b
+     ON a.order_id = b.order_id
+     JOIN vend c
+     ON a.vend_id = c.vend_id	
      <where>
      	<if test="orderDt != null and oustDt != null">
      		<![CDATA[a.order_dt between (#{orderDt}) and (#{oustDt})]]> 
@@ -21,20 +21,24 @@
      	<if test="prdtId !=null and prdtId != ''">
      		and b.prdt_id = #{prdtId}
      	</if>
+     	<if test="stFg !='전체'">
+     		 and a.st_fg = #{stFg}
+     	</if>
+     	
      </where>
     	
 </select>
 
 <!-- 주문서에서 거래처 검색 modal -->
 <select id="vendList" resultType="OrderVO">
-	select  vend_id, vend_name, bizno, telno
- 	from vend
+	SELECT  vend_id, vend_name, bizno, telno
+ 	FROM vend
 </select>
 
 <!-- 주문서에서 제품코드 검색 modal -->
 <select id="prdtList" resultType="OrderVO">
-	 select prdt_id, prdt_nm, spec
-	 from prdt
+	 SELECT prdt_id, prdt_nm, spec
+	 FROM prdt
 </select>
 
 </mapper>
