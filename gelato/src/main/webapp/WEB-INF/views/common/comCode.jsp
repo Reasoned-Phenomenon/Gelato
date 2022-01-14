@@ -29,7 +29,7 @@
 </table>
 
 <br>
-
+ 
 <div align="right">
 	
 	<button type="button" class="btn cur-p btn-outline-primary" id="btnModal">모달창 테스트</button>
