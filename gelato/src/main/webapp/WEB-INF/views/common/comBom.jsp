@@ -67,7 +67,7 @@ const BomGrid = new Grid({
 	el: document.getElementById('BomGrid'),
 	data : {
 	  api: {
-	    readData: 	{ url: '${path}/com/comBom.do', method: 'GET'},
+	    readData: 	{ url: '${path}/com/findBomList.do', method: 'GET'},
 	  },
 	  contentType: 'application/json'
 	},
