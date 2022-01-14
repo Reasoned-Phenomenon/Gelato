@@ -56,7 +56,7 @@ public class EqmController {
 		model.addAttribute(service.eqmSelect(eqmVo));
 		return "tiles/eqm/eqmManagement";
 	}
-	
+
 	// 설비수정
 	@GetMapping("/eqm/eqmUpdate.do")
 	public String eqmUpdate(EqmVO eqmVo) {
@@ -65,18 +65,20 @@ public class EqmController {
 		return "tiles/eqm/eqmManagement";
 	}
 
-	/*// 설비삭제
-	@GetMapping("/eqm/eqmDelete.do")
-	public String eqmDelete(EqmVO eqmVo) {
-		service.eqmDelete(eqmVo);
-		return ""; ///////////// 이거 고쳐라
-	}*/
-	
-	//설비비가동관리 페이지
+	// 설비비가동관리 페이지
 	@GetMapping("/eqm/eqmNonMoving.do")
 	public String eqmNonMoving(Model model, EqmVO eqmVo) {
 		model.addAttribute("datas", eqmVo.getEqmId());
 		System.out.println(eqmVo.getEqmId());
 		return "tiles/eqm/eqmNonMoving";
 	}
+
+	/*
+	 * //설비비가동관리 페이지
+	 * 
+	 * @GetMapping("/eqm/eqmNonMoving.do") public String eqmNonM(Model model, EqmVO
+	 * eqmVo) { model.addAttribute("datas", eqmVo.getEqmId());
+	 * System.out.println(eqmVo.getEqmId()); return "grid"; }
+	 */
 }
+
