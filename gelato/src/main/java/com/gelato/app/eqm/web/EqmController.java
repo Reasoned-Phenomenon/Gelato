@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gelato.app.eqm.dao.EqmNonVO;
 import com.gelato.app.eqm.dao.EqmVO;
 import com.gelato.app.eqm.service.EqmService;
 
@@ -41,7 +42,7 @@ public class EqmController {
 		return "tiles/eqm/eqmManagement";
 	}
 
-	// 설비관리(조회)
+	// 설비관리(조회 그리드)
 	@GetMapping("/eqm/eqmList.do")
 	public String findEqm(Model model, EqmVO eqmVo) {
 		System.out.println(service.eqmList(eqmVo));
@@ -61,7 +62,6 @@ public class EqmController {
 	@GetMapping("/eqm/eqmUpdate.do")
 	public String eqmUpdate(EqmVO eqmVo) {
 		int r = service.eqmUpdate(eqmVo);
-		System.out.println(r + "건====================");
 		return "tiles/eqm/eqmManagement";
 	}
 
@@ -72,13 +72,20 @@ public class EqmController {
 		System.out.println(eqmVo.getEqmId());
 		return "tiles/eqm/eqmNonMoving";
 	}
-
-	/*
-	 * //설비비가동관리 페이지
-	 * 
-	 * @GetMapping("/eqm/eqmNonMoving.do") public String eqmNonM(Model model, EqmVO
-	 * eqmVo) { model.addAttribute("datas", eqmVo.getEqmId());
-	 * System.out.println(eqmVo.getEqmId()); return "grid"; }
-	 */
+	
+	// 설비비가동관리(설비전체조회 그리드)
+	@GetMapping("/eqm/eqmNonMovingList.do")
+	public String findEqmNon(Model model, EqmVO eqmVo) {
+		model.addAttribute("datas", service.eqmNonList(eqmVo));
+		return "grid";
+	}
+	
+	//설비비가동관리(내역조회)
+	@GetMapping("eqm/eqmNonSelect.do")
+	public String eqmNonSelect(Model model, EqmNonVO eqmNonVo) {
+		model.addAttribute("datas",service.eqmNonSelect(eqmNonVo));
+		return "grid";
+	}
+	
 }
 

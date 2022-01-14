@@ -11,5 +11,7 @@ public class EqmNonVO {
 	String nonOprToTm;	//비가동종료시간
 	String resnId;		//비가동사유코드
 	
+	String eqmName;		//설비명
+	String resnName;	//비가동사유명
 	String gubun;		//구분
 }

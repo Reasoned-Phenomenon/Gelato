@@ -149,7 +149,7 @@
                         </li>
                         
                         <li>
-                           <a href="#">> <span>설비 점검 관리</span></a>
+                           <a href="${path }/eqm/eqmInspection.do">> <span>설비 점검 관리</span></a>
                         </li>
                         
                         <li>

@@ -50,8 +50,13 @@ public class EqmServiceImpl implements EqmService{
 
 	//설비비가동 조회
 	@Override
-	public List<EqmNonVO> eqmNon(EqmNonVO eqmNonVo) {
-		return eqmMapper.eqmNon(eqmNonVo);
+	public List<EqmVO> eqmNonList(EqmVO eqmVo) {
+		return eqmMapper.eqmNonList(eqmVo);
+	}
+
+	@Override
+	public List<EqmNonVO> eqmNonSelect(EqmNonVO eqmNonVo) {
+		return eqmMapper.eqmNonSelect(eqmNonVo);
 	}
 	
 }
