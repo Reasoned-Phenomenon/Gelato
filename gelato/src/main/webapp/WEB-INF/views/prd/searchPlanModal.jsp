@@ -107,8 +107,9 @@ searchPlanGrid.on("dblclick", (ev) => {
 	});
 	
 	var spg = searchPlanGrid.getRow(ev.rowKey).planId;
-	console.log(spg);
-	choosePI(spg);
+	var spn = searchPlanGrid.getRow(ev.rowKey).name;
+	console.log(spg + ',' + spn);
+	choosePI(spg , spn);
 	
 });
 
