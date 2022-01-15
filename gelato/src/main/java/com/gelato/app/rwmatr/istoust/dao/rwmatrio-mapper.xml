@@ -29,5 +29,17 @@
 			</if>
         ORDER BY IST_OUST_DTTM
 	</select>
-
+ 	
+ 	<select id="RwmatrPassList" resultType="RwmatrioVO">
+ 		SELECT R.RWMATR_ID AS RWMATR_ID,
+		       R.NM AS NM,
+		       V.VEND_NAME AS VEND_NAME,
+		       RII.PASS_QY AS PASS_QY,
+               RII.DT AS DT
+		FROM RWMATR_IST_INSP RII JOIN RWMATR R
+		    ON RII.RWMATR_ID = R.RWMATR_ID 
+		JOIN VEND V
+		    ON R.VEND_ID = V.VEND_ID
+		WHERE RII.FG IS NULL
+ 	</select>
 </mapper>

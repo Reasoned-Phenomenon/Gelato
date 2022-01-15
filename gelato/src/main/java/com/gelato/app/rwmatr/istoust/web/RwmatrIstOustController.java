@@ -32,6 +32,27 @@ public class RwmatrIstOustController {
 		return "grid";
 	}
 	
+	//원자재 검수완료 내역 모달
+	@RequestMapping("/rwmatr/rwmatrPassModal.do")
+	public String rwmatrPassModal() {
+		return "rwmatr/rwmatrPassModal";
+	}
+	
+	//원자재 검수완료 내역 리스트
+	@RequestMapping("/rwmatr/rwmatrPassList.do")
+	public String rwmatrPassList(RwmatrioVO vo, Model model) {
+		System.out.println("자재검수완료 리스트 조회");
+		model.addAttribute("datas", rwmatrioService.rwmatrPassList(vo));
+		System.out.println(rwmatrioService.rwmatrPassList(vo));
+		return "grid";
+	}
+	
+	//원자재 LOT번호 모달
+	@RequestMapping("/rwmatr/rwmatrLotNoModal.do")
+	public String rwmatrLotNoModal() {
+		return "rwmatr/rwmatrLotNoModal";
+	}
+	
 	@PutMapping("/rwmatr/rwmatrIstModifyData.do")
 	@ResponseBody
 	public boolean modifyData (@RequestBody ModifyVO<RwmatrioVO> mvo) {

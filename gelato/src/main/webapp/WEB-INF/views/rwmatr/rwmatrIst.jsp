@@ -56,6 +56,11 @@ var endDate;
 var rwmName;
 var vendName;
 
+//LOT번호 부여할 자재코드,자재명,입고량
+let rwmId;
+let rwmNm;
+let rwmQy;
+
 //그리드 테마
 Grid.applyTheme('striped', {
 	  cell: {
@@ -100,12 +105,12 @@ var rwmatrIstList = new Grid({
 				{
 				  header: '입고량',
 				  name: 'istQy',
-				  editor: 'text',
 				  sortable: true
 				},
 				{
 				  header: '입고일',
 				  name: 'istOustDttm',
+				  editor: 'datePicker',
 				  sortable: true
 				},
 				{
@@ -116,6 +121,7 @@ var rwmatrIstList = new Grid({
 				{
 				  header: '유통기한',
 				  name: 'expdate',
+			      editor: 'datePicker',
 				  sortable: true
 				}
 		]
@@ -131,9 +137,7 @@ function callRwmatrModal(){
 	      modal: true
 	}); 
 	
-    console.log("11111")
     dialog.dialog( "open" );
-    console.log("111112222")
     $("#dialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
 }
 
@@ -147,48 +151,52 @@ function callVendModal(){
 	      modal: true
 	}); 
 
-    console.log("11111")
     dialog.dialog( "open" );
-    console.log("111112222")
     $("#dialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("업체명 목록")})
 }
+
+//검수완료리스트 모달
+function callrwmatrPassModal(){
+	dialog = $( "#dialogFrm" ).dialog({
+		  modal:true,
+		  autoOpen:false,
+	      height: 400,
+	      width: 600,
+	      modal: true
+	}); 
+
+    dialog.dialog( "open" );
+    $("#dialogFrm").load("${path}/rwmatr/rwmatrPassModal.do", function(){console.log("검수완료 리스트")})
+}
 	
-	//자재명 클릭시 모달
+	//자재명 클릭시 검수완료리스트 모달
 	rwmatrIstList.on('click', (ev) => {
 		rk = ev.rowKey;
 		console.log(ev)
 		console.log(ev.columnName)
 		console.log(ev.rowKey)
-	    if (ev.columnName === 'nm') {
-			console.log("자재리스트")
+	    if (ev.columnName === 'rwmatrId') {
+			console.log("검수완료리스트")
 			ig = 'g';
-    		callRwmatrModal();
-		} 
-		//총액 자동계산
-		rwmatrIstList.on('editingFinish', (ev) => {
-			console.log("11111111")
-			console.log(ev);
-			console.log("11111111")
-			rk = ev.rowKey;
-			let untprc = parseInt(rwmatrIstList.getValue(rk, "untprc"));
-			let qy = parseInt(rwmatrIstList.getValue(rk, "qy"));
-			let totalPrice = untprc * qy;
-			if(rwmatrIstList.getValue(rk, "untprc") != '' && rwmatrIstList.getValue(rk, "qy") != '') {
-				rwmatrIstList.setValue(rk, 
-										"totalPrice", 
-										totalPrice, 
-										true);
-			} 
-		});
+			callrwmatrPassModal();
+		} else if(ev.columnName === 'lotNo'){
+			if(rwmatrIstList.getValue(rk, "istQy") != ''){
+				callLotNoModal();
+			}
+		}
 	});
 
-	//자재리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
-	function getRwmatrData(rwmatrData) {
-		console.log("Rwmatr정보 기입")
+	//검수합격리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
+	function getRwmatrPassData(rwmatrData) {
+		console.log("입고정보 기입")
 		if(ig == 'g'){
+			rwmId = rwmatrData.rwmatrId;
+			rwmNm = rwmatrData.nm;
+			rwmQy = rwmatrData.passQy;
 			rwmatrIstList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
 			rwmatrIstList.setValue(rk, "nm", rwmatrData.nm, true)
 			rwmatrIstList.setValue(rk, "vendName", rwmatrData.vendName, true)
+			rwmatrIstList.setValue(rk, "istQy", rwmatrData.passQy, true)
 		} else if(ig == 'i'){
 			document.getElementById("rwmName").value = rwmatrData.nm;
 		}
