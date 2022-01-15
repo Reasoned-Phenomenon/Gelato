@@ -12,19 +12,21 @@
 	<div class="container">
 		<div class="flex row">
 			<div class="col-4">
-				<h2>비가동 등록</h2>
-				${datas} <br> <label>설비구분</label> <select id="gubun">
+			<br>
+				<h2>설비목록</h2>
+				${datas} <br> <label>설비구분</label> <select id="gubun" onchange="selectGubun()">
 					<option value="전체">전체
 					<option value="배합">배합
 					<option value="운송">운송
 					<option value="측정">측정
 					<option value="가공">가공
 				</select>
-				<button id="btnFind">조회</button>
 				<div id="eqmListGrid" style="width: 100%;"></div>
 			</div>
-			<div class="col-8">
+			<div class="col-8" id="eqmNonInsert" style="display: none;">
+			<br>
 				<h2>비가동 등록</h2>
+				<br>
 				<form>
 					<table>
 						<tbody>
@@ -55,8 +57,8 @@
 							</tr>
 							<tr>
 								<th>판정</th>
-								<td><input type="checkBox" id=>적합<input
-									type="checkBox">부적합</td>
+								<td><input type="radio" id=>적합<input
+									type="radio">부적합</td>
 							</tr>
 							<tr>
 								<td><button>점검완료</button></td>
@@ -67,7 +69,7 @@
 			</div>
 			<div class="col-12">
 				<br>
-				<h2>내역 조회</h2>
+				<h2>비가동 내역 조회</h2>
 				<br> <label>공정코드</label> <select>
 					<option>공정코드1</option>
 					<option>공정코드2</option>
@@ -80,6 +82,21 @@
 		</div>
 	</div>
 	<script>
+	
+		//설비관리 페이지에서 넘어오는 값이 있을 때 등록 창 띄우기
+		if("${datas}"==""){
+			
+		}else{
+			$("#eqmNonInsert").css("display","block");
+		}
+		
+		//좌측 그리드에서 한 행 선택시 비가동 등록 창 띄우기
+		eqmListGrid.on("dblclick", (ev) => {
+			$("#eqmNonInsert").css("display","block");
+			
+			${"#"}
+		}
+		
 		var Grid = tui.Grid;
 
 		const eqmListGrid = new Grid({
@@ -93,7 +110,7 @@
 				},
 				contentType : 'application/json'
 			},
-			bodyHeight : 600,
+			bodyHeight : 300,
 			columns : [ {
 				header : '설비코드',
 				name : 'eqmId'
@@ -110,6 +127,14 @@
 				name : 'chckPerd',
 			} ]
 		});
+		
+		//드롭다운 선택시 바로 조회
+		function selectGubun(){
+			let gubun = $('#gubun option:selected').val();
+			eqmListGrid.readData(1, {
+				'gubun' : gubun
+			}, true);
+		}
 
 		const eqmNonListGrid = new Grid({
 			el : document.getElementById('eqmNonList'),
@@ -124,7 +149,7 @@
 			},
 			rowHeaders : [ 'rowNum' ],
 			selectionUnit : 'row',
-			bodyHeight : 600,
+			bodyHeight : 150,
 			columns : [ {
 				header : '설비코드',
 				name : 'eqmId'
@@ -142,6 +167,7 @@
 				name : 'nonOprToTm',
 			} ]
 		});
+		
 	</script>
 </body>
 </html>
