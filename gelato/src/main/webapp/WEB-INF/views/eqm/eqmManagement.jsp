@@ -165,9 +165,10 @@
 			
 			var yn = $("input[name=useYn]:checked").val();
 			var eqmId = $("#eqmId").val();
+			var eqmName = $("#eqmName").val();
 			var params = {
 			eqmId : eqmId,
-			eqmName : $("#eqmName").val(),
+			eqmName : eqmName,
 			prcsId : $("#prcsId").val(),
 			nm : $("#nm").val(),
 			tempMax : $("#tempMax").val(),
@@ -185,7 +186,7 @@
 					eqmListGrid.readData(1,{'gubun':gubun},true);
 					if(yn == 'N'){
 						if(confirm("비가동관리 페이지로 이동하시겠습니까?")){
-							location.href= "${path}/eqm/eqmNonMoving.do?eqmId="+eqmId;
+							location.href= "${path}/eqm/eqmNonMoving.do?eqmId="+eqmId+"&eqmName="+eqmName;
 							/* $.ajax({
 								url : "${path}/eqm/eqmNonMoving.do",
 								data : params,

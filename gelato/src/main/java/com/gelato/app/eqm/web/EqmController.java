@@ -80,8 +80,8 @@ public class EqmController {
 	// 설비비가동관리 페이지
 	@GetMapping("/eqm/eqmNonMoving.do")
 	public String eqmNonMoving(Model model, EqmVO eqmVo) {
-		model.addAttribute("datas", eqmVo.getEqmId());
-		System.out.println(eqmVo.getEqmId());
+		model.addAttribute("datas", eqmVo);
+		System.out.println(eqmVo);
 		return "tiles/eqm/eqmNonMoving";
 	}
 	

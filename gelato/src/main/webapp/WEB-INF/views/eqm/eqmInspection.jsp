@@ -52,8 +52,8 @@
 						</tr>
 						<tr>
 							<th>판정</th>
-							<td><input type="checkBox" id=>적합<input
-								type="checkBox">부적합</td>
+							<td><input type="radio" id="Y" value="Y">적합<input
+								type="radio" id="N" value="N">부적합</td>
 						</tr>
 						<tr>
 							<td><button>점검완료</button></td>
