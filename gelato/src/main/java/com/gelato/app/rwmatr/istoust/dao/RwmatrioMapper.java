@@ -11,4 +11,5 @@ public interface RwmatrioMapper {
 	List<RwmatrioVO> RwmatrPassList(RwmatrioVO vo);
 	
 	//출고 관리 전체조회
+	List<RwmatrioVO> RwmatrOustList(RwmatrioVO vo);
 }

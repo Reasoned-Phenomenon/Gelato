@@ -18,7 +18,7 @@
 <div style="margin: 20px;">
 	<form action="">
 		자재명 : <input type="text" id="rwmName">업체명 : <input type="text" id="vendName"><br>
-		발주신청일 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
+		입고일 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
 		<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
 	</form>
@@ -187,7 +187,7 @@ function callrwmatrPassModal(){
 	});
 
 	//검수합격리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
-	function getRwmatrPassData(rwmatrData) {
+	function getRwmatrData(rwmatrData) {
 		console.log("입고정보 기입")
 		if(ig == 'g'){
 			rwmId = rwmatrData.rwmatrId;

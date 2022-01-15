@@ -42,4 +42,32 @@
 		    ON R.VEND_ID = V.VEND_ID
 		WHERE RII.FG IS NULL
  	</select>
+ 	
+ 	<select id="RwmatrOustList" resultType="RwmatrioVO">
+ 		SELECT RIO.RWMATR_ID AS RWMATR_ID, 
+			   R.NM AS NM, 
+			   RIO.OUST_QY AS OUST_QY, 
+			   RIO.IST_OUST_DTTM AS IST_OUST_DTTM, 
+			   RIO.LOT_NO AS LOT_NO, 
+			   RIO.EXPDATE AS EXPDATE,
+               V.VEND_NAME AS VEND_NAME
+		FROM RWMATR_IST_OUST RIO JOIN RWMATR R
+			ON RIO.RWMATR_ID = R.RWMATR_ID
+        JOIN VEND V
+        	ON V.VEND_ID = R.VEND_ID
+        WHERE OUST_QY != 0
+        <if test="startDate != ''">
+	    		AND <![CDATA[TRUNC(RIO.IST_OUST_DTTM) >= to_date(#{startDate})]]>
+	    	</if>
+	    	<if test="endDate != ''">
+	    		AND <![CDATA[TRUNC(RIO.IST_OUST_DTTM) <= to_date(#{endDate})]]>
+	    	</if>
+			<if test="rwmName != ''">
+				AND R.NM LIKE '%'||#{rwmName}||'%'
+			</if>
+			<if test="vendName != ''">
+				AND V.VEND_NAME LIKE '%'||#{vendName}||'%'
+			</if>
+        ORDER BY IST_OUST_DTTM
+ 	</select>
 </mapper>
