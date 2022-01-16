@@ -17,14 +17,13 @@
 		<div class="flex row">
 			<div class="col-7">
 				<h2>설비관리</h2>
-				<label>구분</label> <select id="gubun">
+				<label>구분</label> <select id="gubun" onchange="selectGubun()">
 					<option value="전체">전체
 					<option value="배합">배합
 					<option value="운송">운송
 					<option value="측정">측정
 					<option value="가공">가공
 				</select>
-				<button id="btnFind">조회</button>
 				<div id="eqmListGrid"></div>
 			</div>
 			<div class="col-5">
@@ -98,7 +97,7 @@
 				contentType : 'application/json'
 			},rowHeaders:['rowNum'],
 			selectionUnit : 'row',
-			bodyHeight : 600,
+			bodyHeight : 500,
 			columns : [ {
 				header : '설비코드',
 				name : 'eqmId'
@@ -132,15 +131,14 @@
 				hidden:true
 			} ]
 		});
-
-		//조회버튼 실행
-		$('#btnFind').on("click", function() {
+		
+		//드롭다운 선택시 바로 조회
+		function selectGubun(){
 			let gubun = $('#gubun option:selected').val();
-
 			eqmListGrid.readData(1, {
 				'gubun' : gubun
 			}, true);
-		})
+		}
 	
 		//더블 클릭시 한 행 선택
 		eqmListGrid.on("dblclick", (ev) => {
@@ -167,9 +165,10 @@
 			
 			var yn = $("input[name=useYn]:checked").val();
 			var eqmId = $("#eqmId").val();
+			var eqmName = $("#eqmName").val();
 			var params = {
 			eqmId : eqmId,
-			eqmName : $("#eqmName").val(),
+			eqmName : eqmName,
 			prcsId : $("#prcsId").val(),
 			nm : $("#nm").val(),
 			tempMax : $("#tempMax").val(),
@@ -187,7 +186,7 @@
 					eqmListGrid.readData(1,{'gubun':gubun},true);
 					if(yn == 'N'){
 						if(confirm("비가동관리 페이지로 이동하시겠습니까?")){
-							location.href= "${path}/eqm/eqmNonMoving.do?eqmId="+eqmId;
+							location.href= "${path}/eqm/eqmNonMoving.do?eqmId="+eqmId+"&eqmName="+eqmName;
 							/* $.ajax({
 								url : "${path}/eqm/eqmNonMoving.do",
 								data : params,
@@ -206,21 +205,6 @@
 			})
 		})
 		
-		/* //삭제버튼 클릭
-		$('#btnDel').on("click",function(){
-			var eqmId = $("#eqmId").val();
-			var result = confirm(eqmId + "설비를 정말로 삭제하시겠습니까?")
-			if(! result)
-				return;
-			
-			$.ajax({
-				url : "${path}/eqm/eqmDelete.do",
-				data : {'eqmId': eqmId},
-				type : 'GET'
-			}).done(function(xhr){
-				eqmListGrid.readData(1,{'gubun':gubun},true);
-			})
-		}) */
 	</script>
 </body>
 </html>

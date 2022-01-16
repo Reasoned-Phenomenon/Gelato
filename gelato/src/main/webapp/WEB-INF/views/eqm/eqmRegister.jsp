@@ -29,8 +29,8 @@
 								</th>
 								<td><input id="eqmId" name="eqmId" required></td>
 								<th>사용여부</th>
-								<td><input type="checkBox" id="useYn" name="useYn">Y
-									<input type="checkBox" id="notUse">N</td>
+								<td><input type="radio" id="useYn" name="useYn" value="Y">Y
+									<input type="radio" id="notUse" name="useYn" value="N">N</td>
 								<th>설비구분</th>
 								<td><input id="fg" name="fg" required>
 									<button id="btnFindFg" type="button" class="btn cur-p btn-outline-dark" data-bs-toggle="modal" aria-label="Close">
@@ -123,10 +123,12 @@ $(function(){
 		dialog.dialog("open");
 		$("#dialog-form").load("${path}/eqm/searchFg.do", 	//load가 익숙치 않으면 ajax를 써도됨
 				function(){
-			codeGrid.readData(1, {codeId:"EQM002"}, true);
+			seolbiGrid.readData(1, {codeId:"EQM002"}, true);
 			console.log("로드됨")})
 	});
 })
-	</script>
+	
+
+</script>
 </body>
 </html>

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gelato.app.com.comCode.dao.ComCodeVO;
+import com.gelato.app.com.comCode.service.ComCodeService;
 import com.gelato.app.eqm.dao.EqmNonVO;
 import com.gelato.app.eqm.dao.EqmVO;
 import com.gelato.app.eqm.service.EqmService;
@@ -16,10 +18,10 @@ public class EqmController {
 
 	@Autowired
 	EqmService service;
-
+	@Autowired ComCodeService cservice;
 	// 등록 페이지
 	@GetMapping("/eqm/eqmRegister.do")
-	public String insertForm() {
+	public String insertForm() {  
 		return "tiles/eqm/eqmRegister";
 	}
 
@@ -34,6 +36,16 @@ public class EqmController {
 	@RequestMapping("/eqm/searchFg.do")
 	public String getModal() {
 		return "/eqm/searchFg";
+	}
+	
+	//설비등록 모달(설비구분)
+	@RequestMapping("/eqm/findSeolbi.do")
+	public String getSeolbi(Model model, EqmVO eqmVo) {
+		ComCodeVO vo = new ComCodeVO();
+		vo.setCodeId(eqmVo.getCodeId());
+		System.out.println(cservice.findComCode(vo));
+		model.addAttribute("datas",cservice.findComCode(vo));
+		return "grid";
 	}
 
 	// 설비관리 페이지
@@ -68,8 +80,8 @@ public class EqmController {
 	// 설비비가동관리 페이지
 	@GetMapping("/eqm/eqmNonMoving.do")
 	public String eqmNonMoving(Model model, EqmVO eqmVo) {
-		model.addAttribute("datas", eqmVo.getEqmId());
-		System.out.println(eqmVo.getEqmId());
+		model.addAttribute("datas", eqmVo);
+		System.out.println(eqmVo);
 		return "tiles/eqm/eqmNonMoving";
 	}
 	
