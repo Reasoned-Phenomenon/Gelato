@@ -107,6 +107,8 @@ public class PrdPlanMngController {
 		System.out.println(mvo);
 		prdPlanMngService.modifyPrdPlan(mvo);
 		System.out.println("modi 컨트롤러2222");
+		prdPlanMngService.modifyExcp(mvo);
+		System.out.println("홀딩값 추가");
 		return true;
 	}
 	

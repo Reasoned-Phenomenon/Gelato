@@ -47,6 +47,7 @@ public class PrdPlanMngServiceImpl implements PrdPlanMngService{
 			pvo = mvo.getUpdatedRows().get(0);
 			System.out.println(pvo);
 			ppmMapper.insertPrdPlan(pvo);
+			ppmMapper.updateOrderSht(pvo);
 			System.out.println("성공");
 		}
 		for(PrdPlanMngVO vo : mvo.getUpdatedRows()) {
@@ -95,6 +96,18 @@ public class PrdPlanMngServiceImpl implements PrdPlanMngService{
 		
 		return 0;
 		
+	}
+
+	@Override
+	public int modifyExcp(ModifyVO<PrdPlanMngVO> mvo) {
+		System.out.println("홀딩값 추가22222");
+		if(!mvo.getUpdatedRows().isEmpty()) {
+			ppmMapper.insertExcp(mvo.getUpdatedRows().get(0));
+		}
+		if(!mvo.getCreatedRows().isEmpty()) {
+			ppmMapper.insertExcp(mvo.getCreatedRows().get(0));
+		}
+		return 0;
 	}
 
 	

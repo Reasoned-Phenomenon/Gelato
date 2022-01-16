@@ -29,4 +29,7 @@ public interface PrdPlanMngService {
 	
 	//modify - 취소
 	public int modifyCanPrdPlan(ModifyVO<PrdPlanMngVO> mvo);
+	
+	//modify - 홀딩값
+	public int modifyExcp(ModifyVO<PrdPlanMngVO> mvo);
 }

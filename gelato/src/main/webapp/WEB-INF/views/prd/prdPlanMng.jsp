@@ -162,6 +162,10 @@ th, td {
 			}, {
 				header : '작업상태',
 				name : 'fg',
+			},{
+				header : '생산계획명',
+				name : 'name',
+				hidden : true
 			}]
 		});
 		
@@ -268,9 +272,17 @@ th, td {
 		} */
 	
 		// 주문코드 받아서 readData에 파라미터값으로 넘겨주기
-		function choosePI(spg){
+		function choosePI(spg, spn){
 			console.log(spg);
+			console.log(spn);
 			PlanDetaGrid.readData(1,{planId:spg}, true);
+			
+			for ( i =0 ; i <= PlanDetaGrid.getRowCount(); i++) {
+				console.log(i);
+				PlanDetaGrid.setValue(i,'name',spn);
+			} 
+			
+			console.log(111);
 			SearchPlanDialog.dialog("close");
 		}
 	
@@ -352,15 +364,37 @@ th, td {
 	//계획 등록
 	btnPlanIns.addEventListener("click", function() {
 		PlanDetaInsGrid.blur();
-		//입력값 없을 때, toast 띄우기.
-		var planName = document.getElementById('planName').value;
+		let planName = document.getElementById('planName').value;
 		console.log(planName);
-		for ( i =0 ; i <= PlanDetaInsGrid.getRowCount(); i++) {
-			PlanDetaInsGrid.setValue(i,'name',planName);
-		}
-		console.log(2222);
-		PlanDetaInsGrid.request('modifyData');
-		console.log(22223333);
+		
+		if(planName.trim() == ''){
+			 
+			//입력값 없을 때,제목 입력안했을 때 toast 띄우기.
+			toastr.clear()
+			toastr.options.positionClass = "toast-top-center";
+			toastr.options.progressBar = true;
+			toastr.success( ('생산 계획명을 입력해주세요.'),'Gelato',{timeOut:'1000'});
+			
+		 } else {
+			 
+			console.log(planName);
+			
+			for ( i =0 ; i <= PlanDetaInsGrid.getRowCount(); i++) {
+				PlanDetaInsGrid.setValue(i,'name',planName);
+			}
+			console.log(2222);
+			PlanDetaInsGrid.request('modifyData');
+			console.log(22223333);
+			
+			// 등록 후 토스트 띄우기
+			toastr.clear()
+			toastr.options.positionClass = "toast-top-center";
+			toastr.options.progressBar = true;
+			toastr.success( ('계획 <' + planName + '>이 등록되었습니다.'),'Gelato',{timeOut:'1000'} );
+			
+			PlanDetaInsGrid.clear();
+		 } 
+		
 	});
 	
 	//계획 취소
@@ -372,6 +406,14 @@ th, td {
 		}
 		PlanDetaGrid.request('modifyData');
 		console.log(565656);
+		
+		//취소 완료시 toast
+		toastr.clear()
+		toastr.options.positionClass = "toast-top-center";
+		toastr.options.progressBar = true;
+		toastr.success( ('생산 계획이 취소되었습니다.'),'Gelato',{timeOut:'1000'} );
+		
+		PlanDetaGrid.clear();
 	})
 	</script>
 </body>

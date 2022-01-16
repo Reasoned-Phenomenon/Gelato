@@ -108,7 +108,7 @@
                         </li>
                         
                         <li>
-                           <a href="#">> <span>생산 계획 조회</span></a>
+                           <a href="${path }/prd/prdPlanMngFind.do">> <span>생산 계획 조회</span></a>
                         </li>
                         
                         <li>

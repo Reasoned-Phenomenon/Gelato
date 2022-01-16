@@ -27,4 +27,10 @@ public interface PrdPlanMngMapper {
 	
 	//계획 취소 update
 	int updatePrdPlanDeta(PrdPlanMngVO vo);
+	
+	//계획 등록 후 update
+	int updateOrderSht(PrdPlanMngVO vo);
+	
+	//홀딩값 추가 insert
+	int insertExcp(PrdPlanMngVO vo);
 }
