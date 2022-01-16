@@ -1,3 +1,4 @@
+//라디오 렌더러
 class GelatoRadio {
   constructor(props) {
 	
@@ -56,3 +57,20 @@ class GelatoRadio {
   }
 
 }
+
+//로트번호 부여 함수
+function get_lot(str_id) {
+	
+	$.ajax({
+		url:"mkLot.do?itemId="+str_id,
+		dataType:'json',
+		async:false
+	}).done(function (result) {
+		console.log(result)
+	}).error(function () {
+		console.log("에러발생")
+	})
+	
+}
+
+console.log("gelatoCom.js실행")

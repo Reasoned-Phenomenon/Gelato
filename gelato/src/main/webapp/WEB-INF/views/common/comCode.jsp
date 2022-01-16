@@ -27,7 +27,7 @@
 		</tr>
 	</tbody>
 </table>
-
+<button id="btnTest">검색</button>
 <br>
  
 <div align="right">
@@ -95,6 +95,12 @@ Grid.applyTheme('striped', {
 	  }
 });
 
+toastr.options = {
+		positionClass : "toast-top-center",
+		progressBar : true,
+		timeOut: 1500 // null 입력시 무제한.
+		}
+
 //코드ID 그리드(화면 좌측) 생성
 const codeIdGrid = new Grid({
 	el: document.getElementById('codeIdGrid'),
@@ -148,11 +154,8 @@ codeIdGrid.on('click', (ev) => {
 	
 	//토스트
 	toastr.clear()
-	toastr.options.positionClass = "toast-top-center";
-	toastr.options.progressBar = true;
-	toastr.success('코드ID선택','Gelato',{timeOut:'1500'});
-	
-	
+	toastr.info('코드ID선택','Gelato');
+	//toastr.info('코드ID선택 <button type="button">테스트1</button><br><button type="button">테스트2</button>','Gelato');
 	
 });
 
@@ -234,16 +237,11 @@ const codeGrid = new tui.Grid({
 	//저장버튼
 	btnSave.addEventListener("click",function(){
 		//수정하고 있던 값 저장
-		codeGrid.blur()
-		
-		codeGrid.request('modifyData')
-		flag = 'O';
-		
-		/* var chkchk = new Promise((resolve, reject) => { 
-			codeGrid.request('modifyData')
-		})
-		
-		chkchk.then(codeGrid.readData(1)); */
+		if(confirm("저장하시겠습니까?")) {
+			codeGrid.blur()
+			codeGrid.request('modifyData',{showConfirm:false})
+			flag = 'O';
+		}
 		
 	})	
 
@@ -259,9 +257,9 @@ const codeGrid = new tui.Grid({
 	//삭제버튼
 	btnDel.addEventListener("click",function(){
 		
-		if(codeGrid.removeCheckedRows(true)){ //true -> 확인 받고 삭제 / false는 바로 삭제
-			console.log("확인")
-			codeGrid.request('modifyData');
+		if(confirm("삭제하시겠습니까?")){ 
+			codeGrid.removeCheckedRows(false) //true -> 확인 받고 삭제 / false는 바로 삭제
+			codeGrid.request('modifyData',{showConfirm:false});
 		}
 		
 	})
@@ -314,6 +312,11 @@ const codeGrid = new tui.Grid({
 		dialog.dialog( "close" );
 	}
 	
+	//테스트
+	btnTest.addEventListener('click', function () {
+		let a = get_lot('RML-10010')
+		console.log(a)
+	})
 </script>
 </body>
 </html>

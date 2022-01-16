@@ -1,4 +1,4 @@
-package com.gelato.app.com.deta.service.impl;
+package com.gelato.app.com.comCodeDeta.service.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -6,9 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gelato.app.com.deta.dao.ComCodeDetaMapper;
-import com.gelato.app.com.deta.dao.ComCodeDetaVO;
-import com.gelato.app.com.deta.service.ComCodeDetaService;
+import com.gelato.app.com.comCodeDeta.dao.ComCodeDetaMapper;
+import com.gelato.app.com.comCodeDeta.dao.ComCodeDetaVO;
+import com.gelato.app.com.comCodeDeta.service.ComCodeDetaService;
 import com.gelato.app.vr.ModifyVO;
 
 @Service

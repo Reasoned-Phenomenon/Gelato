@@ -1,4 +1,4 @@
-package com.gelato.app.com.deta.dao;
+package com.gelato.app.com.comCodeDeta.dao;
 
 import lombok.Data;
 

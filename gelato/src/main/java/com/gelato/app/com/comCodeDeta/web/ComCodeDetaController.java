@@ -1,4 +1,4 @@
-package com.gelato.app.com.deta.web;
+package com.gelato.app.com.comCodeDeta.web;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gelato.app.com.deta.dao.ComCodeDetaVO;
-import com.gelato.app.com.deta.service.ComCodeDetaService;
+import com.gelato.app.com.comCodeDeta.dao.ComCodeDetaVO;
+import com.gelato.app.com.comCodeDeta.service.ComCodeDetaService;
 import com.gelato.app.vr.ModifyVO;
 
 @Controller
