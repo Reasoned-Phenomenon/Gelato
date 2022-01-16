@@ -23,6 +23,7 @@ public class RwmatrioVO {
 	Date expdate;
 	String qy;
 	String excpQy;
+	String safStc;
 	
 	String startDate;
 	String endDate;

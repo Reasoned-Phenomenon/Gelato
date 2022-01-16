@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>원자재 출고관리</title> 
+<title>원자재 재고관리</title> 
 <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
@@ -14,7 +14,7 @@
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head>
 <body>
-<h3>원자재 출고관리</h3>
+<h3>원자재 재고관리</h3>
 <div style="margin: 20px;">
 	<form action="">
 		자재명 : <input type="text" id="rwmName">업체명 : <input type="text" id="vendName"><br>
@@ -32,7 +32,7 @@
 <br>
 
 	<!-- 입고내역 조회 -->
-	<div id="rwmatrOustList" style="width: 80%"></div>
+	<div id="rwmatrStcList" style="width: 80%"></div>
 
 	<!-- 모달창 -->
 	<div id="dialogFrm"></div>
@@ -70,12 +70,12 @@ Grid.applyTheme('striped', {
 });
 
 //그리드 생성
-var rwmatrOustList = new Grid({
-	el: document.getElementById('rwmatrOustList'),
+var rwmatrStcList = new Grid({
+	el: document.getElementById('rwmatrStcList'),
 	data : {
 	  api: {
-	    readData: 	{ url: '${path}/rwmatr/rwmatrOustList.do', method: 'GET'},
-	    modifyData : { url: '${path}/rwmatr/rwmatrOustModifyData.do', method: 'PUT'} 
+	    readData: 	{ url: '${path}/rwmatr/rwmatrStcList.do', method: 'GET'},
+	    modifyData : { url: '${path}/rwmatr/rwmatrStcModifyData.do', method: 'PUT'} 
 	  },
 	  contentType: 'application/json',
 	  initialRequest: false
@@ -84,42 +84,41 @@ var rwmatrOustList = new Grid({
 	selectionUnit: 'row',
 	bodyHeight: 600,
 	columns:[
-				{
-				  header: '자재코드',
-				  name: 'rwmatrId',
-				},
-				{
-				  header: '자재명',
-				  name: 'nm',
-				  sortable: true
-				},
-				{
-				  header: '업체명',
-				  name: 'vendName',
-				  sortable: true
-				},
-				{
-				  header: '출고량',
-				  name: 'oustQy',
-				  sortable: true
-				},
-				{
-				  header: '출고일',
-				  name: 'istOustDttm',
-				  editor: 'datePicker',
-				  sortable: true
-				},
-				{
-				  header: '자재LOT번호',
-				  name: 'lotNo',
-				  sortable: true
-				},
-				{
-				  header: '유통기한',
-				  name: 'expdate',
-			      editor: 'datePicker',
-				  sortable: true
-				}
+		{
+		    header: '자재LOT번호',
+		    name: 'lotNo',
+		    sortable: true
+		  },
+  		  {
+		    header: '자재코드',
+		    name: 'rwmatrId',
+		    sortable: true
+		  },
+		  {
+		    header: '자재명',
+		    name: 'nm',
+		    sortable: true
+		  },
+		  {
+		    header: '수량',
+		    name: 'qy',
+		    sortable: true
+		  },
+		  {
+		    header: '안전재고',
+		    name: 'safStc',
+		    sortable: true
+		  },
+		  {
+		    header: '홀딩수량',
+		    name: 'excpQy',
+		    sortable: true
+		  },
+		  {
+		    header: '유통기한',
+		    name: 'expdate',
+		    sortable: true
+		  }
 		]
 });
 
@@ -170,8 +169,8 @@ function callrwmatrStcModal(){
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 600,
-	      width: 800,
+	      height: 400,
+	      width: 600,
 	      modal: true
 	}); 
 
@@ -180,7 +179,7 @@ function callrwmatrStcModal(){
 }
 	
 	//자재명 클릭시 현재고리스트 모달
-	rwmatrOustList.on('click', (ev) => {
+	rwmatrStcList.on('click', (ev) => {
 		rk = ev.rowKey;
 		console.log(ev)
 		console.log(ev.columnName)
@@ -198,10 +197,10 @@ function callrwmatrStcModal(){
 	function getRwmatrData(rwmatrData) {
 		console.log("입고정보 기입")
 		if(ig == 'g'){
-			rwmatrOustList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
-			rwmatrOustList.setValue(rk, "nm", rwmatrData.nm, true)
-			rwmatrOustList.setValue(rk, "vendName", rwmatrData.vendName, true)
-			rwmatrOustList.setValue(rk, "oustQy", rwmatrData.passQy, true)
+			rwmatrStcList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
+			rwmatrStcList.setValue(rk, "nm", rwmatrData.nm, true)
+			rwmatrStcList.setValue(rk, "vendName", rwmatrData.vendName, true)
+			rwmatrStcList.setValue(rk, "oustQy", rwmatrData.passQy, true)
 		} else if(ig == 'i'){
 			document.getElementById("rwmName").value = rwmatrData.nm;
 		}
@@ -229,13 +228,13 @@ function callrwmatrStcModal(){
 	
 	
 	//컨트롤러 응답
-	rwmatrOustList.on('response', function (ev) {
+	rwmatrStcList.on('response', function (ev) {
 		console.log(ev)
 		if(flag == 'O') {
-			rwmatrOustList.readData(1);
+			rwmatrStcList.readData(1);
 			flag = 'X';
 		}
-		//rwmatrOustList.resetOriginData();
+		//rwmatrStcList.resetOriginData();
 	});
 
 	//조회
@@ -247,7 +246,7 @@ function callrwmatrStcModal(){
 		console.log(startDate);
 		console.log(endDate);
 		
-		rwmatrOustList.readData(1,{'startDate':startDate,
+		rwmatrStcList.readData(1,{'startDate':startDate,
 									'endDate':endDate, 
 									'rwmName':rwmName,
 									'vendName': vendName}, true);
@@ -255,21 +254,21 @@ function callrwmatrStcModal(){
 	
 	//추가
 	btnAdd.addEventListener("click", function(){
-		rwmatrOustList.prependRow();
+		rwmatrStcList.prependRow();
 	});
 	
 	//삭제
 	btnDel.addEventListener("click", function(){
 		
-		if(rwmatrOustList.removeCheckedRows(true)){
-			rwmatrOustList.request('modifyData');
+		if(rwmatrStcList.removeCheckedRows(true)){
+			rwmatrStcList.request('modifyData');
 		}
 	});
 	
 	//저장
 	btnSave.addEventListener("click", function(){
-		rwmatrOustList.blur();
-		rwmatrOustList.request('modifyData');
+		rwmatrStcList.blur();
+		rwmatrStcList.request('modifyData');
 		flag = 'O'
 	});
 

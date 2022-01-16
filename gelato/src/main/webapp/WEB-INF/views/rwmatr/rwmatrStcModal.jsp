@@ -47,6 +47,11 @@ var rwmatrStcListGrid = new Grid({
   	selectionUnit: 'row',
   	columns:[
   		  {
+		    header: '자재LOT번호',
+		    name: 'lotNo',
+		    sortable: true
+		  },
+  		  {
 		    header: '자재코드',
 		    name: 'rwmatrId',
 		    sortable: true
@@ -57,19 +62,24 @@ var rwmatrStcListGrid = new Grid({
 		    sortable: true
 		  },
 		  {
-		    header: '업체명',
-		    name: 'vendName',
+		    header: '수량',
+		    name: 'qy',
 		    sortable: true
 		  },
 		  {
-		    header: '입고량',
-		    name: 'passQy',
+		    header: '안전재고',
+		    name: 'safStc',
 		    sortable: true
 		  },
 		  {
-		    header: '검사일자',
-		    name: 'dt',
-		    editor: 'datePicker'
+		    header: '홀딩수량',
+		    name: 'excpQy',
+		    sortable: true
+		  },
+		  {
+		    header: '유통기한',
+		    name: 'expdate',
+		    sortable: true
 		  }
 		]
 });
