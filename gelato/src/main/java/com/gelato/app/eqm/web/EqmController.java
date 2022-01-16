@@ -21,7 +21,7 @@ public class EqmController {
 	@Autowired ComCodeService cservice;
 	// 등록 페이지
 	@GetMapping("/eqm/eqmRegister.do")
-	public String insertForm() {
+	public String insertForm() {  
 		return "tiles/eqm/eqmRegister";
 	}
 
