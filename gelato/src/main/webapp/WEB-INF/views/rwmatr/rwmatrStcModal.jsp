@@ -84,7 +84,6 @@ var rwmatrStcListGrid = new Grid({
 		]
 });
 
-
 //커스텀 이벤트
 rwmatrStcListGrid.on('dblclick', (ev) => {	
 	
