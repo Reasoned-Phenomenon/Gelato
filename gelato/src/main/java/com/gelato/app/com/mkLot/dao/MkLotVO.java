@@ -8,8 +8,6 @@ public class MkLotVO {
 	String itemId;
 	
 	//결과
-	String lotNo;
-	
 	String clsf;
 	String seq;
 	

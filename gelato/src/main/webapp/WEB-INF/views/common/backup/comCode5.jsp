@@ -28,10 +28,6 @@
 	</tbody>
 </table>
 <button id="btnTest">검색</button>
-
-<input id="testInput" type="time">시간입력
-<button id="btnTime">시간확인</button>
-
 <br>
  
 <div align="right">
@@ -282,37 +278,41 @@ const codeGrid = new tui.Grid({
 	});
 
 	//모달창
-	//dialog는 상단에 전역변수로 선언해뒀음
-	//모달생성
-	dialog = $( "#dialog-form" ).dialog({
-	      autoOpen: false,
-	      height: 500,
-	      width: 700,
-	      modal: true,
-	      buttons: {
-	          Cancel: function() {
-	            dialog.dialog( "close" );
-	          }
-	      }
-	     
-	});
-	
-	//모달 호출하는 버튼
-	btnModal.addEventListener("click",function(){
+	$(function(){
 		
-		console.log("모달클릭")
-		dialog.dialog( "open" );
-		console.log(codeParam)
+		//dialog는 상단에 전역변수로 선언해뒀음
+		//모달생성
+		dialog = $( "#dialog-form" ).dialog({
+		      autoOpen: false,
+		      height: 500,
+		      width: 700,
+		      modal: true,
+		      buttons: {
+		          Cancel: function() {
+		            dialog.dialog( "close" );
+		          }
+		      }
+		     
+		});
 		
-		 $('#dialog-form').load("${path}/com/comModal.do",function () {
-			console.log('로드됨')
-			modalGrid.readData(1, {codeId:codeParam}, true);
+		//모달 호출하는 버튼
+		btnModal.addEventListener("click",function(){
+			
+			console.log("모달클릭")
+			dialog.dialog( "open" );
+			console.log(codeParam)
+			
+			 $('#dialog-form').load("${path}/com/comModal.do",function () {
+				console.log('로드됨')
+				modalGrid.readData(1, {codeId:codeParam}, true);
+			})
+			
 		})
+		
+		$( "#tabs" ).tabs();
 		
 	})
 	
-	$( "#tabs" ).tabs();
-		
 	function getModalData (str) {
 		//목표 태그의 ID값을 입력하면 해당 태그의 value에 모달에서 가져온 값을 넣어줌.
 		let target = document.getElementById('inputName');
@@ -320,25 +320,13 @@ const codeGrid = new tui.Grid({
 		dialog.dialog( "close" );
 	}
 	
-	//LOT 번호 부여 테스트
+	//테스트
 	btnTest.addEventListener('click', function () {
 		let a = get_lot('RML-10010')
 		console.log(a[0])
 		console.log(a[1])
 		
 	})
-	
-	//input태그(time) 테스트
-	btnTime.addEventListener('click', function () {
-		
-		let now = new Date();
-		
-		testInput.value = ("00"+now.getHours()).slice(-2)+":"+("00"+now.getMinutes()).slice(-2);
-		
-		console.log(testInput.value)
-		
-	})
-	
 </script>
 </body>
 </html>
