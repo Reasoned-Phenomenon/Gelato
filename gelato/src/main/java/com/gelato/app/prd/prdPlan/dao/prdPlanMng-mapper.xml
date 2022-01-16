@@ -15,8 +15,9 @@
 		    on (os.vend_id = ve.vend_id)
             left outer join prod_plan pp
             on os.order_id = pp.order_id
-		where not os.st_fg = 'OUTSTC' 
-              and pp.plan_id is null
+		where not os.st_fg = 'OUTSTC'
+              and pp.fg = 'CANCLE'
+              or pp.plan_id is null
 		group by os.order_id, os.order_dt, ve.vend_name, os.oust_dt
 		order by os.oust_dt asc, to_number(sum(osd.qy)) desc
 	</select>
