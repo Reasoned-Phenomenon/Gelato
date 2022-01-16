@@ -47,7 +47,7 @@ public class PrdPlanMngServiceImpl implements PrdPlanMngService{
 			pvo = mvo.getUpdatedRows().get(0);
 			System.out.println(pvo);
 			ppmMapper.insertPrdPlan(pvo);
-			ppmMapper.updateOrderSht(pvo);
+			//ppmMapper.updateOrderSht(pvo);
 			System.out.println("성공");
 		}
 		for(PrdPlanMngVO vo : mvo.getUpdatedRows()) {
