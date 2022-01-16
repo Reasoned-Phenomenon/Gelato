@@ -315,7 +315,8 @@ const codeGrid = new tui.Grid({
 	//테스트
 	btnTest.addEventListener('click', function () {
 		let a = get_lot('RML-10010')
-		console.log(a)
+		console.log(a[0])
+		console.log(a[1])
 	})
 </script>
 </body>
