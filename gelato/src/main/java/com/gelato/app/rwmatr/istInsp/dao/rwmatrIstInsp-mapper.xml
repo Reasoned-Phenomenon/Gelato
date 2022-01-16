@@ -30,7 +30,7 @@
 			<if test="mngr != ''">
 				AND RII.MNGR LIKE '%'||#{mngr}||'%'
 			</if>
-		</where>
+		</where> 
         ORDER BY 1 DESC
 	</select>
 	
@@ -57,7 +57,8 @@
 										INFER_QY, 
 										MNGR, 
 										REMK, 
-										RWMATR_ORDER_DETA_ID) 
+										RWMATR_ORDER_DETA_ID
+									) 
 							 VALUES(
 								 		#{rwmatrId},
 								 		#{dt},

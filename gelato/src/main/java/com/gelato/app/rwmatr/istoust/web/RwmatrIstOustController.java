@@ -19,7 +19,7 @@ public class RwmatrIstOustController {
 	
 	//원자재 입고 관리 페이지로 이동
 	@RequestMapping("/rwmatr/rwmatrIst.do")
-	public String rwmatrIst () {
+	public String rwmatrIst() {
 		return "tiles/rwmatr/rwmatrIst";
 	}
 	
@@ -32,9 +32,55 @@ public class RwmatrIstOustController {
 		return "grid";
 	}
 	
+	//원자재 출고 관리 페이지로 이동
+	@RequestMapping("/rwmatr/rwmatrOust.do")
+	public String rwmatrOust() {
+		return "tiles/rwmatr/rwmatrOust";
+	}
+	
+	//원자재 출고내역 조회
+	@RequestMapping("/rwmatr/rwmatrOustList.do")
+	public String rwmatrOustList(RwmatrioVO vo, Model model) {
+		System.out.println("원자재 출고내역 조회");
+		model.addAttribute("datas", rwmatrioService.RwmatrOustList(vo));
+		System.out.println(rwmatrioService.RwmatrOustList(vo));
+		return "grid";
+	}
+	
+	//원자재 검수완료 내역 모달
+	@RequestMapping("/rwmatr/rwmatrPassModal.do")
+	public String rwmatrPassModal() {
+		return "rwmatr/rwmatrPassModal";
+	}
+	
+	//원자재 검수완료 내역 리스트
+	@RequestMapping("/rwmatr/rwmatrPassList.do")
+	public String rwmatrPassList(RwmatrioVO vo, Model model) {
+		System.out.println("자재검수완료 리스트 조회");
+		model.addAttribute("datas", rwmatrioService.RwmatrPassList(vo));
+		System.out.println(rwmatrioService.RwmatrPassList(vo));
+		return "grid";
+	}
+	
+	//원자재 LOT번호 모달(보류)
+	@RequestMapping("/rwmatr/rwmatrLotNoModal.do")
+	public String rwmatrLotNoModal() {
+		return "rwmatr/rwmatrLotNoModal";
+	}
+	
+	//원자재 입고관리 CUD
 	@PutMapping("/rwmatr/rwmatrIstModifyData.do")
 	@ResponseBody
-	public boolean modifyData (@RequestBody ModifyVO<RwmatrioVO> mvo) {
+	public boolean modifyIstData (@RequestBody ModifyVO<RwmatrioVO> mvo) {
+		System.out.println(mvo);
+		//rwmatroService.modifyRwmatro(mvo); //수정해야함
+		return true;
+	}
+	
+	//원자재 출고관리 CUD
+	@PutMapping("/rwmatr/rwmatrOustModifyData.do")
+	@ResponseBody
+	public boolean modifyOustData (@RequestBody ModifyVO<RwmatrioVO> mvo) {
 		System.out.println(mvo);
 		//rwmatroService.modifyRwmatro(mvo); //수정해야함
 		return true;

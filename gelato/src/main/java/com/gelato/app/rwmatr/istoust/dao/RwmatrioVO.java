@@ -21,6 +21,8 @@ public class RwmatrioVO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	Date expdate;
+	String qy;
+	String excpQy;
 	
 	String startDate;
 	String endDate;
@@ -29,7 +31,9 @@ public class RwmatrioVO {
 	//join
 	String nm;
 	String vendName;
-	
-	
+	String passQy;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	Date dt;
 	
 }

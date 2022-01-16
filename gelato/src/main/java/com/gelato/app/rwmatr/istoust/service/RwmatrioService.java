@@ -6,6 +6,12 @@ import com.gelato.app.rwmatr.istoust.dao.RwmatrioVO;
 
 public interface RwmatrioService {
 
-	//입고 관리 전체조회
+	// 입고 관리 전체조회
 	List<RwmatrioVO> RwmatrIstList(RwmatrioVO vo);
+
+	// 검수 완료 리스트 조회
+	List<RwmatrioVO> RwmatrPassList(RwmatrioVO vo);
+	
+	//출고 관리 전체조회
+	List<RwmatrioVO> RwmatrOustList(RwmatrioVO vo);
 }

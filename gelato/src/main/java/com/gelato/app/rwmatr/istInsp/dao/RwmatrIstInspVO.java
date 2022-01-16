@@ -20,6 +20,7 @@ public class RwmatrIstInspVO {
 	String remk;
 	String mngr;
 	String rwmatrOrderDetaId;
+	String fg;
 	
 	String startDate;
 	String endDate;

@@ -66,6 +66,7 @@ public class RwmatrOrderController {
 		return "grid"; 
 	}
 	
+	//원자재 발주관리 CUD
 	@PutMapping("/rwmatr/rwmatroModifyData.do")
 	@ResponseBody
 	public boolean modifyData (@RequestBody ModifyVO<RwmatroVO> mvo) {

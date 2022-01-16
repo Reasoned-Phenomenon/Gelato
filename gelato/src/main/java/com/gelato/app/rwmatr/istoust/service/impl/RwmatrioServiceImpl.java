@@ -18,4 +18,14 @@ public class RwmatrioServiceImpl implements RwmatrioService {
 	public List<RwmatrioVO> RwmatrIstList(RwmatrioVO vo) {
 		return rwmatrioMapper.RwmatrIstList(vo);
 	}
+
+	@Override
+	public List<RwmatrioVO> RwmatrPassList(RwmatrioVO vo) {
+		return rwmatrioMapper.RwmatrPassList(vo);
+	}
+
+	@Override
+	public List<RwmatrioVO> RwmatrOustList(RwmatrioVO vo) {
+		return rwmatrioMapper.RwmatrOustList(vo);
+	}
 }
