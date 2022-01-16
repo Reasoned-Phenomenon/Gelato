@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>검수합격 목록</title>
+<title>원자재 재고현황</title>
 </head>
 <style>
 h1 {
@@ -15,9 +15,9 @@ h1 {
 </style>
 <body>
 	<br>
-	<h1>검수합격 목록</h1>
+	<h1>원자재 재고현황</h1>
 	<br>
-	<div id="rwmatrPassListGrid" style="width: 100%"></div>
+	<div id="rwmatrStcListGrid" style="width: 100%"></div>
 	
 <script>
 var Grid = tui.Grid;
@@ -35,11 +35,11 @@ Grid.applyTheme('striped', {
 	});
 	
 // 그리드 생성
-var rwmatrPassListGrid = new Grid({
-	el: document.getElementById('rwmatrPassListGrid'),
+var rwmatrStcListGrid = new Grid({
+	el: document.getElementById('rwmatrStcListGrid'),
   	data : {
 	  api: {
-	    readData: { url:'${path}/rwmatr/rwmatrPassList.do', method: 'GET'}
+	    readData: { url:'${path}/rwmatr/rwmatrStcList.do', method: 'GET'}
 	  },
 	  contentType: 'application/json'
 	},
@@ -76,16 +76,16 @@ var rwmatrPassListGrid = new Grid({
 
 
 //커스텀 이벤트
-rwmatrPassListGrid.on('dblclick', (ev) => {	
+rwmatrStcListGrid.on('dblclick', (ev) => {	
 	
 	//cell 선택시 row 선택됨.
-	rwmatrPassListGrid.setSelectionRange({
+	rwmatrStcListGrid.setSelectionRange({
 	      start: [ev.rowKey, 0],
-	      end: [ev.rowKey, rwmatrPassListGrid.getColumns().length-1]
+	      end: [ev.rowKey, rwmatrStcListGrid.getColumns().length-1]
 	  });
 	
 	
-	getRwmatrData(rwmatrPassListGrid.getRow(ev.rowKey));
+	getRwmatrData(rwmatrStcListGrid.getRow(ev.rowKey));
 });
 
 </script>

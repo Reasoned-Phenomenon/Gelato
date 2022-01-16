@@ -12,4 +12,7 @@ public interface RwmatrioMapper {
 	
 	//출고 관리 전체조회
 	List<RwmatrioVO> RwmatrOustList(RwmatrioVO vo);
+	
+	//자재 현재고 전체조회
+	List<RwmatrioVO> RwmatrStcList(RwmatrioVO vo);
 }

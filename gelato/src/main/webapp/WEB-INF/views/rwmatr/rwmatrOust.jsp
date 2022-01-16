@@ -56,10 +56,6 @@ var endDate;
 var rwmName;
 var vendName;
 
-//LOT번호 부여할 자재코드,자재명,입고량
-let rwmId;
-let rwmNm;
-let rwmQy;
 
 //그리드 테마
 Grid.applyTheme('striped', {
@@ -190,9 +186,6 @@ function callrwmatrPassModal(){
 	function getRwmatrData(rwmatrData) {
 		console.log("입고정보 기입")
 		if(ig == 'g'){
-			rwmId = rwmatrData.rwmatrId;
-			rwmNm = rwmatrData.nm;
-			rwmQy = rwmatrData.passQy;
 			rwmatrOustList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
 			rwmatrOustList.setValue(rk, "nm", rwmatrData.nm, true)
 			rwmatrOustList.setValue(rk, "vendName", rwmatrData.vendName, true)
