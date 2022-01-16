@@ -155,7 +155,6 @@
 	</update>
 	
 <!-- 홀딩값 추가 해주는 프로시저 -->
-
     <parameterMap type="PrdPlanMngVO" id="ExcpParam">
 		<parameter property="planId" mode="IN" jdbcType="VARCHAR" javaType="string"/>
 	</parameterMap>
