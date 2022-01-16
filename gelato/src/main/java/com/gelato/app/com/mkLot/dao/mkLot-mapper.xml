@@ -13,7 +13,6 @@
 	WHERE item_id = UPPER(#{itemId})
 </select>
 
-
 <insert id="insertGvLot">
 
 	<selectKey keyProperty="seq" order="BEFORE" resultType="int">
@@ -31,4 +30,5 @@
 						#{seq})	
 	
 </insert>
+
 </mapper>

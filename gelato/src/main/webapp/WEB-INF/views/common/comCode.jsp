@@ -28,7 +28,7 @@
 	</tbody>
 </table>
 <button id="btnTest">검색</button>
-
+<br>
 <input id="testInput" type="time">시간입력
 <button id="btnTime">시간확인</button>
 
