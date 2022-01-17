@@ -4,7 +4,7 @@ import com.gelato.app.com.mkLot.dao.MkLotVO;
 
 public interface MkLotService {
 
-	MkLotVO findLot(String itemId);
+	MkLotVO findSeq(String itemId);
 	
 	int insertGvLot(String itemId);
 }

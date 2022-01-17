@@ -323,11 +323,10 @@ const codeGrid = new tui.Grid({
 	//LOT 번호 부여 테스트
 	btnTest.addEventListener('click', function () {
 		let a = get_lot('RML-10010')
-		console.log(a[0])
-		console.log(a[1])
+		console.log(a)
 		
 	})
-	
+	 
 	//input태그(time) 테스트
 	btnTime.addEventListener('click', function () {
 		

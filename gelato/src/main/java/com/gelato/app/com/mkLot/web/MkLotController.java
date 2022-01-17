@@ -17,6 +17,6 @@ public class MkLotController {
 	@ResponseBody
 	public MkLotVO mkLot (MkLotVO vo) {
 		System.out.println("여기로 오나");
-		return service.findLot(vo.getItemId());
+		return service.findSeq(vo.getItemId());
 	}
 }
