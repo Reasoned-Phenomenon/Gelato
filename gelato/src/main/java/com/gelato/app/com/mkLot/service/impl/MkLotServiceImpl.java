@@ -13,8 +13,8 @@ public class MkLotServiceImpl implements MkLotService {
 	@Autowired MkLotMapper mapper;
 	
 	@Override
-	public MkLotVO findLot(String itemId) {
-		return mapper.findLot(itemId);
+	public MkLotVO findSeq(String itemId) {
+		return mapper.findSeq(itemId);
 	}
 
 	@Override

@@ -2,15 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gelato.app.com.mkLot.dao.MkLotMapper">
 
-<select id="findLot" resultType="MkLotVO">
-	SELECT	item_id, 
-			LCLSF || '-' || MCLSF || '-' || SCLSF || '-' || TO_CHAR(sysdate,'rrMMdd') || '-' as clsf,
-			TO_CHAR((SELECT NVL(MAX(seq),0)+1 
-				 FROM gv_lot 
-				 WHERE dt = trunc(sysdate)
-				 AND item_id = UPPER(#{itemId})),'FM000')  as seq
-	FROM item_clsf
-	WHERE item_id = UPPER(#{itemId})
+<select id="findSeq" resultType="int">
+	SELECT NVL(MAX(seq),0)+1 as seq, sysdate as dt
+    FROM gv_lot 
+    WHERE dt = trunc(sysdate)
+    AND item_id = UPPER(#{itemId})
 </select>
 
 <insert id="insertGvLot">

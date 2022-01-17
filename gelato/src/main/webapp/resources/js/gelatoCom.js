@@ -61,21 +61,21 @@ class GelatoRadio {
 //로트번호 부여 함수
 function get_lot(str_id) {
 	
-	let res;
+	let seq,dt;
 	
 	$.ajax({
 		url:"mkLot.do?itemId="+str_id,
-		dataType:'json',
 		async:false,
 		error: function (result) {
-			console.log(result)
+			console.log('에러발생',result)
 		}
 	}).done(function (result) {
 		console.log(result)
-		res = result;
+		seq = result.seq;
+		dt = result.dt;
 	})
 	
-	return [res.clsf,res.seq];
+	return [seq,dt];
 }
 
 console.log("gelatoCom.js실행")
