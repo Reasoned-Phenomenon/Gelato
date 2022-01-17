@@ -68,6 +68,27 @@ public class RwmatrIstOustController {
 		return "rwmatr/rwmatrLotNoModal";
 	}
 	
+	//원자재 현재고 모달
+	@RequestMapping("/rwmatr/rwmatrStcModal.do")
+	public String rwmatrStcModal() {
+		return "rwmatr/rwmatrStcModal";
+	}
+	
+	//원자재 현재고 페이지로 이동
+	@RequestMapping("/rwmatr/rwmatrStc.do")
+	public String rwmatrStc() {
+		return "tiles/rwmatr/rwmatrStc";
+	}
+	
+	//원자재 현재고 리스트
+	@RequestMapping("/rwmatr/rwmatrStcList.do")
+	public String rwmatrStcList(RwmatrioVO vo, Model model) {
+		System.out.println("현재고 리스트 조회");
+		model.addAttribute("datas", rwmatrioService.RwmatrStcList(vo));
+		System.out.println(rwmatrioService.RwmatrStcList(vo));
+		return "grid";
+	}
+	
 	//원자재 입고관리 CUD
 	@PutMapping("/rwmatr/rwmatrIstModifyData.do")
 	@ResponseBody
@@ -81,6 +102,15 @@ public class RwmatrIstOustController {
 	@PutMapping("/rwmatr/rwmatrOustModifyData.do")
 	@ResponseBody
 	public boolean modifyOustData (@RequestBody ModifyVO<RwmatrioVO> mvo) {
+		System.out.println(mvo);
+		//rwmatroService.modifyRwmatro(mvo); //수정해야함
+		return true;
+	}
+	
+	//원자재 재고관리 CUD
+	@PutMapping("/rwmatr/rwmatrStcModifyData.do")
+	@ResponseBody
+	public boolean modifyStcData (@RequestBody ModifyVO<RwmatrioVO> mvo) {
 		System.out.println(mvo);
 		//rwmatroService.modifyRwmatro(mvo); //수정해야함
 		return true;
