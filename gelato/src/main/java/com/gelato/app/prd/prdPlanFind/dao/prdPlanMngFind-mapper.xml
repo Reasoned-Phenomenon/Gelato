@@ -30,11 +30,11 @@
                 </if>
                 
                 <if test="startD != null and startD != ''">
-                	<![CDATA[and pp.dt >= to_date(#{startD})]]>
+                	<![CDATA[and trunc(pp.dt) >= to_date(#{startD})]]>
                 </if>
                 
                 <if test="endD != null and endD != ''">
-                	<![CDATA[and pp.dt <= to_date(#{endD})]]>
+                	<![CDATA[and trunc(pp.dt) <= to_date(#{endD})]]>
                 </if>
                 
                  <if test="prdtNm != null and prdtNm != ''">

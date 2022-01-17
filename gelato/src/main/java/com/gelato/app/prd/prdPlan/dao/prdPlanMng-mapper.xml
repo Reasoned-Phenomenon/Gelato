@@ -29,10 +29,10 @@
 		<where>
 			fg != 'CANCEL' and fg != 'FINISH'
 			<if test="startD != null and startD != ''">
-	    		<![CDATA[and dt >= to_date(#{startD})]]>
+	    		<![CDATA[and trunc(dt) >= to_date(#{startD})]]>
 	    	</if>
 	    	<if test="endD != null and endD != ''">
-	    		<![CDATA[and dt <= to_date(#{endD})]]>
+	    		<![CDATA[and trunc(dt) <= to_date(#{endD})]]>
 	    	</if>
 		</where>
 		order by dt

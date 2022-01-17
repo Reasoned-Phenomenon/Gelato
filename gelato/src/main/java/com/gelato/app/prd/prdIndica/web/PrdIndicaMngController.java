@@ -1,12 +1,16 @@
 package com.gelato.app.prd.prdIndica.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.gelato.app.prd.prdIndica.service.PrdIndicaMngService;
 
 @Controller
 public class PrdIndicaMngController {
 	
-	/* @Autowired */
+	 @Autowired PrdIndicaMngService prdIndicaMngService;
 	
 	//생산지시관리로 이동
 	@RequestMapping("/prd/prdIndicaMng.do")
@@ -21,5 +25,14 @@ public class PrdIndicaMngController {
 		System.out.println("미지시생산계획 이동");
 		// 미지시생산계획 들어갈 주문서 modal jsp.
 		return "prd/nonIndicaModal"; 
+	}
+	
+	//미지시생산계획 출력
+	@RequestMapping("/prd/nonIndicaList.do")
+	public String nonIndicaList(Model model) {
+		System.out.println("미지시 생산계획 리스트 출력");
+		System.out.println(model);
+		model.addAttribute("datas" , prdIndicaMngService.nonIndicaList());
+		return "grid";
 	}
 }

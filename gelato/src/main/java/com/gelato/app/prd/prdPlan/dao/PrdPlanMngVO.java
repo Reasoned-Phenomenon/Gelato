@@ -1,6 +1,5 @@
 package com.gelato.app.prd.prdPlan.dao;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
