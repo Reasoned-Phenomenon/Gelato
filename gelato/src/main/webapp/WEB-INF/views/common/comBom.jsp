@@ -20,7 +20,7 @@
 			<br>
 				<label>제품코드</label>
 	      			<input type="text" id="" name="">
-	      			<button type="button" id="serach">검색</button>&ensp;&ensp;&ensp;
+	      			<button type="button" id="serachBtn">검색</button>&ensp;&ensp;&ensp;
 	      					
 	      		<label>제품명</label>
 	      			<input type="text" id="" name=""> &ensp;
@@ -48,6 +48,8 @@
 <div id="bomModal" style="width: 100%"></div>
 		
 <script>
+let dialog;
+
 var Grid = tui.Grid;
 
 //그리드 테마.
