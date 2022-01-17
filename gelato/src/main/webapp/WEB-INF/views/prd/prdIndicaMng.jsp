@@ -135,7 +135,7 @@
 					console.log(232323);
 					   $("#nonIndicaDialog").load("${path}/prd/nonIndicaDialog.do",
 							function() {
-								console.log("주문창 로드")
+								console.log("주문창 로드") 
 							})
 				});
 		// 계획코드 받아서 readData에 넘기기
