@@ -49,11 +49,8 @@
 	
 	<insert id="insertRwmatro" parameterType="RwmatroVO">
 		<selectKey keyProperty="orderId" resultType="string" order="BEFORE">
-			SELECT 'OAF-'||
-				    TO_CHAR(SYSDATE,'YYYYMMDD-')||
-				    LPAD(MAX(TO_NUMBER(SUBSTR(ORDER_ID, -3))) +1, 3, 0) 
-			AS ORDER_ID
-			FROM RWMATR_ORDER
+			SELECT ins_oaf()
+			FROM DUAL
 		</selectKey>
 		INSERT INTO RWMATR_ORDER (
 									ORDER_ID,
@@ -68,16 +65,8 @@
 	
 	<insert id="insertRwmatroDeta" parameterType="RwmatroVO">
 		<selectKey keyProperty="rwmatrOrderDetaId" resultType="string" order="BEFORE">
-			SELECT 
-	        'OAD-'||TO_CHAR(SYSDATE,'YYYYMMDD-')|| 
-	        LPAD((SELECT NVL(MAX(TO_NUMBER(SUBSTR(ROD.RWMATR_ORDER_DETA_ID, -3)))+1, 0) 
-	        		AS RWMATR_ORDER_DETA_ID
-		        FROM RWMATR_ORDER RO 
-		        	JOIN RWMATR_ORDER_DETA ROD
-			        ON RO.ORDER_ID = ROD.ORDER_ID
-			        WHERE TRUNC(ORDER_DT) = TRUNC(SYSDATE)), 3, 0) 
-			        AS rwmatr_order_deta_id
-	        FROM DUAL
+			SELECT ins_oad()
+     		FROM DUAL
 		</selectKey>
 		INSERT INTO RWMATR_ORDER_DETA (
 										RWMATR_ORDER_DETA_ID,
