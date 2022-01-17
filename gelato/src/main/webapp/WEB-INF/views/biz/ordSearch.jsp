@@ -59,8 +59,10 @@
 	      					
 	      				<button type="button" class="btn cur-p btn-outline-primary" id="btnRst">새자료</button>
 	      				<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
+	      				<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
 						<button type="button" class="btn cur-p btn-outline-primary" id="btnExcel">Excel</button>
 						<button type="button" class="btn cur-p btn-outline-primary" id="btnprint">인쇄</button>
+						
 						  <br>
 	      				</div>
 	      			</li>
@@ -95,7 +97,7 @@ Grid.applyTheme('striped', {
 });
 
 //그리드 생성
-const ordGrid = new Grid({
+var ordGrid = new Grid({
 	el: document.getElementById('ordGrid'),
 	data : {
 	  api: {

@@ -51,7 +51,7 @@ public class OrderController {
 		model.addAttribute("datas", ordService.prdtList());
 		return "grid";
 	}
-	// 거래처 버튼 눌럿을때  모달 창 함수가 컨트롤러에 오고 리턴으로 모달창 띄울 jsp 적어줌.
+	// 제품코드 버튼 눌럿을때  모달 창 함수가 컨트롤러에 오고 리턴으로 모달창 띄울 jsp 적어줌.
 		@RequestMapping("/biz/prdtModal.do")
 		public String prdtModal(Model model) {
 			System.out.println("모달모달모달");

@@ -15,5 +15,12 @@ public class BomCodeVO {
 		String useYn;    // 사용 여부.
 		
 		
-		// 필요한 거 있으면 vo에 추가하기.
+		// join에 필요한 거 있으면 vo에 추가하기.
+		String nm;      // 자재명.
+		String spec;    // 자재 규격.
+		String wkUnit;  // 작업 단위.
+		
+		String vendName;       // 업체명.
+		String prdtNm;		  // 완제품 명.
+		String prcsNm;		  // 공정 명.
 }

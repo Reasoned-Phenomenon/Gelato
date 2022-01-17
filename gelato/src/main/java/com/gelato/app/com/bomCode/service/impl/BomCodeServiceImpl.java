@@ -15,12 +15,14 @@ public class BomCodeServiceImpl implements BomCodeService {
 
 	@Autowired BomCodeMapper bomcodeMapper;
 	
+	// Bom 전체 조회.
 	@Override
 	public List<BomCodeVO> findBomList(BomCodeVO vo) {
 		
 		return bomcodeMapper.findBomList(vo);
 	}
-
+	
+	// modify로 등록 수정 삭제 
 	@Override
 	public int modifyBomCode(ModifyVO<BomCodeVO> mvo) {
 			for(BomCodeVO vo : mvo.getCreatedRows()) {
@@ -28,6 +30,13 @@ public class BomCodeServiceImpl implements BomCodeService {
 				bomcodeMapper.insertBomCode(vo);
 			}
 		return 0;
+	}
+
+	// 모달창으로 원자재 제품코드 조회.
+	@Override
+	public List<BomCodeVO> rwmatrList() {
+		
+		return bomcodeMapper.rwmatrList();
 	}
 
 }
