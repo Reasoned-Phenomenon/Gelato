@@ -18,7 +18,7 @@
 <div style="margin: 20px;">
 	<form action="">
 		자재명 : <input type="text" id="rwmName">업체명 : <input type="text" id="vendName"><br>
-		발주신청일 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
+		검사일자 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
 		<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
 	</form>
@@ -106,7 +106,13 @@ var rwmatrInferList = new Grid({
 		    sortable: true
 		  },
 		  {
+		    header: '업체명',
+		    name: 'vendName',
+		    sortable: true
+		  },
+		  {
 		    header: '불량량',
+		    align: 'right',
 		    name: 'qy',
 		    sortable: true
 		  },

@@ -63,6 +63,7 @@ var rwmatrLotNoGrid = new Grid({
 		  },
 		  {
 		    header: '입고량',
+		    align: 'right',
 		    name: 'passQy',
 		    sortable: true
 		  },

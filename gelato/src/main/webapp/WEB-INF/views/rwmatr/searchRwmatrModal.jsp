@@ -78,10 +78,12 @@ var rwmatrListGrid = new Grid({
 		  },
 		  {
 		    header: '규격',
+		    align: 'right',
 		    name: 'spec'
 		  },
 		  {
 		    header: '작업단위',
+		    align: 'right',
 		    name: 'wkUnit'
 		  }
 		]

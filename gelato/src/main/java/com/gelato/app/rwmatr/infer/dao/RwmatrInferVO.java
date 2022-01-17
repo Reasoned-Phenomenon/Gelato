@@ -22,5 +22,12 @@ public class RwmatrInferVO {
 	String inferId;
 	String deta;
 	
+	String startDate;
+	String endDate;
+	String rwmName;
+	
+	//join
+	String vendName;
+	
 	
 }

@@ -7,6 +7,7 @@
 		       RII.RWMATR_ORDER_DETA_ID AS RWMATR_ORDER_DETA_ID,
 		       RII.RWMATR_ID AS RWMATR_ID,
 		       R.NM AS NM,
+               V.VEND_NAME AS VEND_NAME,
 		       RI.QY AS QY,
 		       RII.DT AS DT,
 		       RI.INFER_ID AS INFER_ID,
@@ -19,7 +20,27 @@
 		    ON RI.INFER_ID = IC.INFER_ID
 		JOIN RWMATR_ORDER_DETA ROD
 		    ON ROD.RWMATR_ORDER_DETA_ID = RII.RWMATR_ORDER_DETA_ID
+        JOIN VEND V
+            ON V.VEND_ID = R.VEND_ID
+	    <where>
+	    	<if test="startDate != ''">
+	    		<![CDATA[TRUNC(RII.DT) >= to_date(#{startDate})]]>
+	    	</if>
+	    	<if test="endDate != ''">
+	    		AND <![CDATA[TRUNC(RII.DT) <= to_date(#{endDate})]]>
+	    	</if>
+			<if test="rwmName != '' and rwmName != null">
+				AND R.NM LIKE '%'||#{rwmName}||'%'
+			</if>
+			<if test="vendName != '' and vendName != null">
+				AND V.VEND_NAME LIKE '%'||#{vendName}||'%'
+			</if>
+		</where> 
 		ORDER BY DT DESC
 	</select>
+	
+	<insert id="">
+		
+	</insert>
 	
 </mapper>

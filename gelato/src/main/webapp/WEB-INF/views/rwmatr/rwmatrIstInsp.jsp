@@ -99,6 +99,7 @@ var rwmatrIstInspList = new Grid({
 				},
 				{
 				  header: '발주총량',
+				  align: 'right',
 				  name: 'qy',
 				  formatter({value}) { // 추가
 					  let a = `\${value}`
@@ -109,6 +110,7 @@ var rwmatrIstInspList = new Grid({
 				},
 				{
 				  header: '합격량',
+				  align: 'right',
 				  name: 'passQy',
 				  editor: 'text',
 				  formatter({value}) { // 추가
@@ -120,6 +122,7 @@ var rwmatrIstInspList = new Grid({
 				},
 				{
 				  header: '불량량',
+				  align: 'right',
 				  name: 'inferQy',
 				  formatter({value}) { // 추가
 					  let a = `\${value}`

@@ -102,16 +102,19 @@ var rwmatrStcList = new Grid({
 		  },
 		  {
 		    header: '수량',
+		    align: 'right',
 		    name: 'qy',
 		    sortable: true
 		  },
 		  {
 		    header: '안전재고',
+		    align: 'right',
 		    name: 'safStc',
 		    sortable: true
 		  },
 		  {
 		    header: '홀딩수량',
+		    align: 'right',
 		    name: 'excpQy',
 		    sortable: true
 		  },
