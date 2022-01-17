@@ -39,11 +39,11 @@
                         </li>
                         
                         <li>
-                           <a href="${path}/com/comBom.do">> <span>BOM 코드 관리</span></a>
+                           <a href="#">> <span>완제품 코드 관리</span></a>
                         </li>
                         
                         <li>
-                           <a href="#">> <span>완제품 코드 관리</span></a>
+                           <a href="${path}/com/comBom.do">> <span>BOM 코드 관리</span></a>
                         </li>
                         
                         <li>

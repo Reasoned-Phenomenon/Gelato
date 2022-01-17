@@ -3,12 +3,32 @@
 <mapper namespace="com.gelato.app.com.mkLot.dao.MkLotMapper">
 
 <select id="findLot" resultType="MkLotVO">
-	SELECT LCLSF || '-' || MCLSF || '-' || SCLSF || '-' || TO_CHAR(sysdate,'rrMMdd') || '-' as clsf,
-			 TO_CHAR((SELECT MAX(NVL(seq,0))+1 
-					 FROM gv_lot 
-					 WHERE dt = trunc(sysdate)),'FM000')  as seq
+	SELECT	item_id, 
+			LCLSF || '-' || MCLSF || '-' || SCLSF || '-' || TO_CHAR(sysdate,'rrMMdd') || '-' as clsf,
+			TO_CHAR((SELECT NVL(MAX(seq),0)+1 
+				 FROM gv_lot 
+				 WHERE dt = trunc(sysdate)
+				 AND item_id = UPPER(#{itemId})),'FM000')  as seq
 	FROM item_clsf
 	WHERE item_id = UPPER(#{itemId})
 </select>
+
+<insert id="insertGvLot">
+
+	<selectKey keyProperty="seq" order="BEFORE" resultType="int">
+		SELECT NVL(MAX(seq),0)+1 
+		FROM gv_lot 
+		WHERE dt = trunc(sysdate)
+		AND item_id = UPPER(#{itemId})
+	</selectKey>
+	
+	INSERT INTO gv_lot(ITEM_ID,
+						DT,
+						SEQ)
+				VALUES(UPPER(#{itemId}),
+						sysdate,
+						#{seq})	
+	
+</insert>
 
 </mapper>
