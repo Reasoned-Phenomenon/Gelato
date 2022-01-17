@@ -6,13 +6,13 @@
 		SELECT RD.ORDER_ID AS ORDER_ID, 
        		   RD.rwmatr_order_deta_id AS rwmatr_order_deta_id, 
 		       R.NM, R.RWMATR_ID AS RWMATR_ID, 
-		       TO_CHAR(RD.UNTPRC, '999,999,999') AS UNTPRC, 
-		       TO_CHAR(RD.QY, '999,999,999') AS QY,
+		       RD.UNTPRC AS UNTPRC, 
+		       RD.QY AS QY,
 		       V.VEND_ID AS VEND_ID, 
 		       V.VEND_NAME AS VEND_NAME, 
 		       RO.ORDER_DT AS ORDER_DT, 
 		       RO.DUDT AS DUDT,
-               TO_CHAR(RD.QY*RD.UNTPRC, '999,999,999') AS TOTALPRICE
+               RD.QY*RD.UNTPRC AS TOTALPRICE
 		FROM RWMATR_ORDER_DETA RD JOIN RWMATR_ORDER RO
 		    ON(RD.ORDER_ID = RO.ORDER_ID)
 		JOIN RWMATR R
@@ -26,10 +26,10 @@
 	    	<if test="endDate != ''">
 	    		AND <![CDATA[TRUNC(RO.ORDER_DT) <= to_date(#{endDate})]]>
 	    	</if>
-			<if test="rwmName != ''">
+			<if test="rwmName != '' and rwmName != null">
 				AND R.NM LIKE '%'||#{rwmName}||'%'
 			</if>
-			<if test="vendName != ''">
+			<if test="vendName != '' and vendName != null">
 				AND V.VEND_NAME LIKE '%'||#{vendName}||'%'
 			</if>
 		</where>
@@ -42,7 +42,7 @@
 			   REMK
 		FROM VEND
 		WHERE FG = 'VEND01'
-		<if test="vendName != ''">
+		<if test="vendName != '' and vendName != null">
 			AND VEND_NAME LIKE '%'||#{vendName}||'%'
 		</if>
 	</select>
@@ -102,7 +102,7 @@
 	<update id="updateRwmatroDeta" parameterType="RwmatroVO">
 		UPDATE RWMATR_ORDER_DETA SET RWMATR_ID = #{rwmatrId},
 									 UNTPRC = #{untprc},
-									 qy = #{qy}
+									 QY = #{qy}
 		WHERE RWMATR_ORDER_DETA_ID = #{rwmatrOrderDetaId}
 	</update>
 	

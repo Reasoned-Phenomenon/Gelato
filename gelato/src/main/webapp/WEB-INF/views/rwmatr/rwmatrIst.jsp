@@ -104,6 +104,7 @@ var rwmatrIstList = new Grid({
 				},
 				{
 				  header: '입고량',
+				  align: 'right',
 				  name: 'istQy',
 				  sortable: true
 				},

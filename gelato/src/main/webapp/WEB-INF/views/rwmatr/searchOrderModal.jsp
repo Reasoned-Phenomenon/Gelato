@@ -68,6 +68,7 @@ var orderDetailListGrid = new Grid({
 		  },
 		  {
 		    header: '발주총량',
+		    align: 'right',
 		    name: 'qy',
 		    sortable: true
 		  }

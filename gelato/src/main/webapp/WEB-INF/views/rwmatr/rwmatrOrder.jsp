@@ -106,6 +106,7 @@ var rwmatrOrderList = new Grid({
 				},
 				{
 				  header: '단가(원)',
+				  align: 'right',
 				  name: 'untprc',
 				  editor: 'text',
 				  formatter({value}) { // 추가
@@ -117,6 +118,7 @@ var rwmatrOrderList = new Grid({
 				},
 				{
 				  header: '발주량',
+				  align: 'right',
 				  name: 'qy',
 				  editor: 'text',
 				  formatter({value}) { // 추가
@@ -128,6 +130,7 @@ var rwmatrOrderList = new Grid({
 				},
 				{
 				  header: '총액',
+				  align: 'right',
 				  name: 'totalPrice',
 				  formatter({value}) { // 추가
 					  let a = `\${value}`

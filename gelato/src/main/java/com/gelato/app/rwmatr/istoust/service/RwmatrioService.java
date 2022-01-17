@@ -17,4 +17,7 @@ public interface RwmatrioService {
 	
 	//자재 현재고 전체조회
 	List<RwmatrioVO> RwmatrStcList(RwmatrioVO vo);
+	
+	//자재 현재고 전체조회(모달)
+	List<RwmatrioVO> RwmatrStcMList(RwmatrioVO vo);
 }

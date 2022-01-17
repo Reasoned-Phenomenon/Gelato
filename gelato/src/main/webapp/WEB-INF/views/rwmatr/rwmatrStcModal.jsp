@@ -39,7 +39,7 @@ var rwmatrStcListGrid = new Grid({
 	el: document.getElementById('rwmatrStcListGrid'),
   	data : {
 	  api: {
-	    readData: { url:'${path}/rwmatr/rwmatrStcList.do', method: 'GET'}
+	    readData: { url:'${path}/rwmatr/rwmatrStcMList.do', method: 'GET'}
 	  },
 	  contentType: 'application/json'
 	},
@@ -63,16 +63,19 @@ var rwmatrStcListGrid = new Grid({
 		  },
 		  {
 		    header: '수량',
+		    align: 'right',
 		    name: 'qy',
 		    sortable: true
 		  },
 		  {
 		    header: '안전재고',
+		    align: 'right',
 		    name: 'safStc',
 		    sortable: true
 		  },
 		  {
 		    header: '홀딩수량',
+		    align: 'right',
 		    name: 'excpQy',
 		    sortable: true
 		  },
