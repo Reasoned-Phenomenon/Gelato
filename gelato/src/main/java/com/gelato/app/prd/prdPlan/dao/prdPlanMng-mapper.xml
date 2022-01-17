@@ -13,7 +13,11 @@
 		    on (os.order_id = osd.order_id)
 		    join vend ve
 		    on (os.vend_id = ve.vend_id)
-		where os.st_fg = 'BEFORE' 
+            left outer join prod_plan pp
+            on os.order_id = pp.order_id
+		where not os.st_fg = 'OUTSTC'
+              and pp.fg = 'CANCLE'
+              or pp.plan_id is null
 		group by os.order_id, os.order_dt, ve.vend_name, os.oust_dt
 		order by os.oust_dt asc, to_number(sum(osd.qy)) desc
 	</select>
@@ -103,7 +107,7 @@
 					#{name},
 					sysdate,
 					#{orderId},
-					'PROCEE'
+					f_com_name_select('PROCEE')
 					 )
 	</insert>
 	
@@ -147,12 +151,12 @@
 	</update>
 	
 <!-- 생산계획관리 - 계획 등록 후 update -->
-	<update id="updateOrderSht" parameterType="PrdPlanMngVO">
+	<!-- <update id="updateOrderSht" parameterType="PrdPlanMngVO">
 		<if test="orderId != null and orderId != ''">
 			update order_sht set st_fg = 'ACCEPT'
 			where order_id = #{orderId}
 		</if>
-	</update>
+	</update> -->
 	
 <!-- 홀딩값 추가 해주는 프로시저 -->
     <parameterMap type="PrdPlanMngVO" id="ExcpParam">
