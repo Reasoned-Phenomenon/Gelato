@@ -24,10 +24,10 @@
 	    	<if test="endDate != ''">
 	    		AND <![CDATA[TRUNC(RII.DT) <= to_date(#{endDate})]]>
 	    	</if>
-			<if test="rwmName != ''">
+			<if test="rwmName != '' and rwmName != null">
 				AND R.NM LIKE '%'||#{rwmName}||'%'
 			</if>
-			<if test="mngr != ''">
+			<if test="mngr != '' and mngr != null">
 				AND RII.MNGR LIKE '%'||#{mngr}||'%'
 			</if>
 		</where> 

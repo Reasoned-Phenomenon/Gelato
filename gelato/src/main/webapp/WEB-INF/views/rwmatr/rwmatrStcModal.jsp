@@ -39,7 +39,7 @@ var rwmatrStcListGrid = new Grid({
 	el: document.getElementById('rwmatrStcListGrid'),
   	data : {
 	  api: {
-	    readData: { url:'${path}/rwmatr/rwmatrStcList.do', method: 'GET'}
+	    readData: { url:'${path}/rwmatr/rwmatrStcMList.do', method: 'GET'}
 	  },
 	  contentType: 'application/json'
 	},

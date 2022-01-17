@@ -21,10 +21,10 @@
 	    	<if test="endDate != ''">
 	    		AND <![CDATA[TRUNC(RIO.IST_OUST_DTTM) <= to_date(#{endDate})]]>
 	    	</if>
-			<if test="rwmName != ''">
+			<if test="rwmName != '' and rwmName != null">
 				AND R.NM LIKE '%'||#{rwmName}||'%'
 			</if>
-			<if test="vendName != ''">
+			<if test="vendName != '' and vendName != null">
 				AND V.VEND_NAME LIKE '%'||#{vendName}||'%'
 			</if>
         ORDER BY IST_OUST_DTTM
@@ -62,10 +62,10 @@
     	<if test="endDate != ''">
     		AND <![CDATA[TRUNC(RIO.IST_OUST_DTTM) <= to_date(#{endDate})]]>
     	</if>
-		<if test="rwmName != ''">
+		<if test="rwmName != '' and rwmName != null">
 			AND R.NM LIKE '%'||#{rwmName}||'%'
 		</if>
-		<if test="vendName != ''">
+		<if test="vendName != '' and vendName != null">
 			AND V.VEND_NAME LIKE '%'||#{vendName}||'%'
 		</if>
         ORDER BY IST_OUST_DTTM
@@ -91,13 +91,29 @@
 	    	<if test="endDate != ''">
 	    		AND <![CDATA[TRUNC(RS.EXPDATE) <= to_date(#{endDate})]]>
 	    	</if>
-			<if test="rwmName != ''">
+			<if test="rwmName != '' and rwmName != null">
 				AND R.NM LIKE '%'||#{rwmName}||'%'
 			</if>
-			<if test="vendName != ''">
+			<if test="vendName != '' and vendName != null">
 				AND V.VEND_NAME LIKE '%'||#{vendName}||'%'
 			</if>
 		</where>
+		ORDER BY EXPDATE
+ 	</select>
+ 	
+ 	<select id="RwmatrStcMList" resultType="RwmatrioVO">
+ 		SELECT RS.LOT_NO AS LOT_NO,
+		       RS.RWMATR_ID AS RWMATR_ID,
+		       R.NM AS NM,
+               V.VEND_NAME AS VEND_NAME,
+		       RS.QY AS QY,
+		       R.SAF_STC AS SAF_STC,
+		       RS.EXCP_QY AS EXCP_QY,
+		       RS.EXPDATE AS EXPDATE
+		FROM RWMATR_STC RS JOIN RWMATR R
+			ON RS.RWMATR_ID = R.RWMATR_ID
+        JOIN VEND V
+            ON R.VEND_ID = V.VEND_ID
 		ORDER BY EXPDATE
  	</select>
 </mapper>

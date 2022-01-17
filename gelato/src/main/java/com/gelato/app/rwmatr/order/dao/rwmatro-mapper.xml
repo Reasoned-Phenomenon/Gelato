@@ -26,10 +26,10 @@
 	    	<if test="endDate != ''">
 	    		AND <![CDATA[TRUNC(RO.ORDER_DT) <= to_date(#{endDate})]]>
 	    	</if>
-			<if test="rwmName != ''">
+			<if test="rwmName != '' and rwmName != null">
 				AND R.NM LIKE '%'||#{rwmName}||'%'
 			</if>
-			<if test="vendName != ''">
+			<if test="vendName != '' and vendName != null">
 				AND V.VEND_NAME LIKE '%'||#{vendName}||'%'
 			</if>
 		</where>
@@ -42,7 +42,7 @@
 			   REMK
 		FROM VEND
 		WHERE FG = 'VEND01'
-		<if test="vendName != ''">
+		<if test="vendName != '' and vendName != null">
 			AND VEND_NAME LIKE '%'||#{vendName}||'%'
 		</if>
 	</select>
