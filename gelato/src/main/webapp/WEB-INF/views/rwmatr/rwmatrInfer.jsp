@@ -68,7 +68,6 @@ Grid.applyTheme('striped', {
 	  }
 });
 
-
 //그리드 생성
 var rwmatrInferList = new Grid({
 	el: document.getElementById('rwmatrInferList'),
