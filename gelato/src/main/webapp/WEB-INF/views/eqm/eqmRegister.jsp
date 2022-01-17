@@ -33,9 +33,9 @@
 									<input type="radio" id="notUse" name="useYn" value="N">N</td>
 								<th>설비구분</th>
 								<td><input id="fg" name="fg" required>
-									<button id="btnFindFg" type="button" class="btn cur-p btn-outline-dark" data-bs-toggle="modal" aria-label="Close">
-									찾아보기
-									</button><input id="fgName" name="fgName"></td>
+									<button id="btnFindFg" type="button" class="btn cur-p btn-outline-dark btn-sm" data-bs-toggle="modal" aria-label="Close">
+									🔍</button>
+									<input id="fgName" name="fgName"></td>
 							</tr>
 							<tr>
 								<th>설비명</th>
@@ -113,7 +113,6 @@
 	})
 	
 //설비구분 모달
-$(function(){
 	let dialog = $( "#dialog-form" ).dialog({
 		autoOpen :false,
 		modal : true
@@ -126,8 +125,6 @@ $(function(){
 			seolbiGrid.readData(1, {codeId:"EQM002"}, true);
 			console.log("로드됨")})
 	});
-})
-	
 
 </script>
 </body>

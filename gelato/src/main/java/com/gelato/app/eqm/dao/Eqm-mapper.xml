@@ -46,16 +46,6 @@
 		</if>
 		
 	</select>
-     
-    <!-- 설비 관리 페이지 - 설비 한 건 조회(모달창) -->
-	<select id="eqmSelect" parameterType="EqmVO" resultType="EqmVO">
-		SELECT E.*, 
-			   P.PRCS_ID, P.NM
-		FROM EQM E, 
-			 PRCS P 
-		WHERE E.EQM_ID = P.EQM_ID
-		AND E.EQM_ID = #{eqmId} <!-- #{eqmId} 클릭시 넘긴 인자값 -->
-	</select>
 	
 	<!-- 설비 관리 페이지 - 설비 한 건 조회(모달창) 수정 -->
 	<update id="eqmUpdate" parameterType="EqmVO">
@@ -68,13 +58,6 @@
 			USE_YN = #{useYn}
 		WHERE EQM_ID = #{eqmId}
 	</update>
-	
-	<!-- 설비 관리 페이지 - 설비 한 건 조회(모달창) 삭제 -->
-	<delete id="eqmDelete" parameterType="EqmVO">
-		DELETE FROM EQM
-		 
-		WHERE EQM_ID = #{eqmId}
-	</delete>
 	
 	<!-- 점검페이지관리/비가동페이지관리 - 등록 전 조회 -->
 	<select id="eqmNonList" resultType="EqmVO">
@@ -101,10 +84,19 @@
 			 FROM EQM_NON_OPR O, 
 			 	  EQM_NON_OPR_RESN R
         	 WHERE O.RESN_ID = R.RESN_ID 
-        	 AND EQM_ID = 'EQM-001'	<!-- 인자값으로 바꾸기 -->
+        	 AND O.EQM_ID = #{eqmId}
         	 ) A,
         	 EQM E 
         WHERE A.EQM_ID = E.EQM_ID
+        <if test="fromDate != null and fromDate !=''">
+        	<![CDATA[AND TRUNC(NON_OPR_FR_TM) >= TO_CHAR(#{fromDate})]]>
+        </if>
+        <if test="toDate != null and toDate !=''">
+        	<![CDATA[AND TRUNC(NON_OPR_TO_TM) <= TO_CHAR(#{toDate})]]>
+        </if>
+        <if test="searchId != ''">
+        	AND A.EQM_ID = #{eqmId}
+        </if>
 	</select>
 	
 	<!-- 비가동 등록 -->

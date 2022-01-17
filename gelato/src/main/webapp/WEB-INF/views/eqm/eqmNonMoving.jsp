@@ -7,8 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>설비비가동 페이지(비가동등록/비가동내역 조회)</title>
+
 </head>
 <body>
+	<!-- 설비검색 모달 -->
+	<div id="dialog-form" title="설비검색"></div>
 	<div class="container">
 		<div class="flex row">
 			<div class="col-4">
@@ -25,6 +28,43 @@
 				<div id="eqmListGrid" style="width: 100%;"></div>
 			</div>
 			<div class="col-8">
+
+				<div class="container">
+					<h2>비가동 내역 조회</h2>
+					<form id="dataForm" name="dataForm" method="post"
+						autocomplete="off">
+						<div>
+							<ul>
+								<li>
+									<div class="col-8">
+										<label>해당일자</label> <input id="fromDate" name="fromDate"
+											type="date"><label>~</label><input id="toDate"
+											name="toDate" type="date">
+									</div>
+								</li>
+								<li>
+									<div class="col-8">
+										<label>설비코드</label> <input id="searchId" required>
+										<button type="button" id="btnEqmSearch"
+											class="btn cur-p btn-outline-dark btn-sm">🔍</button>
+										<input id="searchNm" readonly>
+
+									</div>
+								</li>
+							</ul>
+							<div class="grid-option-area">
+								<div class="col-6"></div>
+								<div class="col-6">
+									<button type="button" class="btn btn-reset" id="resetBtn">초기화</button>
+									<button type="button" class="btn btn-search" id="searchBtn">조회</button>
+									<button type="button" class="btn btn-exel" id="excelBtn">Excel</button>
+									<button type="button" class="btn btn-print" id="printBtn">인쇄</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div id="eqmNonList" style="width: 100%;"></div>
 				<div id="eqmNonInsert" style="display: none;">
 					<br>
 					<h2>비가동 등록</h2>
@@ -34,9 +74,9 @@
 							<tbody>
 								<tr>
 									<th>설비코드</th>
-									<td><input id="eqmId"></td>
+									<td><input id="eqmId" readonly></td>
 									<th>설비명</th>
-									<td><input id="eqmName"></td>
+									<td><input id="eqmName" readonly></td>
 								</tr>
 								<tr>
 									<th>작업자</th>
@@ -44,11 +84,9 @@
 								</tr>
 								<tr>
 									<th>비가동시간</th>
-									<td><input id="workSttmH"><font>시</font><input
-										id="workSttmM"><font>분</font></td>
+									<td><input id="workSttmH" type="time"></td>
 									<td><button type="button" id="workStart">시작</button></td>
-									<td><input id="workEntmH"><font>시</font><input
-										id="workEntmM"><font>분</font></td>
+									<td><input id="workEntmH" type="time"></td>
 									<td><button type="button" id="workStop" disabled>종료</button></td>
 								</tr>
 								<tr>
@@ -64,20 +102,7 @@
 						</table>
 					</form>
 				</div>
-				<div>
-					<br>
-					<h2>비가동 내역 조회</h2>
-					<br> <label>설비구분</label> <select>
-						<option>공정코드1</option>
-						<option>공정코드2</option>
-						<option>공정코드3</option>
-						<option>공정코드4</option>
-					</select>
-					<button>조회</button>
-					<div id="eqmNonList" style="width: 100%;"></div>
-				</div>
 			</div>
-
 		</div>
 	</div>
 	<script>
@@ -90,8 +115,6 @@
 			$("#eqmId").val("${datas.eqmId}");
 			$("#eqmName").val("${datas.eqmName}");
 		}
-		
-		
 		
 		var Grid = tui.Grid;
 
@@ -173,24 +196,56 @@
 		
 		//비가동시작시간 버튼 이벤트
 		$("#workStart").on("click",function(){
-			let date = new Date();
-			$("#workSttmH").val(date.getHours());
-			$("#workSttmM").val(date.getMinutes());
+			let date1 = new Date();
+			workSttmH.value = ("00"+date1.getHours()).slice(-2)+":"+("00"+date1.getMinutes()).slice(-2);			
+			console.log(workSttmH.value)
 			$("#workStop").removeAttr("disabled");
 		})
 		
 		//비가동종료시간 버튼 이벤트
 		$("#workStop").on("click",function(){
-			let date = new Date();
-			$("#workEntmH").val(date.getHours());
-			$("#workEntmM").val(date.getMinutes());
-			$("#workStart").attr("disabled",true);
+			let date2 = new Date();
+			workEntmH.value = ("00"+date2.getHours()).slice(-2)+":"+("00"+date2.getMinutes()).slice(-2);			
+			console.log(workEntmH.value)
+			$("#workStop").attr("disabled",true);
 		})
 		
 		//비가동등록 버튼 이벤트
 		$("#insertEqmNon").on("click", function(){
 			
 		})
+		
+		//설비코드 모달
+			let dialog = $( "#dialog-form" ).dialog({
+				autoOpen :false,
+				modal : true
+			});
+			
+			$("#btnEqmSearch").on("click",function(){
+				dialog.dialog("open");
+				$("#dialog-form").load("${path}/eqm/searchEqm.do", 	//load가 익숙치 않으면 ajax를 써도됨
+						function(){
+					console.log("로드됨")})
+			});
+		
+		//해당일자 검색
+		var toDate;
+		var fromDate;
+		var searchId;
+		$("#searchBtn").on("click",function(){
+			toDate = document.getElementById("toDate").value;
+			fromDate = document.getElementById("fromDate").value;
+			searchId = document.getElementById("searchId").value;
+			console.log(toDate);
+			console.log(fromDate);
+			console.log(searchId);
+			if(searchId == ''){
+				alert("설비코드를 선택해주세요");
+				return; 
+			}
+			eqmNonListGrid.readData(1,{'toDate': toDate, 'fromDate': fromDate, 'eqmId': searchId}, true);
+		})
+		
 	</script>
 </body>
 </html>

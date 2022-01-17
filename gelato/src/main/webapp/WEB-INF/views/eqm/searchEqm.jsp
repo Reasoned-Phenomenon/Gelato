@@ -6,61 +6,63 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>설비구분 모달창</title>
+<title>설비코드 모달창</title>
 </head>
 <body>
-<div id="seolbiGrid"></div>
-
+<div id="eqmGrid"></div>
 <script>
 var codeParam;
 
 var Grid = tui.Grid;
 
-const seolbiGrid = new Grid({
-	el: document.getElementById('seolbiGrid'),
+var eqmGrid = new Grid({
+	el: document.getElementById('eqmGrid'),
   	data : {
 	  api: {
-	    readData: 	{ url: '${path}/com/findComCodeDeta.do', method: 'GET'}
+	    readData: 	{ url: '${path}/eqm/eqmList.do', method: 'GET'}
 	  },
 	  contentType: 'application/json'
 	},
   	rowHeaders:['rowNum'],
   	selectionUnit: 'row',
+  	bodyHeight : 300,
   	columns:[
 			{
-			  header: '구분코드',
-			  name: 'code'
+			  header: '설비코드',
+			  name: 'eqmId'
 			},
 			{
-			  header: '구분명',
-			  name: 'codeNm'
+			  header: '설비명',
+			  name: 'eqmName'
 			}
 		]
 });
-function getSeolbiData (str){
+
+function getEqmData (str){
 	//목표 태그의 ID값을 입력하면 해당 태그의 value에 모달에서 가져온 값 넣어줌
-	let target1 = document.getElementById('fg');
-	let target2 = document.getElementById('fgName');
+	let target1 = document.getElementById('searchId');
+	let target2 = document.getElementById('searchNm');
 	console.log(str);
-	target1.value = str.code;
-	target2.value = str.codeNm;
+	target1.value = str.eqmId;
+	target2.value = str.eqmName;
 	dialog.dialog("close");
 }
 
 //이벤트
-seolbiGrid.on('dblclick', (ev) => {	
+eqmGrid.on('dblclick', (ev) => {	
 	
 	//cell 선택시 row 선택됨.
-	seolbiGrid.setSelectionRange({
+	eqmGrid.setSelectionRange({
 	      start: [ev.rowKey, 0],
-	      end: [ev.rowKey, seolbiGrid.getColumns().length-1]
+	      end: [ev.rowKey, eqmGrid.getColumns().length-1]
 	  });
 	
 	//클릭한 row의 codeId에 해당하는 code를 읽어옴
-	codeParam = seolbiGrid.getRow(ev.rowKey);
+	codeParam = eqmGrid.getRow(ev.rowKey);
 	console.log(codeParam)
-	getSeolbiData(codeParam);
+	getEqmData(codeParam);
 });
+
 </script>
 </body>
 </html>

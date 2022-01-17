@@ -14,4 +14,8 @@ public class EqmNonVO {
 	String eqmName;		//설비명
 	String resnName;	//비가동사유명
 	String gubun;		//구분
+	
+	String toDate;
+	String fromDate;
+	String searchId;
 }
