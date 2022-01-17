@@ -92,19 +92,26 @@ public class EqmController {
 		return "grid";
 	}
 	
-	//설비비가동관리(내역조회)
+	// 설비비가동관리(내역조회)=========날짜검색결과 추가하기==========
 	@GetMapping("eqm/eqmNonSelect.do")
 	public String eqmNonSelect(Model model, EqmNonVO eqmNonVo) {
+		System.out.println(eqmNonVo);
 		model.addAttribute("datas",service.eqmNonSelect(eqmNonVo));
 		return "grid";
 	}
 	
-	//설비비가동등록
+	// 설비비가동 등록 
 	@RequestMapping("/eqm/eqmNonInsert.do")
 	public String eqmNonInsert(Model model, EqmNonVO eqmNonVo) {
 		model.addAttribute("datas",service.insertNonEqm(eqmNonVo));
 		return "tiles/eqm/eqmNonMoving";
 	}
 	
+	//설비코드(명) 모달
+	@RequestMapping("/eqm/searchEqm.do")
+	public String getEqmModal() {
+		return "/eqm/searchEqm";
+	}	
+
 }
 

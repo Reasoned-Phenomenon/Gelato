@@ -24,4 +24,5 @@ public interface EqmService {
 	List<EqmNonVO> eqmNonSelect(EqmNonVO eqmNonVo);
 	
 	int insertNonEqm(EqmNonVO eqmNonVo);
+	
 }
