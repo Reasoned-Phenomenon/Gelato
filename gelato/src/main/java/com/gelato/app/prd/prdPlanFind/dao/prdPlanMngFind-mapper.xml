@@ -25,11 +25,9 @@
 			 join prdt p
 			 on p.prdt_id = ppd.prdt_id
 		<where>
-				pp.fg = any('FINISH', 'PROCEE', 'CANCLE')
-				
-                <!-- <if test="fg != 'ALL'">
-                	and pp.fg = #{fg}
-                </if> -->
+                <if test="fg != 'ALL'">
+                	pp.fg = #{fg}
+                </if>
                 
                 <if test="startD != null and startD != ''">
                 	<![CDATA[and pp.dt >= to_date(#{startD})]]>
