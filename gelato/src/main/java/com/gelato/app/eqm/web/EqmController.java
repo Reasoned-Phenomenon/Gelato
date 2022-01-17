@@ -99,5 +99,12 @@ public class EqmController {
 		return "grid";
 	}
 	
+	//설비비가동등록
+	@RequestMapping("/eqm/eqmNonInsert.do")
+	public String eqmNonInsert(Model model, EqmNonVO eqmNonVo) {
+		model.addAttribute("datas",service.insertNonEqm(eqmNonVo));
+		return "tiles/eqm/eqmNonMoving";
+	}
+	
 }
 

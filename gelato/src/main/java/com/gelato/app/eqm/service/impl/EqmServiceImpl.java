@@ -58,5 +58,10 @@ public class EqmServiceImpl implements EqmService{
 	public List<EqmNonVO> eqmNonSelect(EqmNonVO eqmNonVo) {
 		return eqmMapper.eqmNonSelect(eqmNonVo);
 	}
+
+	@Override
+	public int insertNonEqm(EqmNonVO eqmNonVo) {
+		return eqmMapper.insertNonEqm(eqmNonVo);
+	}
 	
 }

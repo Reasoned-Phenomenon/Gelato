@@ -24,53 +24,50 @@
 				</select>
 				<div id="eqmListGrid" style="width: 100%;"></div>
 			</div>
-			<div class="col-8" id="eqmNonInsert" style="display: none;">
-				<br>
-				<h2>비가동 등록</h2>
-				<br>
-				<form>
-					<table>
-						<tbody>
-							<tr>
-								<th>설비코드</th>
-								<td><input id="eqmId"></td>
-								<th>설비명</th>
-								<td><input id="eqmName"></td>
-							</tr>
-							<tr>
-								<th>작업자</th>
-								<td><input></td>
-							</tr>
-							<tr>
-								<th>비가동시간</th>
-								<td><input id="workSttmH"><font>시</font><input
-									id="workSttmM"><font>분</font></td>
-								<td><button type="button" id="workStart">시작</button></td>
-								<td><input id="workEntmH"><font>시</font><input
-									id="workEntmM"><font>분</font></td>
-								<td><button type="button" id="workStop" disabled>종료</button></td>
-							</tr>
-							<tr>
-								<th>점검내역</th>
-								<td><input type="text"></td>
-							</tr>
-							<tr>
-								<th>판정</th>
-								<td><input type="radio" id="congruity" name="judgement"
-									value="Y">적합 <input type="radio" id="incongruity"
-									name="judgement" value="N">부적합</td>
-							</tr>
-							<tr>
-								<td><button>비가동등록</button></td>
-							</tr>
-						</tbody>
-					</table>
-				</form>
+			<div class="col-8">
+				<div id="eqmNonInsert" style="display: none;">
+					<br>
+					<h2>비가동 등록</h2>
+					<br>
+					<form>
+						<table>
+							<tbody>
+								<tr>
+									<th>설비코드</th>
+									<td><input id="eqmId"></td>
+									<th>설비명</th>
+									<td><input id="eqmName"></td>
+								</tr>
+								<tr>
+									<th>작업자</th>
+									<td><input></td>
+								</tr>
+								<tr>
+									<th>비가동시간</th>
+									<td><input id="workSttmH"><font>시</font><input
+										id="workSttmM"><font>분</font></td>
+									<td><button type="button" id="workStart">시작</button></td>
+									<td><input id="workEntmH"><font>시</font><input
+										id="workEntmM"><font>분</font></td>
+									<td><button type="button" id="workStop" disabled>종료</button></td>
+								</tr>
+								<tr>
+									<th>비가동사유</th>
+									<td><input type="text" id="resnId"></td>
+									<th>비고</th>
+									<td><input type="text" id="remk"></td>
+								</tr>
+								<tr>
+									<td><button type="button" id="insertEqmNon">비가동등록</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+				</div>
 				<div>
 					<br>
 					<h2>비가동 내역 조회</h2>
-					<br> <label>설비구분</label> 
-					<select>
+					<br> <label>설비구분</label> <select>
 						<option>공정코드1</option>
 						<option>공정코드2</option>
 						<option>공정코드3</option>
@@ -86,7 +83,7 @@
 	<script>
 	
 		//설비관리 페이지에서 넘어오는 값이 있을 때 등록 창 띄우기
-		if("${datas}"==""){
+		if("${datas.eqmId}"==""){
 			
 		}else{
 			$("#eqmNonInsert").css("display","block");
@@ -188,6 +185,11 @@
 			$("#workEntmH").val(date.getHours());
 			$("#workEntmM").val(date.getMinutes());
 			$("#workStart").attr("disabled",true);
+		})
+		
+		//비가동등록 버튼 이벤트
+		$("#insertEqmNon").on("click", function(){
+			
 		})
 	</script>
 </body>
