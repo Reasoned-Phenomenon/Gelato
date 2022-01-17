@@ -112,7 +112,7 @@
                         </li>
                         
                         <li>
-                           <a href="#">> <span>생산 지시 관리</span></a>
+                           <a href="${path }/prd/prdIndicaMng.do">> <span>생산 지시 관리</span></a>
                         </li>
                         
                         <li>
