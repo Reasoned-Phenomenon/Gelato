@@ -25,7 +25,7 @@ th, td {
                 <tr>
                     <th>진행 구분</th>
                     <td>
-                        <input type="radio" id="fgAll" name="fg" value="All" checked>전체
+                        <input type="radio" id="fgAll" name="fg" value="ALL" checked>전체
                         <input type="radio" id="fgPro" name="fg" value="PROCEE">진행
                         <input type="radio" id="fgFin" name="fg" value="FINISH">완료
 						<input type="radio" id="fgCan" name="fg" value="CANCLE">취소

@@ -15,9 +15,16 @@
 		    on (os.vend_id = ve.vend_id)
             left outer join prod_plan pp
             on os.order_id = pp.order_id
-		where not os.st_fg = 'OUTSTC'
-              and pp.fg = 'CANCLE'
-              or pp.plan_id is null
+		where PP.PLAN_ID IS NULL
+              OR (pp.fg != 'FINISH' 
+                    AND pp.fg != 'PROCEE' 
+                  and os.order_id != (SELECT order_id
+                                        FROM prod_plan
+                                        WHERE order_id = (SELECT order_id
+                                                            FROM prod_plan
+                                                            WHERE fg = 'CANCLE')
+                                        AND (fg = 'PROCEE'
+                                        OR fg = 'FINISH')))
 		group by os.order_id, os.order_dt, ve.vend_name, os.oust_dt
 		order by os.oust_dt asc, to_number(sum(osd.qy)) desc
 	</select>
@@ -29,10 +36,10 @@
 		<where>
 			fg != 'CANCEL' and fg != 'FINISH'
 			<if test="startD != null and startD != ''">
-	    		<![CDATA[and dt >= to_date(#{startD})]]>
+	    		<![CDATA[and trunc(dt) >= to_date(#{startD})]]>
 	    	</if>
 	    	<if test="endD != null and endD != ''">
-	    		<![CDATA[and dt <= to_date(#{endD})]]>
+	    		<![CDATA[and trunc(dt) <= to_date(#{endD})]]>
 	    	</if>
 		</where>
 		order by dt
@@ -151,12 +158,12 @@
 	</update>
 	
 <!-- 생산계획관리 - 계획 등록 후 update -->
-	<!-- <update id="updateOrderSht" parameterType="PrdPlanMngVO">
+	<update id="updateOrderSht" parameterType="PrdPlanMngVO">
 		<if test="orderId != null and orderId != ''">
-			update order_sht set st_fg = 'ACCEPT'
+			update prod_plan set st_fg = 'PROCEE'
 			where order_id = #{orderId}
 		</if>
-	</update> -->
+	</update>
 	
 <!-- 홀딩값 추가 해주는 프로시저 -->
     <parameterMap type="PrdPlanMngVO" id="ExcpParam">
