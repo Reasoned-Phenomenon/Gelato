@@ -326,7 +326,7 @@ const codeGrid = new tui.Grid({
 		console.log(a)
 		
 	})
-	
+	 
 	//input태그(time) 테스트
 	btnTime.addEventListener('click', function () {
 		
