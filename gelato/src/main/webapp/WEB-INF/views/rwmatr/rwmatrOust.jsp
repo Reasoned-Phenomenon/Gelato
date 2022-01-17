@@ -172,7 +172,7 @@ function callrwmatrStcModal(){
 		  modal:true,
 		  autoOpen:false,
 	      height: 600,
-	      width: 800,
+	      width: 1200,
 	      modal: true
 	}); 
 
@@ -202,7 +202,8 @@ function callrwmatrStcModal(){
 			rwmatrOustList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
 			rwmatrOustList.setValue(rk, "nm", rwmatrData.nm, true)
 			rwmatrOustList.setValue(rk, "vendName", rwmatrData.vendName, true)
-			rwmatrOustList.setValue(rk, "oustQy", rwmatrData.passQy, true)
+			rwmatrOustList.setValue(rk, "lotNo", rwmatrData.lotNo, true)
+			rwmatrOustList.setValue(rk, "expdate", rwmatrData.expdate, true)
 		} else if(ig == 'i'){
 			document.getElementById("rwmName").value = rwmatrData.nm;
 		}

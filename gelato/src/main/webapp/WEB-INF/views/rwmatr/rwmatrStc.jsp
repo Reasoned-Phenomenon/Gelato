@@ -173,8 +173,8 @@ function callrwmatrStcModal(){
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 400,
-	      width: 600,
+	      height: 600,
+	      width: 1200,
 	      modal: true
 	}); 
 
@@ -188,7 +188,7 @@ function callrwmatrStcModal(){
 		console.log(ev)
 		console.log(ev.columnName)
 		console.log(ev.rowKey)
-	    if (ev.columnName === 'rwmatrId') {
+	    if (ev.columnName === 'lotNo') {
 			console.log("검수완료리스트")
 			ig = 'g';
 			callrwmatrStcModal();
@@ -204,7 +204,6 @@ function callrwmatrStcModal(){
 			rwmatrStcList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
 			rwmatrStcList.setValue(rk, "nm", rwmatrData.nm, true)
 			rwmatrStcList.setValue(rk, "vendName", rwmatrData.vendName, true)
-			rwmatrStcList.setValue(rk, "oustQy", rwmatrData.passQy, true)
 		} else if(ig == 'i'){
 			document.getElementById("rwmName").value = rwmatrData.nm;
 		}
