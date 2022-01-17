@@ -24,4 +24,7 @@ public interface EqmMapper {
 	
 	//설비비가동 내역조회
 	List<EqmNonVO> eqmNonSelect(EqmNonVO eqmNonVo);
+	
+	//설비비가동 등록
+	int insertNonEqm(EqmNonVO eqmNonVo);
 }

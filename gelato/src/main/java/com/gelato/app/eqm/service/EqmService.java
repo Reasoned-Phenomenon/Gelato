@@ -22,4 +22,6 @@ public interface EqmService {
 	
 	//비가동관리 내역조회
 	List<EqmNonVO> eqmNonSelect(EqmNonVO eqmNonVo);
+	
+	int insertNonEqm(EqmNonVO eqmNonVo);
 }
