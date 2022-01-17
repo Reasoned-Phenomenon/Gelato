@@ -40,4 +40,20 @@ public class BomCodeController {
 		return true;
 	}
 	
+	
+	// 제품 검색 버튼 눌럿을때  모달 창 함수가 컨트롤러에 오고 리턴으로 모달창 띄울 jsp 적어줌.
+	@RequestMapping("com/bomModal.do")
+	public String vendModal(Model model) {
+		System.out.println("모달모달모달");
+		return "/common/bomModal"; // 모달 주소 적어야 한다.
+	}
+	
+	// 모달창으로 원자재 제품코드 조회.
+	@RequestMapping("/com/bomModalModal.do")
+	public String vendList(Model model) {
+		System.out.println("제품 검색");
+		model.addAttribute("datas", bomcodeService.rwmatrList());
+		return "grid"; 
+	}
+	
 }

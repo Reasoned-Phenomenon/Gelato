@@ -19,14 +19,14 @@
 			<div>
 			<br>
 				<label>제품코드</label>
-	      			<input type="text" id="" name="">
+	      			<input type="text" id="prdtId" name="prdtId">
 	      			<button type="button" id="serachBtn">검색</button>&ensp;&ensp;&ensp;
 	      					
 	      		<label>제품명</label>
 	      			<input type="text" id="" name=""> &ensp;
 	      			
 	      		<label>소모량</label>
-	      			<input type="text" id="" name=""> &ensp;
+	      			<input type="text" id="qy" name="qy"> &ensp;
 	      		
 	      		<label>업체명</label>
 	      			<input type="text" id="" name=""> &ensp;		
@@ -36,8 +36,8 @@
 			    <br>
 	      	 </div>
 				<div>
-					<button type="button" class="btn cur-p btn-outline-primary" id="btnAdd">추가</button>
 					<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
+					<button type="button" class="btn cur-p btn-outline-primary" id="btnAdd">추가</button>
 					<button type="button" class="btn cur-p btn-outline-primary" id="btnSave">저장</button>
 				
 				</div>
@@ -72,7 +72,8 @@ const bomGrid = new Grid({
 	    readData: 	{ url: '${path}/com/findBomList.do', method: 'GET'},
 	    modifyData : { url: '${path}/com/bomCodeModifyData.do', method: 'PUT'} 
 	  },
-	  contentType: 'application/json'
+	  contentType: 'application/json',
+	  initialRequest: false
 	},
 	rowHeaders: ['rowNum'],
 	selectionUnit: 'row',
@@ -97,6 +98,13 @@ const bomGrid = new Grid({
 			  editor:'text',
 			  align: 'center'
 		      
+			},
+			{
+			  header: '자재명',
+			  name: 'nm',
+			  editor:'text',
+			  align: 'center'
+			      
 			},
 			{
 			  header: '소모량',
@@ -145,7 +153,43 @@ const bomGrid = new Grid({
 	// 저장 버튼 이벤트.
 	
 	
-	// 검색 버튼 이벤트.
+	
+	
+	// 모달창 생성 함수.
+	$(function () {
+		dialog = $( "#bomModal" ).dialog({
+			autoOpen: false,
+			height: 500,
+			width: 700,
+			modal: true,
+			buttons: {
+			// 선택하는 버튼 넣어두기!. 옵션? 어떤거 잇는 지 찾아보기.
+			Cancel: function() {
+			
+			}
+			}
+		})
+	});
+	
+	// 제품 검색 버튼 이벤트.
+	serachBtn.addEventListener("click", function() {
+		console.log("00000");
+		console.log("모달클릭")
+		dialog.dialog( "open" );
+		
+		 // 컨트롤러에 보내주고 따로 모달은 jsp 만들 필요가 없으니깐  
+		 $('#bomModal').load("${path}/com/bomModal.do",function () {
+			 console.log('로드됨')
+		})
+		
+	})
+	
+	// 제품코드 인풋 태그에 값들어가게 함.
+	function getModal(Param) {
+		console.log(Param);
+		$("#prdtId").val(Param);
+		dialog.dialog("close");
+	}
 	
 
 </script>		

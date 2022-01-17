@@ -5,15 +5,11 @@
 	<!-- BOM 전체 조회.-->
 	
 	<select id="findBomList" resultType="BomCodeVO">
-		SELECT BOM_ID,
-			   PRDT_ID,
-			   RWMATR_ID,
-			   QY,
-			   PRCS_ID,
-			   FG,
-			   REMK,
-			   USE_YN
-		FROM BOM	   
+		SELECT  a.bom_id, a.prdt_id, a.rwmatr_id, a.qy, a.prcs_id, a.fg, a.remk, a.use_yn,
+                b.nm
+		FROM bom a 
+		JOIN rwmatr b
+		ON a.rwmatr_id = b.rwmatr_id   
 	</select>
 
 	<!-- BOM 등록 -->
@@ -42,9 +38,18 @@
 	</insert>
 
 
+	<!-- bom에서 제품코드 검색 modal --> <!-- 다시 생각해서 수정 -->
+	<select id="rwmatrList" resultType="BomCodeVO">
+		SELECT a.prdt_id, b.nm , b.spec ,b.wk_unit
+		FROM   bom a
+		JOIN   rwmatr b
+		ON     a.rwmatr_id = b.rwmatr_id
+		
+	</select>
 
-
-
+	<update id="" >
+	
+	</update>
 
 
 
