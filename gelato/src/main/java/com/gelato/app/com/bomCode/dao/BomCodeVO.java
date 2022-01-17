@@ -19,4 +19,8 @@ public class BomCodeVO {
 		String nm;      // 자재명.
 		String spec;    // 자재 규격.
 		String wkUnit;  // 작업 단위.
+		
+		String vendName;       // 업체명.
+		String prdtNm;		  // 완제품 명.
+		String prcsNm;		  // 공정 명.
 }

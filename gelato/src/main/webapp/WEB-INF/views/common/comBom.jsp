@@ -23,22 +23,23 @@
 	      			<button type="button" id="serachBtn">검색</button>&ensp;&ensp;&ensp;
 	      					
 	      		<label>제품명</label>
-	      			<input type="text" id="" name=""> &ensp;
+	      			<input type="text" id="prdtNm" name="prdtNm"> &ensp;
 	      			
 	      		<label>소모량</label>
 	      			<input type="text" id="qy" name="qy"> &ensp;
 	      		
 	      		<label>업체명</label>
-	      			<input type="text" id="" name=""> &ensp;		
+	      			<input type="text" id="vendName" name="vendName"> &ensp;		
 	      		
 	      		<label>사용여부</label>
-	      			<input type="checkBox" id="" name=""> &ensp;		
+	      			<input type="checkBox" id="useYn" name="useYn" checked> &ensp;		
 			    <br>
 	      	 </div>
 				<div>
-					<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
-					<button type="button" class="btn cur-p btn-outline-primary" id="btnAdd">추가</button>
-					<button type="button" class="btn cur-p btn-outline-primary" id="btnSave">저장</button>
+					<button type="button" class="btn cur-p btn-outline-primary" id="FindBtn">조회</button>
+					<button type="button" class="btn cur-p btn-outline-primary" id="AddBtn">추가</button>
+					<button type="button" class="btn cur-p btn-outline-primary" id="SaveBtn">저장</button>
+					<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
 				
 				</div>
 		</form>
@@ -65,7 +66,7 @@ Grid.applyTheme('striped', {
 });
 
 //그리드 생성.
-const bomGrid = new Grid({
+var bomGrid = new Grid({
 	el: document.getElementById('bomGrid'),
 	data : {
 	  api: {
@@ -95,14 +96,12 @@ const bomGrid = new Grid({
 			{
 			  header: '자재코드',
 			  name: 'rwmatrId',
-			  editor:'text',
 			  align: 'center'
 		      
 			},
 			{
 			  header: '자재명',
 			  name: 'nm',
-			  editor:'text',
 			  align: 'center'
 			      
 			},
@@ -114,9 +113,8 @@ const bomGrid = new Grid({
 			  
 			},
 			{
-			  header: '공정코드',
-			  name: 'prcsId',
-			  editor:'text',
+			  header: '사용 공정명',
+			  name: 'prcsNm',
 			  align: 'center'
 		     
 			},
@@ -146,12 +144,15 @@ const bomGrid = new Grid({
 });
 	
 	// 추가 버튼 이벤트.
-	btnAdd.addEventListener("click", function(){
-		bomGrid.prependRow();
+	AddBtn.addEventListener("click", function(){
+		bomGrid.appendRow();
 	});
 	
-	// 저장 버튼 이벤트.
-	
+	// 저장(등록) 버튼 이벤트.
+	SaveBtn.addEventListener("click", function(){	
+		bomGrid.blur();
+		bomGrid.request('modifyData');
+	});
 	
 	
 	
@@ -187,9 +188,33 @@ const bomGrid = new Grid({
 	// 제품코드 인풋 태그에 값들어가게 함.
 	function getModal(Param) {
 		console.log(Param);
-		$("#prdtId").val(Param);
+		$("#prdtId").val(Param.prdtId);
+		$("#prdtNm").val(Param.prdtNm);
+		$("#qy").val(Param.qy);
+		$("#vendName").val(Param.vendName);
+		$("#useYn").val(Param.useYn);
+		
 		dialog.dialog("close");
 	}
+	
+	// 조회 버튼 이벤트.
+	FindBtn.addEventListener("click", function(){
+		    console.log("조회버튼 클릭");
+		    var prdtId = document.getElementById("prdtId").value;
+			var prdtNm = document.getElementById("prdtNm").value;
+			
+			var qy = document.getElementById("qy").value;
+			var vendName = document.getElementById("vendName").value;
+			var useYn = document.getElementById("useYn").value;
+			
+			console.log("prdtId");
+			console.log("prdtNm");
+			console.log("qy");
+			console.log("vendName");
+			console.log("useYn");
+			
+			bomGrid.readData(1, {'prdtId':prdtId, 'prdtNm':prdtNm, 'qy':qy, 'vendName':vendName, 'useYn':useYn }, true);
+	});
 	
 
 </script>		

@@ -51,7 +51,7 @@
 			  },
 			  {
 			    header: '제품 명',
-			    name: 'nm',
+			    name: 'prdtNm',
 			    align: 'center'
 			  },
 			  {
@@ -59,6 +59,17 @@
 			    name: 'spec',
 			    align: 'center'
 			  },
+			  {
+			    header: '소모량',
+			    name: 'qy',
+			    align: 'center'
+			  },
+			  {
+			    header: '업체 명',
+				name: 'vendName',
+				align: 'center'
+			  },
+			  
 			  {
 				header: '작업 단위',
 				name: 'wkUnit',
@@ -77,7 +88,7 @@
 		});
 		
 		
-		var Param = findGrid.getRow(ev.rowKey).prdtId; // 컬럼 네임을 해서 한줄에 있는 값 다 들고 오게 하기.
+		var Param = findGrid.getRow(ev.rowKey); // 컬럼 네임을 해서 한줄에 있는 값 다 들고 오게 하기.
 		getModal(Param);
 		console.log(Param);
 	}); 
