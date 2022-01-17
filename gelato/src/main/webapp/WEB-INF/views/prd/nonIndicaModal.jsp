@@ -55,7 +55,19 @@
 		  ]
 	});
 	
+	//그리드 클릭 이벤트
+	nonIndicaGrid.on("dblclick", (ev) => {
 	
+		nonIndicaGrid.setSelectionRange({
+	    start: [ev.rowKey, 0],
+	    end: [ev.rowKey, nonIndicaGrid.getColumns().length-1]
+	});
+	
+	var nip = nonIndicaGrid.getRow(ev.rowKey).planId;
+	console.log(nip);
+	choosePI(nip);
+
+	});
 	
 </script>	
 </body>

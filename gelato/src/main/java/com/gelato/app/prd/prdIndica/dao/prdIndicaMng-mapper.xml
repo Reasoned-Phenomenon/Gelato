@@ -9,5 +9,6 @@
 		from prod_plan pp left outer join prod_indica pi
 		    on pp.plan_id = pi.plan_id
 		where pi.indica_id is null
+		order by pp.dt
 	</select>
 </mapper>
