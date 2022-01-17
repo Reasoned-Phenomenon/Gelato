@@ -11,4 +11,18 @@
 		where pi.indica_id is null
 		order by pp.dt
 	</select>
+	
+<!-- 생산계획조회 그리드 출력 -->
+	<select id="choosePlan" resultType="PrdIndicaMngVO">
+		select ppd.plan_deta_id as plan_deta_id, 
+		       p.prdt_nm as prdt_nm,
+		       ppd.qy as qy, 
+		       ppd.prod_dcnt as prod_dcnt
+		from prod_plan_deta ppd join prdt p
+		    on ppd.prdt_id = p.prdt_id
+		where ppd.plan_id = #{planId}
+		order by ppd.priort
+	</select>
+	
+<!-- 생산지시 그리드 출력 -->
 </mapper>

@@ -19,4 +19,9 @@ public class PrdIndicaMngImpl implements PrdIndicaMngService{
 		return pimMapper.nonIndicaList();
 	}
 
+	@Override
+	public List<PrdIndicaMngVO> choosePlan(PrdIndicaMngVO vo) {
+		return pimMapper.choosePlan(vo);
+	}
+
 }

@@ -25,21 +25,21 @@
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-sm-4">
-			<div id="planDetaGrid"></div>
+		<div class="col-sm-5">
+			<div id="planDetaGrid">그리드1</div>
 			<hr>
 		</div>
-		<div class="col-sm-8">
+		<div class="col-sm-7">
 			<div id="planIndicaGrid">그리드2</div>
 			<hr>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-4">
+		<div class="col-sm-5">
 			<div id="RwmatrGrid">그리드3</div>
 			<hr>
 		</div>
-		<div class="col-sm-8">
+		<div class="col-sm-7">
 			<div id="RwmatrLotGrid">그리드4</div>
 			<hr>
 		</div>
@@ -73,7 +73,7 @@
 			el : document.getElementById('planDetaGrid'),
 			data : {
 				api : {
-					readData : {url : '${path}/prd/chooseOrder.do',method : 'GET'},
+					readData : {url : '${path}/prd/choosePlan.do',method : 'GET'},
 				},
 				contentType : 'application/json',
 				initialRequest: false
@@ -94,14 +94,32 @@
 				name : 'prodDcnt',
 			}]
 		});
-	
-	// 미지시 생산계획
-		// 계획코드 받아서 readData에 넘기기
-		function choosePI(nip){
-			console.log(nip);
-			planDetaGrid.readData(1,{planId:nip}, true);
-		}
 		
+		//생산지시 그리드
+		const planIndicaGrid = new Grid({
+			el : document.getElementById('planIndicaGrid'),
+			data : {
+				api : {
+					readData : {url : '${path}/',method : 'GET'},
+				},
+				contentType : 'application/json',
+				initialRequest: false
+			},
+			rowHeaders : ['rowNum' ],
+			selectionUnit : 'row',
+			columns : [ {
+				header : '착수일자',
+				name : 'indicaDt',
+			}, {
+				header : '작업수량',
+				name : 'qy',
+			}, {
+				header : '라인코드',
+				name : 'prodDcnt',
+			}]
+		});
+		
+	// 미지시 생산계획
 		//모달창 생성
 		var NonIndicaDialog = $("#nonIndicaDialog").dialog({
 				modal : true,
@@ -120,9 +138,34 @@
 								console.log("주문창 로드")
 							})
 				});
+		// 계획코드 받아서 readData에 넘기기
+		function choosePI(nip){
+			console.log(nip);
+			planDetaGrid.readData(1,{planId:nip}, true);
+			NonIndicaDialog.dialog("close");
+		}
 	//종료
 
-
+	// 생산계획 그리드 클릭
+	planDetaGrid.on("dblclick", (ev) => {
+		planDetaGrid.setSelectionRange({
+		    start: [ev.rowKey, 0],
+		    end: [ev.rowKey, planDetaGrid.getColumns().length-1]
+		});
+		
+		//planDetaId 가지고 와서 생산지시 작성
+		var pdi = planDetaGrid.getRow(ev.rowKey).planDetaId;
+		console.log(pdi);
+		choosePDI(pdi);
+	});
+	
+	function choosePDI(pdi){
+		console.log(pdi);
+		planIndicaGrid.readData(1,{planDetaId:pdi}, true);
+	}
+	
+	
+	
 
 
 

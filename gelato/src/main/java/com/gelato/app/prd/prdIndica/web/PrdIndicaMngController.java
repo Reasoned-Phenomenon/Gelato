@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gelato.app.prd.prdIndica.dao.PrdIndicaMngVO;
 import com.gelato.app.prd.prdIndica.service.PrdIndicaMngService;
 
 @Controller
@@ -33,6 +34,16 @@ public class PrdIndicaMngController {
 		System.out.println("미지시 생산계획 리스트 출력");
 		System.out.println(model);
 		model.addAttribute("datas" , prdIndicaMngService.nonIndicaList());
+		return "grid";
+	}
+	
+	//미지시에서 선택한 값을 그리드1에 출력
+	@RequestMapping("/prd/choosePlan.do")
+	public String choosePlan(Model model, PrdIndicaMngVO vo) {
+		System.out.println("미지시 선택값 출력");
+		System.out.println(vo);
+		System.out.println(model);
+		model.addAttribute("datas", prdIndicaMngService.choosePlan(vo));
 		return "grid";
 	}
 }
