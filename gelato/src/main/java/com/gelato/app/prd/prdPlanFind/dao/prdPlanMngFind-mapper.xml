@@ -27,9 +27,9 @@
 		<where>
 				pp.fg = any('FINISH', 'PROCEE', 'CANCLE')
 				
-                <if test="fg != 'ALL'">
+                <!-- <if test="fg != 'ALL'">
                 	and pp.fg = #{fg}
-                </if>
+                </if> -->
                 
                 <if test="startD != null and startD != ''">
                 	<![CDATA[and pp.dt >= to_date(#{startD})]]>
