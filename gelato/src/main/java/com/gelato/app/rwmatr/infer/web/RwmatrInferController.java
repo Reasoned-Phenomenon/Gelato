@@ -27,4 +27,19 @@ public class RwmatrInferController {
 		System.out.println(rwmatrInferService.RwmatrInferList(vo));
 		return "grid";
 	}
+	
+	//원자재 불합격 모달
+	@RequestMapping("/rwmatr/rwmatrFailModal.do")
+	public String rwmatrFailModal() {
+		return "rwmatr/rwmatrFailModal";
+	}
+	
+	//원자재 불합격 리스트
+	@RequestMapping("/rwmatr/rwmatrFailList.do")
+	public String rwmatrFailList(RwmatrInferVO vo, Model model) {
+		System.out.println("자재불합격 리스트 조회");
+		model.addAttribute("datas", rwmatrInferService.RwmatrFailList(vo));
+		System.out.println(rwmatrInferService.RwmatrFailList(vo));
+		return "grid";
+	}
 }

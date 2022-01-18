@@ -20,6 +20,10 @@ public class RwmatrInferServiceImpl implements RwmatrInferService {
 		return rwmatrInferMapper.RwmatrInferList(vo);
 	}
 
+	@Override
+	public List<RwmatrInferVO> RwmatrFailList(RwmatrInferVO vo) {
+		return rwmatrInferMapper.RwmatrFailList(vo);
+	}
 	
 	public int modifyRwmatrInfer(ModifyVO<RwmatrInferVO> mvo) {
 		for(RwmatrInferVO vo : mvo.getCreatedRows()) {
@@ -38,4 +42,6 @@ public class RwmatrInferServiceImpl implements RwmatrInferService {
 		}
 		return 0;
 	}
+
+
 }

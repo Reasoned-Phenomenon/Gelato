@@ -39,6 +39,23 @@
 		ORDER BY DT DESC
 	</select>
 	
+	<select id="RwmatrFailList" resultType="RwmatrInferVO">
+		SELECT ROD.ORDER_ID AS ORDER_ID,
+        ROD.RWMATR_ORDER_DETA_ID AS RWMATR_ORDER_DETA_ID,
+                R.RWMATR_ID AS RWMATR_ID,
+		       R.NM AS NM,
+		       V.VEND_NAME AS VEND_NAME,
+		       RII.INFER_QY AS INFER_QY,
+               RII.DT AS DT
+		FROM RWMATR_IST_INSP RII JOIN RWMATR R
+		    ON RII.RWMATR_ID = R.RWMATR_ID 
+		JOIN VEND V
+		    ON R.VEND_ID = V.VEND_ID
+        JOIN RWMATR_ORDER_DETA ROD
+            ON ROD.RWMATR_ORDER_DETA_ID = RII.RWMATR_ORDER_DETA_ID
+		WHERE RII.FG IS NULL
+	</select>
+	
 	<insert id="">
 		
 	</insert>

@@ -87,10 +87,11 @@ var rwmatrInferList = new Grid({
 		{
 		    header: '발주코드',
 		    name: 'orderId',
-		    sortable: true
+		    sortable: true,
+			hidden:true
 		  },
   		  {
-		    header: '발주디테일코드',
+		    header: '발주코드',	//발주디테일코드
 		    name: 'rwmatrOrderDetaId',
 		    sortable: true
 		  },
@@ -187,7 +188,21 @@ function callrwmatrStcModal(){
 	}); 
 
     dialog.dialog( "open" );
-    $("#dialogFrm").load("${path}/rwmatr/rwmatrStcModal.do", function(){console.log("검수완료 리스트")})
+    $("#dialogFrm").load("${path}/rwmatr/rwmatrStcModal.do", function(){console.log("원자재 현재고 리스트")})
+}
+
+//원자재 불합격리스트 모달
+function callrwmatrFailModal(){
+	dialog = $( "#dialogFrm" ).dialog({
+		  modal:true,
+		  autoOpen:false,
+	      height: 400,
+	      width: 600,
+	      modal: true
+	}); 
+
+    dialog.dialog( "open" );
+    $("#dialogFrm").load("${path}/rwmatr/rwmatrFailModal.do", function(){console.log("원자재 불합격 리스트")})
 }
 	
 	//자재명 클릭시 현재고리스트 모달
@@ -196,23 +211,24 @@ function callrwmatrStcModal(){
 		console.log(ev)
 		console.log(ev.columnName)
 		console.log(ev.rowKey)
-	    if (ev.columnName === 'rwmatrId') {
+	    if (ev.columnName === 'rwmatrOrderDetaId') {
 			console.log("검수완료리스트")
 			ig = 'g';
-			callrwmatrStcModal();
+			callrwmatrFailModal();
 		} else {
 			
 		}
 	});
 
-	//검수합격리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
+	//불량리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
 	function getRwmatrData(rwmatrData) {
 		console.log("입고정보 기입")
 		if(ig == 'g'){
+			rwmatrInferList.setValue(rk, "rwmatrOrderDetaId", rwmatrData.rwmatrOrderDetaId, true)
 			rwmatrInferList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
 			rwmatrInferList.setValue(rk, "nm", rwmatrData.nm, true)
 			rwmatrInferList.setValue(rk, "vendName", rwmatrData.vendName, true)
-			rwmatrInferList.setValue(rk, "oustQy", rwmatrData.passQy, true)
+			rwmatrInferList.setValue(rk, "qy", rwmatrData.inferQy, true)
 		} else if(ig == 'i'){
 			document.getElementById("rwmName").value = rwmatrData.nm;
 		}

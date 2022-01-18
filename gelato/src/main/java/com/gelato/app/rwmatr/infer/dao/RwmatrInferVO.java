@@ -28,6 +28,7 @@ public class RwmatrInferVO {
 	
 	//join
 	String vendName;
+	String inferQy;
 	
 	
 }
