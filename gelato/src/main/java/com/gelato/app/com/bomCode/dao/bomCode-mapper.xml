@@ -26,8 +26,7 @@
 	<!-- BOM 등록 -->
 	<insert id="insertBomCode" parameterType="BomCodeVO">
 		INSERT INTO BOM (
-							BOM_ID,
-							PRDT_ID,
+							
 							RWMATR_ID,
 							QY,
 							PRCS_ID,
@@ -36,8 +35,6 @@
 							USE_YN
 			             )
 			     VALUES (
-			     			#{bomId},
-			     			#{prdtId},
 			     			#{rwmatrId},
 			     			#{qy},
 			     			#{prcsId},
