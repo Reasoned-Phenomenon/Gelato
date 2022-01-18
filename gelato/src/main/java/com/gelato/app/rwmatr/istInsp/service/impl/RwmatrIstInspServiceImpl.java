@@ -51,6 +51,9 @@ public class RwmatrIstInspServiceImpl implements RwmatrIstInspService {
 		
 		for(RwmatrIstInspVO vo : mvo.getDeletedRows()) {
 			System.out.println("삭제");
+			RwmatrInferVO rwmatrInferVO = new RwmatrInferVO();
+			rwmatrInferVO.setRwmatrOrderDetaId(vo.getRwmatrOrderDetaId());
+			rwmatrInferMapper.deleteRwmatrInferDeta(rwmatrInferVO);
 			rwmatrIstInspMapper.deleteRwmatrIstInsp(vo);
 		}
 		
