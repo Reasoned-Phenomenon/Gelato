@@ -91,7 +91,7 @@
 			el : document.getElementById('eqmListGrid'),
 			data : {
 				api : {
-					readData : {
+					readData : {  
 						url : '${path}/eqm/eqmList.do',
 						method : 'GET'
 					}
@@ -110,7 +110,7 @@
 				header : '공정코드',
 				name : 'prcsId'
 			}, {
-				header : '공정명',
+				header : '공정명',  
 				name : 'nm'
 			}, {
 				header : '사용여부',
