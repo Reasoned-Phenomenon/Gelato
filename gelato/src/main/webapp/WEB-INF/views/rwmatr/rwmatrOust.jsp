@@ -102,6 +102,11 @@ var rwmatrOustList = new Grid({
 				  header: '출고량',
 				  align: 'right',
 				  name: 'oustQy',
+				  formatter({value}) { // 추가
+					  let a = `\${value}`
+				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+				      return b;
+				  },
 				  sortable: true
 				},
 				{

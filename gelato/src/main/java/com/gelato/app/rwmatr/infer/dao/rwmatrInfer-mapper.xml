@@ -62,7 +62,6 @@
 	</select>
 	
 	<insert id="insertRwmatrInferDeta">
-		
 	</insert>
 	
 	<update id="updateRwmatrInferDeta">

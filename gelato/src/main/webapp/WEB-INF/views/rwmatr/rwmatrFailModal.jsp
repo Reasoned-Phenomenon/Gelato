@@ -75,6 +75,11 @@ var rwmatrFailListGrid = new Grid({
 		    header: '불량량',
 		    align: 'right',
 		    name: 'inferQy',
+		    formatter({value}) { // 추가
+				  let a = `\${value}`
+			  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+			      return b;
+		    },
 		    sortable: true
 		  },
 		  {

@@ -113,7 +113,7 @@ var rwmatrOrderList = new Grid({
 					  let a = `\${value}`
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 				      return b;
-				   }, 
+				  }, 
 				  sortable: true
 				},
 				{
@@ -125,7 +125,7 @@ var rwmatrOrderList = new Grid({
 					  let a = `\${value}`
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 				      return b;
-				   }, 
+				  }, 
 				  sortable: true
 				},
 				{
@@ -136,7 +136,7 @@ var rwmatrOrderList = new Grid({
 					  let a = `\${value}`
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 				      return b;
-				   },
+				  },
 				  sortable: true
 				},
 				{
