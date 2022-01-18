@@ -24,4 +24,9 @@ public class PrdIndicaMngImpl implements PrdIndicaMngService{
 		return pimMapper.choosePlan(vo);
 	}
 
+	@Override
+	public PrdIndicaMngVO choosePlanDetaId(PrdIndicaMngVO vo) {
+		return pimMapper.choosePlanDetaId(vo);
+	}
+
 }

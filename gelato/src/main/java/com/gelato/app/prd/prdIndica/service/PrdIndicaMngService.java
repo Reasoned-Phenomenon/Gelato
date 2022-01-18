@@ -11,4 +11,7 @@ public interface PrdIndicaMngService {
 	
 	//생산계획디테일 그리드 출력
 	List<PrdIndicaMngVO> choosePlan(PrdIndicaMngVO vo);
+	
+	//생산지시 그리드 - ajax
+	PrdIndicaMngVO choosePlanDetaId(PrdIndicaMngVO vo);
 }
