@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gelato.app.com.comCode.dao.ComCodeVO;
 import com.gelato.app.com.comCode.service.ComCodeService;
-import com.gelato.app.eqm.dao.EqmNonVO;
 import com.gelato.app.eqm.dao.EqmVO;
+import com.gelato.app.eqm.eqmNon.dao.EqmNonVO;
 import com.gelato.app.eqm.service.EqmService;
 
 @Controller
@@ -91,27 +91,6 @@ public class EqmController {
 		return "tiles/eqm/eqmNonMoving";
 	}
 	
-	// 설비비가동관리 - 좌측 설비전체조회 그리드
-	@GetMapping("/eqm/eqmNonMovingList.do")
-	public String findEqmNon(Model model, EqmVO eqmVo) {
-		model.addAttribute("datas", service.eqmNonList(eqmVo));
-		return "grid";
-	}
-	
-	// 설비비가동관리 - 비가동내역조회
-	@GetMapping("eqm/eqmNonSelect.do")
-	public String eqmNonSelect(Model model, EqmNonVO eqmNonVo) {
-		System.out.println(eqmNonVo);
-		model.addAttribute("datas",service.eqmNonSelect(eqmNonVo));
-		return "grid";
-	}
-	
-	// 설비비가동관리 - 등록 
-	@RequestMapping("/eqm/eqmNonInsert.do")
-	public String eqmNonInsert(Model model, EqmNonVO eqmNonVo) {
-		model.addAttribute("datas",service.insertNonEqm(eqmNonVo));
-		return "tiles/eqm/eqmNonMoving";
-	}
 	
 }
 

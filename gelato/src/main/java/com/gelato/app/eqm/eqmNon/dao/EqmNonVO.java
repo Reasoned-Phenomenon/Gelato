@@ -1,4 +1,4 @@
-package com.gelato.app.eqm.dao;
+package com.gelato.app.eqm.eqmNon.dao;
 
 import lombok.Data;
 
@@ -15,7 +15,8 @@ public class EqmNonVO {
 	String resnName;	//비가동사유명
 	String gubun;		//구분
 	
-	String toDate;
-	String fromDate;
-	String searchId;
+	String toDate;		//검색일자(시작)
+	String fromDate;	//검색일자(종료)
+	String searchId;	
+
 }

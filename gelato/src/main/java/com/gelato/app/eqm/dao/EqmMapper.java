@@ -19,12 +19,5 @@ public interface EqmMapper {
 	//설비삭제
 	int eqmDelete(EqmVO eqmVo);
 	
-	//설비비가동
-	List<EqmVO> eqmNonList(EqmVO eqmVo);
 	
-	//설비비가동 내역조회
-	List<EqmNonVO> eqmNonSelect(EqmNonVO eqmNonVo);
-	
-	//설비비가동 등록
-	int insertNonEqm(EqmNonVO eqmNonVo);
 }

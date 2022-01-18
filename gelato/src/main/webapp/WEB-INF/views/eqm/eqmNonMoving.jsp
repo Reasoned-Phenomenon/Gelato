@@ -20,10 +20,10 @@
 				<br> <label>설비구분</label> <select id="gubun"
 					onchange="selectGubun()">
 					<option value="전체">전체
-					<option value="배합">배합
-					<option value="운송">운송
-					<option value="측정">측정
-					<option value="가공">가공
+					<option value="배합기">배합기
+					<option value="운송기">운송기
+					<option value="측정기">측정기
+					<option value="가공기">가공기
 				</select>
 				<div id="eqmListGrid" style="width: 100%;"></div>
 			</div>
