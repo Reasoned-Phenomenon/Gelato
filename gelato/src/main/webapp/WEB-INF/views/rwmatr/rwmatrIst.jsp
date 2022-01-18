@@ -111,6 +111,11 @@ var rwmatrIstList = new Grid({
 				  header: '입고량',
 				  align: 'right',
 				  name: 'istQy',
+				  formatter({value}) { // 추가
+					  let a = `\${value}`
+				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+				      return b;
+				  },
 				  sortable: true
 				},
 				{

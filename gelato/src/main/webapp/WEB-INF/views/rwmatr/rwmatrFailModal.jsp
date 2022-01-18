@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>발주 목록</title>
+<title>검수불합격 목록</title>
 </head>
 <style>
 h1 {
@@ -15,9 +15,9 @@ h1 {
 </style>
 <body>
 	<br>
-	<h1>발주 목록</h1>
+	<h1>검수불합격 목록</h1>
 	<br>
-	<div id="orderDetailListGrid" style="width: 100%"></div>
+	<div id="rwmatrFailListGrid" style="width: 100%"></div>
 	
 <script>
 var Grid = tui.Grid;
@@ -35,26 +35,31 @@ Grid.applyTheme('striped', {
 	});
 	
 // 그리드 생성
-var orderDetailListGrid = new Grid({
-	el: document.getElementById('orderDetailListGrid'),
+var rwmatrFailListGrid = new Grid({
+	el: document.getElementById('rwmatrFailListGrid'),
   	data : {
 	  api: {
-	    readData: { url:'${path}/rwmatr/orderDetailList.do', method: 'GET'}
+	    readData: { url:'${path}/rwmatr/rwmatrFailList.do', method: 'GET'}
 	  },
 	  contentType: 'application/json'
 	},
   	rowHeaders:['rowNum'],
   	selectionUnit: 'row',
   	columns:[
-  		  {
-		    header: '발주번호',
+ 		  {
+		    header: '발주코드',
 		    name: 'orderId',
 		    sortable: true
 		  },
 		  {
-		    header: '발주디테일번호',
+		    header: '발주디테일코드',
 		    name: 'rwmatrOrderDetaId',
-		    hidden:true 
+			hidden:true
+		  },
+  		  {
+		    header: '자재코드',
+		    name: 'rwmatrId',
+		    sortable: true
 		  },
 		  {
 		    header: '자재명',
@@ -62,36 +67,41 @@ var orderDetailListGrid = new Grid({
 		    sortable: true
 		  },
 		  {
-		    header: '자재코드',
-		    name: 'rwmatrId',
+		    header: '업체명',
+		    name: 'vendName',
 		    sortable: true
 		  },
 		  {
-		    header: '발주총량',
+		    header: '불량량',
 		    align: 'right',
-		    name: 'qy',
+		    name: 'inferQy',
 		    formatter({value}) { // 추가
 				  let a = `\${value}`
 			  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 			      return b;
-			  },
+		    },
 		    sortable: true
+		  },
+		  {
+		    header: '검사일자',
+		    name: 'dt',
+		    editor: 'datePicker'
 		  }
 		]
 });
 
 
 //커스텀 이벤트
-orderDetailListGrid.on('dblclick', (ev) => {	
+rwmatrFailListGrid.on('dblclick', (ev) => {	
 	
 	//cell 선택시 row 선택됨.
-	orderDetailListGrid.setSelectionRange({
+	rwmatrFailListGrid.setSelectionRange({
 	      start: [ev.rowKey, 0],
-	      end: [ev.rowKey, orderDetailListGrid.getColumns().length-1]
+	      end: [ev.rowKey, rwmatrFailListGrid.getColumns().length-1]
 	  });
 	
 	
-	getOrderData(orderDetailListGrid.getRow(ev.rowKey));
+	getRwmatrData(rwmatrFailListGrid.getRow(ev.rowKey));
 });
 
 </script>
