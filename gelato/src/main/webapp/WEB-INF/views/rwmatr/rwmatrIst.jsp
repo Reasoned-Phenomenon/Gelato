@@ -89,6 +89,11 @@ var rwmatrIstList = new Grid({
 	bodyHeight: 600,
 	columns:[
 				{
+				  header: '발주코드',
+				  name: 'rwmatrOrderDetaId',
+				  sortable: true
+				},
+				{
 				  header: '자재코드',
 				  name: 'rwmatrId',
 				},
@@ -162,7 +167,7 @@ function callrwmatrPassModal(){
 		  modal:true,
 		  autoOpen:false,
 	      height: 400,
-	      width: 600,
+	      width: 850,
 	      modal: true
 	}); 
 
@@ -176,7 +181,7 @@ function callrwmatrPassModal(){
 		console.log(ev)
 		console.log(ev.columnName)
 		console.log(ev.rowKey)
-	    if (ev.columnName === 'rwmatrId') {
+	    if (ev.columnName === 'rwmatrOrderDetaId') {
 			console.log("검수완료리스트")
 			ig = 'g';
 			callrwmatrPassModal();
@@ -194,6 +199,7 @@ function callrwmatrPassModal(){
 			//rwmId = rwmatrData.rwmatrId;
 			//rwmNm = rwmatrData.nm;
 			//rwmQy = rwmatrData.passQy;
+			rwmatrIstList.setValue(rk, "rwmatrOrderDetaId", rwmatrData.rwmatrOrderDetaId, true)
 			rwmatrIstList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
 			rwmatrIstList.setValue(rk, "nm", rwmatrData.nm, true)
 			rwmatrIstList.setValue(rk, "vendName", rwmatrData.vendName, true)

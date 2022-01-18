@@ -30,6 +30,8 @@ public class RwmatrioVO {
 	String rwmName;
 	
 	//join
+	String rwmatrOrderDetaId;
+	String orderId;
 	String nm;
 	String vendName;
 	String passQy;

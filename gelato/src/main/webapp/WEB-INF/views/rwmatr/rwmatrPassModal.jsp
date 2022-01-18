@@ -46,6 +46,16 @@ var rwmatrPassListGrid = new Grid({
   	rowHeaders:['rowNum'],
   	selectionUnit: 'row',
   	columns:[
+ 		  {
+		    header: '발주코드',
+		    name: 'orderId',
+		    sortable: true
+		  },
+		  {
+		    header: '발주디테일코드',
+		    name: 'rwmatrOrderDetaId',
+			hidden:true
+		  },
   		  {
 		    header: '자재코드',
 		    name: 'rwmatrId',
