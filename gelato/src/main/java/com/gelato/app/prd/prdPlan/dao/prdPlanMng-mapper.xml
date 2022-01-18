@@ -34,7 +34,7 @@
 		FROM    order_sht os 
 		JOIN    order_sht_deta osd
 		ON      (os.order_id = osd.order_id)
-		
+		    
 		JOIN    vend ve
 		ON      (os.vend_id = ve.vend_id)
 		
