@@ -19,10 +19,10 @@
 				<h2>설비관리</h2>
 				<label>구분</label> <select id="gubun" onchange="selectGubun()">
 					<option value="전체">전체
-					<option value="배합">배합
-					<option value="운송">운송
-					<option value="측정">측정
-					<option value="가공">가공
+					<option value="배합기">배합기
+					<option value="운송기">운송기
+					<option value="측정기">측정기
+					<option value="가공기">가공기
 				</select>
 				<div id="eqmListGrid"></div>
 			</div>
@@ -153,6 +153,8 @@
 			//$("#eqmImg").val(eqmListGrid.getValue(ev["rowKey"],"eqmImg"));
 			eqmListGrid.getValue(ev["rowKey"],"useYn")=='Y'?$("#useYn").prop("checked",true):$("#notUse").prop("checked",true);
 			
+			$("#prcsId").attr("disabled",false);
+			$("#nm").attr("disabled",false);
 			$("#tempMax").attr("disabled",false);
 			$("#tempMin").attr("disabled",false);
 			$("#chckPerd").attr("disabled",false);

@@ -79,7 +79,7 @@
 									<td><input id="eqmName" readonly></td>
 								</tr>
 								<tr>
-									<th>작업자</th>
+									<th>등록자</th>
 									<td><input></td>
 								</tr>
 								<tr>
@@ -223,7 +223,7 @@
 			
 			$("#btnEqmSearch").on("click",function(){
 				dialog.dialog("open");
-				$("#dialog-form").load("${path}/eqm/searchEqm.do", 	//load가 익숙치 않으면 ajax를 써도됨
+				$("#dialog-form").load("${path}/eqm/searchEqmModal.do", 	//load가 익숙치 않으면 ajax를 써도됨
 						function(){
 					console.log("로드됨")})
 			});
