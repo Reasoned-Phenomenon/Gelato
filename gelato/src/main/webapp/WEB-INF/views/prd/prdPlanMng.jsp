@@ -162,6 +162,7 @@ th, td {
 			}, {
 				header : '작업상태',
 				name : 'fg',
+				hidden : true
 			},{
 				header : '생산계획명',
 				name : 'name',

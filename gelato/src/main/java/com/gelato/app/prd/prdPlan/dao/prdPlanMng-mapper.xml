@@ -4,29 +4,47 @@
 
 <!-- 생산계획관리 - 주문서 modal  -->
 	<select id="OrderShtList" resultType="PrdPlanMngVO">
-		select os.order_id as order_id, 
-			   os.order_dt as order_dt, 
-			   ve.vend_name as vend_name,
-			   os.oust_dt as oust_dt,
-			   sum(osd.qy) as qy
-		from order_sht os join order_sht_deta osd
-		    on (os.order_id = osd.order_id)
-		    join vend ve
-		    on (os.vend_id = ve.vend_id)
-            left outer join prod_plan pp
-            on os.order_id = pp.order_id
-		where PP.PLAN_ID IS NULL
-              OR (pp.fg != 'FINISH' 
-                    AND pp.fg != 'PROCEE' 
-                  and os.order_id != (SELECT order_id
-                                        FROM prod_plan
-                                        WHERE order_id = (SELECT order_id
-                                                            FROM prod_plan
-                                                            WHERE fg = 'CANCLE')
-                                        AND (fg = 'PROCEE'
-                                        OR fg = 'FINISH')))
-		group by os.order_id, os.order_dt, ve.vend_name, os.oust_dt
-		order by os.oust_dt asc, to_number(sum(osd.qy)) desc
+		SELECT  os.order_id as order_id, 
+		        os.order_dt as order_dt, 
+		        ve.vend_name as vend_name,
+		        os.oust_dt as oust_dt,
+		        sum(osd.qy) as qy
+		FROM    order_sht os 
+		JOIN    order_sht_deta osd
+		ON      (os.order_id = osd.order_id)
+		
+		JOIN    vend ve
+		ON      (os.vend_id = ve.vend_id)
+		
+		LEFT OUTER JOIN prod_plan pp
+		ON      os.order_id = pp.order_id
+		
+		WHERE   pp.plan_id IS null
+		OR      pp.fg ='CANCEL'
+		     
+		GROUP BY os.order_id, os.order_dt, ve.vend_name, os.oust_dt
+		
+		MINUS
+		
+		SELECT  os.order_id as order_id, 
+		        os.order_dt as order_dt, 
+		        ve.vend_name as vend_name,
+		        os.oust_dt as oust_dt,
+		        sum(osd.qy) as qy
+		FROM    order_sht os 
+		JOIN    order_sht_deta osd
+		ON      (os.order_id = osd.order_id)
+		    
+		JOIN    vend ve
+		ON      (os.vend_id = ve.vend_id)
+		
+		LEFT OUTER JOIN prod_plan pp
+		ON      os.order_id = pp.order_id
+		
+		WHERE   pp.fg ='FINISH'
+		OR      pp.fg ='PROCEE'
+		     
+		GROUP BY os.order_id, os.order_dt, ve.vend_name, os.oust_dt
 	</select>
 	
 <!-- 생산계획관리 - 생산계획 modal -->
@@ -114,7 +132,7 @@
 					#{name},
 					sysdate,
 					#{orderId},
-					f_com_name_select('PROCEE')
+					'PROCEE'
 					 )
 	</insert>
 	
