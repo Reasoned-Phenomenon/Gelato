@@ -47,6 +47,7 @@
 
 <div id="bomGrid" style="width: 100%"></div>
 <div id="bomModal" style="width: 100%"></div>
+<div id="rwmatrCodeModal"></div>
 		
 <script>
 let dialog;
@@ -82,14 +83,12 @@ var bomGrid = new Grid({
 			{
 			  header: 'BOM코드',
 			  name: 'bomId',
-			  editor:'text',
 			  align: 'center'
 		      
 			},
 			{
 			  header: '제품코드',
 			  name: 'prdtId',
-			  editor:'text',
 			  align: 'center'
 	          
 			},
@@ -215,6 +214,33 @@ var bomGrid = new Grid({
 			
 			bomGrid.readData(1, {'prdtId':prdtId, 'prdtNm':prdtNm, 'qy':qy, 'vendName':vendName, 'useYn':useYn }, true);
 	});
+	
+	 // 그리드 셀 클릭하면 모달창 띄우기.
+	function callRwmartCodeModal () {
+		dialog = $("rwmatrCodeModal").dialog({
+			modal:true,
+			autoOpen:false,
+			height:400,
+			width:600,
+			modal:true
+		});
+		console.log("ppppp");
+		dialog.dialog( "open" );
+		console.log("dialog open확인");
+		$("#rwmatrCodeModal").load("${path}/com/searchRwmatrCode.do", function(){console.log("자재코드 목록")})
+	} 
+	
+	// 자재코드 셀 클릭시 모달
+	bomGrid.on('click',(ev) => {
+		rowkey = ev.rowKey;
+		console.log(ev)
+		console.log(ev.columnName)
+		console.log(ev.rowKey)
+		if (ev.columnName =='rwmatrId') {
+			console.log('자재코드')
+			callRwmartCodeModal ();
+		}
+	})
 	
 
 </script>		

@@ -56,4 +56,14 @@ public class BomCodeController {
 		return "grid"; 
 	}
 	
+	// 그리드 셀 클릭 시 제품코드 명 모달창으로 조회.
+	@RequestMapping("/com/searchRwmatrCode.do") 
+	public String searchRwmatrCode() {
+		System.out.println("제품코드명 모달");
+		return "/common/searchRwmatrCodeModal";
+	}
+	
+	// 제품코드 조회.
+	
+	
 }
