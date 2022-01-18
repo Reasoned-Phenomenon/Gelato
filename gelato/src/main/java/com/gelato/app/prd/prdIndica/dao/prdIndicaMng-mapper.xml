@@ -25,4 +25,11 @@
 	</select>
 	
 <!-- 생산지시 그리드 출력 -->
+	<select id="choosePlanDetaId" resultType="PrdIndicaMngVO">
+		select l.line_id
+		from prod_plan_deta ppd join line l
+		    on ppd.prdt_id = l.prdt_id
+		where ppd.plan_deta_id = #{planDetaId}
+		group by l.line_id
+	</select>
 </mapper>

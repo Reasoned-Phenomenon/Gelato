@@ -102,7 +102,7 @@
 			el : document.getElementById('planIndicaGrid'),
 			data : {
 				api : {
-					readData : {url : '${path}/',method : 'GET'},
+					readData : {url : '${path}/prd/choosePlanDetaId.do' , method : 'GET'},
 				},
 				contentType : 'application/json',
 				initialRequest: false
@@ -117,7 +117,7 @@
 				name : 'qy',
 			}, {
 				header : '라인코드',
-				name : 'prodDcnt',
+				name : 'lineId',
 			},  {
 				header : '일자별 우선순위',
 				name : 'ord',
@@ -161,13 +161,30 @@
 		//planDetaId 가지고 와서 생산지시 작성
 		var pdi = planDetaGrid.getRow(ev.rowKey).planDetaId;
 		console.log(pdi);
-		choosePDI(pdi);
+		var pdc = planDetaGrid.getRow(ev.rowKey).prodDcnt;
+		console.log(pdc);
+		
+		//ajax -> 라인코드 가져오기
+		$.ajax({
+			url:"${path}/prd/choosePlanDetaId.do?planDetaId=" + pdi,
+			async: false,
+			error : function(result) {
+				console.log('에러', result)
+			}
+		}).done(function (result) {
+			console.log(result)
+			lineId = result.lineId;
+			console.log(lineId)
+		})
+		
+		for( let i=0 ; i<pdc ; i++ ) {
+			planIndicaGrid.appendRow({'lineId':lineId})
+		}
+		
+		
+		
 	});
 	
-	function choosePDI(pdi){
-		console.log(pdi);
-		planIndicaGrid.readData(1,{planDetaId:pdi}, true);
-	}
 	
 	
 	
