@@ -91,7 +91,7 @@
 			el : document.getElementById('eqmListGrid'),
 			data : {
 				api : {
-					readData : {
+					readData : {  
 						url : '${path}/eqm/eqmList.do',
 						method : 'GET'
 					}
