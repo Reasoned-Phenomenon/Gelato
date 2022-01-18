@@ -26,22 +26,24 @@
 	<hr>
 	<div class="row">
 		<div class="col-sm-5">
-			<div id="planDetaGrid">그리드1</div>
+			<h3>상세생산계획</h3>
 			<hr>
+			<div id="planDetaGrid"></div>
 		</div>
 		<div class="col-sm-7">
-			<div id="planIndicaGrid">그리드2</div>
+			<h3>생산지시</h3>
 			<hr>
+			<div id="planIndicaGrid"></div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-5">
-			<div id="RwmatrGrid">그리드3</div>
 			<hr>
+			<div id="RwmatrGrid">그리드3</div>
 		</div>
 		<div class="col-sm-7">
-			<div id="RwmatrLotGrid">그리드4</div>
 			<hr>
+			<div id="RwmatrLotGrid">그리드4</div>
 		</div>
 	</div>
 	
@@ -116,6 +118,9 @@
 			}, {
 				header : '라인코드',
 				name : 'prodDcnt',
+			},  {
+				header : '일자별 우선순위',
+				name : 'ord',
 			}]
 		});
 		
