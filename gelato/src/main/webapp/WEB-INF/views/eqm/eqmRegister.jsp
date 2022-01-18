@@ -123,7 +123,7 @@
 		$("#dialog-form").load("${path}/eqm/searchFgModal.do", 	//load가 익숙치 않으면 ajax를 써도됨
 				function(){
 			seolbiGrid.readData(1, {codeId:"EQM002"}, true);
-			console.log("로드됨")})
+			console.log("설비구분모달 로드됨")})
 	});
 
 </script>

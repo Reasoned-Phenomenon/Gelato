@@ -13,6 +13,8 @@
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head>
 <body>
+	<!-- 공정코드 모달 -->
+	<div id="dialog-form" title="공정코드"></div>
 	<div class="container">
 		<div class="flex row">
 			<div class="col-7">
@@ -207,6 +209,18 @@
 			})
 		})
 		
+		//공정코드 모달
+		let dialog = $("#dialog-form").dialog({
+			autoOpen :false,
+			modal : true
+		});
+		
+		$("#btnFindPrcs").on("click", function(){
+			dialog.dialog("open");
+			$("#dialog-form").load("${path}/eqm/searchPrcsModal.do", 
+					function(){
+				console.log("공정코드모달 로드됨")})
+		});
 	</script>
 </body>
 </html>

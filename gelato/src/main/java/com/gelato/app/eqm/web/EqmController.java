@@ -113,12 +113,5 @@ public class EqmController {
 		return "tiles/eqm/eqmNonMoving";
 	}
 	
-	// 설비비가동관리 - 설비코드 모달
-	@RequestMapping("/eqm/searchEqmModal.do")
-	public String getEqmModal() {
-		return "/eqm/searchEqmModal";
-	}	
-
-	
 }
 
