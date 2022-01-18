@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="path" value="${pageContext.request.contextPath}"/> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -237,14 +235,6 @@ const codeGrid = new tui.Grid({
 		}
 	})
 	
-	codeGrid.on('click',function (ev) {
-		//findRows로 중복값 체크 -> 번호 증가시키면 LOT번호 부여 가능할 것 같음
-		console.log(ev)
-		let aaa = codeGrid.findRows({
-			code:codeGrid.getValue(ev.rowKey,ev.columnName)
-		}) 
-		console.log(aaa.length)
-	})
 	//버튼 이벤트
 	//저장버튼
 	btnSave.addEventListener("click",function(){
@@ -320,13 +310,23 @@ const codeGrid = new tui.Grid({
 		dialog.dialog( "close" );
 	}
 	
+	//테스트
 	//LOT 번호 부여 테스트
 	btnTest.addEventListener('click', function () {
 		let a = get_lot('RML-10010')
 		console.log(a)
 		
 	})
-	 
+	
+	codeGrid.on('click',function (ev) {
+		//findRows로 중복값 체크 -> 번호 증가시키면 LOT번호 부여 가능할 것 같음
+		console.log(ev)
+		let aaa = codeGrid.findRows({
+			code:codeGrid.getValue(ev.rowKey,ev.columnName)
+		}) 
+		console.log(aaa.length)
+	})
+	
 	//input태그(time) 테스트
 	btnTime.addEventListener('click', function () {
 		
