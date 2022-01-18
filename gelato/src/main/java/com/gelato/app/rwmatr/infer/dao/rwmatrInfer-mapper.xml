@@ -56,8 +56,21 @@
 		WHERE RII.FG IS NULL
 	</select>
 	
-	<insert id="">
+	<select id="RmatrInferCodeList" resultType="RwmatrInferVO">
+		SELECT * FROM INFER_CODE
+		WHERE FG = 'STEP01'
+	</select>
+	
+	<insert id="insertRwmatrInferDeta">
 		
 	</insert>
+	
+	<update id="updateRwmatrInferDeta">
+		
+	</update>
+	
+	<delete id="deleteRwmatrInferDeta">
+		
+	</delete>
 	
 </mapper>

@@ -204,25 +204,41 @@ function callrwmatrFailModal(){
     dialog.dialog( "open" );
     $("#dialogFrm").load("${path}/rwmatr/rwmatrFailModal.do", function(){console.log("원자재 불합격 리스트")})
 }
+
+//원자재 불량코드 모달
+function callrwmatrInferCodeModal(){
+	dialog = $( "#dialogFrm" ).dialog({
+		  modal:true,
+		  autoOpen:false,
+	      height: 400,
+	      width: 600,
+	      modal: true
+	}); 
+
+    dialog.dialog( "open" );
+    $("#dialogFrm").load("${path}/rwmatr/rwmatrInferCodeModal.do", function(){console.log("원자재 불합격 리스트")})
+}
 	
-	//자재명 클릭시 현재고리스트 모달
+	//자재명 클릭시 불량리스트 모달 / 불량코드클릭시 원자재불량코드 리스트 모달
 	rwmatrInferList.on('click', (ev) => {
 		rk = ev.rowKey;
 		console.log(ev)
 		console.log(ev.columnName)
 		console.log(ev.rowKey)
 	    if (ev.columnName === 'rwmatrOrderDetaId') {
-			console.log("검수완료리스트")
+			console.log("불량리스트")
 			ig = 'g';
 			callrwmatrFailModal();
-		} else {
-			
+		} else if(ev.columnName === 'inferId') {
+			console.log("원자재불량코드리스트")
+			ig = 'g';
+			callrwmatrInferCodeModal();
 		}
 	});
 
 	//불량리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
 	function getRwmatrData(rwmatrData) {
-		console.log("입고정보 기입")
+		console.log("불량정보 기입")
 		if(ig == 'g'){
 			rwmatrInferList.setValue(rk, "rwmatrOrderDetaId", rwmatrData.rwmatrOrderDetaId, true)
 			rwmatrInferList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
@@ -233,6 +249,16 @@ function callrwmatrFailModal(){
 			document.getElementById("rwmName").value = rwmatrData.nm;
 		}
 		
+		dialog.dialog( "close" );
+	}
+	
+	//불량코드리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
+	function getInferData(inferData) {
+		console.log("불량내용 기입")
+		if(ig == 'g'){
+			rwmatrInferList.setValue(rk, "inferId", inferData.inferId, true)
+			rwmatrInferList.setValue(rk, "deta", inferData.deta, true)
+		}
 		dialog.dialog( "close" );
 	}
 	

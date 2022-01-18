@@ -25,6 +25,11 @@ public class RwmatrInferServiceImpl implements RwmatrInferService {
 		return rwmatrInferMapper.RwmatrFailList(vo);
 	}
 	
+	@Override
+	public List<RwmatrInferVO> RmatrInferCodeList(RwmatrInferVO vo) {
+		return rwmatrInferMapper.RmatrInferCodeList(vo);
+	}
+	
 	public int modifyRwmatrInfer(ModifyVO<RwmatrInferVO> mvo) {
 		for(RwmatrInferVO vo : mvo.getCreatedRows()) {
 			System.out.println("추가");
@@ -42,6 +47,5 @@ public class RwmatrInferServiceImpl implements RwmatrInferService {
 		}
 		return 0;
 	}
-
 
 }

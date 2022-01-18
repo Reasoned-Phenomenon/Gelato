@@ -30,6 +30,10 @@ Grid.applyTheme('striped', {
 	    },
 	    evenRow: {
 	      background: '#fee'
+	    },
+	    invalid: {
+	    	background: 'red',
+	    	text: 'white'
 	    }
 	  }
 	});
@@ -65,7 +69,10 @@ var rwmatrStcListGrid = new Grid({
 		    header: '수량',
 		    align: 'right',
 		    name: 'qy',
-		    sortable: true
+		    sortable: true,
+	        validation: {
+	        	validatorFn: (value, row, columnName) => Number(value) > Number(row['safStc'])
+	        }
 		  },
 		  {
 		    header: '안전재고',
