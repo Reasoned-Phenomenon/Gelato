@@ -18,13 +18,11 @@
 		ON 	 (E.EQM_ID = O.EQM_ID)
 		
 		<where>
-			<if test='gubun != "선택" and gubun != null and gubun != ""'>
+			<if test='gubun != "선택"'>
 				AND E.FG = F_COM_NM_TO_CODE(#{gubun})
 			</if>
-			<if test='eqmNonYn == eqmNonY'>
-			</if>
-			<if test='eqmNonYn == eqmNonN'>
-				AND O.EQM_ID = #{eqmId}
+			<if test='eqmNonYn !="" and eqmNonYn != null'>
+				AND USE_YN = #{eqmNonYn}
 			</if>
 		</where>
 	</select>

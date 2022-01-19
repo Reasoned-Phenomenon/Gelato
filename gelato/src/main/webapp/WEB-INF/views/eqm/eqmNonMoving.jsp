@@ -27,9 +27,9 @@
 					<option value="운송기">운송기
 					<option value="측정기">측정기
 					<option value="가공기">가공기
-				</select> 가동설비<input type="radio" id="eqmNonY" name="eqmNonYn"> 
-				비가동설비<input type="radio" id="eqmNonN" name="eqmNonYn">
-				전체<input type="radio" id="eqmNonAll" name="eqmNonYn" checked>
+				</select> 가동설비<input type="radio" name="eqmNonYn" value="Y"> 
+				비가동설비<input type="radio" name="eqmNonYn" value="N">
+				전체<input type="radio" name="eqmNonYn"  value="" checked>
 				<div id="eqmListGrid" style="width: 100%;"></div>
 			</div>
 			<div class="col-8">
@@ -121,6 +121,7 @@
 	$("input[name='eqmNonYn']:radio").change(function () {
         //라디오 버튼 값을 가져온다.
         var eqmNonYn = this.value;
+        console.log(eqmNonYn);
                         
 	});
 
@@ -175,7 +176,8 @@
 		$("input[name='eqmNonYn']:radio").change(function () {
 	        //라디오 버튼 값을 가져온다.
 	        var eqmNonYn = this.value;   
-	        eqmListGrid.readData(1,{'eqmNonYn' : eqmNonYn}, true);
+	        console.log($("#gubun").val());
+	        eqmListGrid.readData(1,{'eqmNonYn' : eqmNonYn,'gubun':$("#gubun").val()}, true);
 		});
 		
 		//드롭다운 선택시 바로 조회
