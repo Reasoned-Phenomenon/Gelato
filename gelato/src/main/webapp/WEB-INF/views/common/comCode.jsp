@@ -29,7 +29,7 @@
 <br>
 <input id="testInput" type="time">시간입력
 <button id="btnTime">시간확인</button>
-
+<div id="bcTarget"></div> 
 <br>
  
 <div align="right">
@@ -75,7 +75,10 @@ let codeParam;
 let dialog;
 //Response의 종류를 구분하기 위한 전역변수
 let flag;
- 
+
+$("#bcTarget").barcode("PID-20220102-001", "code128",{barWidth:2, barHeight:70});  
+
+
 var Grid = tui.Grid;
 
 //그리드 테마
