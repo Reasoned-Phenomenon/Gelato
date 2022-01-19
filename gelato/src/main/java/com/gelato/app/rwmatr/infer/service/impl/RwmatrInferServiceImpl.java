@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 import com.gelato.app.rwmatr.infer.dao.RwmatrInferMapper;
 import com.gelato.app.rwmatr.infer.dao.RwmatrInferVO;
 import com.gelato.app.rwmatr.infer.service.RwmatrInferService;
+import com.gelato.app.rwmatr.istInsp.dao.RwmatrIstInspMapper;
 import com.gelato.app.vr.ModifyVO;
 
 @Service
 public class RwmatrInferServiceImpl implements RwmatrInferService {
 
 	@Autowired RwmatrInferMapper rwmatrInferMapper;
+	@Autowired RwmatrIstInspMapper rwmatrIstInspMapper;
 	
 	@Override
 	public List<RwmatrInferVO> RwmatrInferList(RwmatrInferVO vo) {
@@ -31,6 +33,7 @@ public class RwmatrInferServiceImpl implements RwmatrInferService {
 	}
 	
 	public int modifyRwmatrInfer(ModifyVO<RwmatrInferVO> mvo) {
+		
 		for(RwmatrInferVO vo : mvo.getCreatedRows()) {
 			System.out.println("추가");
 			rwmatrInferMapper.insertRwmatrInferDeta(vo);

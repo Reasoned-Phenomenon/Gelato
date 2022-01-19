@@ -93,7 +93,7 @@
                         </li>
                         
                         <li>
-                           <a href="${path }/rwmatr/rwmatrInfer.do">> <span>원자재 불량관리</span></a>
+                           <a href="${path }/rwmatr/rwmatrInfer.do">> <span>원자재 불량조회</span></a>
                         </li>
                         
                      </ul>
