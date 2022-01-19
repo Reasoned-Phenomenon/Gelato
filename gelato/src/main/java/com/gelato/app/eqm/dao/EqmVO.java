@@ -27,5 +27,7 @@ public class EqmVO {
 	String prcsId;
 	String nm;
 	
+	String eqmNonYn;	//비가동설비 체크
+	
 	String gubun;
 }

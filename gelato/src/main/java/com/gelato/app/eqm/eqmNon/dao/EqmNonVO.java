@@ -18,5 +18,10 @@ public class EqmNonVO {
 	String toDate;		//검색일자(시작)
 	String fromDate;	//검색일자(종료)
 	String searchId;	
+	String searchIf;
+	
+	String eqmNonYn;	//비가동설비 체크
+	
+	String useYn;	//사용여부
 
 }

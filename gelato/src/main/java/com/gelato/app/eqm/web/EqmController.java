@@ -69,12 +69,6 @@ public class EqmController {
 		model.addAttribute(service.eqmSelect(eqmVo));
 		return "tiles/eqm/eqmManagement";
 	}
-	
-	// 설비관리 - 공정코드 모달
-	@RequestMapping("eqm/searchPrcsModal.do")
-	public String searchPrcs() {
-		return "eqm/searchPrcsModal";
-	}
 
 	// 설비관리 - 수정
 	@GetMapping("/eqm/eqmUpdate.do")
@@ -83,14 +77,6 @@ public class EqmController {
 		return "tiles/eqm/eqmManagement";
 	}
 
-	// 설비비가동관리 - 페이지
-	@GetMapping("/eqm/eqmNonMoving.do")
-	public String eqmNonMoving(Model model, EqmVO eqmVo) {
-		model.addAttribute("datas", eqmVo);
-		System.out.println(eqmVo);
-		return "tiles/eqm/eqmNonMoving";
-	}
-	
 	
 }
 

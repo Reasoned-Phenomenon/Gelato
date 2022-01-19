@@ -7,7 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>설비비가동 페이지(비가동등록/비가동내역 조회)</title>
-
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head>
 <body>
 	<!-- 설비검색 모달 -->
@@ -19,12 +22,14 @@
 				<h2>설비목록</h2>
 				<br> <label>설비구분</label> <select id="gubun"
 					onchange="selectGubun()">
-					<option value="전체">전체
+					<option value="선택">선택
 					<option value="배합기">배합기
 					<option value="운송기">운송기
 					<option value="측정기">측정기
 					<option value="가공기">가공기
-				</select>
+				</select> 가동설비<input type="radio" name="eqmNonYn" value="Y"> 
+				비가동설비<input type="radio" name="eqmNonYn" value="N">
+				전체<input type="radio" name="eqmNonYn"  value="" checked>
 				<div id="eqmListGrid" style="width: 100%;"></div>
 			</div>
 			<div class="col-8">
@@ -107,6 +112,19 @@
 	</div>
 	<script>
 	
+	//설비비가동내역 전체조회 버튼
+	$("#searchAllBtn").on("click",function(){
+		eqmNonListGrid.readData(1,{}, true);
+	})
+	
+	//설비 가동/비가동 라디오 버튼 
+	$("input[name='eqmNonYn']:radio").change(function () {
+        //라디오 버튼 값을 가져온다.
+        var eqmNonYn = this.value;
+        console.log(eqmNonYn);
+                        
+	});
+
 		//설비관리 페이지에서 넘어오는 값이 있을 때 등록 창 띄우기
 		if("${datas.eqmId}"==""){
 			
@@ -153,6 +171,14 @@
 			$("#eqmId").val(eqmListGrid.getValue(ev["rowKey"],"eqmId"));
 			$("#eqmName").val(eqmListGrid.getValue(ev["rowKey"],"eqmName"));
 		}) 
+		
+		//라디오 버튼 클릭시 바로 조회
+		$("input[name='eqmNonYn']:radio").change(function () {
+	        //라디오 버튼 값을 가져온다.
+	        var eqmNonYn = this.value;   
+	        console.log($("#gubun").val());
+	        eqmListGrid.readData(1,{'eqmNonYn' : eqmNonYn,'gubun':$("#gubun").val()}, true);
+		});
 		
 		//드롭다운 선택시 바로 조회
 		function selectGubun(){
@@ -243,7 +269,7 @@
 				alert("설비코드를 선택해주세요");
 				return; 
 			}
-			eqmNonListGrid.readData(1,{'toDate': toDate, 'fromDate': fromDate, 'eqmId': searchId}, true);
+			eqmNonListGrid.readData(1,{'toDate': toDate, 'fromDate': fromDate,  'eqmId': searchId}, true);
 		})
 		
 	</script>
