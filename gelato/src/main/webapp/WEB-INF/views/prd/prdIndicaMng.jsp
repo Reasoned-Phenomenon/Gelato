@@ -62,7 +62,7 @@
 	let pdq;
 	
 	// 버튼 숨김
-	$("#btnIns").hide();
+	/* $("#btnIns") */
 	
 	//토스트옵션
 	toastr.options = {
@@ -258,7 +258,7 @@
 			console.log("큼");
 		}else {
 			console.log("확인");
-			$("#btnIns").show();
+			/* $("#btnIns").show(); */
 		}
 	});
 	
