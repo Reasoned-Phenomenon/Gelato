@@ -36,11 +36,14 @@
 			<div id="planIndicaGrid"></div>
 		</div>
 	</div>
+	<br><br>
 	<div class="row">
 		<div class="col-sm-5">
 			<h3>필요자재</h3>
 			<hr>
 			<div id="RwmatrGrid"></div>
+			<br>
+			<h6>소모량 : 자재별 필요량 * 작업수량 / 10</h6>
 		</div>
 		<div class="col-sm-7">
 			<hr>
@@ -154,6 +157,33 @@
 			}
 		});
 		
+		// 그리드3 - 필요자재
+		const RwmatrGrid = new Grid({
+			el : document.getElementById('RwmatrGrid'),
+			data : {
+				api : {
+					readData : {url : '${path}/prd/chooseIndicaQy.do',method : 'GET'},
+				},
+				contentType : 'application/json',
+				initialRequest: false
+			},
+			rowHeaders : ['rowNum' ],
+			selectionUnit : 'row',
+			columns : [ {
+				header : '제품코드',
+				name : 'prdtId'
+			}, {
+				header : '자재코드',
+				name : 'rwmatrId',
+			}, {
+				header : '자재명',
+				name : 'nm',
+			}, {
+				header : '소모량',
+				name : 'qy',
+			}]
+		});
+		
 	// 미지시 생산계획
 		//모달창 생성
 		var NonIndicaDialog = $("#nonIndicaDialog").dialog({
@@ -181,7 +211,7 @@
 		}
 	//종료
 
-	// 생산계획 그리드 클릭
+	// 생산계획 그리드 클릭 -> 생산지시그리드에 출력해주기
 	planDetaGrid.on("dblclick", (ev) => {
 		planDetaGrid.setSelectionRange({
 		    start: [ev.rowKey, 0],
@@ -189,6 +219,7 @@
 		});
 		
 		planIndicaGrid.clear();
+		RwmatrGrid.clear();
 		
 		//planDetaId 가지고 와서 생산지시 작성
 		pdi = planDetaGrid.getRow(ev.rowKey).planDetaId;
@@ -229,6 +260,29 @@
 			console.log("확인");
 			$("#btnIns").show();
 		}
+	});
+	
+	// 생산지시 클릭 -> 필요자재 그리드
+	planIndicaGrid.on("dblclick", (ev3) => {
+		planIndicaGrid.setSelectionRange({
+		    start: [ev3.rowKey, 0],
+		    end: [ev3.rowKey, planIndicaGrid.getColumns().length-1]
+		});
+		
+		RwmatrGrid.clear();
+		
+		var pil = planIndicaGrid.getRow(ev3.rowKey).lineId;
+		console.log(pil);
+		var piq = planIndicaGrid.getRow(ev3.rowKey).qy;
+		console.log(piq);
+		
+		if(piq == '') {
+			toastr.clear()
+			toastr.success( ('작업수량을 입력해주세요.'),'Gelato',{timeOut:'1000'});
+		} else {
+			RwmatrGrid.readData(1,{'lineId':pil, 'qy':piq}, true);
+		}
+		
 	});
 	
 	
