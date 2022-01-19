@@ -1,7 +1,5 @@
 package com.gelato.app.prd.prdIndica.web;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +48,7 @@ public class PrdIndicaMngController {
 		return "grid";
 	}
 	
-	//상세갱산계획에서 선택한 값으로 line 가져오기
+	//상세갱산계획에서 선택한 값으로 line 가져오기 -> ajax 사용
 	@RequestMapping("/prd/choosePlanDetaId.do")
 	@ResponseBody
 	public PrdIndicaMngVO choosePlanDetaId(PrdIndicaMngVO vo) {
@@ -61,7 +59,13 @@ public class PrdIndicaMngController {
 		return prdIndicaMngService.choosePlanDetaId(vo);
 	}
 	
-	
+	@RequestMapping("/prd/chooseIndicaQy.do")
+	public String chooseIndicaQy(Model model, PrdIndicaMngVO vo) {
+		System.out.println("생산지시 선택값 출력");
+		System.out.println(vo);
+		model.addAttribute("datas", prdIndicaMngService.chooseIndicaQy(vo));
+		return "grid";
+	}
 	
 	
 	
