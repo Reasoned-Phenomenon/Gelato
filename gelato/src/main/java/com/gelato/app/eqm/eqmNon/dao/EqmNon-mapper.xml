@@ -6,16 +6,42 @@
 		SELECT E.EQM_ID AS EQM_ID, 
 			   E.EQM_NAME AS EQM_NAME, 
 			   E.CHCK_PERD AS CHCK_PERD,
+			   E.USE_YN AS USE_YN,
 			   P.PRCS_ID AS PRCS_ID, 
 			   P.NM AS NM
+			   
 		FROM EQM E 
 			 LEFT OUTER JOIN PRCS P 
 			 ON (E.EQM_ID = P.EQM_ID)
-		<if test='gubun != "전체" and gubun != null and gubun != ""'>
-			AND E.FG = F_COM_NM_TO_CODE(#{gubun})
-		</if>
+			 
+		JOIN EQM_NON_OPR O
+		ON 	 (E.EQM_ID = O.EQM_ID)
+		
+		<where>
+			<if test='gubun != "선택" and gubun != null and gubun != ""'>
+				AND E.FG = F_COM_NM_TO_CODE(#{gubun})
+			</if>
+			<if test='eqmNonYn == eqmNonY'>
+			</if>
+			<if test='eqmNonYn == eqmNonN'>
+				AND O.EQM_ID = #{eqmId}
+			</if>
+		</where>
 	</select>
-	
+	<!-- 비가동 내역 전체조회 -->
+	<select id="eqmNonSelectAll" resultType="EqmNonVO">
+		SELECT A.*,
+       		   E.EQM_NAME 
+     	FROM
+        	(
+        	 SELECT O.*, 
+        	 		R.RESN_NAME
+			 FROM EQM_NON_OPR O, 
+			 	  EQM_NON_OPR_RESN R
+        	 WHERE O.RESN_ID = R.RESN_ID
+        	 ) A,
+        	 EQM E
+	</select>
 	<!-- 비가동 내역조회 -->
 	<select id="eqmNonSelect" resultType="EqmNonVO">
        	SELECT A.*,
@@ -27,17 +53,21 @@
 			 FROM EQM_NON_OPR O, 
 			 	  EQM_NON_OPR_RESN R
         	 WHERE O.RESN_ID = R.RESN_ID 
+        	 <if test="eqmId !=null and eqmId !=''">
         	 AND O.EQM_ID = #{eqmId}
+        	 </if>
         	 ) A,
         	 EQM E 
+        	 <if test="eqmId !=null and eqmId !=''">
         WHERE A.EQM_ID = E.EQM_ID
+       </if>
         <if test="fromDate != null and fromDate !=''">
         	<![CDATA[AND TRUNC(NON_OPR_FR_TM) >= TO_CHAR(#{fromDate})]]>
         </if>
         <if test="toDate != null and toDate !=''">
         	<![CDATA[AND TRUNC(NON_OPR_TO_TM) <= TO_CHAR(#{toDate})]]>
         </if>
-        <if test="searchId != ''">
+        <if test="searchId != '' and searchId!=null">
         	AND A.EQM_ID = #{eqmId}
         </if>
 	</select>

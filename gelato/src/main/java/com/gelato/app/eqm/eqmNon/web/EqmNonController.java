@@ -16,10 +16,25 @@ public class EqmNonController {
 	@Autowired
 	EqmNonService service;
 	
+	// 설비비가동관리 - 페이지
+	@GetMapping("/eqm/eqmNonMoving.do")
+	public String eqmNonMoving(Model model, EqmVO eqmVo) {
+		model.addAttribute("datas", eqmVo);
+		System.out.println(eqmVo);
+		return "tiles/eqm/eqmNonMoving";
+	}
+	
 	// 설비비가동관리 - 좌측 설비전체조회 그리드
 	@GetMapping("/eqm/eqmNonMovingList.do")
 	public String findEqmNon(Model model, EqmVO eqmVo) {
 		model.addAttribute("datas", service.eqmNonList(eqmVo));
+		return "grid";
+	}
+	
+	// 설비비가동관리 - 비가동내역조회
+	@GetMapping("eqm/eqmNonSelectAll.do")
+	public String eqmNonSelectAll(Model model, EqmNonVO eqmNonVo) {
+		model.addAttribute("datas",service.eqmNonSelectAll(eqmNonVo));
 		return "grid";
 	}
 	
@@ -36,5 +51,11 @@ public class EqmNonController {
 	public String eqmNonInsert(Model model, EqmNonVO eqmNonVo) {
 		model.addAttribute("datas",service.insertNonEqm(eqmNonVo));
 		return "tiles/eqm/eqmNonMoving";
+	}
+	
+	// 설비비가동관리 - 설비코드 모달
+	@RequestMapping("/eqm/searchEqmModal.do")
+	public String getModal() {
+		return "/eqm/searchEqmModal";
 	}
 }
