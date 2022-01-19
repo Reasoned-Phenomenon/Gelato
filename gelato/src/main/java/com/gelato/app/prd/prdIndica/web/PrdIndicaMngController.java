@@ -67,7 +67,13 @@ public class PrdIndicaMngController {
 		return "grid";
 	}
 	
-	
+	@RequestMapping("/prd/chooseRwmatrId.do")
+	public String chooseRwmatrId(Model model, PrdIndicaMngVO vo) {
+		System.out.println("자재 선택값 출력");
+		System.out.println(vo);
+		model.addAttribute("datas", prdIndicaMngService.chooseRwmatrId(vo));
+		return "grid";
+	}
 	
 	
 	
