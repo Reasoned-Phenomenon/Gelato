@@ -23,12 +23,13 @@
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
 	</form>
 </div>
-<div style="float: right;">
+<!-- <div style="float: right;">
 	<button type="button" class="btn cur-p btn-outline-primary" id="btnAdd">추가</button>
 	<button type="button" class="btn cur-p btn-outline-primary" id="btnDel">삭제</button>
 	<button type="button" class="btn cur-p btn-outline-primary" id="btnSave">저장</button>
 </div>
-<hr>
+ -->
+ <hr>
 <br>
 
 	<!-- 입고내역 조회 -->
