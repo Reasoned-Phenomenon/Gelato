@@ -38,5 +38,18 @@ public class BomCodeServiceImpl implements BomCodeService {
 		
 		return bomcodeMapper.rwmatrList();
 	}
+	
+	// 모달창으로 원자재 제품코드 조회. 그리드 셀 클릭시 조회.
+	@Override
+	public List<BomCodeVO> rwmatrCodeList() {
+		
+		return bomcodeMapper.rwmatrCodeList();
+	}
+
+	@Override
+	public List<BomCodeVO> prcsCodeList() {
+		
+		return bomcodeMapper.rwmatrCodeList();
+	}
 
 }

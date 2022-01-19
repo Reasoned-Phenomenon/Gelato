@@ -6,16 +6,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공정 코드 모달</title>
 </head>
 <body>
-    <br>
-	<h3>자재 코드 검색</h3>
+
 	<br>
-	<div id="rwmatrCodeGrid" style="width: 100%"></div>
+	<h3>공정 코드 검색</h3>
+	<br>
+	<div id="prcsCodeGrid" style="width: 100%"></div>
 	
 	<script>
-	var Grid = tui.Grid;
+var Grid = tui.Grid;
 	
 	//그리드 테마
 	Grid.applyTheme('striped', {
@@ -29,13 +30,12 @@
 		  }
 		});	
 	
-	
 	// 그리드 생성
-	var rwmatrCodeGrid = new Grid({
-		el: document.getElementById('rwmatrCodeGrid'),
+	var prcsCodeGrid = new Grid({
+		el: document.getElementById('prcsCodeGrid'),
 	  	data : {
 		  api: {
-		    readData: { url:'${path}/com/rwmatrCodeModal.do', method: 'GET'}
+		    readData: { url:'${path}/com/prcsCodeModal.do', method: 'GET'}
 		  },
 		  contentType: 'application/json'
 		},
@@ -43,13 +43,13 @@
 	  	selectionUnit: 'row',
 	  	columns:[
 	  		  {
-			    header: '자재 코드',
-			    name: 'rwmatrId',
+			    header: '공정 코드',
+			    name: 'prcsId',
 			    align: 'center'
 			  },
 			  {
-			    header: '자재 명',
-			    name: 'nm',
+			    header: '공정 명',
+			    name: 'prcsNm',
 			    align: 'center'
 			  }
 			 
@@ -57,15 +57,15 @@
 	});
 	
 	// 모달에서 클릭 이벤트
-	rwmatrCodeGrid.on('dblclick', (ev) => {
+	prcsCodeGrid.on('dblclick', (ev) => {
 		
 		// cell 선택시 row 선택.
-		rwmatrCodeGrid.setSelectionRange({
+		prcsCodeGrid.setSelectionRange({
 		      start: [ev.rowKey, 0],
-		      end: [ev.rowKey, rwmatrCodeGrid.getColumns().length-1]
+		      end: [ev.rowKey, prcsCodeGrid.getColumns().length-1]
 	});
 		// 해당 행의 모든값 객체형태로 매개값으로 담음.
-	 getRwmatrData(rwmatrCodeGrid.getRow(ev.rowKey))
+	 prcsCodeData(prcsCodeGrid.getRow(ev.rowKey))
 		
 	});	
 	

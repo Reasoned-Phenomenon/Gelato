@@ -48,9 +48,13 @@
 <div id="bomGrid" style="width: 100%"></div>
 <div id="bomModal" style="width: 100%"></div>
 <div id="rwmatrCodeModal"></div>
+<div id="prcsCodeModal"></div>
 		
 <script>
 let dialog;
+
+let rowkey = '';
+
 
 var Grid = tui.Grid;
 
@@ -142,9 +146,13 @@ var bomGrid = new Grid({
 		]
 });
 	
-	// 추가 버튼 이벤트.
-	AddBtn.addEventListener("click", function(){
-		bomGrid.appendRow();
+	// 추가 버튼 이벤트. 추가 버튼을 누르면 제품코드가 자동적으로 값이 들어가게 함.
+	AddBtn.addEventListener("click", function(ev){
+		 
+		 console.log($('#prdtId').val());
+		 
+		 bomGrid.appendRow({prdtId:$('#prdtId').val()})
+		
 	});
 	
 	// 저장(등록) 버튼 이벤트.
@@ -217,7 +225,7 @@ var bomGrid = new Grid({
 	
 	 // 그리드 셀 클릭하면 모달창 띄우기.
 	function callRwmartCodeModal () {
-		dialog = $("rwmatrCodeModal").dialog({
+		dialog = $("#rwmatrCodeModal").dialog({
 			modal:true,
 			autoOpen:false,
 			height:400,
@@ -239,6 +247,43 @@ var bomGrid = new Grid({
 		if (ev.columnName =='rwmatrId') {
 			console.log('자재코드')
 			callRwmartCodeModal ();
+		}
+	})
+	// 모달창에서 자재코드를 선택하면 자재코드랑 자재 명 새로운 그리드 행에 들어가게 하기.
+	function getRwmatrData(rwmatrData) {
+		console.log("공정코드 모달 행 입력");
+		
+		bomGrid.setValue(rowkey, "rwmatrId", rwmatrData.rwmatrId, true)
+		bomGrid.setValue(rowkey, "nm", rwmatrData.nm, true)
+		
+		dialog.dialog("close");
+	}
+	
+	
+	 // 그리드 사용공정 셀 클릭하면 모달창 띄우기.
+	function callPrcsCodeModal () {
+		dialog = $("#prcsCodeModal").dialog({
+			modal:true,
+			autoOpen:false,
+			height:400,
+			width:600,
+			modal:true
+		});
+		console.log("iii");
+		dialog.dialog( "open" );
+		console.log("dialog open확인");
+		$("#prcsCodeModal").load("${path}/com/searchPrcsCode.do", function(){console.log("공정코드 목록")})
+	} 
+	
+	// 사용공정 셀 클릭시 모달 
+	bomGrid.on('click',(ev) => {
+		rowkey = ev.rowKey;
+		console.log(ev)
+		console.log(ev.columnName)
+		console.log(ev.rowKey)
+		if (ev.columnName =='prcsNm') {
+			console.log('공정명')
+			callPrcsCodeModal ();
 		}
 	})
 	

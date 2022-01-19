@@ -63,7 +63,21 @@
         ON a.prdt_id = d.prdt_id
 		
 	</select>
-
+	
+	<!-- 그리드 셀에서 클릭시 조회되는 원자재 코드 검색 modal. -->
+	<select id="rwmatrCodeList" resultType="BomCodeVO">
+		SELECT rwmatr_id, nm
+		FROM   rwmatr
+	
+	</select>
+	
+	<!-- 그리드셀에서 클릭시 조회되는 공정코드 검색 modal. -->
+	<select id ="prcsCodeList" resultType="BomCodeVO">
+		SELECT prcs_id, nm
+		FROM prcs
+	
+	</select>
+	
 	<update id="" >
 	
 	</update>
