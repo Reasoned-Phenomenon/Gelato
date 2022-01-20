@@ -55,6 +55,7 @@ let dialog;
 
 let rowkey = '';
 
+let useYn = '';
 
 var Grid = tui.Grid;
 
@@ -121,6 +122,13 @@ var bomGrid = new Grid({
 			  align: 'center'
 		     
 			},
+			{
+			  header: '공정 코드',
+			  name: 'prcsId',
+			  align: 'center',
+			  hidden: true
+			  
+			},
 			
 			{
 			  header: '단계구분',
@@ -129,8 +137,8 @@ var bomGrid = new Grid({
 				  type : 'select',
 				  options : {
 					  listItems: [
-						  {text : '원자재', value :'STEP 01'},
-						  {text : '반제품', value :'STEP 02'}
+						  {text : '원자재', value :'STEP01'},
+						  {text : '반제품', value :'STEP02'}
 					  ]
 				  }
 			  },
@@ -223,13 +231,22 @@ var bomGrid = new Grid({
 			
 			var qy = document.getElementById("qy").value;
 			var vendName = document.getElementById("vendName").value;
-			var useYn = document.getElementById("useYn").value;
+			//var useYn = document.getElementById("useYn").value;
 			
-			console.log("prdtId");
-			console.log("prdtNm");
-			console.log("qy");
-			console.log("vendName");
-			console.log("useYn");
+			var useYn = $('input:checkbox[id="useYn"]').is(":checked") == true
+
+			if (useYn == true) {
+				useYn = "Y";
+			} else {
+				useYn = "N";
+			} 
+			
+			console.log(prdtId);
+			console.log(prdtNm);
+			console.log(qy);
+			console.log(vendName);
+		
+			
 			
 			bomGrid.readData(1, {'prdtId':prdtId, 'prdtNm':prdtNm, 'qy':qy, 'vendName':vendName, 'useYn':useYn }, true);
 	});
@@ -303,6 +320,7 @@ var bomGrid = new Grid({
 		console.log("사용공정 코드 모달 행 입력");
 		
 		bomGrid.setValue(rowkey, "prcsNm", prcsData.prcsNm, true)
+		bomGrid.setValue(rowkey, "prcsId", prcsData.prcsId, true)
 		
 		dialog.dialog("close");
 	}

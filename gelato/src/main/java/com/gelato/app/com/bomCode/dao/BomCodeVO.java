@@ -13,7 +13,7 @@ public class BomCodeVO {
 		String fg;       // 단계 구분.
 		String remk;     // 비고. 
 		String useYn;    // 사용 여부.
-		                 // 사용여부 인풋 태그 사용. 
+		
 		
 		// join에 필요한 거 있으면 vo에 추가하기.
 		String nm;      // 자재명.
