@@ -20,13 +20,25 @@
 			<if test="nm !=null and nm !=''">
 			 	and b.nm = #{nm}
 			</if>
+		    <if test="useYn !=null and useYn !=''">
+				and a.use_yn = #{useYn}
+			</if>
+			
 		</where>    
 	</select>
 
 	<!-- BOM 등록 -->
 	<insert id="insertBomCode" parameterType="BomCodeVO">
+		<selectKey keyProperty="bomId" resultType="String" order="BEFORE">
+			SELECT 'BOM-'||
+					LPAD(MAX(TO_NUMBER(SUBSTR(BOM_ID, -4))) +1, 5, 0)
+				AS  BOM_ID
+			  FROM	BOM
+		
+		</selectKey>
 		INSERT INTO BOM (
-							
+							BOM_ID,
+							PRDT_ID,
 							RWMATR_ID,
 							QY,
 							PRCS_ID,
@@ -34,7 +46,9 @@
 							REMK,
 							USE_YN
 			             )
-			     VALUES (
+			     VALUES (	
+			     			#{bomId},
+			     			#{prdtId},
 			     			#{rwmatrId},
 			     			#{qy},
 			     			#{prcsId},
@@ -46,7 +60,7 @@
 	</insert>
 
 
-	<!-- bom에서 제품코드 검색 modal --> <!-- 다시 생각해서 수정 -->
+	<!-- bom에서 제품코드 검색 modal --> 
 	<select id="rwmatrList" resultType="BomCodeVO">
 		SELECT a.prdt_id as prdt_id , a.qy as qy,
 		       b.nm as nm, b.spec as spec, b.wk_unit as wk_unit, 

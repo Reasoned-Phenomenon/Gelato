@@ -103,7 +103,7 @@ public class RwmatrIstOustController {
 	@ResponseBody
 	public boolean modifyIstData (@RequestBody ModifyVO<RwmatrioVO> mvo) {
 		System.out.println(mvo);
-		//rwmatroService.modifyRwmatro(mvo); //수정해야함
+		rwmatrioService.modifyIst(mvo);
 		return true;
 	}
 	
@@ -116,13 +116,5 @@ public class RwmatrIstOustController {
 		return true;
 	}
 	
-	//원자재 재고관리 CUD
-	@PutMapping("/rwmatr/rwmatrStcModifyData.do")
-	@ResponseBody
-	public boolean modifyStcData (@RequestBody ModifyVO<RwmatrioVO> mvo) {
-		System.out.println(mvo);
-		//rwmatroService.modifyRwmatro(mvo); //수정해야함
-		return true;
-	}
 	
 }

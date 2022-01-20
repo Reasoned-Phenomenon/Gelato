@@ -12,9 +12,9 @@
 				   RIO.EXPDATE AS EXPDATE,
 	               V.VEND_NAME AS VEND_NAME
 		FROM RWMATR_IST_OUST RIO JOIN RWMATR R
-		ON RIO.RWMATR_ID = R.RWMATR_ID
+			ON RIO.RWMATR_ID = R.RWMATR_ID
         JOIN VEND V
-        ON V.VEND_ID = R.VEND_ID
+        	ON V.VEND_ID = R.VEND_ID
         WHERE IST_QY != 0
         	<if test="startDate != ''">
 	    		AND <![CDATA[TRUNC(RIO.IST_OUST_DTTM) >= to_date(#{startDate})]]>
@@ -28,7 +28,7 @@
 			<if test="vendName != '' and vendName != null">
 				AND V.VEND_NAME LIKE '%'||#{vendName}||'%'
 			</if>
-        ORDER BY IST_OUST_DTTM
+        ORDER BY 1 DESC
 	</select>
  	
  	<select id="RwmatrPassList" resultType="RwmatrioVO">
@@ -117,4 +117,75 @@
             ON R.VEND_ID = V.VEND_ID
 		ORDER BY EXPDATE
  	</select>
+ 	
+ 	<!-- 자재입고관리 insert -->
+ 	<insert id="insertRwmatrIst" parameterType="RwmatrioVO">
+ 		<selectKey keyProperty="lotNo" resultType="string" order="BEFORE">
+ 			SELECT #{rwmatrId}||'-'||TO_CHAR(SYSDATE, 'YYMMDD')||(SELECT LPAD(NVL(MAX(SUBSTR(LOT_NO,-3)),0)+1, 3, 0) FROM RWMATR_IST_OUST
+			WHERE SUBSTR(LOT_NO,-9,6) = TO_CHAR(SYSDATE, 'YYMMDD')
+			AND SUBSTR(LOT_NO,0,9) = #{rwmatrId}) AS LOT_NO FROM DUAL
+ 		</selectKey>
+ 		INSERT INTO RWMATR_IST_OUST(
+ 									RWMATR_ID, 
+ 									LOT_NO, 
+ 									IST_OUST_DTTM, 
+ 									IST_QY, 
+ 									OUST_QY, 
+ 									EXPDATE, 
+ 									RWMATR_ORDER_DETA_ID
+ 									) 
+							 VALUES(
+							 		#{rwmatrId},
+							 		#{lotNo},
+							 		#{istOustDttm},
+							 		#{istQy},
+							 		'0',
+							 		#{expdate},
+							 		#{rwmatrOrderDetaId}
+							 		)
+ 	</insert>
+ 	
+ 	<!-- 자재입고관리 update -->
+ 	<update id="updateRwmatrIst" parameterType="RwmatrioVO">
+ 		UPDATE RWMATR_IST_OUST SET EXPDATE = #{expdate}
+		WHERE LOT_NO = #{lotNo} 
+		AND RWMATR_ORDER_DETA_ID = #{rwmatrOrderDetaId}
+ 	</update>
+ 	
+ 	<!-- 자재입고관리 delete -->
+ 	<delete id="deleteRwmatrIst" parameterType="RwmatrioVO">
+ 		DELETE FROM RWMATR_IST_OUST
+		WHERE LOT_NO = #{lotNo} 
+		AND RWMATR_ORDER_DETA_ID = #{rwmatrOrderDetaId}
+ 	</delete>
+ 	
+ 	<!-- 자재 현재고 insert -->
+ 	<insert id="insertRwmatrStc" parameterType="RwmatrioVO">
+ 		INSERT INTO RWMATR_STC(
+		                       LOT_NO, 
+		                       RWMATR_ID, 
+		                       QY, 
+		                       EXPDATE
+		                       )
+		                VALUES(
+		                       #{lotNo},
+		                       #{rwmatrId},
+		                       #{qy},
+		                       #{expdate}
+		                       )
+ 	</insert>
+ 	
+ 	<!-- 자재 현재고 update -->
+ 	<update id="updateRwmatrStc" parameterType="RwmatrioVO">
+ 		UPDATE RWMATR_STC SET IST_OUST_DTTM = #{istOustDttm},
+ 							  EXPDATE = #{expdate}
+ 		WHERE LOT_NO = #{lotNo}
+ 	</update>
+ 	
+ 	<!-- 자재 현재고 delete -->
+ 	<delete id="deleteRwmatrStc" parameterType="RwmatrioVO">
+ 		DELETE FROM RWMATR_STC
+		WHERE LOT_NO = #{lotNo}
+ 	</delete>
+ 	
 </mapper>

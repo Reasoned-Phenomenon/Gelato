@@ -52,11 +52,12 @@
 <!-- 자재 선택 후 lot 정하기 -->
 	<select id="chooseRwmatrId" resultType="PrdIndicaMngVO">
 		select rs.lot_no as lotNo,
-			   rs.qy as qy
+			   rs.qy as qy,
+			   trunc(rs.expdate) as expdate
 		from rwmatr rw join rwmatr_stc rs
 		    on rw.rwmatr_id = rs.rwmatr_id
 		where rw.rwmatr_id = #{rwmatrId}
-		ORDER BY rs.expdate desc
+		ORDER BY rs.expdate asc
 	</select>
 
 
