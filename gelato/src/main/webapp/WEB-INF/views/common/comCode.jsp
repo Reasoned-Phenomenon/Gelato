@@ -175,8 +175,6 @@ codeIdGrid.on('click', (ev) => {
 			dataType:'json',
 			success: function (res) {
 				
-				
-				
 				let ff ;
 				for(let i =0 ; i< res.data.contents.length ; i ++) {
 					
