@@ -18,7 +18,9 @@
 	<div class="container">
 		<div class="flex row">
 			<div class="col-7">
+			<br>
 				<h2>설비관리</h2>
+				<br>
 				<label>구분</label> <select id="gubun" onchange="selectGubun()">
 					<option value="전체">전체
 					<option value="배합기">배합기
@@ -29,6 +31,7 @@
 				<div id="eqmListGrid"></div>
 			</div>
 			<div class="col-5">
+			<br>
 				<h2 class="detailTitle">상세조회</h2>
 				<div>설비 이미지</div>
 				<div id="imageView">
