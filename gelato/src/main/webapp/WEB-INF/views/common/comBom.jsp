@@ -125,7 +125,16 @@ var bomGrid = new Grid({
 			{
 			  header: '단계구분',
 			  name: 'fg',
-			  editor: 'text',
+			  editor: {
+				  type : 'select',
+				  options : {
+					  listItems: [
+						  {text : '원자재', value :'STEP 01'},
+						  {text : '반제품', value :'STEP 02'}
+					  ]
+				  }
+			  },
+			  
 			  align: 'center'
 
 			},
@@ -139,8 +148,10 @@ var bomGrid = new Grid({
 			{
               header: '사용여부',
 			  name: 'useYn',
-			  editor:'text',
-			  align: 'center'
+			  align: 'center',
+			  renderer: {
+		            type: GelatoRadio,
+		      }
 			  
 			}
 		]

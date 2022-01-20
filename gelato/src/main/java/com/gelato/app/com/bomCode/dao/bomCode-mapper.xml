@@ -20,13 +20,17 @@
 			<if test="nm !=null and nm !=''">
 			 	and b.nm = #{nm}
 			</if>
+		    <if test="useYn !=null and useYn !=''">
+				and a.use_yn = 'Y'
+			</if>
+			
 		</where>    
 	</select>
 
 	<!-- BOM 등록 -->
 	<insert id="insertBomCode" parameterType="BomCodeVO">
 		INSERT INTO BOM (
-							
+							PRDT_ID,
 							RWMATR_ID,
 							QY,
 							PRCS_ID,
@@ -34,7 +38,8 @@
 							REMK,
 							USE_YN
 			             )
-			     VALUES (
+			     VALUES (	
+			     			#{prdtId},
 			     			#{rwmatrId},
 			     			#{qy},
 			     			#{prcsId},
@@ -46,7 +51,7 @@
 	</insert>
 
 
-	<!-- bom에서 제품코드 검색 modal --> <!-- 다시 생각해서 수정 -->
+	<!-- bom에서 제품코드 검색 modal --> 
 	<select id="rwmatrList" resultType="BomCodeVO">
 		SELECT a.prdt_id as prdt_id , a.qy as qy,
 		       b.nm as nm, b.spec as spec, b.wk_unit as wk_unit, 
