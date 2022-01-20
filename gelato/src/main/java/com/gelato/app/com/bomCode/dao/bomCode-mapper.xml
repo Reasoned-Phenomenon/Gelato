@@ -94,7 +94,13 @@
 	
 	<update id="updateBomCode" parameterType="BomCodeVO" >
 	   UPDATE  BOM  
-	     SET   USE_YN = #{useYn}
+	     SET   RWMATR_ID = #{rwmatrId},
+	     	   QY = #{qy},
+	     	   PRCS_ID = #{prcsId},
+	     	   FG = #{fg},
+	     	   REMK = #{remk}, 
+	           USE_YN = #{useYn}
+	          
 	   WHERE   BOM_ID = #{bomId}
 	</update>
 
