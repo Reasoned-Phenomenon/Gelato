@@ -54,6 +54,10 @@
 	
 	<!-- 미지시 생산계획조회 모달창 -->
 	<div id=nonIndicaDialog title="미지시 생산계획 목록"></div>
+	
+	<!-- 자재 모달창 -->
+	<div id=RwmatrLotDialog title="자재별 Lot 목록"></div>
+	
 </body>
 
 <script>
@@ -61,6 +65,7 @@
 	let pdi;
 	let pdc;
 	let pdq;
+	let rwi;
 	
 	// 버튼 숨김
 	/* $("#btnIns") */
@@ -293,7 +298,38 @@
 		
 	});
 	
+	// 필요자재 클릭시 자재별 Lot 모달 출력
+	RwmatrGrid.on('dblclick', (ev4) => {
+		RwmatrGrid.setSelectionRange({
+		    start: [ev4.rowKey, 0],
+		    end: [ev4.rowKey, RwmatrGrid.getColumns().length-1]
+		});
+		
+		rwi = RwmatrGrid.getRow(ev4.rowKey).rwmatrId;
+		console.log(rwi);
+		chooseRI(rwi);
+		console.log(99999)
+	})
 	
+	function chooseRI(rwi){
+		// 자재Lot 모달창 생성
+		
+		var RwmatrLotDialog = $("#RwmatrLotDialog").dialog({
+			modal : true,
+			autoOpen : false,
+			height: 600,
+			width: 800
+		});
+		
+		RwmatrLotDialog.dialog("open");
+		console.log(232323);
+		   $("#RwmatrLotDialog").load("${path}/prd/RwmatrLotDialog.do",
+				function() {
+					console.log("주문창 로드") 
+					console.log(rwi);
+					chooseRWI(rwi);
+				})
+	}
 
 
 
