@@ -15,6 +15,10 @@
 <body>
 	<!-- 설비검색 모달 -->
 	<div id="dialog-form" title="설비검색"></div>
+
+	<!-- 비가동사유코드 검색 모달 -->
+	<div id="dialog-search" title="비가동사유코드검색"></div>
+
 	<div class="container">
 		<div class="flex row">
 			<div class="col-4">
@@ -27,9 +31,9 @@
 					<option value="운송기">운송기
 					<option value="측정기">측정기
 					<option value="가공기">가공기
-				</select> 가동설비<input type="radio" name="eqmNonYn" value="Y"> 
-				비가동설비<input type="radio" name="eqmNonYn" value="N">
-				전체<input type="radio" name="eqmNonYn"  value="" checked>
+				</select> 가동설비<input type="radio" name="eqmNonYn" value="Y"> 비가동설비<input
+					type="radio" name="eqmNonYn" value="N"> 전체<input
+					type="radio" name="eqmNonYn" value="" checked>
 				<div id="eqmListGrid" style="width: 100%;"></div>
 			</div>
 			<div class="col-8">
@@ -74,14 +78,15 @@
 					<br>
 					<h2>비가동 등록</h2>
 					<br>
-					<form>
+					<form action="${pageContext.request.contextPath}/eqm/eqmNonInsert.do"
+						method="post" name="frm">
 						<table>
 							<tbody>
 								<tr>
 									<th>설비코드</th>
-									<td><input id="eqmId" readonly></td>
+									<td><input name="eqmId" id="eqmId" readonly></td>
 									<th>설비명</th>
-									<td><input id="eqmName" readonly></td>
+									<td><input name="eqmName" id="eqmName" readonly></td>
 								</tr>
 								<tr>
 									<th>등록자</th>
@@ -89,19 +94,22 @@
 								</tr>
 								<tr>
 									<th>비가동시간</th>
-									<td><input id="workSttmH" type="time"></td>
+									<td><input name="workSttmH" id="workSttmH" type="time"></td>
 									<td><button type="button" id="workStart">시작</button></td>
-									<td><input id="workEntmH" type="time"></td>
+									<td><input name="workEntmH" id="workEntmH" type="time"></td>
 									<td><button type="button" id="workStop" disabled>종료</button></td>
 								</tr>
 								<tr>
 									<th>비가동사유</th>
-									<td><input type="text" id="resnId"></td>
+									<td><input type="text" name="resnId" id="resnId">
+									<button type="button" id="btnEqmNonResnSearch"
+											class="btn cur-p btn-outline-dark btn-sm">🔍</button> <input
+										type="text" name="resnName" id="resnName"></td>
 									<th>비고</th>
-									<td><input type="text" id="remk"></td>
+									<td><input type="text" name="remk"></td>
 								</tr>
 								<tr>
-									<td><button type="button" id="insertEqmNon">비가동등록</button></td>
+									<td><button id="insertEqmNon">비가동등록</button></td>
 								</tr>
 							</tbody>
 						</table>
@@ -122,155 +130,186 @@
         //라디오 버튼 값을 가져온다.
         var eqmNonYn = this.value;
         console.log(eqmNonYn);
-                        
 	});
-
-		//설비관리 페이지에서 넘어오는 값이 있을 때 등록 창 띄우기
-		if("${datas.eqmId}"==""){
-			
+	
+	// 화면 시작시 설비 전체리스트 바로 띄우기
+	$(function(){
+		var eqmNonYn=$("input[name='eqmNonYn']:radio").val();
+		 eqmListGrid.readData(1,{'eqmNonYn' : eqmNonYn,'gubun':$("#gubun").val()}, true);
+	})
+	
+	//라디오 버튼 클릭시 바로 조회
+	$("input[name='eqmNonYn']:radio").change(function () {
+        //라디오 버튼 값을 가져온다.
+        var eqmNonYn = this.value;   
+        console.log($("#gubun").val());
+        eqmListGrid.readData(1,{'eqmNonYn' : eqmNonYn,'gubun':$("#gubun").val()}, true);
+	});
+	
+	//드롭다운 선택시 바로 조회
+	function selectGubun(){
+		let gubun = $('#gubun option:selected').val();
+		eqmListGrid.readData(1, {
+			'gubun' : gubun
+		}, true);
+	}
+	
+	//설비관리 페이지에서 넘어오는 값이 있을 때 비가동등록 창 띄우기
+	if("${datas.eqmId}"==""){
+		
+	}else{
+		$("#eqmNonInsert").css("display","block");
+		$("#eqmId").val("${datas.eqmId}");
+		$("#eqmName").val("${datas.eqmName}");
+	}
+	
+	var Grid = tui.Grid;
+	
+	//설비리스트 - 좌측 그리드
+	const eqmListGrid = new Grid({
+		el : document.getElementById('eqmListGrid'),
+		data : {
+			api : {
+				readData : {
+					url : '${path}/eqm/eqmNonMovingList.do',
+					method : 'GET'
+				}
+			},
+			contentType : 'application/json'
+		},
+		bodyHeight : 500,
+		columns : [ {
+			header : '설비코드',
+			name : 'eqmId'
+		}, {
+			header : '설비명',
+			name : 'eqmName',
+			width : 'auto'
+		}, {
+			header : '공정명',
+			name : 'nm',
+			width : 'auto'
+		}, {
+			header : '점검주기',
+			name : 'chckPerd',
+		},{
+			header : '점검체크',
+			name : 'yn',
+			hidden : true
+		},
+		]
+	});
+	
+	//좌측 그리드에서 한 행 선택시 비가동 등록 창 띄우기(비가동설비 체크시 등록 창 안띄움)
+	eqmListGrid.on("dblclick", (ev) => {
+		 var abc =eqmListGrid.getValue(ev["rowKey"],"yn");
+		if(abc==('Y')){
+		$("#eqmNonInsert").css("display","block");
+		$("#eqmId").val(eqmListGrid.getValue(ev["rowKey"],"eqmId"));
+		$("#eqmName").val(eqmListGrid.getValue(ev["rowKey"],"eqmName"));
 		}else{
-			$("#eqmNonInsert").css("display","block");
-			$("#eqmId").val("${datas.eqmId}");
-			$("#eqmName").val("${datas.eqmName}");
+			$("#eqmNonInsert").css("display","none");
 		}
-		
-		var Grid = tui.Grid;
-
-		const eqmListGrid = new Grid({
-			el : document.getElementById('eqmListGrid'),
-			data : {
-				api : {
-					readData : {
-						url : '${path}/eqm/eqmNonMovingList.do',
-						method : 'GET'
-					}
-				},
-				contentType : 'application/json'
+	}) 
+	
+	//비가동내역조회 그리드
+	const eqmNonListGrid = new Grid({
+		el : document.getElementById('eqmNonList'),
+		data : {
+			api : {
+				readData : {
+					url : '${path}/eqm/eqmNonSelect.do',
+					method : 'GET'
+				}
 			},
-			bodyHeight : 500,
-			columns : [ {
-				header : '설비코드',
-				name : 'eqmId'
-			}, {
-				header : '설비명',
-				name : 'eqmName',
-				width : 'auto'
-			}, {
-				header : '공정명',
-				name : 'nm',
-				width : 'auto'
-			}, {
-				header : '점검주기',
-				name : 'chckPerd',
-			} ]
+			initialRequest : false,
+			contentType : 'application/json'
+		},
+		rowHeaders : [ 'rowNum' ],
+		selectionUnit : 'row',
+		bodyHeight : 200,
+		columns : [ {
+			header : '설비코드',
+			name : 'eqmId'
+		}, {
+			header : '설비명',
+			name : 'eqmName'
+		}, {
+			header : '비가동명',
+			name : 'resnName'
+		}, {
+			header : '시작시간',
+			name : 'nonOprFrTm',
+		}, {
+			header : '종료시간',
+			name : 'nonOprToTm',
+		} ]
+	});
+	
+	//비가동시작시간 버튼 이벤트
+	$("#workStart").on("click",function(){
+		let date1 = new Date();
+		workSttmH.value = ("00"+date1.getHours()).slice(-2)+":"+("00"+date1.getMinutes()).slice(-2);			
+		console.log(workSttmH.value)
+		$("#workStop").removeAttr("disabled");
+	})
+	
+	//비가동종료시간 버튼 이벤트
+	$("#workStop").on("click",function(){
+		let date2 = new Date();
+		workEntmH.value = ("00"+date2.getHours()).slice(-2)+":"+("00"+date2.getMinutes()).slice(-2);			
+		console.log(workEntmH.value)
+		$("#workStop").attr("disabled",true);
+	})
+	
+	//비가동등록 버튼 이벤트
+	$("#insertEqmNon").on("click", function(){
+		
+	})
+	
+	//설비코드 모달
+		let dialog = $( "#dialog-form" ).dialog({
+			autoOpen :false,
+			modal : true
 		});
 		
-		//좌측 그리드에서 한 행 선택시 비가동 등록 창 띄우기
-		eqmListGrid.on("dblclick", (ev) => {
-			$("#eqmNonInsert").css("display","block");
-			$("#eqmId").val(eqmListGrid.getValue(ev["rowKey"],"eqmId"));
-			$("#eqmName").val(eqmListGrid.getValue(ev["rowKey"],"eqmName"));
-		}) 
-		
-		//라디오 버튼 클릭시 바로 조회
-		$("input[name='eqmNonYn']:radio").change(function () {
-	        //라디오 버튼 값을 가져온다.
-	        var eqmNonYn = this.value;   
-	        console.log($("#gubun").val());
-	        eqmListGrid.readData(1,{'eqmNonYn' : eqmNonYn,'gubun':$("#gubun").val()}, true);
+		$("#btnEqmSearch").on("click",function(){
+			dialog.dialog("open");
+			$("#dialog-form").load("${path}/eqm/searchEqmModal.do", 	
+					function(){
+				console.log("설비모달로드됨")})
 		});
 		
-		//드롭다운 선택시 바로 조회
-		function selectGubun(){
-			let gubun = $('#gubun option:selected').val();
-			eqmListGrid.readData(1, {
-				'gubun' : gubun
-			}, true);
+	//비가동사유코드 검색 모달
+		let dialogSearch = $("#dialog-search").dialog({
+			autoOpen :false,
+			modal : true
+		});
+	
+		$("#btnEqmNonResnSearch").on("click", function(){
+			dialogSearch.dialog("open");
+			$("#dialog-search").load("${path}/eqm/eqmNonResnModal.do", 	
+					function(){
+				console.log("비가동사유코드 검색모달 로드됨")})
+		})
+	
+	//해당일자 검색
+	var toDate;
+	var fromDate;
+	var searchId;
+	$("#searchBtn").on("click",function(){
+		toDate = document.getElementById("toDate").value;
+		fromDate = document.getElementById("fromDate").value;
+		searchId = document.getElementById("searchId").value;
+		console.log(toDate);
+		console.log(fromDate);
+		console.log(searchId);
+		if(searchId == ''){
+			alert("설비코드를 선택해주세요");
+			return; 
 		}
-
-		const eqmNonListGrid = new Grid({
-			el : document.getElementById('eqmNonList'),
-			data : {
-				api : {
-					readData : {
-						url : '${path}/eqm/eqmNonSelect.do',
-						method : 'GET'
-					}
-				},
-				contentType : 'application/json'
-			},
-			rowHeaders : [ 'rowNum' ],
-			selectionUnit : 'row',
-			bodyHeight : 200,
-			columns : [ {
-				header : '설비코드',
-				name : 'eqmId'
-			}, {
-				header : '설비명',
-				name : 'eqmName'
-			}, {
-				header : '비가동명',
-				name : 'resnName'
-			}, {
-				header : '시작시간',
-				name : 'nonOprFrTm',
-			}, {
-				header : '종료시간',
-				name : 'nonOprToTm',
-			} ]
-		});
-		
-		//비가동시작시간 버튼 이벤트
-		$("#workStart").on("click",function(){
-			let date1 = new Date();
-			workSttmH.value = ("00"+date1.getHours()).slice(-2)+":"+("00"+date1.getMinutes()).slice(-2);			
-			console.log(workSttmH.value)
-			$("#workStop").removeAttr("disabled");
-		})
-		
-		//비가동종료시간 버튼 이벤트
-		$("#workStop").on("click",function(){
-			let date2 = new Date();
-			workEntmH.value = ("00"+date2.getHours()).slice(-2)+":"+("00"+date2.getMinutes()).slice(-2);			
-			console.log(workEntmH.value)
-			$("#workStop").attr("disabled",true);
-		})
-		
-		//비가동등록 버튼 이벤트
-		$("#insertEqmNon").on("click", function(){
-			
-		})
-		
-		//설비코드 모달
-			let dialog = $( "#dialog-form" ).dialog({
-				autoOpen :false,
-				modal : true
-			});
-			
-			$("#btnEqmSearch").on("click",function(){
-				dialog.dialog("open");
-				$("#dialog-form").load("${path}/eqm/searchEqmModal.do", 	//load가 익숙치 않으면 ajax를 써도됨
-						function(){
-					console.log("로드됨")})
-			});
-		
-		//해당일자 검색
-		var toDate;
-		var fromDate;
-		var searchId;
-		$("#searchBtn").on("click",function(){
-			toDate = document.getElementById("toDate").value;
-			fromDate = document.getElementById("fromDate").value;
-			searchId = document.getElementById("searchId").value;
-			console.log(toDate);
-			console.log(fromDate);
-			console.log(searchId);
-			if(searchId == ''){
-				alert("설비코드를 선택해주세요");
-				return; 
-			}
-			eqmNonListGrid.readData(1,{'toDate': toDate, 'fromDate': fromDate,  'eqmId': searchId}, true);
-		})
+		eqmNonListGrid.readData(1,{'toDate': toDate, 'fromDate': fromDate,  'eqmId': searchId}, true);
+	})
 		
 	</script>
 </body>
