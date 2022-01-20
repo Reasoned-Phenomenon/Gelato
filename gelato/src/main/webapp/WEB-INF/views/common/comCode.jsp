@@ -78,8 +78,8 @@ let dialog;
 //Response의 종류를 구분하기 위한 전역변수
 let flag;
 
-/* $("#bcTarget").barcode("PID-20220102-001", "code128",{barWidth:2, barHeight:70});   */
 
+//$("#bcTarget").barcode("PID-20220102-001", "code128",{barWidth:2, barHeight:70});  
 
 var Grid = tui.Grid;
 
