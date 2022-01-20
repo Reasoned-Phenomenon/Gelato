@@ -25,6 +25,9 @@
    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
    
+   <!-- 바코드 -->
+   <script src="${path}/resources/js/jquery-barcode.js" type="text/javascript" />
+   
    <!-- 데이트 픽커 -->
    <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
    <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>

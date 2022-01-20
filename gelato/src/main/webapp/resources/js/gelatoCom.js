@@ -1,13 +1,14 @@
+//페이지 이동시 메뉴 열리게 하는 부분
+$(function () {
+	$('a[href="'+window.location.pathname+'"]').parent().parent().parent().find('a').trigger("click")
+})
+
 //라디오 렌더러
 class GelatoRadio {
   constructor(props) {
 	
 	
 	const { grid, rowKey,columnInfo, value } = props;
-	//console.log(grid)
-	//console.log(rowKey)
-	//console.log(columnInfo)
-	//console.log(value)
 	const el = document.createElement('div');
 	
     const input1 = document.createElement('input');
