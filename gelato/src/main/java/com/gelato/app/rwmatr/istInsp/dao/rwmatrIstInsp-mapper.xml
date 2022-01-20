@@ -92,6 +92,11 @@
 		WHERE RWMATR_ORDER_DETA_ID = #{rwmatrOrderDetaId}
 	</update>
 	
+	<update id="updateRwmatrIstInspIst" parameterType="RwmatrIstInspVO">
+		UPDATE RWMATR_IST_INSP SET FG = 'Y'
+		WHERE RWMATR_ORDER_DETA_ID = #{rwmatrOrderDetaId}
+	</update>
+	
 	<delete id="deleteRwmatrIstInsp" parameterType="RwmatrIstInspVO">
 		DELETE FROM RWMATR_IST_INSP
 		WHERE RWMATR_ORDER_DETA_ID = #{rwmatrOrderDetaId} 

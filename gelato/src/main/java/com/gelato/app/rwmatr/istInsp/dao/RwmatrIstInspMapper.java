@@ -12,6 +12,8 @@ public interface RwmatrIstInspMapper {
 	
 	//불량까지 등록완료시 구분자 변경
 	int updateRwmatrIstInspInfer(RwmatrIstInspVO vo);
+	//입고까지 등록완료시 구분자 변경
+	int updateRwmatrIstInspIst(RwmatrIstInspVO vo);
 	
 	int insertRwmatrIstInsp(RwmatrIstInspVO vo);
 	int updateRwmatrIstInsp(RwmatrIstInspVO vo);
