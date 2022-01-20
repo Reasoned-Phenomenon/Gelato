@@ -73,7 +73,7 @@
 	
 	<!-- 그리드셀에서 클릭시 조회되는 공정코드 검색 modal. -->
 	<select id ="prcsCodeList" resultType="BomCodeVO">
-		SELECT prcs_id, nm
+		SELECT prcs_id, nm as prcsNm
 		FROM prcs
 	
 	</select>

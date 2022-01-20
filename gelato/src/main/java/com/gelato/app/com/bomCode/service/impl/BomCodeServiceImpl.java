@@ -49,7 +49,7 @@ public class BomCodeServiceImpl implements BomCodeService {
 	@Override
 	public List<BomCodeVO> prcsCodeList() {
 		
-		return bomcodeMapper.rwmatrCodeList();
+		return bomcodeMapper.prcsCodeList();
 	}
 
 }
