@@ -48,7 +48,7 @@
 		<div class="col-sm-7">
 			<h3>필요자재Lot</h3>
 			<hr>
-			<div id="RwmatrLotGrid">그리드4</div>
+			<div id="RwmatrLotGrid"></div>
 		</div>
 	</div>
 	
@@ -192,6 +192,40 @@
 			}]
 		});
 		
+		// 그리드4 - 선택lot
+		const RwmatrLotGrid = new Grid({
+			el: document.getElementById('RwmatrLotGrid'),
+			data : {
+			  api: {
+			    readData: { url:'${path}', method: 'GET'}
+			  },
+			  contentType: 'application/json',
+			  initialRequest: false
+			},
+			rowHeaders:['rowNum'],
+			selectionUnit: 'row',
+			columns:[
+				  {
+				    header: '자재Lot번호',
+				    name: 'lotNo'
+				  },
+				  {
+				    header: '현재고',
+				    name: 'qy',
+				  },
+				  {
+				    header: '사용수량',
+				    name: 'oustQy',
+				    editor : 'text'
+				  },
+				  {
+				    header: '유통기한',
+				    name: 'expdate',
+				    editor: 'datePicker'
+				  }
+			  ]
+		});
+		
 	// 미지시 생산계획
 		//모달창 생성
 		var NonIndicaDialog = $("#nonIndicaDialog").dialog({
@@ -217,6 +251,7 @@
 			planDetaGrid.clear();
 			planIndicaGrid.clear();
 			RwmatrGrid.clear();
+			RwmatrLotGrid.clear();
 			planDetaGrid.readData(1,{planId:nip}, true);
 			NonIndicaDialog.dialog("close");
 		}
@@ -231,6 +266,7 @@
 		
 		planIndicaGrid.clear();
 		RwmatrGrid.clear();
+		RwmatrLotGrid.clear();
 		
 		//planDetaId 가지고 와서 생산지시 작성
 		pdi = planDetaGrid.getRow(ev.rowKey).planDetaId;
@@ -281,6 +317,7 @@
 		});
 		
 		RwmatrGrid.clear();
+		RwmatrLotGrid.clear();
 		
 		var pil = planIndicaGrid.getRow(ev3.rowKey).lineId;
 		console.log(pil);
@@ -327,7 +364,6 @@
 	
 	function chooseRI(rwi,rwn,rwq){
 		// 자재Lot 모달창 생성
-		
 		RwmatrLotDialog.dialog("open");
 		console.log(232323);
 		   $("#RwmatrLotDialog").load("${path}/prd/RwmatrLotDialog.do",
