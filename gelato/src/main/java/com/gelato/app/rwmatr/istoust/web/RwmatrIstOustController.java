@@ -104,6 +104,7 @@ public class RwmatrIstOustController {
 	public boolean modifyIstData (@RequestBody ModifyVO<RwmatrioVO> mvo) {
 		System.out.println(mvo);
 		rwmatrioService.modifyIst(mvo);
+		rwmatrioService.modifyStc(mvo);
 		return true;
 	}
 	

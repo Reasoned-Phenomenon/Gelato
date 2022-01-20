@@ -52,39 +52,39 @@ public class RwmatrioServiceImpl implements RwmatrioService {
 			//입고검사 구분자 업데이트
 			rwmatrIstInspMapper.updateRwmatrIstInspIst(rwmatrIstInspVO);
 			
-			RwmatrioVO rwmatrioVO = new RwmatrioVO();
-			rwmatrioVO.setLotNo(vo.getLotNo());
-			rwmatrioVO.setRwmatrId(vo.getRwmatrId());
-			rwmatrioVO.setQy(vo.getQy());
-			rwmatrioVO.setExpdate(vo.getExpdate());
-			//현재고 추가
-			rwmatrioMapper.insertRwmatrStc(rwmatrioVO);
 			//입고내역 추가
 			rwmatrioMapper.insertRwmatrIst(vo);
 		}
 		
 		for(RwmatrioVO vo : mvo.getUpdatedRows()) {
 			System.out.println("수정");
-			RwmatrioVO rwmatrioVO = new RwmatrioVO();
-			rwmatrioVO.setIstOustDttm(vo.getIstOustDttm());
-			rwmatrioVO.setExpdate(vo.getExpdate());
-			rwmatrioVO.setLotNo(vo.getLotNo());
-			//입고내역수정시 현재고 업데이트
 			rwmatrioMapper.updateRwmatrIst(vo);
-			rwmatrioMapper.updateRwmatrStc(rwmatrioVO);
 		}
 		
 		for(RwmatrioVO vo : mvo.getDeletedRows()) {
 			System.out.println("삭제");
-			RwmatrIstInspVO rwmatrIstInspVO = new RwmatrIstInspVO();
-			rwmatrIstInspVO.setRwmatrOrderDetaId(vo.getRwmatrOrderDetaId());
-			rwmatrIstInspMapper.updateRwmatrIstInspInfer(rwmatrIstInspVO);
-			RwmatrioVO rwmatrioVO = new RwmatrioVO();
-			rwmatrioVO.setLotNo(vo.getLotNo());
 			//입고내역 삭제
 			rwmatrioMapper.deleteRwmatrIst(vo);
-			//현재고 삭제
-			rwmatrioMapper.deleteRwmatrStc(rwmatrioVO);
+		}
+		return 0;
+	}
+
+	@Override
+	public int modifyStc(ModifyVO<RwmatrioVO> mvo) {
+		for(RwmatrioVO vo : mvo.getCreatedRows()) {
+			System.out.println("추가");
+			vo.setQy(vo.getIstQy());
+			rwmatrioMapper.insertRwmatrStc(vo);
+		}
+		
+		for(RwmatrioVO vo : mvo.getUpdatedRows()) {
+			System.out.println("수정");
+			rwmatrioMapper.updateRwmatrStc(vo);
+		}
+		
+		for(RwmatrioVO vo : mvo.getDeletedRows()) {
+			System.out.println("삭제");
+			rwmatrioMapper.deleteRwmatrStc(vo);
 		}
 		return 0;
 	}
