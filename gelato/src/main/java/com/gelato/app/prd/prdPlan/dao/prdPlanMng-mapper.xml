@@ -200,4 +200,11 @@
 		{ call insert_excp(?) }
 	</insert>
 
+<!-- 계획 취소시 홀딩값 삭제 -->
+	<delete id="deleteExcp" parameterType="PrdPlanMngVO">
+		delete from excp 
+		where plan_id = #{planId}
+	</delete>
+	
+	
 </mapper>
