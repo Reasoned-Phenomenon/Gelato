@@ -18,5 +18,8 @@ public interface EqmNonService {
 
 	// 비가동관리 등록
 	int insertNonEqm(EqmNonVO eqmNonVo);
+	
+	// 비가동사유코드 검색 모달
+	List<EqmNonVO> EqmNonResnSearch(EqmNonVO eqmNonVo);
 
 }

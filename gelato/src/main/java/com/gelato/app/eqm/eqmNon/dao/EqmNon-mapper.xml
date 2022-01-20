@@ -8,14 +8,12 @@
 			   E.CHCK_PERD AS CHCK_PERD,
 			   E.USE_YN AS USE_YN,
 			   P.PRCS_ID AS PRCS_ID, 
-			   P.NM AS NM
+			   P.NM AS NM,
+			   #{eqmNonYn} AS YN
 			   
 		FROM EQM E 
 			 LEFT OUTER JOIN PRCS P 
 			 ON (E.EQM_ID = P.EQM_ID)
-			 
-		JOIN EQM_NON_OPR O
-		ON 	 (E.EQM_ID = O.EQM_ID)
 		
 		<where>
 			<if test='gubun != "선택"'>
@@ -88,12 +86,18 @@
 								RESN_ID
 								)
 		VALUES(
-				#{eqmNonOprId}
+				#{eqmNonOprId},
 				#{eqmId}, 
-				#{value}, 
+				TO_DATE(TO_CHAR(sysdate,'yyyyMMdd')||#{nonOprFrTm},'yyyy-MM-dd HH24:MI:SS'), 
 				#{remk}, 
-				sysdate, 
+				TO_DATE(TO_CHAR(sysdate,'yyyyMMdd')||#{nonOprToTm},'yyyy-MM-dd HH24:MI:SS'), 
 				#{resnId}
 				)
 	</insert>
+	
+	<!-- 비가동사유코드 모달 -->
+	<select id="EqmNonResnSearch" resultType="EqmNonVO" parameterType="EqmNonVO">
+		SELECT * 
+		FROM EQM_NON_OPR_RESN
+	</select>
 </mapper>

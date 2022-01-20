@@ -1,7 +1,7 @@
 package com.gelato.app.eqm.dao;
 
 import java.util.List;
-
+  
 public interface EqmMapper {
 	
 	//설비등록

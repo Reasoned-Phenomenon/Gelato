@@ -10,6 +10,8 @@ public class EqmNonVO {
 	String remk;		//비고
 	String nonOprToTm;	//비가동종료시간
 	String resnId;		//비가동사유코드
+	String resnCode;	//비가동사유
+	String resnDeta;	//비가동상세내역
 	
 	String eqmName;		//설비명
 	String resnName;	//비가동사유명
@@ -23,5 +25,7 @@ public class EqmNonVO {
 	String eqmNonYn;	//비가동설비 체크
 	
 	String useYn;	//사용여부
+		
+
 
 }

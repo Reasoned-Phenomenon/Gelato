@@ -35,4 +35,9 @@ public class EqmNonServiceImpl implements EqmNonService {
 		return eqmNonMapper.eqmNonSelectAll(eqmNonVo);
 	}
 
+	@Override
+	public List<EqmNonVO> EqmNonResnSearch(EqmNonVO eqmNonVo) {
+		return eqmNonMapper.EqmNonResnSearch(eqmNonVo);
+	}
+
 }
