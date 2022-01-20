@@ -50,9 +50,6 @@ let ig;
 //모달에서 선택한 rowKey값 세팅
 let rk = '';
 
-//lot부여위한 rwmatrId담을 변수
-let rwmatrId = '';
-
 //날짜검색 조건
 var startDate;
 var endDate;
