@@ -20,7 +20,7 @@
 
 <script>
 	var Grid = tui.Grid;
-
+	var iqy;
 	
 	//그리드 테마
 	Grid.applyTheme('striped', {
@@ -98,7 +98,9 @@
 			for (let i=0 ; i<grc ; i++) {
 				
 				// 행의 현재고값
-				var iqy = chooseRwmatrLotGrid.getValue(i,'qy');
+				iqy = parseInt(chooseRwmatrLotGrid.getValue(i,'qy'));
+				rwq = parseInt(rwq);
+				// iqy = 현재고, rwq = 필요량
 				console.log(iqy);
 				console.log(rwq);
 				console.log(rwq-iqy);
@@ -106,14 +108,23 @@
 				if( iqy >= rwq) {
 					chooseRwmatrLotGrid.setValue(i,'oustQy',rwq);
 					console.log("현재고가 더 큼")
+					chooseRwmatrLotGrid.check(i);
+					return;
 				} else {
 					console.log("현재고가 더 작음")
-					chooseRwmatrLotGrid.setValue(i+1,'oustQy',(iqy-rwq));
+					chooseRwmatrLotGrid.setValue(i,'oustQy',iqy);
+					rwq = rwq-iqy
+					chooseRwmatrLotGrid.check(i);
 				}
 			}
 				
 		})
 	}
+	
+	$("#btnchoose").on(
+			"click", function(){
+				RwmatrLotDialog.dialog("close");
+			});
 	
 	
 	
