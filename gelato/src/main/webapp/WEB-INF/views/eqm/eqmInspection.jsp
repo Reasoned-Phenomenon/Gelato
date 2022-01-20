@@ -69,6 +69,9 @@
 			}, {
 				header : '점검내역',
 				name : 'chckDeta'
+			}, {
+				header : '구분',
+				name : 'chckDeta'
 			} ]
 		});
 
