@@ -49,7 +49,15 @@
 		order by b.rwmatr_id
 	</select>
 
-
+<!-- 자재 선택 후 lot 정하기 -->
+	<select id="chooseRwmatrId" resultType="PrdIndicaMngVO">
+		select rs.lot_no as lotNo,
+			   rs.qy as qy
+		from rwmatr rw join rwmatr_stc rs
+		    on rw.rwmatr_id = rs.rwmatr_id
+		where rw.rwmatr_id = #{rwmatrId}
+		ORDER BY rs.expdate desc
+	</select>
 
 
 

@@ -46,6 +46,7 @@
 			<h6>소모량 : 자재별 필요량 * 작업수량 / 10</h6>
 		</div>
 		<div class="col-sm-7">
+			<h3>필요자재Lot</h3>
 			<hr>
 			<div id="RwmatrLotGrid">그리드4</div>
 		</div>
@@ -136,7 +137,7 @@
 				name : 'indicaDt',
 				editor: 'datePicker'
 			}, {
-				header : '작업수량',
+				header : '작업수량 (Box)',
 				name : 'qy',
 				editor: 'text',
 			}, {
@@ -206,6 +207,9 @@
 		// 계획코드 받아서 readData에 넘기기
 		function choosePI(nip){
 			console.log(nip);
+			planDetaGrid.clear();
+			planIndicaGrid.clear();
+			RwmatrGrid.clear();
 			planDetaGrid.readData(1,{planId:nip}, true);
 			NonIndicaDialog.dialog("close");
 		}
@@ -273,8 +277,12 @@
 		
 		var pil = planIndicaGrid.getRow(ev3.rowKey).lineId;
 		console.log(pil);
+		var pid = planIndicaGrid.getRow(ev3.rowKey).indicaDt;
+		console.log(pid);
 		var piq = planIndicaGrid.getRow(ev3.rowKey).qy;
 		console.log(piq);
+		var pio = planIndicaGrid.getRow(ev3.rowKey).ord;
+		console.log(pio);
 		
 		if(piq == '') {
 			toastr.clear()

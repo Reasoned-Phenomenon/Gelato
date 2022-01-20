@@ -34,4 +34,9 @@ public class PrdIndicaMngImpl implements PrdIndicaMngService{
 		return pimMapper.chooseIndicaQy(vo);
 	}
 
+	@Override
+	public PrdIndicaMngVO chooseRwmatrId(PrdIndicaMngVO vo) {
+		return pimMapper.chooseRwmatrId(vo);
+	}
+
 }

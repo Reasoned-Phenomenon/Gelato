@@ -17,4 +17,7 @@ public interface PrdIndicaMngService {
 	
 	//생산지시 선택 -> 자재
 	List<PrdIndicaMngVO> chooseIndicaQy(PrdIndicaMngVO vo);
+	
+	//자재 선택 -> lot결정하기
+	PrdIndicaMngVO chooseRwmatrId(PrdIndicaMngVO vo);
 }
