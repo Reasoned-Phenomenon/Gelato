@@ -51,6 +51,7 @@ public class RwmatrioServiceImpl implements RwmatrioService {
 			rwmatrIstInspVO.setRwmatrOrderDetaId(vo.getRwmatrOrderDetaId());
 			//입고검사 구분자 업데이트
 			rwmatrIstInspMapper.updateRwmatrIstInspIst(rwmatrIstInspVO);
+			
 			RwmatrioVO rwmatrioVO = new RwmatrioVO();
 			rwmatrioVO.setLotNo(vo.getLotNo());
 			rwmatrioVO.setRwmatrId(vo.getRwmatrId());
@@ -69,8 +70,8 @@ public class RwmatrioServiceImpl implements RwmatrioService {
 			rwmatrioVO.setExpdate(vo.getExpdate());
 			rwmatrioVO.setLotNo(vo.getLotNo());
 			//입고내역수정시 현재고 업데이트
-			rwmatrioMapper.updateRwmatrStc(rwmatrioVO);
 			rwmatrioMapper.updateRwmatrIst(vo);
+			rwmatrioMapper.updateRwmatrStc(rwmatrioVO);
 		}
 		
 		for(RwmatrioVO vo : mvo.getDeletedRows()) {
@@ -80,10 +81,10 @@ public class RwmatrioServiceImpl implements RwmatrioService {
 			rwmatrIstInspMapper.updateRwmatrIstInspInfer(rwmatrIstInspVO);
 			RwmatrioVO rwmatrioVO = new RwmatrioVO();
 			rwmatrioVO.setLotNo(vo.getLotNo());
-			//현재고 삭제
-			rwmatrioMapper.deleteRwmatrStc(rwmatrioVO);
 			//입고내역 삭제
 			rwmatrioMapper.deleteRwmatrIst(vo);
+			//현재고 삭제
+			rwmatrioMapper.deleteRwmatrStc(rwmatrioVO);
 		}
 		return 0;
 	}
