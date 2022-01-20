@@ -125,9 +125,9 @@ var bomGrid = new Grid({
 			{
 			  header: '단계구분',
 			  name: 'fg',
-			  editor:'text',
+			  editor: 'text',
 			  align: 'center'
-			  
+
 			},
 			{
         	  header: '비고',
@@ -251,7 +251,7 @@ var bomGrid = new Grid({
 	})
 	// 모달창에서 자재코드를 선택하면 자재코드랑 자재 명 새로운 그리드 행에 들어가게 하기.
 	function getRwmatrData(rwmatrData) {
-		console.log("공정코드 모달 행 입력");
+		console.log("자재코드 모달 행 입력");
 		
 		bomGrid.setValue(rowkey, "rwmatrId", rwmatrData.rwmatrId, true)
 		bomGrid.setValue(rowkey, "nm", rwmatrData.nm, true)
@@ -281,11 +281,20 @@ var bomGrid = new Grid({
 		console.log(ev)
 		console.log(ev.columnName)
 		console.log(ev.rowKey)
-		if (ev.columnName =='prcsNm') {
+		if (ev.columnName == 'prcsNm') {
 			console.log('공정명')
 			callPrcsCodeModal ();
 		}
 	})
+	
+	// 모달창에서 공정코드를 선택하면 자재코드랑 자재 명 새로운 그리드 행에 들어가게 하기.
+	function prcsCodeData(prcsData) {
+		console.log("사용공정 코드 모달 행 입력");
+		
+		bomGrid.setValue(rowkey, "prcsNm", prcsData.prcsNm, true)
+		
+		dialog.dialog("close");
+	}
 	
 
 </script>		
