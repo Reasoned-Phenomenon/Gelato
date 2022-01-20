@@ -1,5 +1,8 @@
 package com.gelato.app.eqm.eqmIns.dao;
 
-public interface EqmInsMapper {
+import java.util.List;
 
+public interface EqmInsMapper {
+	//점검리스트
+	List<EqmInsVO> eqmChck(EqmInsVO eqmInsVo);
 }

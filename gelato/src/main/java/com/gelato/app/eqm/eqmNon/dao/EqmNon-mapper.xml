@@ -8,8 +8,7 @@
 			   E.CHCK_PERD AS CHCK_PERD,
 			   E.USE_YN AS USE_YN,
 			   P.PRCS_ID AS PRCS_ID, 
-			   P.NM AS NM,
-			   #{eqmNonYn} AS YN
+			   P.NM AS NM
 			   
 		FROM EQM E 
 			 LEFT OUTER JOIN PRCS P 

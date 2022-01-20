@@ -64,7 +64,7 @@
 							<div class="grid-option-area">
 								<div class="col-6"></div>
 								<div class="col-6">
-									<button type="button" class="btn btn-reset" id="resetBtn">초기화</button>
+									<button type="reset" class="btn btn-reset" id="resetBtn">초기화</button>
 									<button type="button" class="btn btn-search" id="searchBtn">조회</button>
 									<button type="button" class="btn btn-exel" id="excelBtn">Excel</button>
 									<button type="button" class="btn btn-print" id="printBtn">인쇄</button>
@@ -109,7 +109,7 @@
 									<td><input type="text" name="remk"></td>
 								</tr>
 								<tr>
-									<td><button id="insertEqmNon">비가동등록</button></td>
+									<td><button id="insertEqmNon" onclick="msg()">비가동등록</button></td>
 								</tr>
 							</tbody>
 						</table>
@@ -119,6 +119,10 @@
 		</div>
 	</div>
 	<script>
+	//등록 버튼 클릭시 얼럿창
+	function msg(){
+		alert("등록됨");
+	}
 	
 	//설비비가동내역 전체조회 버튼
 	$("#searchAllBtn").on("click",function(){
@@ -135,21 +139,25 @@
 	// 화면 시작시 설비 전체리스트 바로 띄우기
 	$(function(){
 		var eqmNonYn=$("input[name='eqmNonYn']:radio").val();
-		 eqmListGrid.readData(1,{'eqmNonYn' : eqmNonYn,'gubun':$("#gubun").val()}, true);
+		 eqmListGrid.readData(1,{'useYn' : eqmNonYn,'gubun':$("#gubun").val()}, true);
 	})
 	
 	//라디오 버튼 클릭시 바로 조회
 	$("input[name='eqmNonYn']:radio").change(function () {
         //라디오 버튼 값을 가져온다.
+        console.log(this);
         var eqmNonYn = this.value;   
         console.log($("#gubun").val());
-        eqmListGrid.readData(1,{'eqmNonYn' : eqmNonYn,'gubun':$("#gubun").val()}, true);
+        eqmListGrid.readData(1,{'eqmNonYn' : eqmNonYn, 'gubun':$("#gubun").val()}, true);
 	});
 	
 	//드롭다운 선택시 바로 조회
 	function selectGubun(){
-		let gubun = $('#gubun option:selected').val();
+		var gubun = $('#gubun option:selected').val();
+		var eqmNonYn=$("input[name='eqmNonYn']:radio:checked").val();
+	console.log("!!!!!!"+eqmNonYn);
 		eqmListGrid.readData(1, {
+			'eqmNonYn' : eqmNonYn,
 			'gubun' : gubun
 		}, true);
 	}
@@ -193,16 +201,15 @@
 			header : '점검주기',
 			name : 'chckPerd',
 		},{
-			header : '점검체크',
-			name : 'yn',
-			hidden : true
+			header : '사용여부',
+			name : 'useYn'
 		},
 		]
 	});
 	
 	//좌측 그리드에서 한 행 선택시 비가동 등록 창 띄우기(비가동설비 체크시 등록 창 안띄움)
 	eqmListGrid.on("dblclick", (ev) => {
-		 var abc =eqmListGrid.getValue(ev["rowKey"],"yn");
+		 var abc = eqmListGrid.getValue(ev["rowKey"],"useYn");
 		if(abc==('Y')){
 		$("#eqmNonInsert").css("display","block");
 		$("#eqmId").val(eqmListGrid.getValue(ev["rowKey"],"eqmId"));
@@ -307,6 +314,12 @@
 		if(searchId == ''){
 			alert("설비코드를 선택해주세요");
 			return; 
+		}
+		if(toDate < fromDate){
+			alert("날짜가 검색조건에 부합하지 않습니다.");
+			document.getElementById("toDate").value = null;
+			document.getElementById("fromDate").value = null;
+			return;
 		}
 		eqmNonListGrid.readData(1,{'toDate': toDate, 'fromDate': fromDate,  'eqmId': searchId}, true);
 	})
