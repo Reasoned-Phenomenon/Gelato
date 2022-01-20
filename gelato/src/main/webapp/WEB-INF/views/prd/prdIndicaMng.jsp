@@ -56,7 +56,7 @@
 	<div id=nonIndicaDialog title="미지시 생산계획 목록"></div>
 	
 	<!-- 자재 모달창 -->
-	<div id=RwmatrLotDialog title="자재별 Lot 목록"></div>
+	<div id=RwmatrLotDialog title="자재별 LOT 목록"></div>
 	
 </body>
 
@@ -66,6 +66,8 @@
 	let pdc;
 	let pdq;
 	let rwi;
+	let rwn;
+	let rwq;
 	
 	// 버튼 숨김
 	/* $("#btnIns") */
@@ -272,7 +274,7 @@
 	});
 	
 	// 생산지시 클릭 -> 필요자재 그리드
-	planIndicaGrid.on("dblclick", (ev3) => {
+	planIndicaGrid.on("editingFinish", (ev3) => {
 		planIndicaGrid.setSelectionRange({
 		    start: [ev3.rowKey, 0],
 		    end: [ev3.rowKey, planIndicaGrid.getColumns().length-1]
@@ -307,19 +309,24 @@
 		
 		rwi = RwmatrGrid.getRow(ev4.rowKey).rwmatrId;
 		console.log(rwi);
-		chooseRI(rwi);
+		rwn = RwmatrGrid.getRow(ev4.rowKey).nm;
+		console.log(rwn);
+		rwq = RwmatrGrid.getRow(ev4.rowKey).qy;
+		console.log(rwq);
+		
+		chooseRI(rwi,rwn,rwq);
 		console.log(99999)
 	})
 	
-	function chooseRI(rwi){
-		// 자재Lot 모달창 생성
-		
 		var RwmatrLotDialog = $("#RwmatrLotDialog").dialog({
 			modal : true,
 			autoOpen : false,
 			height: 600,
 			width: 800
-		});
+		});	
+	
+	function chooseRI(rwi,rwn,rwq){
+		// 자재Lot 모달창 생성
 		
 		RwmatrLotDialog.dialog("open");
 		console.log(232323);
@@ -327,7 +334,7 @@
 				function() {
 					console.log("주문창 로드") 
 					console.log(rwi);
-					chooseRWI(rwi);
+					chooseRWI(rwi,rwn,rwq);
 				})
 	}
 

@@ -6,20 +6,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자재 Lot 조회</title>
+<title>자재 LOT 조회</title>
 </head>
 <body>
 	<br>
-	<h1>자재 Lot 조회</h1>
+	<h1>자재 LOT 조회</h1>
+	<br>
+	<div>자재명 : <input type="text" readonly id="rwname"> 필요수량 : <input type="text" readonly id="rwneed"></div>
 	<br>
 	<div id="chooseRwmatrLotGrid"></div>
+	<br>
+	<button type="button" class="btn btn-secondary" id="btnchoose">확인</button>
 
 <script>
 	var Grid = tui.Grid;
 
-	function chooseRWI(rwi) {
-		chooseRwmatrLotGrid.readData(1,{'rwmatrId':rwi}, true);
-	}
+	
 	//그리드 테마
 	Grid.applyTheme('striped', {
 		  cell: {
@@ -42,7 +44,8 @@
 		  api: {
 		    readData: { url:'${path}/prd/chooseRwmatrId.do', method: 'GET'}
 		  },
-		  contentType: 'application/json'
+		  contentType: 'application/json',
+		  initialRequest: false
 		},
 		rowHeaders:['checkbox','rowNum'],
 		selectionUnit: 'row',
@@ -67,6 +70,53 @@
 			  }
 		  ]
 	});
+	
+	function chooseRWI(rwi,rwn,rwq) {
+		/* chooseRwmatrLotGrid.readData(1,{'rwmatrId':rwi}, true); */
+		document.getElementById("rwname").value = rwn;
+		document.getElementById("rwneed").value = rwq;
+		console.log(rwq);
+	
+		$.ajax({
+			url : "${path}/prd/chooseRwmatrId.do?rwmatrId=" + rwi,
+			dataType : 'json',
+			error : function(result) {
+				console.log('에러', result)
+			}
+		}).done(function (result) {
+			console.log('확인');
+			console.log(result);
+			console.log(result.data.contents);
+			
+			chooseRwmatrLotGrid.resetData(result.data.contents);
+			chooseRwmatrLotGrid.resetOriginData();
+			
+			let grc = chooseRwmatrLotGrid.getRowCount();
+			console.log(grc);
+			
+			console.log("시작");
+			for (let i=0 ; i<grc ; i++) {
+				
+				// 행의 현재고값
+				var iqy = chooseRwmatrLotGrid.getValue(i,'qy');
+				console.log(iqy);
+				console.log(rwq);
+				console.log(rwq-iqy);
+				
+				if( iqy >= rwq) {
+					chooseRwmatrLotGrid.setValue(i,'oustQy',rwq);
+					console.log("현재고가 더 큼")
+				} else {
+					console.log("현재고가 더 작음")
+					chooseRwmatrLotGrid.setValue(i+1,'oustQy',(iqy-rwq));
+				}
+			}
+				
+		})
+	}
+	
+	
+	
 </script>
 </body>
 </html>
