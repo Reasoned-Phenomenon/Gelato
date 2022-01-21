@@ -122,7 +122,7 @@ var rwmatrOustList = new Grid({
 				  sortable: true
 				},
 				{
-				  header: '출고일',
+				  header: '출고일시',
 				  name: 'istOustDttm',
 				  sortable: true
 				},
