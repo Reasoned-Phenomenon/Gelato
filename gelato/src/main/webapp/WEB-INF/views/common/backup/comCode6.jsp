@@ -142,8 +142,7 @@ var codeIdGrid = new Grid({
 			  header: '코드 ID 상세',
 			  name: 'codeIdDc',
 			  hidden:true
-			},
-			
+			}
 		]
 });
 
@@ -253,28 +252,20 @@ const codeGrid = new tui.Grid({
 		  header: 'USE_AT',
 		  name: 'useAt',
 		  align: 'center',
-		  editor: {
-	            type: GelatoSelectEditor,
-	            options: {
-	            	listItems : [
-	            		{text: '사용', value: 'Y'},
-						{text: '비사용', value: 'N'}
-	            		]
-	            }
-	      },
+		  renderer: {
+	            type: GelatoRadio,
+	      }
+		  
 		  /* formatter: 'listItemText',
 		  editor : {
-			  type: 'select',
+			  type: 'radio',
 			  options: {
 				  listItems: [
-					  {text: '사용', value: 'Y'},
-					  {text: '비사용', value: 'N'}
+					  {text: 'Y', value: 'Y'},
+					  {text: 'N', value: 'N'}
 				  ]
 			  }
-		  },*/
-		  renderer: {
-	            type: GelatoSelect
-	      } 
+		  } */
 		  
 		}
      ]
@@ -375,10 +366,10 @@ const codeGrid = new tui.Grid({
 	codeGrid.on('click',function (ev) {
 		//findRows로 중복값 체크 -> 번호 증가시키면 LOT번호 부여 가능할 것 같음
 		console.log(ev)
-		/* let aaa = codeGrid.findRows({
+		let aaa = codeGrid.findRows({
 			code:codeGrid.getValue(ev.rowKey,ev.columnName)
 		}) 
-		console.log(aaa.length) */
+		console.log(aaa.length)
 	})
 	
 	//input태그(time) 테스트

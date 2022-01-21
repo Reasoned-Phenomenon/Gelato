@@ -6,8 +6,7 @@ $(function () {
 //라디오 렌더러
 class GelatoRadio {
   constructor(props) {
-	
-	
+	console.log(props)
 	const { grid, rowKey,columnInfo, value } = props;
 	const el = document.createElement('div');
 	
@@ -58,6 +57,81 @@ class GelatoRadio {
   }
 
 }
+
+//셀렉트 렌더러
+class GelatoSelect {
+  constructor(props) {
+	
+	console.log(props)
+	//console.log(props.columnInfo.renderer.options)
+	
+	const { grid, rowKey,columnInfo, value } = props;
+	
+	const el = document.createElement('select');
+	
+	let data = props.columnInfo.editor.options.listItems;
+	
+	for(let i = 0 ; i < data.length ; i ++) {
+		let opt = document.createElement('option');
+		opt.innerText = data[i].text;
+		opt.value = data[i].value;
+		el.append(opt);
+	}
+	
+	el.addEventListener('click',function (ev) {
+		console.log(ev)
+		ev.stopPropagation();
+	})
+	
+    this.el = el;
+  }
+
+  getElement() {
+    return this.el;
+  }
+
+	render(props) {
+		this.el.value = String(props.value);
+	}
+}
+
+//셀렉트 에디터
+class GelatoSelectEditor {
+  constructor(props) {
+	
+	console.log(props)
+	
+	//const { grid, rowKey,columnInfo, value } = props;
+	
+	const el = document.createElement('select');
+	
+	let data = props.columnInfo.editor.options.listItems;
+	
+	for(let i = 0 ; i < data.length ; i ++) {
+		let opt = document.createElement('option');
+		opt.innerText = data[i].text;
+		opt.value = data[i].value;
+		el.append(opt);
+	}
+	
+	el.addEventListener('click',function (ev) {
+		console.log(ev)
+		ev.stopPropagation();
+	})
+	
+    this.el = el;
+  }
+
+  getElement() {
+    return this.el;
+  }
+
+  getValue() {
+    return this.el.value;
+  }
+}
+
+
 
 //로트번호 부여 함수
 function get_lot(str_id) {
