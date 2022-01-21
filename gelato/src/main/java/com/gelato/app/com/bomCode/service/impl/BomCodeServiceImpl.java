@@ -25,10 +25,17 @@ public class BomCodeServiceImpl implements BomCodeService {
 	// modify로 등록 수정 삭제 
 	@Override
 	public int modifyBomCode(ModifyVO<BomCodeVO> mvo) {
-			for(BomCodeVO vo : mvo.getCreatedRows()) {
+			
+		    for(BomCodeVO vo : mvo.getCreatedRows()) {
 				System.out.println("등록");
 				bomcodeMapper.insertBomCode(vo);
 			}
+			
+			for(BomCodeVO vo : mvo.getUpdatedRows()) {
+				System.out.println("수정");
+				bomcodeMapper.updateBomCode(vo);
+			}
+			
 		return 0;
 	}
 

@@ -20,6 +20,7 @@ public class BomCodeController {
 	// 제품 BOM 관리 페이지로 이동.
 	@RequestMapping("/com/comBom.do")
 	public String comBom() {
+		System.out.println("BOM 코드 관리 페이지 이동");
 		return "tiles/common/comBom";
 	}
 	
