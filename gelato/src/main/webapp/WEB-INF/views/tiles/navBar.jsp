@@ -35,7 +35,7 @@
                         </li>
                         
                         <li>
-                           <a href="#">> <span>자재 코드 관리</span></a>
+                           <a href="${path}/com/rwmatrCode.do">> <span>자재 코드 관리</span></a>
                         </li>
                         
                         <li>
