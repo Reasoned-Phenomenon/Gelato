@@ -86,6 +86,11 @@ var rwmatrOustList = new Grid({
 	bodyHeight: 600,
 	columns:[
 				{
+				  header: '자재LOT번호',
+				  name: 'lotNo',
+				  sortable: true
+				},
+				{
 				  header: '자재코드',
 				  name: 'rwmatrId',
 				},
@@ -114,11 +119,6 @@ var rwmatrOustList = new Grid({
 				  header: '출고일',
 				  name: 'istOustDttm',
 				  editor: 'datePicker',
-				  sortable: true
-				},
-				{
-				  header: '자재LOT번호',
-				  name: 'lotNo',
 				  sortable: true
 				},
 				{
@@ -192,7 +192,7 @@ function callrwmatrStcModal(){
 		console.log(ev)
 		console.log(ev.columnName)
 		console.log(ev.rowKey)
-	    if (ev.columnName === 'rwmatrId') {
+	    if (ev.columnName === 'lotNo') {
 			console.log("검수완료리스트")
 			ig = 'g';
 			callrwmatrStcModal();

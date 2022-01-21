@@ -28,6 +28,15 @@ public interface RwmatrioMapper {
 	//자재입고관리 삭제
 	int deleteRwmatrIst(RwmatrioVO vo);
 	
+	//자재출고관리 추가
+	int insertRwmatrOust(RwmatrioVO vo);
+	
+	//자재출고관리 수정
+	int updateRwmatrOust(RwmatrioVO vo);
+	
+	//자재출고관리 삭제
+	int deleteRwmatrOust(RwmatrioVO vo);
+	
 	//현재고 추가
 	int insertRwmatrStc(RwmatrioVO vo);
 	

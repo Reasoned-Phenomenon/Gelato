@@ -62,12 +62,6 @@ public class RwmatrIstOustController {
 		return "grid";
 	}
 	
-	//원자재 LOT번호 모달(보류)
-	@RequestMapping("/rwmatr/rwmatrLotNoModal.do")
-	public String rwmatrLotNoModal() {
-		return "rwmatr/rwmatrLotNoModal";
-	}
-	
 	//원자재 현재고 모달
 	@RequestMapping("/rwmatr/rwmatrStcModal.do")
 	public String rwmatrStcModal() {
