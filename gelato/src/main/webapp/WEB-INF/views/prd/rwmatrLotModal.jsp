@@ -124,8 +124,43 @@
 	
 	$("#btnchoose").on(
 			"click", function(){
-				RwmatrLotDialog.dialog("close");
+				
+				console.log(chooseRwmatrLotGrid.getCheckedRows());
+				
+				let gcr = chooseRwmatrLotGrid.getCheckedRows();
+				console.log(gcr);
+				
+				for( let i=0 ; i<gcr.length ; i++) {
+					RwmatrLotGrid.appendRow({'nm':rwn})
+				}
+
+				moveCR(gcr);
+				
+				/* let rrc = RwmatrLotGrid.getRowCount();
+				console.log(rrc);
+				
+				for( let i=0 ; i<gcr.length ; i++){
+					console.log("자재LOT 등록")
+					RwmatrLotGrid.setValue(rrc, 'nm', rwn);
+					RwmatrLotGrid.setValue(rrc, 'lotNo', gcr[i].lotNo);
+					RwmatrLotGrid.setValue(rrc, 'oustQy', gcr[i].oustQy);
+					RwmatrLotGrid.setValue(rrc, 'expdate', gcr[i].expdate);
+				} */
+				
 			});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

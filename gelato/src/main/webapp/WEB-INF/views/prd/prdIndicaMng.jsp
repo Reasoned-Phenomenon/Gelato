@@ -204,26 +204,19 @@
 			},
 			rowHeaders:['rowNum'],
 			selectionUnit: 'row',
-			columns:[
-				  {
-				    header: '자재Lot번호',
-				    name: 'lotNo'
-				  },
-				  {
-				    header: '현재고',
-				    name: 'qy',
-				  },
-				  {
-				    header: '사용수량',
-				    name: 'oustQy',
-				    editor : 'text'
-				  },
-				  {
-				    header: '유통기한',
-				    name: 'expdate',
-				    editor: 'datePicker'
-				  }
-			  ]
+			columns:[{
+				header : '자재명',
+				name : 'nm'
+			}, {
+				header : '자재LOT번호',
+				name : 'lotNo'
+			}, {
+				header : '사용수량',
+				name : 'oustQy',
+			}, {
+				header : '유통기한',
+				name : 'expdate',
+			}]
 		});
 		
 	// 미지시 생산계획
@@ -374,7 +367,33 @@
 				})
 	}
 
-
+	function moveCR(gcr){
+		RwmatrLotDialog.dialog("close");
+		console.log(gcr);
+		console.log(gcr[0].lotNo);
+		console.log(gcr[0].oustQy);
+		console.log(gcr[0].expdate);
+		console.log(gcr.length);
+		
+		let rrc = RwmatrLotGrid.getRowCount();
+		console.log(rrc);
+		
+		for( let i=(rrc-gcr.length) ; i<gcr.length ; i++){
+			//appendRow 한 다음에 setValue 시키기
+			
+			RwmatrLotGrid.setValue(i, 'nm', rwn);
+			RwmatrLotGrid.setValue(i, 'lotNo', gcr[i].lotNo);
+			RwmatrLotGrid.setValue(i, 'oustQy', gcr[i].oustQy);
+			RwmatrLotGrid.setValue(i, 'expdate', gcr[i].expdate);
+				
+			/* for (let j=0 ; j<gcr.length ; j++) {
+				RwmatrLotGrid.setValue(i, 'nm', rwn);
+				RwmatrLotGrid.setValue(i, 'lotNo', gcr[j].lotNo);
+				RwmatrLotGrid.setValue(i, 'oustQy', gcr[j].oustQy);
+				RwmatrLotGrid.setValue(i, 'expdate', gcr[j].expdate);
+			} */
+		}
+	}
 
 </script>
 </html>
