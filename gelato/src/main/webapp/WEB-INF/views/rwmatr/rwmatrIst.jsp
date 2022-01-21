@@ -121,7 +121,6 @@ var rwmatrIstList = new Grid({
 				{
 				  header: '입고일',
 				  name: 'istOustDttm',
-				  editor: 'datePicker',
 				  sortable: true
 				},
 				{

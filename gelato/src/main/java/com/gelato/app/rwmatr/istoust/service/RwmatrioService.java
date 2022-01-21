@@ -25,6 +25,9 @@ public interface RwmatrioService {
 	//입고관리 CUD
 	public int modifyIst(ModifyVO<RwmatrioVO> mvo);
 	
+	//입고관리 CUD
+	public int modifyOust(ModifyVO<RwmatrioVO> mvo);
+	
 	//현재고 CUD
 	public int modifyStc(ModifyVO<RwmatrioVO> mvo);
 }

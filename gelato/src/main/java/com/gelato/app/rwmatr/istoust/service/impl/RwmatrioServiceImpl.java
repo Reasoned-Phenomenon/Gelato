@@ -88,4 +88,36 @@ public class RwmatrioServiceImpl implements RwmatrioService {
 		}
 		return 0;
 	}
+
+	@Override
+	public int modifyOust(ModifyVO<RwmatrioVO> mvo) {
+		for(RwmatrioVO vo : mvo.getCreatedRows()) {
+			System.out.println("추가");
+			rwmatrioMapper.insertRwmatrOust(vo);
+			//현재고 업데이트
+			RwmatrioVO rwmatrioVO = new RwmatrioVO();
+			rwmatrioVO.setRwmatrId(vo.getRwmatrId());
+			rwmatrioVO.setExpdate(vo.getExpdate());
+			rwmatrioVO.setQy(vo.getExcpQy());
+			System.out.println("현재고 업데이트!");
+			System.out.println(rwmatrioMapper.updateRwmatrStc(rwmatrioVO));
+		}
+		
+		for(RwmatrioVO vo : mvo.getUpdatedRows()) {
+			System.out.println("수정");
+			rwmatrioMapper.updateRwmatrOust(vo);
+		}
+		
+		for(RwmatrioVO vo : mvo.getDeletedRows()) {
+			System.out.println("삭제");
+			rwmatrioMapper.deleteRwmatrOust(vo);
+			//현재고 업데이트
+			RwmatrioVO rwmatrioVO = new RwmatrioVO();
+			rwmatrioVO.setRwmatrId(vo.getRwmatrId());
+			rwmatrioVO.setExpdate(vo.getExpdate());
+			rwmatrioVO.setQy(vo.getExcpQy());
+			rwmatrioMapper.updateRwmatrStcD(rwmatrioVO);
+		}
+		return 0;
+	}
 }

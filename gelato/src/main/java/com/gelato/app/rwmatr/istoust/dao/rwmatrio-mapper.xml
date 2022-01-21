@@ -49,7 +49,8 @@
  	</select>
  	
  	<select id="RwmatrOustList" resultType="RwmatrioVO">
- 		SELECT RIO.RWMATR_ID AS RWMATR_ID, 
+ 		SELECT RIO.RWMATR_ORDER_DETA_ID AS RWMATR_ORDER_DETA_ID, 
+ 			   RIO.RWMATR_ID AS RWMATR_ID, 
 			   R.NM AS NM, 
 			   RIO.OUST_QY AS OUST_QY, 
 			   RIO.IST_OUST_DTTM AS IST_OUST_DTTM, 
@@ -103,7 +104,8 @@
  	</select>
  	
  	<select id="RwmatrStcMList" resultType="RwmatrioVO">
- 		SELECT RS.LOT_NO AS LOT_NO, 
+ 		SELECT DISTINCT RS.LOT_NO AS LOT_NO,
+ 			   RIO.RWMATR_ORDER_DETA_ID,
  			   RS.RWMATR_ID AS RWMATR_ID, 
  			   R.NM AS NM, 
  			   V.VEND_NAME AS VEND_NAME,
@@ -113,6 +115,8 @@
 			ON RS.RWMATR_ID = R.RWMATR_ID
 		JOIN VEND V
 			ON R.VEND_ID = V.VEND_ID
+		JOIN RWMATR_IST_OUST RIO
+            ON RS.LOT_NO = RIO.LOT_NO
 		<where>
 	       	<if test="rwmName != ''">
 				R.NM LIKE '%'||#{rwmName}||'%'
@@ -140,7 +144,7 @@
 							 VALUES(
 							 		#{rwmatrId},
 							 		#{lotNo},
-							 		#{istOustDttm},
+							 		sysdate,
 							 		#{istQy},
 							 		'0',
 							 		#{expdate},
@@ -180,8 +184,15 @@
  	
  	<!-- 자재 현재고 update -->
  	<update id="updateRwmatrStc" parameterType="RwmatrioVO">
- 		UPDATE RWMATR_STC SET IST_OUST_DTTM = #{istOustDttm},
- 							  EXPDATE = #{expdate}
+ 		UPDATE RWMATR_STC SET RWMATR_ID = #{rwmatrId},
+ 							  EXPDATE = #{expdate},
+ 							  QY = QY-#{qy}
+ 		WHERE LOT_NO = #{lotNo}
+ 	</update>
+ 	
+ 	<!-- 자재 현재고 update -->
+ 	<update id="updateRwmatrStcD" parameterType="RwmatrioVO">
+ 		UPDATE RWMATR_STC SET QY = QY + #{qy}
  		WHERE LOT_NO = #{lotNo}
  	</update>
  	
@@ -205,7 +216,7 @@
 							 VALUES(
 							 		#{rwmatrId},
 							 		#{lotNo},
-							 		#{istOustDttm},
+							 		sysdate,
 							 		'0',
 							 		#{oustQy},
 							 		#{expdate},

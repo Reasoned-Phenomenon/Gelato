@@ -107,7 +107,7 @@ public class RwmatrIstOustController {
 	@ResponseBody
 	public boolean modifyOustData (@RequestBody ModifyVO<RwmatrioVO> mvo) {
 		System.out.println(mvo);
-		//rwmatroService.modifyRwmatro(mvo); //수정해야함
+		rwmatrioService.modifyOust(mvo);
 		return true;
 	}
 	

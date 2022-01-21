@@ -43,6 +43,9 @@ public interface RwmatrioMapper {
 	//현재고 수정
 	int updateRwmatrStc(RwmatrioVO vo);
 	
+	//현재고 수정
+	int updateRwmatrStcD(RwmatrioVO vo);
+	
 	//현재고 삭제
 	int deleteRwmatrStc(RwmatrioVO vo);
 	
