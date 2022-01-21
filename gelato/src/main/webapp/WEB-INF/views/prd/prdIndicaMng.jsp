@@ -370,30 +370,51 @@
 	function moveCR(gcr){
 		RwmatrLotDialog.dialog("close");
 		console.log(gcr);
-		console.log(gcr[0].lotNo);
+		/* console.log(gcr[0].lotNo);
 		console.log(gcr[0].oustQy);
-		console.log(gcr[0].expdate);
+		console.log(gcr[0].expdate); */
 		console.log(gcr.length);
 		
 		let rrc = RwmatrLotGrid.getRowCount();
 		console.log(rrc);
+		//rrc=4
 		
-		for( let i=(rrc-gcr.length) ; i<gcr.length ; i++){
+		let j=0;
+		for( let i=(rrc-gcr.length) ; i<rrc ; i++){
 			//appendRow 한 다음에 setValue 시키기
 			
-			RwmatrLotGrid.setValue(i, 'nm', rwn);
+			/* RwmatrLotGrid.setValue(i, 'nm', rwn);
 			RwmatrLotGrid.setValue(i, 'lotNo', gcr[i].lotNo);
 			RwmatrLotGrid.setValue(i, 'oustQy', gcr[i].oustQy);
-			RwmatrLotGrid.setValue(i, 'expdate', gcr[i].expdate);
+			RwmatrLotGrid.setValue(i, 'expdate', gcr[i].expdate); */
 				
-			/* for (let j=0 ; j<gcr.length ; j++) {
+			//i=2-2 0,1
+			//i=4-2=2 ; i<4
+			console.log(989898)
+			//for (var j=0 ; j<gcr.length ; j++) {
+				
+				/* console.log(gcr[j].lotNo);
+				console.log(gcr[j].oustQy);
+				console.log(gcr[j].expdate); */
+				
 				RwmatrLotGrid.setValue(i, 'nm', rwn);
-				RwmatrLotGrid.setValue(i, 'lotNo', gcr[j].lotNo);
+ 				RwmatrLotGrid.setValue(i, 'lotNo', gcr[j].lotNo);
 				RwmatrLotGrid.setValue(i, 'oustQy', gcr[j].oustQy);
 				RwmatrLotGrid.setValue(i, 'expdate', gcr[j].expdate);
-			} */
+				
+				j++;
+			//}
 		}
 	}
+	
+	RwmatrLotGrid.on("dblclick", (ev5) => {
+		RwmatrLotGrid.setSelectionRange({
+		    start: [ev5.rowKey, 0],
+		    end: [ev5.rowKey, RwmatrLotGrid.getColumns().length-1]
+		});
+		
+		console.log(ev5)
+	});
 
 </script>
 </html>
