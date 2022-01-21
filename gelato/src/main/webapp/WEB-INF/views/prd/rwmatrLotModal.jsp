@@ -116,6 +116,7 @@
 					rwq = rwq-iqy
 					chooseRwmatrLotGrid.check(i);
 				}
+				
 			}
 				
 		})
