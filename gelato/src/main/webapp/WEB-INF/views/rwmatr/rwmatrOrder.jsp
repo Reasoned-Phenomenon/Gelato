@@ -92,6 +92,7 @@ var rwmatrOrderList = new Grid({
 				{
 				  header: '발주코드',
 				  name: 'orderId',
+				  //rowSpan: true,
 				  sortable: true
 				},
 				{

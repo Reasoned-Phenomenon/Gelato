@@ -119,7 +119,7 @@ var rwmatrIstList = new Grid({
 				  sortable: true
 				},
 				{
-				  header: '입고일',
+				  header: '입고일시',
 				  name: 'istOustDttm',
 				  sortable: true
 				},
