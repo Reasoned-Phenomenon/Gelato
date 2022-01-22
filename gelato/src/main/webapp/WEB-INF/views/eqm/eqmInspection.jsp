@@ -9,6 +9,8 @@
 <title>설비 점검 페이지(점검등록/점검내역조회)</title>
 </head>
 <body>
+<!-- 설비검색 모달 -->
+	<div id="dialog-form" title="설비검색"></div>
 	<h2>설비 정기점검 관리</h2>
 	<div class="container">
 		<br> <br>
@@ -44,7 +46,7 @@
 						</select>
 					</div>
 				</div>
-				<div class="col-6 border" style="width:500px;">
+				<div class="col-6 border" style="width: 500px;">
 					<div>
 						<ul>
 							<li>
@@ -55,7 +57,7 @@
 									<label>점검일자</label> <input id="fromCkDate" name="fromCkDate"
 										type="date"><label>~</label><input id="toCkDate"
 										name="toCkDate" type="date">
-									<button class="btn btn-print float-right">설비조회</button>
+									<button class="btn btn-print float-right" id="eqmChck">설비조회</button>
 								</div>
 							<li>
 						</ul>
@@ -79,7 +81,8 @@
 						method : 'GET'
 					}
 				},
-				contentType : 'application/json'
+				contentType : 'application/json',
+				initialRequest : false
 			},
 			rowHeaders : [ 'rowNum' ],
 			selectionUnit : 'row',
@@ -106,8 +109,8 @@
 				header : '점검내역',
 				name : 'chckDeta'
 			}, {
-				header : '구분',
-				name : 'chckDeta'
+				header : '검수인',
+				name : 'inspr'
 			} ]
 		});
 
@@ -118,6 +121,41 @@
 				'gubun' : gubun
 			}, true);
 		}
+
+		//점검일자 input태그에 현재날짜 띄우기
+		document.getElementById('chckDate').value = new Date().toISOString().substring(0, 10);
+		
+		//(점검일자별)설비조회 검색 모달
+		let dialog = $("#dialolg-form").dialog({
+			autoOpen :false,
+			modal : true
+		});
+		
+		$("#eqmChck").on("click", function(){
+			dialogSearch.dialog("open");
+			
+			
+			var fromCkDate = $("#fromCkDate").val();
+			var toCkDate = $("#toCkDate").val();
+			
+			var params = {
+			fromCkDate : fromCkDate,
+			toCkDate : toCkDate
+			}
+			console.log(fromCkDate);
+			
+			$.ajax({
+				url : "${path}/eqm/eqmCkDateModal.do",
+				data : params,
+				method : 'GET',
+				success : function(res){ 
+					eqmCkGrid.readData(1,{'fromCkDate':fromCkDate, 'toCkDate':toCkDate},true);
+                }
+			})
+		})
+		
+		
+		
 	</script>
 </body>
 </html>

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gelato.app.eqm.eqmIns.dao.EqmInsVO;
 import com.gelato.app.eqm.eqmIns.service.EqmInsService;
@@ -20,10 +21,18 @@ public class EqmInsController {
 		return"tiles/eqm/eqmInspection";
 	}
 	
-	//설비점검관리 - 그리드
-	@GetMapping("/eqm/eqmInspectionList.do")
-	public String eqmInsList(Model model, EqmInsVO eqmInsVo) {
+	//설비점검관리 - 설비검색 모달
+		@RequestMapping("/eqm/eqmCkModal.do")
+		public String getEqmCkModal() {
+			return "/eqm/eqmCkModal";
+		}
+		
+	//설비점검관리 - 설비검색 모달(페이지)
+	@GetMapping("eqm/eqmCkDate.do")
+	public String eqmCkDate(Model model, EqmInsVO eqmInsVo) {
 		model.addAttribute("datas", service.eqmChck(eqmInsVo));
-		return"grid";
+		return "grid";
 	}
+	
+	
 }
