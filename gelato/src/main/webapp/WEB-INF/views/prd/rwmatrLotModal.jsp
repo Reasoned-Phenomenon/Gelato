@@ -67,6 +67,10 @@
 			    header: '유통기한',
 			    name: 'expdate',
 			    editor: 'datePicker'
+			  },{
+				header : '제품코드',
+				name : 'prdtId',
+				hidden : true
 			  }
 		  ],
 		  summary: {
@@ -94,7 +98,7 @@
 		 }
 	 });
 	
-	function chooseRWI(rwi,rwn,rwq) {
+	function chooseRWI(rwi,rwn,rwq,rpi) {
 		/* chooseRwmatrLotGrid.readData(1,{'rwmatrId':rwi}, true); */
 		document.getElementById("rwname").value = rwn;
 		document.getElementById("rwneed").value = rwq;
@@ -119,6 +123,9 @@
 			
 			console.log("시작");
 			for (let i=0 ; i<grc ; i++) {
+				
+				console.log(rpi);
+				chooseRwmatrLotGrid.setValue(i,'prdtId',rpi);
 				
 				// 행의 현재고값
 				iqy = parseInt(chooseRwmatrLotGrid.getValue(i,'qy'));
@@ -160,7 +167,7 @@
 				console.log(gcr);
 				
 				for( let i=0 ; i<gcr.length ; i++) {
-					RwmatrLotGrid.appendRow({'nm':rwn})
+					RwmatrLotGrid.appendRow({'nm':rwn, 'prdtId':rpi})
 				}
 
 				moveCR(gcr);

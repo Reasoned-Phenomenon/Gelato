@@ -60,7 +60,26 @@
 		ORDER BY rs.expdate asc
 	</select>
 
-
+<!-- 생산지시T insert -->
+	<insert id="insertPrdIndica" parameterType="PrdIndicaMngVO">
+		<selectKey keyProperty="indicaId" resultType="string" order="BEFORE">
+			SELECT 'PIL-' || to_char(sysdate,'yyyyMMdd') || '-' || lpad(nvl2(substr(max(indica_id),14),(substr(max(indica_id),14)+1), 1), 3, '0')
+			AS INDICA_ID
+			FROM prod_indica
+			WHERE substr(indica_id,5,8) = sysdate
+		</selectKey>
+		INSERT INTO prod_indica(indica_id, 
+								plan_id, 
+								fg)
+		VALUES (
+				#{indicaId},
+		        (SELECT PLAN_ID
+				 AS PLAN_ID
+			     FROM PROD_PLAN_DETA
+			     WHERE PLAN_DETA_ID = #{planDetaId}),
+         		#{fg}
+         		)
+	</insert>
 
 
 

@@ -3,16 +3,19 @@ package com.gelato.app.prd.prdIndica.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gelato.app.prd.prdIndica.dao.PrdIndicaMngVO;
 import com.gelato.app.prd.prdIndica.service.PrdIndicaMngService;
+import com.gelato.app.vr.ModifyVO;
 
 @Controller
 public class PrdIndicaMngController {
 	
-	 @Autowired PrdIndicaMngService prdIndicaMngService;
+	@Autowired PrdIndicaMngService prdIndicaMngService;
 	
 	//생산지시관리로 이동
 	@RequestMapping("/prd/prdIndicaMng.do")
@@ -84,7 +87,16 @@ public class PrdIndicaMngController {
 		return "grid";
 	}
 	
-	
+	// modify - 생산지시T 등록
+	@PutMapping("/prd/modifyPrdIndica.do")
+	@ResponseBody
+	public boolean modifyPrdIndica (@RequestBody ModifyVO<PrdIndicaMngVO> mvo) {
+		System.out.println("생산지시 등록 modi 컨트롤러");
+		System.out.println(mvo);
+		prdIndicaMngService.modifyPrdIndica(mvo);
+		System.out.println("modi 컨트롤러222");
+		return true;
+	}
 	   
 	
 	

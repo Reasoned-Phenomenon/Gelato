@@ -72,9 +72,10 @@
 	let rwi;
 	let rwn;
 	let rwq;
+	let rpi;
 	
 	// 버튼 숨김
-	/* $("#btnIns") */
+	$("#btnIns").hide();
 	
 	//토스트옵션
 	toastr.options = {
@@ -82,8 +83,6 @@
 		progressBar : true,
 		timeOut: 1500 // null 입력시 무제한.
 		}
-	
-	$("#btnIns").hide();
 	
 	// 그리드 생성
 		var Grid = tui.Grid;
@@ -103,12 +102,13 @@
 			}
 		});
 		
-		// 그리드 : 계획
+		// 그리드1 : 계획
 		const planDetaGrid = new Grid({
 			el : document.getElementById('planDetaGrid'),
 			data : {
 				api : {
 					readData : {url : '${path}/prd/choosePlan.do',method : 'GET'},
+					modifyData : { url: '${path}/prd/modifyPrdIndica.do', method: 'PUT'} 
 				},
 				contentType : 'application/json',
 				initialRequest: false
@@ -127,10 +127,14 @@
 			}, {
 				header : '생산일수',
 				name : 'prodDcnt',
+			},{
+				header : '구분',
+				name : 'fg',
+				hidden : true
 			}]
 		});
 		
-		//생산지시 그리드
+		// 그리드2 - 생산지시 그리드
 		const planIndicaGrid = new Grid({
 			el : document.getElementById('planIndicaGrid'),
 			data : {
@@ -157,6 +161,10 @@
 				header : '일자별 우선순위',
 				name : 'ord',
 				editor: 'text'
+			},{
+				header : '생산계획디테일코드',
+				name : 'planDetaId',
+				hidden : true
 			}],
 			summary: {
 		        height: 0,
@@ -233,6 +241,10 @@
 			}, {
 				header : '유통기한',
 				name : 'expdate',
+			},{
+				header : '제품코드',
+				name : 'prdtId',
+				hidden : true
 			}],
 			summary: {
 		        height: 0,
@@ -311,7 +323,7 @@
 		})
 		
 		for( let i=0 ; i<pdc ; i++ ) {
-			planIndicaGrid.appendRow({'lineId':lineId})
+			planIndicaGrid.appendRow({'lineId':lineId, 'planDetaId':pdi})
 		}
 	});
 	
@@ -365,6 +377,8 @@
 		    end: [ev4.rowKey, RwmatrGrid.getColumns().length-1]
 		});
 		
+		rpi = RwmatrGrid.getRow(ev4.rowKey).prdtId;
+		console.log(rpi);
 		rwi = RwmatrGrid.getRow(ev4.rowKey).rwmatrId;
 		console.log(rwi);
 		rwn = RwmatrGrid.getRow(ev4.rowKey).nm;
@@ -372,7 +386,7 @@
 		rwq = RwmatrGrid.getRow(ev4.rowKey).qy;
 		console.log(rwq);
 		
-		chooseRI(rwi,rwn,rwq);
+		chooseRI(rwi,rwn,rwq,rpi);
 		console.log(99999)
 	})
 	
@@ -383,7 +397,7 @@
 			width: 800
 		});	
 	
-	function chooseRI(rwi,rwn,rwq){
+	function chooseRI(rwi,rwn,rwq,rpi){
 		// 자재Lot 모달창 생성
 		RwmatrLotDialog.dialog("open");
 		console.log(232323);
@@ -391,7 +405,7 @@
 				function() {
 					console.log("주문창 로드") 
 					console.log(rwi);
-					chooseRWI(rwi,rwn,rwq);
+					chooseRWI(rwi,rwn,rwq,rpi);
 				})
 	}
 
@@ -468,6 +482,29 @@
 			$("#btnIns").show();
 		}
 	}
+	
+	// 등록
+	btnIns.addEventListener("click", function() {
+		if(confirm("저장하시겠습니까?")) {
+			planDetaGrid.blur();
+			console.log("저장");
+			
+			for ( i = 0 ; i <= planDetaGrid.getRowCount() ; i++) {
+				planDetaGrid.setValue(i, 'fg', 'PROCEE');
+			}
+			planDetaGrid.request('modifyData',{showConfirm:false})
+		}
+	})
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </script>
 </html>
