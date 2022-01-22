@@ -10,9 +10,14 @@
 			   C.JUDT AS JUDT,
 			   C.CHCK_DETA AS CHCK_DETA
 		FROM EQM E 
-			 LEFT OUTER JOIN CHCK C
+			 RIGHT OUTER JOIN CHCK C
 			 ON (E.EQM_ID = C.EQM_ID)
-			   
+			 <if test="fromCkDate != null and fromCkDate != ''">
+			 	<![CDATA[AND TRUNC(CHCK_DT) >= TO_CHAR(#{fromCkDate})]]>
+			 </if>
+			 <if test="toCkDate != null and toCkDate != ''">
+			 	<![CDATA[AND TRUNC(CHCK_DT) >= TO_CHAR(#{toCkDate})]]>
+			 </if>
 	</select>
-
+	
 </mapper>
