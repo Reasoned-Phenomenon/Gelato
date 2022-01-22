@@ -14,5 +14,8 @@ public class RwmatrCodeVO {
 	
 	
 	// join에 필요한 거.
+	String useYn;     //사용 여부.
+	String vendName;  // 업체 명.
 	
+ 	
 }

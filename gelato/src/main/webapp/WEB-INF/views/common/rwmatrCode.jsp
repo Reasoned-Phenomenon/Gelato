@@ -9,77 +9,74 @@
 <title>자재 코드 관리 페이지</title>
 </head>
 <body>
-	<div>
-	  <br>
-		<h3>자재 코드 관리</h3>
-	</div>
-	<div align="right">
-		<button type="button" class="btn cur-p btn-outline-primary" id="SaveBtn">저장</button>
-		<button type="button" class="btn cur-p btn-outline-primary" id="DelBtn">삭제</button>
-		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
-	</div>
-	
-	<div class="col-8" >
-			<br>
-				<table>
-					<tbody>
-						<tr>
-							<th>자재코드* </th>
-							<td><input></td>
-							<th>자재명* </th>
-							<td><input></td>
-						</tr>
-						<tr>
-							<th>규격</th>
-							<td><input></td>
-							<th>관리단위</th>
-							<td><input></td>
-						</tr>
-						<tr>
-							<th>입고 업체</th>
-							<td><input>
-							<button>검색</button></td>
-							<th>업체명</th>
-							<td><input></td>
-						</tr>
-						<tr>
-							<th>자재 계정</th>
-							<td><input>
-							<button>검색</button>
-							<input></td>
-							<th>자재 구분</th>
-							<td><input>
-							<button>검색</button>
-							<input></td>
-						</tr>
-						<tr>
-							<th>재질 구분</th>
-							<td><input>
-							<button>검색</button>
-							<input></td>
-						</tr>
-						<tr>
-							<th>사용유무</th>
-							<td><input type="checkbox"></td>
-							<th>검사유무</th>
-							<td><input type="checkbox"></td>
-							<th>원통자재</th>
-							<td><input type="checkbox"></td>
-						</tr>
-						<tr>
-							<th>LOT관리</th>
-							<td><input type="checkbox"></td>
-							<th>안전재고 관리</th>
-							<td><input type="checkbox"></td>
-						</tr>
-						
-					</tbody>
-				</table>
-			</div>
-	
-<div id="rwmatrGrid"></div>
+	<div class="container">
+      <div class="flex row">
+         <div class="col-4">
+            <br>
+            <h3>자재 코드 관리</h3>
+            <div align="right">
+               <button type="button" class="btn cur-p btn-outline-primary" id="SaveBtn">저장</button>
+               <button type="button" class="btn cur-p btn-outline-primary" id="DelBtn">삭제</button>
+               <button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
+            </div>
+            <div id="rwmatrGrid"></div>
+         </div>
 
-	<script>
+         <div class="col-8">
+            <br>
+            	<br>
+            <table border="1">
+               <tbody>
+                  <tr>
+                  
+                     <th>자재코드*</th>
+                     <td><input type="text" id="rwmatrId" name="rwmatrId"></td>
+                     <th>자재명*</th>
+                     <td><input type="text" id="nm" name="nm"></td>
+                  </tr>
+                  <tr>
+                     <th>규격</th>
+                     <td><input type="text" id="spec" name="spec"></td>
+                     <th>관리단위</th>
+                     <td><input type="text" id="" name=""></td>
+                  </tr>
+                  <tr>
+                     <th>입고 업체</th>
+                     <td><input type="text" id="vendId" name="vendId">
+                        <button type="button" id="">검색</button></td>
+                     <th>업체명</th>
+                     <td><input type="text" id="vendName" name="vendName"></td>
+                  </tr>
+                  <tr>
+                     <th>자재 계정</th>
+                     <td><input type="text" id="" name="">
+                        <button type="button" id="">검색</button> 
+                        <input type="text" id="" name=""></td>
+                     <th>자재 구분</th>
+                     <td><input type="text" id="" name="">
+                        <button type="button" id="">검색</button> 
+                        <input type="text" id="" name=""></td>
+                  </tr>
+                  <tr>
+                     <th>사용유무</th>
+                     <td><input type="checkbox" id="useYn"></td>
+                     <th>검사유무</th>
+                     <td><input type="checkbox" id=""></td>
+                  </tr>
+                  <tr>
+                     <th>LOT관리</th>
+                     <td><input type="checkbox" id=""></td>
+                     <th>안전재고 관리</th>
+                     <td><input type="checkbox" id=""></td>
+                  </tr>
+
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+
+<script>
 var Grid = tui.Grid;	
 
 
@@ -151,6 +148,25 @@ var rwmatrGrid = new Grid({
 		]
 });
 
+//더블클릭시 한 행 선택 입력폼에 값 들어가게 하기.
+		rwmatrGrid.on("dblclick", (ev) => {
+			
+			/* $("#eqmId").val(eqmListGrid.getValue(ev["rowKey"],"eqmId"));
+			$("#eqmName").val(eqmListGrid.getValue(ev["rowKey"],"eqmName"));
+			$("#prcsId").val(eqmListGrid.getValue(ev["rowKey"],"prcsId"));
+			$("#nm").val(eqmListGrid.getValue(ev["rowKey"],"nm"));
+			$("#tempMax").val(eqmListGrid.getValue(ev["rowKey"],"tempMax"));
+			$("#tempMin").val(eqmListGrid.getValue(ev["rowKey"],"tempMin"));
+			$("#chckPerd").val(eqmListGrid.getValue(ev["rowKey"],"chckPerd"));
+		
+			rwmatrGrid.getValue(ev["rowKey"],"useYn")=='Y'?$("#useYn").prop("checked",true):$("#notUse").prop("checked",true);
+			
+			$("#prcsId").attr("disabled",false);
+			$("#nm").attr("disabled",false);
+			$("#tempMax").attr("disabled",false);
+			$("#tempMin").attr("disabled",false);
+			$("#chckPerd").attr("disabled",false); */
+		}) 
 	
 	</script>
 	
