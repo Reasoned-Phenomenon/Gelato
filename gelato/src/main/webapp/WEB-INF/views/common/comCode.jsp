@@ -258,10 +258,13 @@ const codeGrid = new tui.Grid({
 	            options: {
 	            	listItems : [
 	            		{text: '사용', value: 'Y'},
-						{text: '비사용', value: 'N'}
+						{text: '비사용', value: 'N'},
 	            		]
 	            }
 	      },
+	      renderer: {
+	            type: GelatoSelect
+	      } 
 		  /* formatter: 'listItemText',
 		  editor : {
 			  type: 'select',
@@ -272,9 +275,7 @@ const codeGrid = new tui.Grid({
 				  ]
 			  }
 		  },*/
-		  renderer: {
-	            type: GelatoSelect
-	      } 
+		  
 		  
 		}
      ]
