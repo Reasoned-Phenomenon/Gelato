@@ -36,7 +36,7 @@
 			<div id="planIndicaGrid"></div>
 		</div>
 	</div>
-	<br><br>
+	<br><br><br><br>
 	<div class="row">
 		<div class="col-sm-5">
 			<h3>필요자재</h3>
@@ -49,6 +49,10 @@
 			<h3>필요자재Lot</h3>
 			<hr>
 			<div id="RwmatrLotGrid"></div>
+			<br>
+			<div class="col-sm-2">
+					<button type="button" class="btn btn-secondary" id="btnDel">행 삭제</button>
+			</div>
 		</div>
 	</div>
 	
@@ -78,6 +82,8 @@
 		progressBar : true,
 		timeOut: 1500 // null 입력시 무제한.
 		}
+	
+	$("#btnIns").hide();
 	
 	// 그리드 생성
 		var Grid = tui.Grid;
@@ -189,7 +195,18 @@
 			}, {
 				header : '소모량',
 				name : 'qy',
-			}]
+			}],
+			summary: {
+		        height: 0,
+		        position: 'bottom', // or 'top'
+		        columnContent: {
+		        	qy: {
+		            template(summary) {
+	              			  return 'Total: ' + summary.sum;
+		            }
+		          }
+		        }
+			}
 		});
 		
 		// 그리드4 - 선택lot
@@ -202,7 +219,7 @@
 			  contentType: 'application/json',
 			  initialRequest: false
 			},
-			rowHeaders:['rowNum'],
+			rowHeaders:['checkbox','rowNum'],
 			selectionUnit: 'row',
 			columns:[{
 				header : '자재명',
@@ -216,7 +233,18 @@
 			}, {
 				header : '유통기한',
 				name : 'expdate',
-			}]
+			}],
+			summary: {
+		        height: 0,
+		        position: 'bottom', // or 'top'
+		        columnContent: {
+		        	oustQy: {
+		            template(summary) {
+	              			  return 'Total: ' + summary.sum;
+		            }
+		          }
+		        }
+			}
 		});
 		
 	// 미지시 생산계획
@@ -405,16 +433,41 @@
 				j++;
 			//}
 		}
+		conSumVal();
 	}
 	
-	RwmatrLotGrid.on("dblclick", (ev5) => {
+	// Lot 클릭 확인
+	/* RwmatrLotGrid.on("dblclick", (ev5) => {
 		RwmatrLotGrid.setSelectionRange({
 		    start: [ev5.rowKey, 0],
 		    end: [ev5.rowKey, RwmatrLotGrid.getColumns().length-1]
 		});
 		
 		console.log(ev5)
-	});
+	}); */
 
+	// 행삭제
+	btnDel.addEventListener("click", function() {
+		if(confirm("삭제하시겠습니까?")){ 
+			RwmatrLotGrid.removeCheckedRows(false) //true -> 확인 받고 삭제 / false는 바로 삭제
+		}
+		conSumVal();
+	});
+	
+	// 등록버튼 비활성화 시키기
+	function conSumVal() {
+		let qys = RwmatrGrid.getSummaryValues('qy').sum;
+		let oqs = RwmatrLotGrid.getSummaryValues('oustQy').sum
+		
+		console.log(qys);
+		console.log(oqs);
+		
+		if(qys != oqs) {
+			$("#btnIns").hide();
+		}else {
+			$("#btnIns").show();
+		}
+	}
+	
 </script>
 </html>
