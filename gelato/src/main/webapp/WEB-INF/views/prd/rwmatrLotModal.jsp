@@ -68,8 +68,31 @@
 			    name: 'expdate',
 			    editor: 'datePicker'
 			  }
-		  ]
+		  ],
+		  summary: {
+		        height: 40,
+		        position: 'bottom', // or 'top'
+		        columnContent: {
+		        	oustQy: {
+		            template(summary) {
+	              			  return 'Total: ' + summary.sum;
+		            }
+		          }
+		        }
+			}
 	});
+	
+	chooseRwmatrLotGrid.on("editingFinish", (ev3) => {
+		 let sumVal = chooseRwmatrLotGrid.getSummaryValues('oustQy').sum;
+		 console.log(sumVal);
+		 let rwv = document.getElementById("rwneed").value;
+		 
+		 if(sumVal != rwv) {
+			 $("#btnchoose").hide();
+		 } else {
+			 $("#btnchoose").show();
+		 }
+	 });
 	
 	function chooseRWI(rwi,rwn,rwq) {
 		/* chooseRwmatrLotGrid.readData(1,{'rwmatrId':rwi}, true); */
@@ -105,20 +128,26 @@
 				console.log(rwq);
 				console.log(rwq-iqy);
 				
-				if( iqy >= rwq) {
-					chooseRwmatrLotGrid.setValue(i,'oustQy',rwq);
-					console.log("현재고가 더 큼")
-					chooseRwmatrLotGrid.check(i);
-					return;
-				} else {
+				if( iqy < rwq) {
 					console.log("현재고가 더 작음")
 					chooseRwmatrLotGrid.setValue(i,'oustQy',iqy);
 					rwq = rwq-iqy
 					chooseRwmatrLotGrid.check(i);
+				} else {
+					chooseRwmatrLotGrid.setValue(i,'oustQy',rwq);
+					console.log("현재고가 더 큼")
+					chooseRwmatrLotGrid.check(i);
+					
+					let sumVal = chooseRwmatrLotGrid.getSummaryValues('oustQy').sum;
+					console.log(sumVal);
+					console.log(document.getElementById("rwneed").value);
+					
+					//callSumVal();
+					return;
 				}
 				
 			}
-				
+			
 		})
 	}
 	
@@ -148,22 +177,6 @@
 				} */
 				
 			});
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </script>
 </body>
 </html>
