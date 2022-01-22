@@ -423,7 +423,7 @@
 				
 				/* console.log(gcr[j].lotNo);
 				console.log(gcr[j].oustQy);
-				console.log(gcr[j].expdate); */
+				console.log(gcr[j].expdate); */  
 				
 				RwmatrLotGrid.setValue(i, 'nm', rwn);
  				RwmatrLotGrid.setValue(i, 'lotNo', gcr[j].lotNo);
