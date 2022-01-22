@@ -165,6 +165,10 @@
 				header : '생산계획디테일코드',
 				name : 'planDetaId',
 				hidden : true
+			},{
+				header : '비고',
+				name : 'remk',
+				editor: 'text'
 			}],
 			summary: {
 		        height: 0,
