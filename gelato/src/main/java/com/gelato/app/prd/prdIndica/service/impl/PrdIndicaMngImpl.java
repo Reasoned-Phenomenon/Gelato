@@ -80,7 +80,7 @@ public class PrdIndicaMngImpl implements PrdIndicaMngService{
 				System.out.println("생산지시디테일추가");
 				System.out.println(vo.get(i).getFg());
 				System.out.println(vo.get(i));
-				
+				pimMapper.insertPrdIdicaDeta(vo.get(i));
 			} else {
 				System.out.println("생산지시디테일제외");
 				System.out.println(vo.get(i));

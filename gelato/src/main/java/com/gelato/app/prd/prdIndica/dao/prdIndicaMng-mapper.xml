@@ -75,7 +75,29 @@
 
 <!-- 계획지시디테일 insert -->
 	<insert id="insertPrdIdicaDeta" parameterType="PrdIndicaMngVO">
-	
+		<selectKey keyProperty="indicaDetaId" resultType="string" order="BEFORE">
+			select 'PID-' || to_char(sysdate, 'yyyyMMdd') || '-' || lpad(nvl2(substr(max(indica_deta_id),14),(substr(max(indica_deta_id),14)+1), 1), 3, '0')
+            as indica_deta_id
+            from prod_indica_deta
+            where substr(indica_deta_id,5,8) = to_char(sysdate, 'yyyyMMdd')
+		</selectKey>
+		insert into prod_indica_deta (indica_deta_id, 
+									  indica_id, 
+									  qy, 
+									  line_id, 
+									  ord, 
+									  indica_dt, 
+									  remk)
+		values (#{indicaDetaId},
+		        (select indica_id
+		         from  prod_indica 
+		         where plan_deta_id = #{planDetaId}),
+		        #{qy},
+		        #{lineId},
+		        #{ord},
+		        #{indicaDt},
+		        #{remk}
+		        )
 	</insert>
 
 </mapper>
