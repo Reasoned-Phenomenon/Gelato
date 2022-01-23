@@ -205,6 +205,9 @@ function callVendModal(){
 		console.log(ev.columnName)
 		console.log(ev.rowKey)
 	    if (ev.columnName === 'nm') {
+	    	if(ev.targetType === 'columnHeader'){
+	    		return;
+	    	}
 			console.log("자재리스트")
 			ig = 'g';
     		callRwmatrModal();

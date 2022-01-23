@@ -192,6 +192,9 @@ function callrwmatrStcModal(){
 	
 	//자재명 클릭시 현재고리스트 모달
 	rwmatrOustList.on('click', (ev) => {
+		if(ev.targetType === 'columnHeader'){
+    		return;
+    	}
 		rk = ev.rowKey;
 		console.log(ev)
 		console.log(ev.columnName)

@@ -186,13 +186,12 @@ function callrwmatrPassModal(){
 		console.log(ev.columnName)
 		console.log(ev.rowKey)
 	    if (ev.columnName === 'rwmatrOrderDetaId') {
+	    	if(ev.targetType === 'columnHeader'){
+	    		return;
+	    	}
 			console.log("검수완료리스트")
 			ig = 'g';
 			callrwmatrPassModal();
-		} else if(ev.columnName === 'lotNo'){
-			if(rwmatrIstList.getValue(rk, "istQy") != ''){
-				callLotNoModal();
-			}
 		}
 	});
 

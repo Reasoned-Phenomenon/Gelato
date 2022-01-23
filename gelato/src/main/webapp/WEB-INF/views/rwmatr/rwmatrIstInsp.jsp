@@ -211,6 +211,9 @@ function callrwmatrInferCodeModal(){
 
 	//발주코드 클릭시 모달
 	rwmatrIstInspList.on('click', (ev) => {
+		if(ev.targetType === 'columnHeader'){
+    		return;
+    	}
 		rk = ev.rowKey;
 		console.log(ev)
 		console.log(ev.columnName)
