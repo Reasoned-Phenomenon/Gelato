@@ -67,12 +67,16 @@
 <script>
 	// 변수모음
 	let pdi;
+	let pdn;
 	let pdc;
 	let pdq;
+	
 	let rwi;
 	let rwn;
 	let rwq;
 	let rpi;
+	
+	let list1 = [];
 	
 	// 버튼 숨김
 	$("#btnIns").hide();
@@ -108,7 +112,7 @@
 			data : {
 				api : {
 					readData : {url : '${path}/prd/choosePlan.do',method : 'GET'},
-					modifyData : { url: '${path}/prd/modifyPrdIndica.do', method: 'PUT'} 
+					//modifyData : { url: '${path}/prd/modifyPrdIndica.do', method: 'PUT'} 
 				},
 				contentType : 'application/json',
 				initialRequest: false
@@ -130,6 +134,7 @@
 			},{
 				header : '확인',
 				name : 'fg',
+				hidden : true
 			}]
 		});
 		
@@ -316,10 +321,20 @@
 		//planDetaId 가지고 와서 생산지시 작성
 		pdi = planDetaGrid.getRow(ev.rowKey).planDetaId;
 		console.log(pdi);
+		pdn = planDetaGrid.getRow(ev.rowKey).prdtNm;
+		console.log(pdn);
 		pdc = planDetaGrid.getRow(ev.rowKey).prodDcnt;
 		console.log(pdc);
 		pdq = planDetaGrid.getRow(ev.rowKey).qy;
 		console.log(pdq);
+		
+		var obj = {};
+		obj["planDetaId"] = pdi;
+		obj["prdtNm"] = pdn;
+		obj["prodDcnt"] = pdc;
+		obj["qy"] = pdq;
+		
+		list1.push(obj);
 		
 		//ajax -> 라인코드 가져오기
 		$.ajax({
@@ -508,17 +523,29 @@
 			planIndicaGrid.blur();
 			console.log("저장");
 			
-			planDetaGrid.request('modifyData',{showConfirm:false});
+			//생산지시 저장
+			//planDetaGrid.request('modifyData',{showConfirm:false});
 			
-			planIndicaGrid.request('modifyData',{showConfirm:false});
+			console.log(pdi);
+			$.ajax({
+				url : "${path}/prd/modifyPrdIndica.do?planDetaId=" + pdi,
+				data : JSON.stringify(list1),
+				type:'POST',
+				dataType:'json',
+				contentType: 'application/json; charset=utf-8',
+				error : function(result) {
+					console.log('에러', result)
+				}
+			}).done(function (result) {
+				console.log(result);
+			})
 			
 			
-			/* for ( i = 0 ; i <= planDetaGrid.getRowCount() ; i++) {
-				planDetaGrid.setValue(i, 'fg', '');
-			}
-			for ( i=0 ; i <= planIndicaGrid.getRowCount() ; i++) {
-				planIndicaGrid.setValue(i, 'fg', '');
-			} */
+			//생산지시디테일 저장
+			//planIndicaGrid.request('modifyData',{showConfirm:false});
+			
+			//순서가 필요한 경우 -> ajax
+			
 		}
 	})
 	

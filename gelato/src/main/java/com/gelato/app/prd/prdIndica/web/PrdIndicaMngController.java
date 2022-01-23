@@ -1,11 +1,14 @@
 package com.gelato.app.prd.prdIndica.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gelato.app.prd.prdIndica.dao.PrdIndicaMngVO;
@@ -87,17 +90,18 @@ public class PrdIndicaMngController {
 		return "grid";
 	}
 	
-	// modify - 생산지시T 등록
-	@PutMapping("/prd/modifyPrdIndica.do")
+	// modify - 생산지시T 등록 -> ajax
+	@RequestMapping(value = "/prd/modifyPrdIndica.do", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean modifyPrdIndica (@RequestBody ModifyVO<PrdIndicaMngVO> mvo) {
+	public String modifyPrdIndica (@RequestBody List<PrdIndicaMngVO> vo) {
 		System.out.println("생산지시 등록 modi 컨트롤러");
-		System.out.println(mvo);
-		System.out.println(mvo.getUpdatedRows().get(1));
-		System.out.println(mvo.getUpdatedRows().get(1).getFg());
-		prdIndicaMngService.modifyPrdIndica(mvo);
+		System.out.println(vo);
+		/*
+		 * System.out.println(mvo.getUpdatedRows().get(1));
+		 * System.out.println(mvo.getUpdatedRows().get(1).getFg());
+		 */
 		System.out.println("modi 컨트롤러222");
-		return true;
+		return prdIndicaMngService.insertPrdIndica(vo);
 	}
 	   
 	// modify - 생산지시D 등록

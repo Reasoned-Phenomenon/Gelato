@@ -40,39 +40,53 @@ public class PrdIndicaMngImpl implements PrdIndicaMngService{
 		return pimMapper.chooseRwmatrId(vo);
 	}
 
+	String indicaId = null;
+	
 	@Override
-	public int modifyPrdIndica(ModifyVO<PrdIndicaMngVO> mvo) {
-		PrdIndicaMngVO ivo = null;
-		int i = 0;
-		System.out.println(mvo.getUpdatedRows().size());
-		System.out.println(mvo.getUpdatedRows().get(0).getFg());
-		System.out.println(mvo.getUpdatedRows().get(1).getFg());
+	public String insertPrdIndica(List<PrdIndicaMngVO> vo) {
+		System.out.println(565656);
+		System.out.println(vo);
+		 
 		// 생산지시T insert
-		for( i = 0 ; i < mvo.getUpdatedRows().size() ; i++) {
-			System.out.println(mvo.getUpdatedRows().get(i).getFg());
-			if(mvo.getUpdatedRows().get(i).getFg() != "") {
-				System.out.println("생산지시 추가");
-				ivo = mvo.getUpdatedRows().get(i);
-				System.out.println(ivo);
-				pimMapper.insertPrdIndica(ivo);
-				System.out.println("지시 추가 완료");
-			} else {
-				System.out.println("생산지시 제외");
-			}
-		}
+		 /* for( i = 0 ; i < mvo.getUpdatedRows().size() ; i++) {
+			  System.out.println(mvo.getUpdatedRows().get(i).getFg());
+			  if(mvo.getUpdatedRows().get(i).getFg() != "") {
+				  System.out.println("생산지시 추가"); 
+				  ivo = mvo.getUpdatedRows().get(i);
+				  System.out.println(ivo); 
+				  pimMapper.insertPrdIndica(ivo);
+				  System.out.println("지시 추가 완료");
+		  
+		    for( vo : mvo.getUpdatedRows()) { System.out.println(vo);
+		  vo.setIndicaId(ivo.getIndicaId()); indicaId = vo.getIndicaId();
+		  System.out.println(indicaId); } } else { System.out.println("생산지시 제외"); 
+			  } 
+		  }*/
 		
-		return 0;
+		pimMapper.insertPrdIndica(vo.get(0).getPlanDetaId());
+		System.out.println(vo);
+		return indicaId;
 	}
 
 	@Override
 	public int modifyPrdIndicaDeta(ModifyVO<PrdIndicaMngVO> mvo) {
 		PrdIndicaMngVO ivo = null;
-		
+		int i = 0;
 		//생산지시DT insert
-		if(!mvo.getCreatedRows().isEmpty()) {
-			
+		for( i = 0; i<mvo.getCreatedRows().size() ; i++) {
+			System.out.println(mvo.getCreatedRows().get(i).getFg());
+			if(mvo.getCreatedRows().get(i).getFg() != "") {
+				System.out.println("생산지시D 추가");
+				ivo = mvo.getCreatedRows().get(i);
+				System.out.println(ivo);
+				pimMapper.insertPrdIdicaDeta(ivo);
+				System.out.println("지시디테일 추가완료");
+			} else {
+				System.out.println("생산지시디테일 제외");
+			}
 		}
 		return 0;
 	}
+
 
 }

@@ -24,7 +24,7 @@ public interface PrdIndicaMngService {
 	List<PrdIndicaMngVO> chooseRwmatrId(PrdIndicaMngVO vo);
 	
 	//modify - 등록
-	public int modifyPrdIndica(ModifyVO<PrdIndicaMngVO> mvo);
+	String insertPrdIndica(List<PrdIndicaMngVO> vo);
 	
 	//modify - 등록
 	public int modifyPrdIndicaDeta(ModifyVO<PrdIndicaMngVO> mvo);
