@@ -18,5 +18,10 @@ public class EqmInsServiceImpl implements EqmInsService{
 	public List<EqmInsVO> eqmChck(EqmInsVO eqmInsVo) {
 		return mapper.eqmChck(eqmInsVo);
 	}
+
+	@Override
+	public List<EqmInsVO> eqmInsList(EqmInsVO eqmInsVo) {
+		return mapper.eqmInsList(eqmInsVo);
+	}
 	
 }

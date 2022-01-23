@@ -7,4 +7,5 @@ import com.gelato.app.eqm.eqmIns.dao.EqmInsVO;
 public interface EqmInsService {
 	
 	List<EqmInsVO> eqmChck(EqmInsVO eqmInsVo);
+	List<EqmInsVO> eqmInsList(EqmInsVO eqmInsVo);
 }

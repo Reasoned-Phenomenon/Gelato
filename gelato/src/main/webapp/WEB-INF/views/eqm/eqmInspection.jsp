@@ -11,6 +11,7 @@
 <body>
 <!-- 설비검색 모달 -->
 	<div id="dialog-form" title="설비검색"></div>
+	
 	<h2>설비 정기점검 관리</h2>
 	<div class="container">
 		<br> <br>
@@ -57,7 +58,7 @@
 									<label>점검일자</label> <input id="fromCkDate" name="fromCkDate"
 										type="date"><label>~</label><input id="toCkDate"
 										name="toCkDate" type="date">
-									<button class="btn btn-print float-right" id="eqmChck">설비조회</button>
+									<button class="btn btn-print float-right" id="eqmChck" type="button">설비조회</button>
 								</div>
 							<li>
 						</ul>
@@ -126,33 +127,18 @@
 		document.getElementById('chckDate').value = new Date().toISOString().substring(0, 10);
 		
 		//(점검일자별)설비조회 검색 모달
-		let dialog = $("#dialolg-form").dialog({
+		let dialog = $("#dialog-form").dialog({
 			autoOpen :false,
-			modal : true
+			modal : true,
+			width : "700px"
 		});
 		
 		$("#eqmChck").on("click", function(){
-			dialogSearch.dialog("open");
-			
-			
-			var fromCkDate = $("#fromCkDate").val();
-			var toCkDate = $("#toCkDate").val();
-			
-			var params = {
-			fromCkDate : fromCkDate,
-			toCkDate : toCkDate
-			}
-			console.log(fromCkDate);
-			
-			$.ajax({
-				url : "${path}/eqm/eqmCkDateModal.do",
-				data : params,
-				method : 'GET',
-				success : function(res){ 
-					eqmCkGrid.readData(1,{'fromCkDate':fromCkDate, 'toCkDate':toCkDate},true);
-                }
-			})
-		})
+		
+			dialog.dialog("open");
+			$("#dialog-form").load("${path}/eqm/eqmCkModal.do",function(){
+				console.log("설비검색 모달 로드됨")})
+		});
 		
 		
 		

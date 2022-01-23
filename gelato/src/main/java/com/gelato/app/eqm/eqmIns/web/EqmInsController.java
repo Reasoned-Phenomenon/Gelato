@@ -22,15 +22,22 @@ public class EqmInsController {
 	}
 	
 	//설비점검관리 - 설비검색 모달
-		@RequestMapping("/eqm/eqmCkModal.do")
-		public String getEqmCkModal() {
-			return "/eqm/eqmCkModal";
-		}
+	@RequestMapping("/eqm/eqmCkModal.do")
+	public String getEqmCkModal() {
+		return "/eqm/eqmCkModal";
+	}
 		
 	//설비점검관리 - 설비검색 모달(페이지)
-	@GetMapping("eqm/eqmCkDate.do")
+	@GetMapping("/eqm/eqmCkDate.do")
 	public String eqmCkDate(Model model, EqmInsVO eqmInsVo) {
+	
 		model.addAttribute("datas", service.eqmChck(eqmInsVo));
+		return "grid";
+	}
+	@GetMapping("/eqm/eqmInspectionList.do")
+	public String eqmInspectionList(Model model, EqmInsVO eqmInsVo) {
+		
+		model.addAttribute("datas", service.eqmInsList(eqmInsVo));
 		return "grid";
 	}
 	
