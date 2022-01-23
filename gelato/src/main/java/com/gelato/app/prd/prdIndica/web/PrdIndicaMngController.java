@@ -96,20 +96,8 @@ public class PrdIndicaMngController {
 	public int modifyPrdIndica (@RequestBody List<PrdIndicaMngVO> vo) {
 		System.out.println("생산지시 등록 modi 컨트롤러");
 		System.out.println(vo);
-		/*
-		 * System.out.println(mvo.getUpdatedRows().get(1));
-		 * System.out.println(mvo.getUpdatedRows().get(1).getFg());
-		 */
 		System.out.println("modi 컨트롤러222");
 		
-		//조회할 수 있는 쿼리
-		/*
-		 * Map<String, Object> map = new Map<String, Object>; if(rtn >= 0) {
-		 * 
-		 * } else {
-		 * 
-		 * }
-		 */
 		return prdIndicaMngService.insertPrdIndica(vo);
 	}
 	   
