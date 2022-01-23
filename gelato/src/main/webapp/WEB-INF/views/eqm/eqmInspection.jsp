@@ -71,16 +71,19 @@
 		</div>
 	</div>
 	<script>
+		var d = new Date();
+		var nd = new Date(d.getFullYear(), d.getMonth(), d.getDate() - 7);
+		document.getElementById('fromCkDate').value = nd.toISOString().slice(0, 10);
+		document.getElementById('toCkDate').value = d.toISOString().slice(0, 10);
+	
 		var Grid = tui.Grid;
 
 		const eqmInsGrid = new Grid({
 			el : document.getElementById('eqmInsGrid'),
 			data : {
 				api : {
-					readData : {
-						url : '${path}/eqm/eqmInspectionList.do',
-						method : 'GET'
-					}
+					readData : {url : '${path}/eqm/eqmInspectionList.do', method : 'GET'},
+					modifyData :{ url: '${path}/eqm/chckModifyData.do', method:'PUT'}
 				},
 				contentType : 'application/json',
 				initialRequest : false
@@ -102,13 +105,43 @@
 				name : 'chckDt'
 			}, {
 				header : '차기점검일',
-				name : 'nCkDt'
+				name : 'nmCkDt'
 			}, {
 				header : '판정',
-				name : 'judt'
+				name : 'judt',
+				align: 'center',
+			    editor: {
+				type: GelatoSelectEditor,
+	      		options: {
+			        listItems: [
+	        			{text : '합격', value :'합격'},
+	        			{text : '수리', value :'수리필요'},
+	        			{text : '교체', value :'교체필요'},
+	        			{text : '정밀점검', value :'정밀점검필요'}
+	        			]		
+			      }
+			    },
+			    renderer: {
+		            type: GelatoSelect
+		      		} 
 			}, {
 				header : '점검내역',
-				name : 'chckDeta'
+				name : 'chckDeta',
+				align: 'center',
+			    /* editor: {
+				type: GelatoSelectEditor,
+	      		options: {
+			        listItems: [
+	        			{text : '합격', value :'합격'},
+	        			{text : '수리', value :'수리필요'},
+	        			{text : '교체', value :'교체필요'},
+	        			{text : '정밀점검', value :'정밀점검필요'}
+	        			]		
+			      }
+			    },
+			    renderer: {
+		            type: GelatoSelect
+		      		}  */
 			}, {
 				header : '검수인',
 				name : 'inspr'
@@ -118,9 +151,7 @@
 		//드롭다운 선택시 바로 조회
 		function selectGubun() {
 			let gubun = $('#gubun option:selected').val();
-			eqmListGrid.readData(1, {
-				'gubun' : gubun
-			}, true);
+			eqmListGrid.readData(1, {'gubun' : gubun}, true);
 		}
 
 		//점검일자 input태그에 현재날짜 띄우기
@@ -140,7 +171,9 @@
 				console.log("설비검색 모달 로드됨")})
 		});
 		
-		
+		$("#resetBtn").on("click", function(){
+			eqmInsGrid.clear();
+		})
 		
 	</script>
 </body>

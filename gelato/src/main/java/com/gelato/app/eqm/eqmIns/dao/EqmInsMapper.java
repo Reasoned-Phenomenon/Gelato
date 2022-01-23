@@ -8,4 +8,7 @@ public interface EqmInsMapper {
 	
 	//점검리스트 - 그리드
 	List<EqmInsVO> eqmInsList(EqmInsVO eqmInsVo);
+	
+	//점검등록
+	int insertChck(EqmInsVO eqmInsVo);
 }
