@@ -43,7 +43,7 @@ public class PrdIndicaMngImpl implements PrdIndicaMngService{
 	String indicaId = null;
 	
 	@Override
-	public String insertPrdIndica(List<PrdIndicaMngVO> vo) {
+	public int insertPrdIndica(List<PrdIndicaMngVO> vo) {
 		System.out.println(565656);
 		System.out.println(vo);
 		 
@@ -65,7 +65,7 @@ public class PrdIndicaMngImpl implements PrdIndicaMngService{
 		
 		pimMapper.insertPrdIndica(vo.get(0).getPlanDetaId());
 		System.out.println(vo);
-		return indicaId;
+		return 0;
 	}
 
 	@Override

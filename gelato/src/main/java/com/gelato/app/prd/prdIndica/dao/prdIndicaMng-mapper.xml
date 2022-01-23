@@ -65,7 +65,8 @@
 		<parameter property="planDetaId" mode="IN" jdbcType="VARCHAR" javaType="string"/>
 	</parameterMap>
 	
-	<insert id="insertPrdIndica" statementType="CALLABLE" parameterMap="IndicaParam">
+	<insert id="insertPrdIndica" statementType="CALLABLE" parameterMap="IndicaParam" >
+	<!-- useGeneratedKeys="true" keyProperty="id" -->
 		{ call insert_indica_id(?) }
 	</insert>
 
