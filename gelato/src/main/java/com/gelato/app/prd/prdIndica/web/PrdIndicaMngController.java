@@ -93,11 +93,21 @@ public class PrdIndicaMngController {
 	public boolean modifyPrdIndica (@RequestBody ModifyVO<PrdIndicaMngVO> mvo) {
 		System.out.println("생산지시 등록 modi 컨트롤러");
 		System.out.println(mvo);
+		System.out.println(mvo.getUpdatedRows().get(1));
+		System.out.println(mvo.getUpdatedRows().get(1).getFg());
 		prdIndicaMngService.modifyPrdIndica(mvo);
 		System.out.println("modi 컨트롤러222");
 		return true;
 	}
 	   
-	
+	// modify - 생산지시D 등록
+	@PutMapping("/prd/modifyPrdIndicaDeta.do")
+	@ResponseBody
+	public boolean modifyPrdIndicaDeta(@RequestBody ModifyVO<PrdIndicaMngVO> mvo) {
+		System.out.println("생산지시디테일 등록 modi 컨트롤러");
+		System.out.println(mvo);
+		prdIndicaMngService.modifyPrdIndicaDeta(mvo);
+		return true;
+	}
 	
 }

@@ -25,4 +25,7 @@ public interface PrdIndicaMngService {
 	
 	//modify - 등록
 	public int modifyPrdIndica(ModifyVO<PrdIndicaMngVO> mvo);
+	
+	//modify - 등록
+	public int modifyPrdIndicaDeta(ModifyVO<PrdIndicaMngVO> mvo);
 }

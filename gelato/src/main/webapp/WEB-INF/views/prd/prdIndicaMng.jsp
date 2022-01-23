@@ -128,9 +128,8 @@
 				header : '생산일수',
 				name : 'prodDcnt',
 			},{
-				header : '구분',
+				header : '확인',
 				name : 'fg',
-				hidden : true
 			}]
 		});
 		
@@ -140,6 +139,7 @@
 			data : {
 				api : {
 					readData : {url : '${path}/prd/choosePlanDetaId.do' , method : 'GET'},
+					modifyData : { url: '${path}/prd/modifyPrdIndicaDeta.do', method: 'PUT'} 
 				},
 				contentType : 'application/json',
 				initialRequest: false
@@ -169,6 +169,9 @@
 				header : '비고',
 				name : 'remk',
 				editor: 'text'
+			},{
+				header : '확인',
+				name : 'fg',
 			}],
 			summary: {
 		        height: 0,
@@ -305,6 +308,11 @@
 		RwmatrGrid.clear();
 		RwmatrLotGrid.clear();
 		
+		for ( i = 0 ; i <= planDetaGrid.getRowCount() ; i++) {
+			planDetaGrid.setValue(i, 'fg', '');
+		}
+		planDetaGrid.setValue(ev.rowKey, 'fg', 'PROCEE');
+		
 		//planDetaId 가지고 와서 생산지시 작성
 		pdi = planDetaGrid.getRow(ev.rowKey).planDetaId;
 		console.log(pdi);
@@ -370,6 +378,12 @@
 			toastr.success( ('작업수량을 입력해주세요.'),'Gelato',{timeOut:'1000'});
 		} else {
 			RwmatrGrid.readData(1,{'lineId':pil, 'qy':piq}, true);
+			
+			for ( i=0 ; i <= planIndicaGrid.getRowCount() ; i++) {
+				planIndicaGrid.setValue(i, 'fg', '');
+			}
+			
+			planIndicaGrid.setValue(ev3.rowKey, 'fg', 'PROCEE');
 		}
 		
 	});
@@ -491,12 +505,20 @@
 	btnIns.addEventListener("click", function() {
 		if(confirm("저장하시겠습니까?")) {
 			planDetaGrid.blur();
+			planIndicaGrid.blur();
 			console.log("저장");
 			
-			for ( i = 0 ; i <= planDetaGrid.getRowCount() ; i++) {
-				planDetaGrid.setValue(i, 'fg', 'PROCEE');
+			planDetaGrid.request('modifyData',{showConfirm:false});
+			
+			planIndicaGrid.request('modifyData',{showConfirm:false});
+			
+			
+			/* for ( i = 0 ; i <= planDetaGrid.getRowCount() ; i++) {
+				planDetaGrid.setValue(i, 'fg', '');
 			}
-			planDetaGrid.request('modifyData',{showConfirm:false})
+			for ( i=0 ; i <= planIndicaGrid.getRowCount() ; i++) {
+				planIndicaGrid.setValue(i, 'fg', '');
+			} */
 		}
 	})
 	

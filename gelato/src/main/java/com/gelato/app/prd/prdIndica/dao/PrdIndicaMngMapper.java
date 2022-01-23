@@ -22,4 +22,6 @@ public interface PrdIndicaMngMapper {
 	//생산지시 insert
 	int insertPrdIndica(PrdIndicaMngVO vo);
 	
+	//생산지시디테일 insert
+	int insertPrdIdicaDeta(PrdIndicaMngVO vo);
 }

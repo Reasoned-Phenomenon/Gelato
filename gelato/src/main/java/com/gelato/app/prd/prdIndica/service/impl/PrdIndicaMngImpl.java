@@ -43,14 +43,34 @@ public class PrdIndicaMngImpl implements PrdIndicaMngService{
 	@Override
 	public int modifyPrdIndica(ModifyVO<PrdIndicaMngVO> mvo) {
 		PrdIndicaMngVO ivo = null;
-		
+		int i = 0;
+		System.out.println(mvo.getUpdatedRows().size());
+		System.out.println(mvo.getUpdatedRows().get(0).getFg());
+		System.out.println(mvo.getUpdatedRows().get(1).getFg());
 		// 생산지시T insert
-		if(!mvo.getUpdatedRows().isEmpty()) {
-			System.out.println("생산지시 추가");
-			ivo = mvo.getUpdatedRows().get(0);
-			System.out.println(ivo);
-			pimMapper.insertPrdIndica(ivo);
-			System.out.println("지시 추가 완료");
+		for( i = 0 ; i < mvo.getUpdatedRows().size() ; i++) {
+			System.out.println(mvo.getUpdatedRows().get(i).getFg());
+			if(mvo.getUpdatedRows().get(i).getFg() != "") {
+				System.out.println("생산지시 추가");
+				ivo = mvo.getUpdatedRows().get(i);
+				System.out.println(ivo);
+				pimMapper.insertPrdIndica(ivo);
+				System.out.println("지시 추가 완료");
+			} else {
+				System.out.println("생산지시 제외");
+			}
+		}
+		
+		return 0;
+	}
+
+	@Override
+	public int modifyPrdIndicaDeta(ModifyVO<PrdIndicaMngVO> mvo) {
+		PrdIndicaMngVO ivo = null;
+		
+		//생산지시DT insert
+		if(!mvo.getCreatedRows().isEmpty()) {
+			
 		}
 		return 0;
 	}
