@@ -100,4 +100,8 @@
 		        )
 	</insert>
 
+<!-- 투입원자재 insert -->
+	<insert id="insertInptRwmatr" parameterType="PrdIndicaMngVO">
+	
+	</insert>
 </mapper>

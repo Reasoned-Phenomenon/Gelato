@@ -28,4 +28,7 @@ public interface PrdIndicaMngService {
 	
 	//modify - 등록
 	int insertPrdIdicaDeta(List<PrdIndicaMngVO> vo);
+	
+	//투입원자재 insert
+	int insertInptRwmatr(List<PrdIndicaMngVO> vo);
 }

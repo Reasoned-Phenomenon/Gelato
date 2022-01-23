@@ -548,6 +548,8 @@
 			
 			console.log(pdi);
 			
+			//순서가 필요한 경우 -> ajax
+			
 			//생산지시 저장
 			$.ajax({
 				url : "${path}/prd/modifyPrdIndica.do?planDetaId=" + pdi,
@@ -581,15 +583,23 @@
 					}
 				}).done(function (result) {
 					console.log(result);
+					
+					list3 = RwmatrLotGrid.getData()
+					$.ajax({
+						url : "${path}/prd/modifyInptRwmatr.do?planDetaId=" + pdi,
+						data : JSON.stringify(list3),
+						type:'POST',
+						dataType:'json',
+						contentType: 'application/json; charset=utf-8',
+						error : function(result) {
+							console.log('에러33', result)
+						}
+					}).done (function(result) {
+						console.log(result);
+					})
 				})
 			})
-			
-			
-			//생산지시디테일 저장
-			//planIndicaGrid.request('modifyData',{showConfirm:false});
-			
-			//순서가 필요한 경우 -> ajax
-			
+					
 		}
 	})
 	

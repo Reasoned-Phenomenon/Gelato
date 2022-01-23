@@ -73,7 +73,6 @@ public class PrdIndicaMngImpl implements PrdIndicaMngService{
 		int i = 0;
 		//생산지시DT insert
 		
-		System.out.println(777777);
 		System.out.println(vo);
 		for (i=0 ; i<vo.size() ; i++) {
 			if(vo.get(i).getFg() != "") {
@@ -86,6 +85,12 @@ public class PrdIndicaMngImpl implements PrdIndicaMngService{
 				System.out.println(vo.get(i));
 			}
 		}
+		return 0;
+	}
+
+	@Override
+	public int insertInptRwmatr(List<PrdIndicaMngVO> vo) {
+		System.out.println(vo);
 		return 0;
 	}
 

@@ -110,4 +110,13 @@ public class PrdIndicaMngController {
 		return prdIndicaMngService.insertPrdIdicaDeta(vo);
 	}
 	
+	//modify - 투입원자재 등록 -> ajax
+	@RequestMapping(value = "/prd/modifyInptRwmatr.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int modifyInptRwmatr(@RequestBody List<PrdIndicaMngVO> vo) {
+		System.out.println("투입원자재 insert");
+		System.out.println(vo);
+		return prdIndicaMngService.insertInptRwmatr(vo);
+	}
+	
 }
