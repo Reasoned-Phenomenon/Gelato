@@ -71,12 +71,19 @@
 	let pdc;
 	let pdq;
 	
+	let pil;
+	let pid;
+	let piq;
+	let pio;
+	let prk;
+	
+	let rpi;
 	let rwi;
 	let rwn;
 	let rwq;
-	let rpi;
 	
 	let list1 = [];
+	let list2 = [];
 	
 	// 버튼 숨김
 	$("#btnIns").hide();
@@ -144,7 +151,7 @@
 			data : {
 				api : {
 					readData : {url : '${path}/prd/choosePlanDetaId.do' , method : 'GET'},
-					modifyData : { url: '${path}/prd/modifyPrdIndicaDeta.do', method: 'PUT'} 
+					//modifyData : { url: '${path}/prd/modifyPrdIndicaDeta.do', method: 'PUT'} 
 				},
 				contentType : 'application/json',
 				initialRequest: false
@@ -177,6 +184,7 @@
 			},{
 				header : '확인',
 				name : 'fg',
+				hidden : true
 			}],
 			summary: {
 		        height: 0,
@@ -215,6 +223,10 @@
 			}, {
 				header : '소모량',
 				name : 'qy',
+			},{
+				header : '생산계획디테일코드',
+				name : 'planDetaId',
+				hidden : true
 			}],
 			summary: {
 		        height: 0,
@@ -256,6 +268,10 @@
 			},{
 				header : '제품코드',
 				name : 'prdtId',
+				hidden : true
+			},{
+				header : '생산계획디테일코드',
+				name : 'planDetaId',
 				hidden : true
 			}],
 			summary: {
@@ -379,26 +395,31 @@
 		RwmatrGrid.clear();
 		RwmatrLotGrid.clear();
 		
-		var pil = planIndicaGrid.getRow(ev3.rowKey).lineId;
+		pil = planIndicaGrid.getRow(ev3.rowKey).lineId;
 		console.log(pil);
-		var pid = planIndicaGrid.getRow(ev3.rowKey).indicaDt;
+		pid = planIndicaGrid.getRow(ev3.rowKey).indicaDt;
 		console.log(pid);
-		var piq = planIndicaGrid.getRow(ev3.rowKey).qy;
+		piq = planIndicaGrid.getRow(ev3.rowKey).qy;
 		console.log(piq);
-		var pio = planIndicaGrid.getRow(ev3.rowKey).ord;
+		pio = planIndicaGrid.getRow(ev3.rowKey).ord;
 		console.log(pio);
+		prk = planIndicaGrid.getRow(ev3.rowKey).remk;
+		console.log(prk);
+		pdi = planIndicaGrid.getRow(ev3.rowKey).planDetaId;
+		console.log(pdi);
 		
 		if(piq == '') {
 			toastr.clear()
 			toastr.success( ('작업수량을 입력해주세요.'),'Gelato',{timeOut:'1000'});
 		} else {
-			RwmatrGrid.readData(1,{'lineId':pil, 'qy':piq}, true);
+			RwmatrGrid.readData(1,{'lineId':pil, 'qy':piq , 'planDetaId':pdi}, true);
 			
 			for ( i=0 ; i <= planIndicaGrid.getRowCount() ; i++) {
 				planIndicaGrid.setValue(i, 'fg', '');
 			}
 			
 			planIndicaGrid.setValue(ev3.rowKey, 'fg', 'PROCEE');
+		
 		}
 		
 	});
@@ -418,8 +439,10 @@
 		console.log(rwn);
 		rwq = RwmatrGrid.getRow(ev4.rowKey).qy;
 		console.log(rwq);
+		pdi = RwmatrGrid.getRow(ev4.rowKey).planDetaId;
+		console.log(pdi);
 		
-		chooseRI(rwi,rwn,rwq,rpi);
+		chooseRI(rwi,rwn,rwq,rpi,pdi);
 		console.log(99999)
 	})
 	
@@ -430,7 +453,7 @@
 			width: 800
 		});	
 	
-	function chooseRI(rwi,rwn,rwq,rpi){
+	function chooseRI(rwi,rwn,rwq,rpi,pdi){
 		// 자재Lot 모달창 생성
 		RwmatrLotDialog.dialog("open");
 		console.log(232323);
@@ -438,7 +461,7 @@
 				function() {
 					console.log("주문창 로드") 
 					console.log(rwi);
-					chooseRWI(rwi,rwn,rwq,rpi);
+					chooseRWI(rwi,rwn,rwq,rpi,pdi);
 				})
 	}
 
@@ -523,10 +546,9 @@
 			planIndicaGrid.blur();
 			console.log("저장");
 			
-			//생산지시 저장
-			//planDetaGrid.request('modifyData',{showConfirm:false});
-			
 			console.log(pdi);
+			
+			//생산지시 저장
 			$.ajax({
 				url : "${path}/prd/modifyPrdIndica.do?planDetaId=" + pdi,
 				data : JSON.stringify(list1),
@@ -538,6 +560,28 @@
 				}
 			}).done(function (result) {
 				console.log(result);
+				
+				/* for ( i=0 ; i<planIndicaGrid.getRowCount() ; i++) {
+					if(planIndicaGrid.getData()[i].fg == 'PROCEE') {
+						list2 = planIndicaGrid.getData()[i]
+						console.log(list2);
+					}
+				} */
+				
+				list2 = planIndicaGrid.getData()
+				// 생산지시디테일 저장
+				$.ajax({
+					url : "${path}/prd/modifyPrdIndicaDeta.do?planDetaId=" + pdi,
+					data : JSON.stringify(list2),
+					type:'POST',
+					dataType:'json',
+					contentType: 'application/json; charset=utf-8',
+					error : function(result) {
+						console.log('에러22', result)
+					}
+				}).done(function (result) {
+					console.log(result);
+				})
 			})
 			
 			

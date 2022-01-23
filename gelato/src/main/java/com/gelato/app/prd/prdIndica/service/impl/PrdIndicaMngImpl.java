@@ -69,24 +69,26 @@ public class PrdIndicaMngImpl implements PrdIndicaMngService{
 	}
 
 	@Override
-	public int modifyPrdIndicaDeta(ModifyVO<PrdIndicaMngVO> mvo) {
-		PrdIndicaMngVO ivo = null;
+	public int insertPrdIdicaDeta(List<PrdIndicaMngVO> vo) {
 		int i = 0;
 		//생산지시DT insert
-		for( i = 0; i<mvo.getCreatedRows().size() ; i++) {
-			System.out.println(mvo.getCreatedRows().get(i).getFg());
-			if(mvo.getCreatedRows().get(i).getFg() != "") {
-				System.out.println("생산지시D 추가");
-				ivo = mvo.getCreatedRows().get(i);
-				System.out.println(ivo);
-				pimMapper.insertPrdIdicaDeta(ivo);
-				System.out.println("지시디테일 추가완료");
+		
+		System.out.println(777777);
+		System.out.println(vo);
+		for (i=0 ; i<vo.size() ; i++) {
+			if(vo.get(i).getFg() != "") {
+				System.out.println("생산지시디테일추가");
+				System.out.println(vo.get(i).getFg());
+				System.out.println(vo.get(i));
+				
 			} else {
-				System.out.println("생산지시디테일 제외");
+				System.out.println("생산지시디테일제외");
+				System.out.println(vo.get(i));
 			}
 		}
 		return 0;
 	}
+
 
 
 }

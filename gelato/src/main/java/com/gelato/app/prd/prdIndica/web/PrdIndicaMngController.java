@@ -101,14 +101,13 @@ public class PrdIndicaMngController {
 		return prdIndicaMngService.insertPrdIndica(vo);
 	}
 	   
-	// modify - 생산지시D 등록
-	@PutMapping("/prd/modifyPrdIndicaDeta.do")
+	// modify - 생산지시D 등록 -> ajax
+	@RequestMapping(value = "/prd/modifyPrdIndicaDeta.do", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean modifyPrdIndicaDeta(@RequestBody ModifyVO<PrdIndicaMngVO> mvo) {
+	public int modifyPrdIndicaDeta(@RequestBody List<PrdIndicaMngVO> vo) {
 		System.out.println("생산지시디테일 등록 modi 컨트롤러");
-		System.out.println(mvo);
-		prdIndicaMngService.modifyPrdIndicaDeta(mvo);
-		return true;
+		System.out.println(vo);
+		return prdIndicaMngService.insertPrdIdicaDeta(vo);
 	}
 	
 }

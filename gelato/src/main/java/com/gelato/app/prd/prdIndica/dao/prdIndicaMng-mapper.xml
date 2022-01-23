@@ -37,15 +37,19 @@
 		select l.prdt_id as prdt_id, 
 			   b.rwmatr_id as rwmatr_id, 
 			   r.nm as nm, 
-			   (b.qy*#{qy}/10) as qy
+			   (b.qy*#{qy}/10) as qy,
+			   ppd.plan_deta_id as plan_deta_id
 		from  prdt p join line l 
 		    on p.prdt_id = l.prdt_id
 		    join bom b
 		    on p.prdt_id = b.prdt_id
 		    join rwmatr r
 		    on b.rwmatr_id = r.rwmatr_id
+		    join prod_plan_deta ppd
+    		on p.prdt_id = ppd.prdt_id
 		where l.line_id = #{lineId}
-		group by l.prdt_id, b.rwmatr_id, r.nm, b.qy
+			and ppd.plan_deta_id = #{planDetaId}
+		group by l.prdt_id, b.rwmatr_id, r.nm, b.qy, ppd.plan_deta_id
 		order by b.rwmatr_id
 	</select>
 

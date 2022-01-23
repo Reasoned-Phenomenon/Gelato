@@ -23,7 +23,7 @@ public interface PrdIndicaMngMapper {
 	int insertPrdIndica(String string);
 	
 	//생산지시디테일 insert
-	int insertPrdIdicaDeta(PrdIndicaMngVO vo);
+	int insertPrdIdicaDeta(String string);
 	
 	
 }
