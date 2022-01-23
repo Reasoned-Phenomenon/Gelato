@@ -73,6 +73,12 @@ Grid.applyTheme('striped', {
 	  }
 });
 
+toastr.options = {
+		positionClass : "toast-top-center",
+		progressBar : true,
+		timeOut: 1500 // null 입력시 무제한.
+	}
+
 //그리드 생성
 var rwmatrIstList = new Grid({
 	el: document.getElementById('rwmatrIstList'),
@@ -192,6 +198,13 @@ function callrwmatrPassModal(){
 			console.log("검수완료리스트")
 			ig = 'g';
 			callrwmatrPassModal();
+		} else if(ev.columnName === 'lotNo' || ev.columnName === 'expdate') {
+			if(rwmatrIstList.getValue(rk, "rwmatrOrderDetaId") == '') {
+				//toastr
+				toastr.clear()
+				toastr.success( ('발주코드를 선택해주세요.'),'Gelato',{timeOut:'1000'} );
+				return;
+			}
 		}
 	});
 
