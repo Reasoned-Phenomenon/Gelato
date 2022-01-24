@@ -91,6 +91,12 @@ public class PrdIndicaMngImpl implements PrdIndicaMngService{
 	@Override
 	public int insertInptRwmatr(List<PrdIndicaMngVO> vo) {
 		System.out.println(vo);
+		int i=0;
+		
+		for(i=0 ; i<vo.size() ; i++) {
+			System.out.println(vo.get(i));
+			pimMapper.insertInptRwmatr(vo.get(i));
+		}
 		return 0;
 	}
 

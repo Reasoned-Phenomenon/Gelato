@@ -100,8 +100,20 @@
 		        )
 	</insert>
 
-<!-- 투입원자재 insert -->
-	<insert id="insertInptRwmatr" parameterType="PrdIndicaMngVO">
-	
+<!-- 투입원자재 insert 프로시저-->
+	<parameterMap type="PrdIndicaMngVO" id="inptRwParam">
+		<parameter property="prdtId" mode="IN" jdbcType="VARCHAR" javaType="string"/>
+		<parameter property="ord" mode="IN" jdbcType="VARCHAR" javaType="string"/>
+		<parameter property="oustQy" mode="IN" jdbcType="VARCHAR" javaType="string"/>
+		<parameter property="lotNo" mode="IN" jdbcType="VARCHAR" javaType="string"/>
+		<parameter property="planDetaId" mode="IN" jdbcType="VARCHAR" javaType="string"/>
+	</parameterMap>
+	<insert id="insertInptRwmatr"  statementType="CALLABLE" parameterMap="inptRwParam">
+		{ call insert_rwmatr(?,?,?,?,?) }
 	</insert>
+	
+	
+	
+	
+	
 </mapper>
