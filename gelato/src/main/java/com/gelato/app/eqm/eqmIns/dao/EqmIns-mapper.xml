@@ -6,7 +6,7 @@
 	<select id="eqmChck" resultType="EqmInsVO">
 		SELECT  E.EQM_ID AS EQM_ID,
 			    E.EQM_NAME AS EQM_NAME,
-			    E.CHCK_PERD AS CHCK_PERD,
+			    E.CHCK_PERD ||'일' AS CHCK_PERD,
 			    C.CHCK_DT AS CHCK_DT,
 			    f_com_code_to_nm(upper(C.JUDT)) AS JUDT,
 			    C.CHCK_DETA AS CHCK_DETA,
@@ -46,17 +46,18 @@
 			 </where>
 	</select>
 	
+	<!-- 점검내역 등록 -->
 	<insert id="insertChck" parameterType="EqmInsVO">
 		INSERT INTO CHCK(
 							EQM_ID, 
 							CHCK_DT, 
 							CHCK_DETA, 
-							JUDT, 
+							JUDT, s
 							INSPR
 						)
 				 VALUES(
 							#{eqmId},
-							#{chckDt},
+							sysdate,
 							#{chckDeta},
 							#{judt},
 							#{inspr}
@@ -64,4 +65,18 @@
 	
 	</insert>
 	
+	<!-- 점검내역 삭제 -->
+	<delete id="deleteChck" parameterType="EqmInsVO">
+		DELETE FROM CHCK 
+		WHERE EQM_ID = #{eqmId}
+	</delete>
+	
+	<!-- 해당일자 점검내역(건수) 조회 -->
+	<select id="eqmDayChck" resultType="EqmInsVO">
+		SELECT CHCK_DT,
+			   COUNT(EQM_ID) 
+		FROM CHCK 
+		WHERE CHCK_DT=CHCK_DT 
+		GROUP BY CHCK_DT;
+	</select>
 </mapper>
