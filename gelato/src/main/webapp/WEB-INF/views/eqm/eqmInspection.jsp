@@ -127,7 +127,7 @@
 			}, {
 				header : '점검내역',
 				name : 'chckDeta',
-				align: 'center',
+				align: 'center',   
 			    /* editor: {
 				type: GelatoSelectEditor,
 	      		options: {
