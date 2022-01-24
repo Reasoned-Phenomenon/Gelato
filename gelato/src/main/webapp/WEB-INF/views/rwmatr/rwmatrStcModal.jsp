@@ -28,7 +28,6 @@ h1 {
 var Grid = tui.Grid;
 
 var rwmNameM;
-let totalList = [];
 
 //자재명검색
 document.getElementById("rwmatrSearch").addEventListener("click", function () {
@@ -122,7 +121,6 @@ rwmatrStcListGrid.on('dblclick', (ev) => {
 	      end: [ev.rowKey, rwmatrStcListGrid.getColumns().length-1]
 	  });
 	
-	totalList.push(rwmatrStcListGrid.getValue(ev.rowKey, "qy"))
 	getRwmatrData(rwmatrStcListGrid.getRow(ev.rowKey));
 });
 

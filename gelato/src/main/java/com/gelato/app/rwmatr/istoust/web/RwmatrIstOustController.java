@@ -83,13 +83,19 @@ public class RwmatrIstOustController {
 		return "grid";
 	}
 	
-	//원자재 현재고 리스트(모달)
+	//원자재 현재고 리스트(모달), 원자재LOT 재고조회
 	@RequestMapping("/rwmatr/rwmatrStcMList.do")
 	public String rwmatrStcMList(RwmatrioVO vo, Model model) {
 		System.out.println("현재고 리스트 조회");
 		model.addAttribute("datas", rwmatrioService.RwmatrStcMList(vo));
 		System.out.println(rwmatrioService.RwmatrStcMList(vo));
 		return "grid";
+	}
+	
+	//원자재Lot 재고조회 페이지로 이동
+	@RequestMapping("/rwmatr/rwmatrLotList.do")
+	public String rwmatrLotList() {
+		return "tiles/rwmatr/rwmatrLotList";
 	}
 	
 	//원자재 입고관리 CUD
