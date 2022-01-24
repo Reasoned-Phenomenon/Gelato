@@ -89,7 +89,7 @@
                         </li>
                         
                         <li>
-                           <a href="${path }/rwmatr/rwmatrLotList.do">> <span>원자재LOT 재고조회</span></a>
+                           <a href="${path }/rwmatr/rwmatrLot.do">> <span>원자재LOT 재고조회</span></a>
                         </li>
                         
                         <li>
