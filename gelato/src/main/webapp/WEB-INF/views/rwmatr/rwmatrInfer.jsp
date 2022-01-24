@@ -33,7 +33,7 @@
  <hr>
 <br>
 
-	<!-- 입고내역 조회 -->
+	<!-- 불량내역 조회 -->
 	<div id="rwmatrInferList" style="width: 80%"></div>
 
 	<!-- 모달창 -->
@@ -82,8 +82,8 @@ var rwmatrInferList = new Grid({
 	  contentType: 'application/json',
 	  initialRequest: false
 	},
-	rowHeaders: ['checkbox'],
-	selectionUnit: 'row',
+	rowHeaders:['rowNum'],
+  	selectionUnit: 'row',
 	bodyHeight: 600,
 	columns:[
 		{

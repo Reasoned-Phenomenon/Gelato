@@ -84,8 +84,8 @@ var rwmatrStcList = new Grid({
 	  contentType: 'application/json',
 	  initialRequest: false
 	},
-	rowHeaders: ['checkbox'],
-	selectionUnit: 'row',
+	rowHeaders:['rowNum'],
+  	selectionUnit: 'row',
 	bodyHeight: 600,
 	columns:[
   		  {

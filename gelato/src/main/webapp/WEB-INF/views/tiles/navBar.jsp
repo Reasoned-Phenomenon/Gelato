@@ -93,7 +93,7 @@
                         </li>
                         
                         <li>
-                           <a href="${path }/rwmatr/rwmatrStc.do">> <span>원자재 재고관리</span></a>
+                           <a href="${path }/rwmatr/rwmatrStc.do">> <span>원자재 재고조회</span></a>
                         </li>
                         
                         <li>
