@@ -21,6 +21,7 @@
 		입고일 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
 		<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
+		<button type="button" class="btn cur-p btn-outline-primary" id="btnReset">전체검색</button>
 	</form>
 </div>
 <div style="float: right;">
@@ -265,6 +266,25 @@ function callrwmatrPassModal(){
 		
 		console.log(startDate);
 		console.log(endDate);
+		
+		rwmatrIstList.readData(1,{'startDate':startDate,
+									'endDate':endDate, 
+									'rwmName':rwmName,
+									'vendName': vendName}, true);
+	});
+	
+	//검색초기화
+	btnReset.addEventListener("click", function(){
+		console.log("검색초기화");
+		document.getElementById("startDate").value = '';
+		document.getElementById("endDate").value = '';
+		document.getElementById("rwmName").value = '';
+		document.getElementById("vendName").value = '';
+		
+		startDate = document.getElementById("startDate").value;
+		endDate = document.getElementById("endDate").value;
+		rwmName = document.getElementById("rwmName").value;
+		vendName = document.getElementById("vendName").value;
 		
 		rwmatrIstList.readData(1,{'startDate':startDate,
 									'endDate':endDate, 
