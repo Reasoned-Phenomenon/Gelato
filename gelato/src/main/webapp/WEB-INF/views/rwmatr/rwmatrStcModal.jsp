@@ -122,7 +122,7 @@ rwmatrStcListGrid.on('dblclick', (ev) => {
 	      end: [ev.rowKey, rwmatrStcListGrid.getColumns().length-1]
 	  });
 	
-	
+	totalList.push(rwmatrStcListGrid.getValue(ev.rowKey, "qy"))
 	getRwmatrData(rwmatrStcListGrid.getRow(ev.rowKey));
 });
 

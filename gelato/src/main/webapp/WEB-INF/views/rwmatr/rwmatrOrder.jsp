@@ -228,22 +228,22 @@ function callVendModal(){
 			}
 		}
 		
-		//총액 자동계산
-		rwmatrOrderList.on('editingFinish', (ev) => {
-			console.log("11111111")
-			console.log(ev);
-			console.log("11111111")
-			rk = ev.rowKey;
-			let untprc = parseInt(rwmatrOrderList.getValue(rk, "untprc"));
-			let qy = parseInt(rwmatrOrderList.getValue(rk, "qy"));
-			let totalPrice = untprc * qy;
-			if(rwmatrOrderList.getValue(rk, "untprc") != '' && rwmatrOrderList.getValue(rk, "qy") != '') {
-				rwmatrOrderList.setValue(rk, 
-										"totalPrice", 
-										totalPrice, 
-										true);
-			} 
-		});
+	});
+	//총액 자동계산
+	rwmatrOrderList.on('editingFinish', (ev) => {
+		console.log("11111111")
+		console.log(ev);
+		console.log("11111111")
+		rk = ev.rowKey;
+		let untprc = parseInt(rwmatrOrderList.getValue(rk, "untprc"));
+		let qy = parseInt(rwmatrOrderList.getValue(rk, "qy"));
+		let totalPrice = untprc * qy;
+		if(rwmatrOrderList.getValue(rk, "untprc") != '' && rwmatrOrderList.getValue(rk, "qy") != '') {
+			rwmatrOrderList.setValue(rk, 
+									"totalPrice", 
+									totalPrice, 
+									true);
+		} 
 	});
 
 	//자재리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에

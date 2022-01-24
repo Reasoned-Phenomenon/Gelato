@@ -117,6 +117,11 @@ var rwmatrOustList = new Grid({
 				  sortable: true
 				},
 				{
+			      header: '수량',
+			      name: 'qy',
+			      hidden:true
+			    },
+				{
 				  header: '출고량',
 				  align: 'right',
 				  name: 'oustQy',
@@ -211,13 +216,27 @@ function callrwmatrStcModal(){
 			ig = 'g';
 			callrwmatrStcModal();
 		} else if(ev.columnName === 'oustQy') {
-			if(rwmatrIstList.getValue(rk, "lotNo") == '') {
+			if(rwmatrOustList.getValue(rk, "lotNo") == '') {
 				//toastr
 				toastr.clear()
 				toastr.success( ('자재LOT번호를 선택해주세요.'),'Gelato',{timeOut:'1000'} );
 				return;
 			}
 		}
+	});
+	
+	//불량량 자동계산
+	rwmatrOustList.on('editingFinish', (ev) => {
+		rk = ev.rowKey;
+		let totalq = parseInt(rwmatrOustList.getValue(rk, "qy"));
+		let oustq = parseInt(rwmatrOustList.getValue(rk, "oustQy"))
+		if(rwmatrOustList.getValue(rk, "oustQy") != '') {
+			if(totalq < oustq){
+				rwmatrOustList.setValue(rk, "oustQy", '', true);
+				toastr.clear()
+				toastr.success( ('해당 자재의 출고가능항 수량은 ' + totalq + ' 입니다.'),'Gelato',{timeOut:'1800'} );
+			} 
+		} 
 	});
 
 	//검수합격리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
@@ -230,6 +249,7 @@ function callrwmatrStcModal(){
 			rwmatrOustList.setValue(rk, "vendName", rwmatrData.vendName, true)
 			rwmatrOustList.setValue(rk, "lotNo", rwmatrData.lotNo, true)
 			rwmatrOustList.setValue(rk, "expdate", rwmatrData.expdate, true)
+			rwmatrOustList.setValue(rk, "qy", rwmatrData.qy, true)
 		} else if(ig == 'i'){
 			document.getElementById("rwmName").value = rwmatrData.nm;
 		}
