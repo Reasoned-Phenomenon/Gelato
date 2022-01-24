@@ -474,9 +474,9 @@
 	function moveCR(gcr){
 		RwmatrLotDialog.dialog("close");
 		console.log(gcr);
-		/* console.log(gcr[0].lotNo);
-		console.log(gcr[0].oustQy);
-		console.log(gcr[0].expdate); */
+		/* console.log(gcr[1].lotNo);
+		console.log(gcr[1].oustQy);
+		console.log(gcr[1].expdate); */
 		console.log(gcr.length);
 		
 		let rrc = RwmatrLotGrid.getRowCount();
@@ -484,22 +484,25 @@
 		//rrc=4
 		
 		let j=0;
+		let k=0;
 		for( let i=(rrc-gcr.length) ; i<rrc ; i++){
 			//appendRow 한 다음에 setValue 시키기
 			
 			console.log(989898)
 				
+			for ( j=0 ; j<gcr.length ; j++) {
 				RwmatrLotGrid.setValue(i, 'nm', rwn);
  				RwmatrLotGrid.setValue(i, 'lotNo', gcr[j].lotNo);
 				RwmatrLotGrid.setValue(i, 'oustQy', gcr[j].oustQy);
 				RwmatrLotGrid.setValue(i, 'expdate', gcr[j].expdate);
 				
 			
-			for ( j=0 ; j<planIndicaGrid.getRowCount() ; j++) {
-				if(planIndicaGrid.getData()[j].fg == 'PROCEE') {
-					pio = planIndicaGrid.getData()[j].ord
-					console.log(pio);
-					RwmatrLotGrid.setValue(i, 'ord', pio);
+				for ( k=0 ; k<planIndicaGrid.getRowCount() ; k++) {
+					if(planIndicaGrid.getData()[k].fg == 'PROCEE') {
+						pio = planIndicaGrid.getData()[k].ord
+						console.log(pio);
+						RwmatrLotGrid.setValue(k, 'ord', pio);
+					}
 				}
 			}
 		}
