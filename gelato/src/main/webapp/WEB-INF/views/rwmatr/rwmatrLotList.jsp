@@ -77,7 +77,8 @@ var rwmatrLotList = new Grid({
 	  api: {
 	    readData: { url:'${path}/rwmatr/rwmatrStcMList.do', method: 'GET'}
 	  },
-	  contentType: 'application/json'
+	  contentType: 'application/json',
+	  initialRequest: false
 	},
   	rowHeaders:['rowNum'],
   	selectionUnit: 'row',
