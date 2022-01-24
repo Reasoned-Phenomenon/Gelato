@@ -141,7 +141,13 @@
 		                              and r.nm = #{nm})
 	</update>
 	
-	
+<!-- 원자재 현재고 update -->
+	<update id="updateRwmatrStc" parameterType="PrdIndicaMngVO">
+		update rwmatr_stc
+		set qy = (to_number(qy) - to_number(#{oustQy}))
+		where lot_no = #{lotNo}
+	</update>
+
 	
 	
 	

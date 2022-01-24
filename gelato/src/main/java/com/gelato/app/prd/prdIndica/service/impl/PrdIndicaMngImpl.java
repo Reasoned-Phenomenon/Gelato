@@ -116,6 +116,20 @@ public class PrdIndicaMngImpl implements PrdIndicaMngService{
 		return 0;
 	}
 
+	@Override
+	public int updateRwmatrStc(List<PrdIndicaMngVO> vo) {
+		System.out.println("현재고 upd");
+		System.out.println(vo);
+		int i=0;
+		
+		for(i=0 ; i<vo.size() ; i++) {
+			System.out.println(i);
+			System.out.println(vo.get(i));
+			pimMapper.updateRwmatrStc(vo.get(i));
+		}
+		return 0;
+	}
+
 
 
 }

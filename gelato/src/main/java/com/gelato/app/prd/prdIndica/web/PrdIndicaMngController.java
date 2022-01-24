@@ -120,7 +120,10 @@ public class PrdIndicaMngController {
 		prdIndicaMngService.insertInptRwmatr(vo);
 		
 		System.out.println("홀딩값 update");
-		return prdIndicaMngService.updateExcp(vo);
+		prdIndicaMngService.updateExcp(vo);
+		
+		System.out.println("원자재 현재고 update");
+		return prdIndicaMngService.updateRwmatrStc(vo);
 	}
 	  
 }

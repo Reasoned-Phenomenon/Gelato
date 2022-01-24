@@ -30,4 +30,7 @@ public interface PrdIndicaMngMapper {
 	
 	//홀딩값 update
 	int updateExcp(PrdIndicaMngVO vo);
+	
+	//원자재 현재고 update
+	int updateRwmatrStc (PrdIndicaMngVO vo);
 }

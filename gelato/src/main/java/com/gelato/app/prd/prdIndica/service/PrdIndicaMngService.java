@@ -34,4 +34,7 @@ public interface PrdIndicaMngService {
 	
 	//홀딩값 update
 	int updateExcp(List<PrdIndicaMngVO> vo);
+	
+	//현재고 update
+	int updateRwmatrStc(List<PrdIndicaMngVO> vo);
 }
