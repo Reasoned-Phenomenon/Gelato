@@ -126,7 +126,7 @@
 		</selectKey>
 		
 		update excp 
-		set qy = to_number(#{qy}) - #{oustQy}*10
+		set qy = to_number(#{qy}) - to_number(#{oustQy})*10
 		where plan_id in (select e.plan_id
 							as plan_id
 		                    from excp e join prod_plan_deta ppd

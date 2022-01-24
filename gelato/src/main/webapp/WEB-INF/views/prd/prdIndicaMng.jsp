@@ -496,7 +496,6 @@
 				RwmatrLotGrid.setValue(i, 'oustQy', gcr[j].oustQy);
 				RwmatrLotGrid.setValue(i, 'expdate', gcr[j].expdate);
 				
-			
 				for ( k=0 ; k<planIndicaGrid.getRowCount() ; k++) {
 					if(planIndicaGrid.getData()[k].fg == 'PROCEE') {
 						pio = planIndicaGrid.getData()[k].ord

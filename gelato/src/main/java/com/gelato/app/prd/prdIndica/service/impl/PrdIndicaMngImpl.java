@@ -109,6 +109,7 @@ public class PrdIndicaMngImpl implements PrdIndicaMngService{
 		int i=0;
 		
 		for(i=0 ; i<vo.size() ; i++) {
+			System.out.println(i);
 			System.out.println(vo.get(i));
 			pimMapper.updateExcp(vo.get(i));
 		}
