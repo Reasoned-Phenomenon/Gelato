@@ -53,4 +53,17 @@ public class EqmInsController {
 		service.modifyChck(eqmInsVo);
 		return true;
 	}
+	
+	//설비점검관리 - 해당일자 점검내역 조회 모달
+	@RequestMapping("/eqm/eqmCkModal.do")
+	public String getDayCkModal() {
+		return "eqm/eqmDayCkModal";
+	}
+	
+	//설비점검관리 - 해당일자 점검내역 조회 모달(페이지)
+	/*
+	 * @GetMapping("/eqm/eqmDayCkGrid.do") public String eqmDayCk(Model model,
+	 * EqmInsVO eqmnInsVo) { model.addAttribute("datas",
+	 * service.eqmDayChck(eqmnInsVo)); return"grid"; }
+	 */
 }

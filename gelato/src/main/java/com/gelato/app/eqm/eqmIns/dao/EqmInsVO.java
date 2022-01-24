@@ -32,4 +32,5 @@ public class EqmInsVO {
 	String fromCkDate;	
 	String toCkDate;
 
+	String count;
 }

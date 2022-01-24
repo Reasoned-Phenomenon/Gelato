@@ -4,33 +4,51 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>설비 점검대상 모달</title>
+<title>일 점검자료 조회 모달</title>
 </head>
 <body>
-	<div id="eqmCkGrid"></div>
+	<div>
+		<h2>일 점검자료 관리</h2>
+	</div>
+	<div>
+		<div>
+			<form id="searchForm" name="searchForm" method="get">
+				<div>
+					<label>점검일자</label> <input id="fromDayCkDate" name="fromDayCkDate"
+						type="date"><label>~</label><input id="toDayCkDate"
+						name="toDayCkDate" type="date">
+					<button class="btn btn-print float-right" id="eqmChck"
+						type="button">설비조회</button>
+				</div>
+			</form>
+			<div id="eqmDayCkGrid"></div>
+		</div>
+	</div>
 	<div>
 		<button id="btnOk" class="btn btn-print">확인</button>
 		<button id="btnCn" class="btn btn-print">취소</button>
 	</div>
+
 	<script>
 
-		var fromCkDate = $("#fromCkDate").val();
-		var toCkDate = $("#toCkDate").val();
+		var fromDayCkDate = $("#fromDayCkDate").val();
+		var toDayCkDate = $("#toDayCkDate").val();
 		
 		
 		var params = {
-		'fromCkDate' : fromCkDate,
-		'toCkDate' : toCkDate
+		'fromDayCkDate' : fromDayCkDate,
+		'toDayCkDate' : toDayCkDate
 		}
+		
 		console.log(params)
 		var Grid = tui.Grid;
 		
-		var eqmCkGrid = new Grid({
-			el : document.getElementById('eqmCkGrid'),
+		var eqmDayCkGrid = new Grid({
+			el : document.getElementById('eqmDayCkGrid'),
 			data : {
 				api : {
 					readData : {
-						url : '${path}/eqm/eqmCkDate.do',
+						url : '${path}/eqm/eqmDayCkGrid.do',
 						method : 'GET',
 						initParams : params
 					},
@@ -41,34 +59,12 @@
 			selectionUnit : 'row',
 			bodyHeight : 300,
 			columns : [ {
-				header : '설비코드',
-				name : 'eqmId'
-			}, {
-				header : '설비명',
-				name : 'eqmName'
-			}, {
-				header : '점검일자', 
+				header : '점검일자',
 				name : 'chckDt'
 			}, {
-				header : '차기점검일자',
-				name : 'nmCkDt'
-			}, {
-				header : '점검주기',
-				name : 'chckPerd',
-				align : 'center'
-			}, {
-				header : '판정',
-				name : 'judt',
-				hidden : true
-			}, {
-				header : '점검내역',
-				name : 'chckDeta',
-				hidden : true
-			}, {
-				header : '검수인',
-				name : 'inspr',
-				hidden : true
-			}  ]
+				header : '건수', 
+				name : 'count'
+			}]
 		});
 		
 		//모달창에서 확인 클릭시 그리드에 선택한 것만 띄우기

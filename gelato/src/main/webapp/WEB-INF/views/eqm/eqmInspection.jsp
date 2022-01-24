@@ -11,6 +11,8 @@
 <body>
 <!-- 설비검색 모달 -->
 	<div id="dialog-form" title="설비검색"></div>
+<!-- 해당일자 점검내역 모달 -->
+	<div id="chckDialog-form" title="점검내역검색"></div>
 	
 	<h2>설비 정기점검 관리</h2>
 	<div class="container">
@@ -33,9 +35,6 @@
 				<div class="col-6">
 					<div>
 						<label>점검일자</label><input type="date" id="chckDate">
-					</div>
-					<div>
-						<label>특이사항</label> <input type="text" id="remk">
 					</div>
 					<div>
 						<label>설비구분</label> <select id="gubun" onchange="selectGubun()">
@@ -83,12 +82,12 @@
 			data : {
 				api : {
 					readData : {url : '${path}/eqm/eqmInspectionList.do', method : 'GET'},
-					modifyData :{ url: '${path}/eqm/chckModifyData.do', method:'PUT'}
+					modifyData : { url: '${path}/eqm/chckModifyData.do', method:'PUT'}
 				},
 				contentType : 'application/json',
 				initialRequest : false
 			},
-			rowHeaders : [ 'rowNum' ],
+			rowHeaders : [ 'checkbox' , 'rowNum'],
 			selectionUnit : 'row',
 			bodyHeight : 500,
 			columns : [ {
@@ -114,10 +113,10 @@
 				type: GelatoSelectEditor,
 	      		options: {
 			        listItems: [
-	        			{text : '합격', value :'합격'},
-	        			{text : '수리', value :'수리필요'},
-	        			{text : '교체', value :'교체필요'},
-	        			{text : '정밀점검', value :'정밀점검필요'}
+	        			{text : '합격', value :'Test01'},
+	        			{text : '수리', value :'Test02'},
+	        			{text : '교체', value :'Test03'},
+	        			{text : '정밀점검', value :'Test04'}
 	        			]		
 			      }
 			    },
@@ -128,20 +127,7 @@
 				header : '점검내역',
 				name : 'chckDeta',
 				align: 'center',   
-			    /* editor: {
-				type: GelatoSelectEditor,
-	      		options: {
-			        listItems: [
-	        			{text : '합격', value :'합격'},
-	        			{text : '수리', value :'수리필요'},
-	        			{text : '교체', value :'교체필요'},
-	        			{text : '정밀점검', value :'정밀점검필요'}
-	        			]		
-			      }
-			    },
-			    renderer: {
-		            type: GelatoSelect
-		      		}  */
+			    editor : 'text'
 			}, {
 				header : '검수인',
 				name : 'inspr'
@@ -157,13 +143,21 @@
 		//점검일자 input태그에 현재날짜 띄우기
 		document.getElementById('chckDate').value = new Date().toISOString().substring(0, 10);
 		
-		//(점검일자별)설비조회 검색 모달
+		//(점검일자별)설비조회 검색 모달(우측)
 		let dialog = $("#dialog-form").dialog({
 			autoOpen :false,
 			modal : true,
 			width : "700px"
 		});
 		
+		//(점검일자별) 설비점검내역 조회 모달
+		let ckDialog = $("#chckDialog-form").dialog({
+			autoOpen :false,
+			modal : true,
+			width : "700px"
+		})
+		
+		//모달창 
 		$("#eqmChck").on("click", function(){
 		
 			dialog.dialog("open");
@@ -171,8 +165,28 @@
 				console.log("설비검색 모달 로드됨")})
 		});
 		
+		//저장버튼
+		$("#saveBtn").on("click", function(){
+			eqmInsGrid.request('modifyData');
+		})
+		
+		//삭제버튼
+		$("#removeBtn").on("click", function(){
+			eqmInsGrid.request('modifyData', {'checkedOnly': true,'modifiedOnly':false ,'showConfirm':false });
+			eqmInsGrid.removeCheckedRows(true)
+		})
+		
+		//초기화버튼
 		$("#resetBtn").on("click", function(){
 			eqmInsGrid.clear();
+		})
+		
+		//조회버튼
+		$("#searchBtn").on("click", function(){
+			ckDialog.dialog("open");
+			$("#chckDialog-form").load("${path}/eqm/eqmCkModal.do", function(){
+				console.log("일 관리점검 모달 로드됨");
+			})
 		})
 		
 	</script>
