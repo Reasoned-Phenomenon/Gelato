@@ -118,5 +118,5 @@ public class PrdIndicaMngController {
 		System.out.println(vo);
 		return prdIndicaMngService.insertInptRwmatr(vo);
 	}
-	
+	  
 }
