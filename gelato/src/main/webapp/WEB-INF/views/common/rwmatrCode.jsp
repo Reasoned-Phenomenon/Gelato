@@ -9,15 +9,18 @@
 <title>자재 코드 관리 페이지</title>
 </head>
 <body>
-
+<form>
 	<div class="container">
-	
+
       <div class="flex row">
+      	
          <div class="col-4">
+          
             <br>
             <h3>자재 코드 관리</h3>
-           <form>
+          
             <div align="right">
+            
                <button type="button" class="btn cur-p btn-outline-primary" id="SaveBtn">저장</button>
                <button type="button" class="btn cur-p btn-outline-primary" id="DelBtn">삭제</button>
                <button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
@@ -47,14 +50,14 @@
                   <tr>
                      <th>입고 업체</th>
                      <td><input type="text" id="vendId" name="vendId">
-                        <button type="button" id="serachVendId">검색</button></td>
+                        <button type="button" id="serachVendIdBtn">검색</button></td>
                      <th>업체명</th>
                      <td><input type="text" id="vendName" name="vendName"></td>
                   </tr>
                   <tr>
                      <th>제품 구분</th>
                      <td><input type="text" id="fg" name="fg">
-                        <button type="button" id="serachFg">검색</button> 
+                        <button type="button" id="serachFgBtn">검색</button> 
                         <input type="text" id="" name=""></td>
                   </tr>
                   <tr>
@@ -64,13 +67,16 @@
                </tbody>
             </table>
          </div>
-         </form>  
+           
       </div>
-     
    </div>
+ </form>  
 <div id="vendModal"></div>
+<div id="fgModal"></div>
 
 <script>
+let dialog;
+
 var Grid = tui.Grid;	
 
 
@@ -171,7 +177,7 @@ var rwmatrGrid = new Grid({
 			console.log(useYn); */
 			
 			//rwmatrGrid.getValue(ev["rowKey"],"useYn")=='Y'?$("#useYn").prop("checked",true):$("#notUse").prop("checked",true);
-			
+
 			
 		});
 	
@@ -198,7 +204,7 @@ var rwmatrGrid = new Grid({
 		});
 		
 		// 거래처 검색 버튼 이벤트.
-		serachVendId.addEventListener("click", function() {
+		serachVendIdBtn.addEventListener("click", function() {
 			
 			console.log("거래처 검색 클릭")
 			dialog.dialog( "open" );
@@ -218,6 +224,8 @@ var rwmatrGrid = new Grid({
 
 		dialog.dialog("close");
 	}
+		
+
 		
 	
 	</script>
