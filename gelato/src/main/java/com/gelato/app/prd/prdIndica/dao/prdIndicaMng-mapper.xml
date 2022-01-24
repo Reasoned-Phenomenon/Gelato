@@ -148,7 +148,33 @@
 		where lot_no = #{lotNo}
 	</update>
 
-	
+<!-- 원자재 입출고 insert -->	
+	<insert id="insertRwmatrIstOust" parameterType="PrdIndicaMngVO">
+	<selectKey keyProperty="rwmatrOrderDetaId" resultType="string" order="BEFORE">
+		select rwmatr_order_deta_id
+		as rwmatrOrderDetaId
+		from rwmatr_ist_oust
+		where lot_no = #{lotNo}
+		group by rwmatr_order_deta_id
+	</selectKey>
+		insert into rwmatr_ist_oust (rwmatr_id, 
+									 lot_no, 
+									 ist_oust_dttm, 
+									 ist_qy, 
+									 oust_qy, 
+									 expdate, 
+									 rwmatr_order_deta_id)
+		values ((select rwmatr_id
+		            from rwmatr
+		            where nm = #{nm}),
+		        #{lotNo},
+		        to_char(sysdate, 'yyyyMMdd'),
+		        '0',
+		        #{oustQy},
+		        to_char(#{expdate}, 'yyyyMMdd'),
+		        #{rwmatrOrderDetaId}
+		        )
+	</insert>
 	
 	
 	

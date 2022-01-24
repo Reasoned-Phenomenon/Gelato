@@ -490,12 +490,13 @@
 			
 			console.log(989898)
 				
-			for ( j=0 ; j<gcr.length ; j++) {
+			//for ( j=0 ; j<gcr.length ; j++) {
 				RwmatrLotGrid.setValue(i, 'nm', rwn);
  				RwmatrLotGrid.setValue(i, 'lotNo', gcr[j].lotNo);
 				RwmatrLotGrid.setValue(i, 'oustQy', gcr[j].oustQy);
 				RwmatrLotGrid.setValue(i, 'expdate', gcr[j].expdate);
 				
+				j++;
 				for ( k=0 ; k<planIndicaGrid.getRowCount() ; k++) {
 					if(planIndicaGrid.getData()[k].fg == 'PROCEE') {
 						pio = planIndicaGrid.getData()[k].ord
@@ -503,7 +504,7 @@
 						RwmatrLotGrid.setValue(i, 'ord', pio);
 					}
 				}
-			}
+			//}
 		}
 		
 			
@@ -601,6 +602,9 @@
 						}
 					}).done (function(result) {
 						console.log(result);
+						
+						toastr.clear()
+						toastr.success( ('생산지시가 등록되었습니다.'),'Gelato',{timeOut:'1000'} );
 					})
 				})
 			})

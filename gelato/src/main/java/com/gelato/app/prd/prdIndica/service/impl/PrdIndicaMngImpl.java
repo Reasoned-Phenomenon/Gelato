@@ -130,6 +130,19 @@ public class PrdIndicaMngImpl implements PrdIndicaMngService{
 		return 0;
 	}
 
+	@Override
+	public int insertRwmatrIstOust(List<PrdIndicaMngVO> vo) {
+		System.out.println("원자재 입출고 insert");
+		int i=0;
+		
+		for(i=0 ; i<vo.size() ; i++) {
+			System.out.println(i);
+			System.out.println(vo.get(i));
+			pimMapper.insertRwmatrIstOust(vo.get(i));
+		}
+		return 0;
+	}
+
 
 
 }

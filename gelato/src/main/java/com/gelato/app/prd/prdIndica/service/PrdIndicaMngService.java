@@ -37,4 +37,7 @@ public interface PrdIndicaMngService {
 	
 	//현재고 update
 	int updateRwmatrStc(List<PrdIndicaMngVO> vo);
+	
+	//원자재 입출고 insert
+	int insertRwmatrIstOust(List<PrdIndicaMngVO> vo);
 }

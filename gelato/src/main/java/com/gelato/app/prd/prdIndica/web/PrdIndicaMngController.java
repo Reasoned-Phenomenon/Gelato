@@ -123,7 +123,10 @@ public class PrdIndicaMngController {
 		prdIndicaMngService.updateExcp(vo);
 		
 		System.out.println("원자재 현재고 update");
-		return prdIndicaMngService.updateRwmatrStc(vo);
+		prdIndicaMngService.updateRwmatrStc(vo);
+		
+		System.out.println("원자재 입출고 insert");
+		return prdIndicaMngService.insertRwmatrIstOust(vo);
 	}
 	  
 }
