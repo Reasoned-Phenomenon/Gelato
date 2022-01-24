@@ -3,10 +3,14 @@ package com.gelato.app.com.rwmatrCode.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gelato.app.com.rwmatrCode.dao.RwmatrCodeVO;
 import com.gelato.app.com.rwmatrCode.service.RwmatrCodeService;
+import com.gelato.app.vr.ModifyVO;
 
 @Controller
 public class RwmatrCodeController {
@@ -28,5 +32,30 @@ public class RwmatrCodeController {
 		return "grid";
     }
 	
+	// 거래처 명 modal 호출.
+	@RequestMapping("/com/vendModal.do")
+	public String vendModal(Model model) {
+		System.out.println("거래처 modal");
+		return "/common/vendModal"; // 모달 주소 적어야 한다.
+	}
+	
+	// 거래처 명 modal로 조회.
+	@RequestMapping("/com/vendModalModal.do")
+	public String vendList(Model model) {
+		System.out.println("거래처 검색");
+		model.addAttribute("datas", rwmatrcodeService.vendList());
+		return "grid"; 
+	}
+
+	
+	
+	// Modify 등록
+	@PutMapping("/com/rwmatrCodeModifyData.do")
+	@ResponseBody
+	public boolean modifyData (@RequestBody ModifyVO<RwmatrCodeVO> mvo) {
+		System.out.println(mvo);
+		rwmatrcodeService.modifyRwmatrCode(mvo);
+		return true;
+	}
 	
 }

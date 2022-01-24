@@ -11,11 +11,52 @@
                WK_UNIT,
                SAF_STC,
                FG
-		FROM   RWMATR
-		
-		
+		FROM   RWMATR 
+
 	</select>
 	
+	<!-- 거래처 modal -->
+	<select id="vendList" resultType="RwmatrCodeVO">
+		SELECT  VEND_ID, VEND_NAME, BIZNO, TELNO
+ 	    FROM    VEND
+	
+	</select>
+	
+	
+	
+	<!-- 자재코드 관리 등록. -->
+	<insert id="insertRwmatrCode" parameterType="RwmatrCodeVO">
+		<selectKey keyProperty="rwmatrId" resultType="String" order="BEFORE">
+			SELECT 'RML-'||
+					LPAD(MAX(TO_NUMBER(SUBSTR(RWMATR_ID, -5))) +1, 5, 0)
+				AS  RWMATR_ID
+			  FROM	RWMATR
+		</selectKey>
+		  INSERT INTO RWMATR (
+		  			RWMATR_ID,
+					VEND_ID,
+					NM,
+					SPEC,
+					WK_UNIT,
+					SAF_STC,
+					FG	
+				  )
+			 VALUES (	
+			     	#{rwmatrId},
+			     	#{vendId},
+			     	#{nm},
+			     	#{spec},
+			     	#{wkUnit},
+			     	#{safStc},
+			     	#{fg}		     			
+			     )      		
+	</insert>
+	
+	<update id="">
+	
+	
+	
+	</update>
 	
 	
 </mapper>
