@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>생산 지시 조회</title>
+<title>생산 지시 관리</title>
 </head>
 <body>
 	<div>
@@ -36,7 +36,7 @@
 			<div id="planIndicaGrid"></div>
 		</div>
 	</div>
-	<br><br><br><br>
+	<br><br><br><br><br><br><br><br><br>
 	<div class="row">
 		<div class="col-sm-5">
 			<h3>필요자재</h3>
