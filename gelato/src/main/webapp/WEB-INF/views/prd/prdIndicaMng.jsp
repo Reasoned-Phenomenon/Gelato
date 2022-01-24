@@ -276,7 +276,7 @@
 			},{
 				header : '일자별 우선순위',
 				name : 'ord',
-				hidden : true
+				hidden : false
 			}],
 			summary: {
 		        height: 0,
@@ -501,7 +501,7 @@
 					if(planIndicaGrid.getData()[k].fg == 'PROCEE') {
 						pio = planIndicaGrid.getData()[k].ord
 						console.log(pio);
-						RwmatrLotGrid.setValue(k, 'ord', pio);
+						RwmatrLotGrid.setValue(i, 'ord', pio);
 					}
 				}
 			}

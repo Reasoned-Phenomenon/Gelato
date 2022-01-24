@@ -116,7 +116,8 @@ public class PrdIndicaMngController {
 	public int modifyInptRwmatr(@RequestBody List<PrdIndicaMngVO> vo) {
 		System.out.println("투입원자재 insert");
 		System.out.println(vo);
-		return prdIndicaMngService.insertInptRwmatr(vo);
+		prdIndicaMngService.insertInptRwmatr(vo);
+		return prdIndicaMngService.updateExcp(vo);
 	}
 	  
 }

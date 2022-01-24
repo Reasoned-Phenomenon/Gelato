@@ -31,4 +31,7 @@ public interface PrdIndicaMngService {
 	
 	//투입원자재 insert
 	int insertInptRwmatr(List<PrdIndicaMngVO> vo);
+	
+	//홀딩값 update
+	int updateExcp(List<PrdIndicaMngVO> vo);
 }

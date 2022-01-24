@@ -90,12 +90,27 @@ public class PrdIndicaMngImpl implements PrdIndicaMngService{
 
 	@Override
 	public int insertInptRwmatr(List<PrdIndicaMngVO> vo) {
+		System.out.println("원자재투입");
+		System.out.println(vo);
+		int i=0;
+		
+		//투입원자재 insert
+		for(i=0 ; i<vo.size() ; i++) {
+			System.out.println(vo.get(i));
+			pimMapper.insertInptRwmatr(vo.get(i));
+		}
+		return 0;
+	}
+
+	@Override
+	public int updateExcp(List<PrdIndicaMngVO> vo) {
+		System.out.println("홀딩값 upd");
 		System.out.println(vo);
 		int i=0;
 		
 		for(i=0 ; i<vo.size() ; i++) {
 			System.out.println(vo.get(i));
-			pimMapper.insertInptRwmatr(vo.get(i));
+			pimMapper.updateExcp(vo.get(i));
 		}
 		return 0;
 	}
