@@ -28,6 +28,7 @@ h1 {
 var Grid = tui.Grid;
 
 var rwmNameM;
+let totalList = [];
 
 //자재명검색
 document.getElementById("rwmatrSearch").addEventListener("click", function () {

@@ -253,12 +253,19 @@ function callrwmatrInferCodeModal(){
 			console.log(ev);
 			console.log("11111111")
 			rk = ev.rowKey;
+			let totalq = parseInt(rwmatrIstInspList.getValue(rk, "qy"));
+			let passq = parseInt(rwmatrIstInspList.getValue(rk, "passQy"));
+			let inferq = totalq - passq;
 			if(rwmatrIstInspList.getValue(rk, "passQy") != '') {
-				console.log("sdfjklsdfjsdfljsdlf")
-				let totalq = parseInt(rwmatrIstInspList.getValue(rk, "qy"));
-				let passq = parseInt(rwmatrIstInspList.getValue(rk, "passQy"));
-				let inferq = totalq - passq;
-				rwmatrIstInspList.setValue(rk, "inferQy", inferq, true);
+				console.log("불량량 자동계산")
+				if(passq <= totalq){
+					rwmatrIstInspList.setValue(rk, "inferQy", inferq, true);
+				} else {
+					rwmatrIstInspList.setValue(rk, "passQy", '', true);
+					//toastr
+					toastr.clear()
+					toastr.success( ('합격량은 발주총량보다 높을수 없습니다.'),'Gelato',{timeOut:'1500'} );
+				}
 			} 
 		});
 	});

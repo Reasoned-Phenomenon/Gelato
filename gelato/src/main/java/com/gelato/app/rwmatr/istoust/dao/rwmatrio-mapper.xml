@@ -128,9 +128,7 @@
  	<!-- 자재입고관리 insert -->
  	<insert id="insertRwmatrIst" parameterType="RwmatrioVO">
  		<selectKey keyProperty="lotNo" resultType="string" order="BEFORE">
- 			SELECT #{rwmatrId}||'-'||TO_CHAR(SYSDATE, 'YYMMDD')||(SELECT LPAD(NVL(MAX(SUBSTR(LOT_NO,-3)),0)+1, 3, 0) FROM RWMATR_IST_OUST
-			WHERE SUBSTR(LOT_NO,-9,6) = TO_CHAR(SYSDATE, 'YYMMDD')
-			AND SUBSTR(LOT_NO,0,9) = #{rwmatrId}) AS LOT_NO FROM DUAL
+ 			SELECT RWL_LOT_NO(#{rwmatrId}) FROM DUAL
  		</selectKey>
  		INSERT INTO RWMATR_IST_OUST(
  									RWMATR_ID, 
