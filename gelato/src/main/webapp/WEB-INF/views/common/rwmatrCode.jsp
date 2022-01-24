@@ -151,21 +151,15 @@ var rwmatrGrid = new Grid({
 //더블클릭시 한 행 선택 입력폼에 값 들어가게 하기.
 		rwmatrGrid.on("dblclick", (ev) => {
 			
-			/* $("#eqmId").val(eqmListGrid.getValue(ev["rowKey"],"eqmId"));
-			$("#eqmName").val(eqmListGrid.getValue(ev["rowKey"],"eqmName"));
-			$("#prcsId").val(eqmListGrid.getValue(ev["rowKey"],"prcsId"));
-			$("#nm").val(eqmListGrid.getValue(ev["rowKey"],"nm"));
-			$("#tempMax").val(eqmListGrid.getValue(ev["rowKey"],"tempMax"));
-			$("#tempMin").val(eqmListGrid.getValue(ev["rowKey"],"tempMin"));
-			$("#chckPerd").val(eqmListGrid.getValue(ev["rowKey"],"chckPerd"));
-		
+			$("#rwmatrId").val(rwmatrGrid.getValue(ev["rowKey"],"rwmatrId"));
+			$("#nm").val(rwmatrGrid.getValue(ev["rowKey"],"nm"));
+			$("#spec").val(rwmatrGrid.getValue(ev["rowKey"],"spec"));
+			$("#vendId").val(rwmatrGrid.getValue(ev["rowKey"],"vendId"));
+			$("#vendName").val(rwmatrGrid.getValue(ev["rowKey"],"vendName"));
+			
 			rwmatrGrid.getValue(ev["rowKey"],"useYn")=='Y'?$("#useYn").prop("checked",true):$("#notUse").prop("checked",true);
 			
-			$("#prcsId").attr("disabled",false);
-			$("#nm").attr("disabled",false);
-			$("#tempMax").attr("disabled",false);
-			$("#tempMin").attr("disabled",false);
-			$("#chckPerd").attr("disabled",false); */
+			
 		}) 
 	
 	</script>
