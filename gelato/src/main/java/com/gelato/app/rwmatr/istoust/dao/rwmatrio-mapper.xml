@@ -92,7 +92,6 @@
 		    ON R.RWMATR_ID = RS.RWMATR_ID
 		JOIN VEND V
 		    ON R.VEND_ID = V.VEND_ID
-		GROUP BY RS.RWMATR_ID, E.Q, R.SAF_STC, R.NM, V.VEND_NAME
         <where>
 			<if test="rwmName != '' and rwmName != null">
 				R.NM LIKE '%'||#{rwmName}||'%'
@@ -101,6 +100,7 @@
 				AND V.VEND_NAME LIKE '%'||#{vendName}||'%'
 			</if>
 		</where>
+		GROUP BY RS.RWMATR_ID, E.Q, R.SAF_STC, R.NM, V.VEND_NAME
  	</select>
  	
  	<select id="RwmatrStcMList" resultType="RwmatrioVO">

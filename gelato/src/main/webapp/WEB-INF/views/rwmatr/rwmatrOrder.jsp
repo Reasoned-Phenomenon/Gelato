@@ -21,6 +21,7 @@
 		발주신청일 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
 		<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
+		<button type="button" class="btn cur-p btn-outline-primary" id="btnReset">전체검색</button>
 	</form>
 </div>
 <div style="float: right;">
@@ -219,10 +220,10 @@ function callVendModal(){
 			ig = 'g';
     		callRwmatrModal();
 		} else if(ev.columnName === 'untprc' || ev.columnName === 'qy') {
-			if(rwmatrOrderList.getValue(rk, "orderId") == '') {
+			if(rwmatrOrderList.getValue(rk, "nm") == '' || rwmatrOrderList.getValue(rk, "rwmatrId") == '' ) {
 				//toastr
 				toastr.clear()
-				toastr.success( ('발주코드를 선택해주세요.'),'Gelato',{timeOut:'1000'} );
+				toastr.success( ('자재를 선택해주세요.'),'Gelato',{timeOut:'1000'} );
 				return;
 			}
 		}
@@ -299,6 +300,25 @@ function callVendModal(){
 		vendName = document.getElementById("vendName").value;
 		console.log(startDate);
 		console.log(endDate);
+		
+		rwmatrOrderList.readData(1,{'startDate':startDate,
+									'endDate':endDate, 
+									'rwmName':rwmName,
+									'vendName': vendName}, true);
+	});
+	
+	//검색초기화
+	btnReset.addEventListener("click", function(){
+		console.log("검색초기화");
+		document.getElementById("startDate").value = '';
+		document.getElementById("endDate").value = '';
+		document.getElementById("rwmName").value = '';
+		document.getElementById("vendName").value = '';
+		
+		startDate = document.getElementById("startDate").value;
+		endDate = document.getElementById("endDate").value;
+		rwmName = document.getElementById("rwmName").value;
+		vendName = document.getElementById("vendName").value;
 		
 		rwmatrOrderList.readData(1,{'startDate':startDate,
 									'endDate':endDate, 
