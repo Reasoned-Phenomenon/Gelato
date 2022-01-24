@@ -26,7 +26,7 @@ public class OrderController {
 	@RequestMapping("/biz/findOrderList.do")
 	public String findOrderList(Model model, OrderVO vo) {
 		System.out.println(vo);
-		System.out.println("999999");
+		System.out.println("주문서 list 조회.");
 		model.addAttribute("datas", ordService.findOrderList(vo));
 		return "grid";
 	}
