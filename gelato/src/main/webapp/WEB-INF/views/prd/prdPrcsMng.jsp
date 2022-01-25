@@ -108,12 +108,11 @@ th, td {
 		});
 		
 		// 그리드1
-		const PlanDetaGrid = new Grid({
-			el : document.getElementById('PlanDetaGrid'),
+		const "IndicaGrid" = new Grid({
+			el : document.getElementById('"IndicaGrid"'),
 			data : {
 				api : {
-					readData : {url : '${path}/prd/chooseOrder.do',method : 'GET'},
-					modifyData : { url: '${path}/prd/modifyCanPrdPlan.do', method: 'PUT'} 
+					readData : {url : '${path}',method : 'GET'},
 				},
 				contentType : 'application/json',
 				initialRequest: false
