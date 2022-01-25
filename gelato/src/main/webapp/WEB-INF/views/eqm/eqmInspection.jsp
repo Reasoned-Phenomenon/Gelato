@@ -13,7 +13,7 @@
 	<div id="dialog-form" title="설비검색"></div>
 <!-- 해당일자 점검내역 모달 -->
 	<div id="chckDialog-form" title="일 점검자료 관리"></div>
-	
+	   
 	<h2>설비 정기점검 관리</h2>
 	<div class="container">
 		<br> <br>
