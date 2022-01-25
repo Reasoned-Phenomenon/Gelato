@@ -43,6 +43,9 @@ let flag;
 //모달에서 선택한 rowKey값 세팅
 let rk = '';
 
+//모달에서 선택했던 리스트 담을배열
+let selectList = [];
+
 //검색 조건
 var startDate;
 var endDate;
