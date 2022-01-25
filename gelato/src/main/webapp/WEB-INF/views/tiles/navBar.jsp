@@ -126,7 +126,7 @@
                            <a href="${path }/prd/prdPrcsMng.do">> <span>생산 관리</span></a>
                         </li>
                         <li>
-                           <a href="#">> <span>공정 실적</span></a>
+                           <a href="${path }/prd/prdPrcsNow.do">> <span>공정 실적</span></a>
                         </li>
                         <li>
                            <a href="#">> <span>공정 관리</span></a>
