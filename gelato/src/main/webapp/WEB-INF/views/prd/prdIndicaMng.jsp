@@ -7,6 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>생산 지시 관리</title>
+<style>
+.tui-grid-layer-editing {
+	z-index : 20;
+}
+</style>
 </head>
 <body>
 	<div>
@@ -36,7 +41,7 @@
 			<div id="planIndicaGrid"></div>
 		</div>
 	</div>
-	<br><br><br><br><br><br><br><br><br>
+	<br><br><br>
 	<div class="row">
 		<div class="col-sm-5">
 			<h3>필요자재</h3>
@@ -164,7 +169,8 @@
 			}, {
 				header : '착수일자',
 				name : 'indicaDt',
-				editor: 'datePicker'
+				editor: 'datePicker',
+				//language : 'ko'
 			}, {
 				header : '작업수량 (Box)',
 				name : 'qy',
@@ -276,7 +282,7 @@
 			},{
 				header : '일자별 우선순위',
 				name : 'ord',
-				hidden : false
+				hidden : true
 			}],
 			summary: {
 		        height: 0,
@@ -612,7 +618,10 @@
 		}
 	})
 	
+	// datepicker
 	
+
+
 	
 	
 	
