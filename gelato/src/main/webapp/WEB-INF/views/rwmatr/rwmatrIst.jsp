@@ -51,6 +51,7 @@ let ig;
 //모달에서 선택한 rowKey값 세팅
 let rk = '';
 
+
 //날짜검색 조건
 var startDate;
 var endDate;
@@ -199,13 +200,20 @@ function callrwmatrPassModal(){
 			console.log("검수완료리스트")
 			ig = 'g';
 			callrwmatrPassModal();
-		} else if(ev.columnName === 'lotNo' || ev.columnName === 'expdate') {
+		} else if(ev.columnName === 'expdate' || ev.columnName === 'lotNo' || ev.columnName === 'istOustDttm') {
 			if(rwmatrIstList.getValue(rk, "rwmatrOrderDetaId") == '') {
 				//toastr
 				toastr.clear()
 				toastr.success( ('발주코드를 선택해주세요.'),'Gelato',{timeOut:'1000'} );
 				return;
 			}
+		}
+		
+		if(ev.columnName === 'lotNo' || ev.columnName === 'istOustDttm') {
+			//toastr
+			toastr.clear()
+			toastr.success( ('저장시 자동으로 기입되는 값입니다.'),'Gelato',{timeOut:'1000'} );
+			return;
 		}
 	});
 
@@ -275,6 +283,7 @@ function callrwmatrPassModal(){
 	
 	//검색초기화
 	btnReset.addEventListener("click", function(){
+		selectList = [];
 		console.log("검색초기화");
 		document.getElementById("startDate").value = '';
 		document.getElementById("endDate").value = '';
@@ -307,6 +316,7 @@ function callrwmatrPassModal(){
 	
 	//저장
 	btnSave.addEventListener("click", function(){
+		selectList = [];
 		rwmatrIstList.blur();
 		rwmatrIstList.request('modifyData');
 		flag = 'O'

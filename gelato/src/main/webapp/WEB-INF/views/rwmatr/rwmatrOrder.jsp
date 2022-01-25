@@ -226,24 +226,48 @@ function callVendModal(){
 				toastr.success( ('자재를 선택해주세요.'),'Gelato',{timeOut:'1000'} );
 				return;
 			}
-		}
+		} else if(ev.columnName === 'orderId' || ev.columnName === 'orderDt') {
+			//toastr
+			toastr.clear()
+			toastr.success( ('저장시 자동으로 기입되는 값입니다.'),'Gelato',{timeOut:'1000'} );
+			return;
+		} 
 		
 	});
-	//총액 자동계산
+	
+	
 	rwmatrOrderList.on('editingFinish', (ev) => {
-		console.log("11111111")
 		console.log(ev);
-		console.log("11111111")
 		rk = ev.rowKey;
 		let untprc = parseInt(rwmatrOrderList.getValue(rk, "untprc"));
 		let qy = parseInt(rwmatrOrderList.getValue(rk, "qy"));
 		let totalPrice = untprc * qy;
-		if(rwmatrOrderList.getValue(rk, "untprc") != '' && rwmatrOrderList.getValue(rk, "qy") != '') {
-			rwmatrOrderList.setValue(rk, 
-									"totalPrice", 
-									totalPrice, 
-									true);
+		
+		// 숫자 정규식 유효성검사
+		var pattern_num = /[0-9]/;
+		if(rwmatrOrderList.getValue(rk, "untprc") != ''){
+			if((pattern_num.test(rwmatrOrderList.getValue(rk, "untprc"))) == false) {
+				rwmatrOrderList.setValue(rk, "untprc", "", true);
+				toastr.clear()
+				toastr.success( ("숫자만 입력이 가능합니다."),'Gelato',{timeOut:'1000'} );
+				return;
+			}
+		}
+		
+		if(rwmatrOrderList.getValue(rk, "qy") != ''){
+			if((pattern_num.test(rwmatrOrderList.getValue(rk, "qy"))) == false) {
+				rwmatrOrderList.setValue(rk, "qy", "", true);
+				toastr.clear()
+				toastr.success( ("숫자만 입력이 가능합니다."),'Gelato',{timeOut:'1000'} );
+				return;			
+			} 
+		}
+		
+		//총액 자동계산
+		if( (pattern_num.test(rwmatrOrderList.getValue(rk, "untprc"))) && (pattern_num.test(rwmatrOrderList.getValue(rk, "qy"))) ) {
+			rwmatrOrderList.setValue(rk, "totalPrice", totalPrice, true);
 		} 
+		
 	});
 
 	//자재리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
