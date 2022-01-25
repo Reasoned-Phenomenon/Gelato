@@ -242,7 +242,7 @@ function callVendModal(){
 		   ev.columnName === 'utnprc' || 
 		   ev.columnName === 'qy' || 
 		   ev.columnName === 'orderDt' ||
-		   ev.columnName === 'dudt' ||) {
+		   ev.columnName === 'dudt') {
 			
 		}
 		
