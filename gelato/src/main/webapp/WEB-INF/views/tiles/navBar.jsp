@@ -161,7 +161,7 @@
                         </li>
                         
                         <li>
-                           <a href="#">> <span>실시간 설비 상태</span></a>
+                           <a href="${path }/eqm/eqmState.do">> <span>실시간 설비 상태</span></a>
                         </li>
                         
                      </ul>
