@@ -99,6 +99,9 @@
 				header : '설비명',
 				name : 'eqmName'
 			}, {
+				header : '설비구분',
+				name : 'fg'
+			}, {
 				header : '점검주기',
 				name : 'chckPerd'
 			}, {
@@ -138,8 +141,8 @@
 
 		//드롭다운 선택시 바로 조회
 		function selectGubun() {
-			let gubun = $('#gubun option:selected').val();
-			eqmListGrid.readData(1, {'gubun' : gubun}, true);
+			var gubun = $('#gubun option:selected').val();
+			eqmInsGrid.readData(1, {'gubun' : gubun}, true);
 		}
 
 		//점검일자 input태그에 현재날짜 띄우기

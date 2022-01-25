@@ -24,11 +24,6 @@
 			<div id="eqmDayCkGrid"></div>
 		</div>
 	</div>
-	<div>
-		<button id="btnOk" class="btn btn-print">확인</button>
-		<button id="btnCn" class="btn btn-print">취소</button>
-	</div>
-
 	<script>
 		
 		//인풋태그 일주일 단위로 설정하기
@@ -105,20 +100,9 @@
 				console.log(codeParam)
 				
 				eqmInsGrid.readData(1,{'chckDt': codeParam}, true);
-				dialog.dialog("close");
+				ckDialog.dialog("close");
 			});
 		
-		//모달창에서 확인 클릭시 그리드에 선택한 것만 띄우기
-		$("#btnOk").on("click", function(){
-			
-			dialog.dialog("close");
-		})
-		
-
-		//모달창 취소버튼
-		$("#btnCn").on("click", function(){
-			dialog.dialog("close");
-		})
 		
 		
 	</script>
