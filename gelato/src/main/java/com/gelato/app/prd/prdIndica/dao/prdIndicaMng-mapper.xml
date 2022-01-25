@@ -25,7 +25,11 @@
 	
 <!-- 생산지시 그리드 출력 -->
 	<select id="choosePlanDetaId" resultType="PrdIndicaMngVO">
-		select l.line_id as line_id
+		select l.line_id as line_id,
+			   (select 'PID-' || to_char(sysdate, 'yyyyMMdd') || '-' || lpad(nvl2(substr(max(indica_deta_id),14),(substr(max(indica_deta_id),14)+1), 1), 3, '0')
+                    as indica_deta_id
+                    from prod_indica_deta
+                    where substr(indica_deta_id,5,8) = to_char(sysdate, 'yyyyMMdd')) as indica_deta_id
 		from prod_plan_deta ppd join line l
 		    on ppd.prdt_id = l.prdt_id
 		where ppd.plan_deta_id = #{planDetaId}
@@ -75,12 +79,6 @@
 
 <!-- 계획지시디테일 insert -->
 	<insert id="insertPrdIdicaDeta" parameterType="PrdIndicaMngVO">
-		<selectKey keyProperty="indicaDetaId" resultType="string" order="BEFORE">
-			select 'PID-' || to_char(sysdate, 'yyyyMMdd') || '-' || lpad(nvl2(substr(max(indica_deta_id),14),(substr(max(indica_deta_id),14)+1), 1), 3, '0')
-            as indica_deta_id
-            from prod_indica_deta
-            where substr(indica_deta_id,5,8) = to_char(sysdate, 'yyyyMMdd')
-		</selectKey>
 		insert into prod_indica_deta (indica_deta_id, 
 									  indica_id, 
 									  qy, 
@@ -106,7 +104,7 @@
 		<parameter property="ord" mode="IN" jdbcType="VARCHAR" javaType="string"/>
 		<parameter property="oustQy" mode="IN" jdbcType="VARCHAR" javaType="string"/>
 		<parameter property="lotNo" mode="IN" jdbcType="VARCHAR" javaType="string"/>
-		<parameter property="planDetaId" mode="IN" jdbcType="VARCHAR" javaType="string"/>
+		<parameter property="indicaDetaId" mode="IN" jdbcType="VARCHAR" javaType="string"/>
 	</parameterMap>
 	<insert id="insertInptRwmatr"  statementType="CALLABLE" parameterMap="inptRwParam">
 		{ call insert_rwmatr(?,?,?,?,?) }
@@ -168,7 +166,7 @@
 		            from rwmatr
 		            where nm = #{nm}),
 		        #{lotNo},
-		        to_char(sysdate, 'yyyyMMdd'),
+		        sysdate,
 		        '0',
 		        #{oustQy},
 		        to_char(#{expdate}, 'yyyyMMdd'),

@@ -78,7 +78,7 @@
 			  },{
 					header : '일자별 우선순위',
 					name : 'ord',
-					hidden : false
+					hidden : true
 			  }
 		  ],
 		  summary: {

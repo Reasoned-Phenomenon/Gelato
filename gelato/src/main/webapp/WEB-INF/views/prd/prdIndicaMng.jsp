@@ -7,6 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>생산 지시 관리</title>
+<style>
+.tui-grid-layer-editing {
+	z-index : 20;
+}
+</style>
 </head>
 <body>
 	<div>
@@ -36,7 +41,7 @@
 			<div id="planIndicaGrid"></div>
 		</div>
 	</div>
-	<br><br><br><br><br><br><br><br><br>
+	<br><br><br>
 	<div class="row">
 		<div class="col-sm-5">
 			<h3>필요자재</h3>
@@ -82,8 +87,11 @@
 	let rwn;
 	let rwq;
 	
+	let idi;
+	
 	let list1 = [];
 	let list2 = [];
+	let list3 = [];
 	
 	// 버튼 숨김
 	$("#btnIns").hide();
@@ -141,7 +149,7 @@
 			},{
 				header : '확인',
 				name : 'fg',
-				hidden : true
+				hidden : false
 			}]
 		});
 		
@@ -159,12 +167,17 @@
 			rowHeaders : ['rowNum' ],
 			selectionUnit : 'row',
 			columns : [ {
+				header : '지시디테일코드',
+				name : 'indicaDetaId',
+				hidden : false
+			},{
 				header : '라인코드',
 				name : 'lineId',
 			}, {
 				header : '착수일자',
 				name : 'indicaDt',
-				editor: 'datePicker'
+				editor: 'datePicker',
+				//language : 'ko'
 			}, {
 				header : '작업수량 (Box)',
 				name : 'qy',
@@ -276,6 +289,10 @@
 			},{
 				header : '일자별 우선순위',
 				name : 'ord',
+				hidden : true
+			},{
+				header : '지시디테일코드',
+				name : 'indicaDetaId',
 				hidden : false
 			}],
 			summary: {
@@ -322,6 +339,13 @@
 		}
 	//종료
 
+	function lpad(val, padLength, padString){
+			    while(val.length < padLength){
+			        val = padString + val;
+			    }
+			    return val;
+			}
+	
 	// 생산계획 그리드 클릭 -> 생산지시그리드에 출력해주기
 	planDetaGrid.on("dblclick", (ev) => {
 		planDetaGrid.setSelectionRange({
@@ -367,10 +391,16 @@
 			console.log(result)
 			lineId = result.lineId;
 			console.log(lineId)
+			indicaDetaId = result.indicaDetaId;
+			console.log(indicaDetaId);
+			
 		})
 		
 		for( let i=0 ; i<pdc ; i++ ) {
-			planIndicaGrid.appendRow({'lineId':lineId, 'planDetaId':pdi})
+			console.log(indicaDetaId);
+			indicaDetaId = indicaDetaId.substr(0,13) + lpad(String(parseInt(indicaDetaId.substr(-3))+i),3,0)
+			console.log(indicaDetaId);
+			planIndicaGrid.appendRow({'lineId':lineId, 'planDetaId':pdi, 'indicaDetaId':indicaDetaId})
 		}
 	});
 	
@@ -411,6 +441,8 @@
 		console.log(prk);
 		pdi = planIndicaGrid.getRow(ev3.rowKey).planDetaId;
 		console.log(pdi);
+		idi = planIndicaGrid.getRow(ev3.rowKey).indicaDetaId;
+		console.log(idi);
 		
 		if(piq == '') {
 			toastr.clear()
@@ -502,6 +534,7 @@
 						pio = planIndicaGrid.getData()[k].ord
 						console.log(pio);
 						RwmatrLotGrid.setValue(i, 'ord', pio);
+						RwmatrLotGrid.setValue(i, 'indicaDetaId', idi);
 					}
 				}
 			//}
@@ -590,6 +623,7 @@
 					console.log(result);
 					
 					list3 = RwmatrLotGrid.getData()
+					list3.push
 					
 					$.ajax({
 						url : "${path}/prd/modifyInptRwmatr.do?planDetaId=" + pdi,
@@ -612,7 +646,10 @@
 		}
 	})
 	
+	// datepicker
 	
+
+
 	
 	
 	
