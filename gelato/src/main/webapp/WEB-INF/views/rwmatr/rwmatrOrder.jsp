@@ -253,7 +253,8 @@ function callVendModal(){
 		if(rwmatrOrderList.getValue(rk, "untprc") != ''){
 			if((pattern_num.test(rwmatrOrderList.getValue(rk, "untprc"))) == false) {
 				rwmatrOrderList.setValue(rk, "untprc", "", true);
-				alert("숫자만 입력이 가능합니다.");
+				toastr.clear()
+				toastr.success( ("숫자만 입력이 가능합니다."),'Gelato',{timeOut:'1000'} );
 				return;
 			}
 		}
@@ -261,7 +262,8 @@ function callVendModal(){
 		if(rwmatrOrderList.getValue(rk, "qy") != ''){
 			if((pattern_num.test(rwmatrOrderList.getValue(rk, "qy"))) == false) {
 				rwmatrOrderList.setValue(rk, "qy", "", true);
-				alert("숫자만 입력이 가능합니다.");
+				toastr.clear()
+				toastr.success( ("숫자만 입력이 가능합니다."),'Gelato',{timeOut:'1000'} );
 				return;			
 			} 
 		}
