@@ -7,6 +7,103 @@
 <title>완제품 코드 관리 페이지</title>
 </head>
 <body>
-	<h3>완제품 코드관리</h3>
+	<div>
+		<br>
+		<h3>완제품 코드 관리</h3>
+	</div>
+	<form>
+	<div>
+		<br>
+		<label>완제품 코드</label>
+			<input type="text" id="" name="">
+			
+		<label>제품명</label>
+		    <input type="text" id="" name="">
+		  
+		<label>규격</label>
+			<input type="text" id="" name="">
+			
+		<label>안전 재고</label>
+			<input type="text" id="" name="">	   
+		<br>	 	
+	</div>
+	<div>
+		<button type="button" class="btn cur-p btn-outline-primary" id="SearchBtn">조회</button>
+					<button type="button" class="btn cur-p btn-outline-primary" id="AddBtn">추가</button>
+					<button type="button" class="btn cur-p btn-outline-primary" id="SaveBtn">저장</button>
+					<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
+	</div>
+</form>
+
+<div id="prdtCodeGrid" style="width: 100%"></div>
+
+<script>
+let dialog;
+
+var Grid = tui.Grid;
+
+//그리드 테마.
+Grid.applyTheme('striped', {
+	  cell: {
+	    header: {
+	      background: '#eef'
+	    },
+	    evenRow: {
+	      background: '#fee'
+	    }
+	  }
+});
+
+
+//그리드 생성.
+var prdtCodeGrid = new Grid({
+	el: document.getElementById('prdtCodeGrid'),
+	data : {
+	  api: {
+	    readData: 	{ url: '${path}/com/prdtCodeList.do', method: 'GET'},
+	    
+	  },
+	  contentType: 'application/json',
+	
+	},
+	rowHeaders: ['rowNum'],
+	selectionUnit: 'row',
+	columns:[
+			{
+			  header: '완제품 코드',
+			  name: 'prdtId',
+			  align: 'center'
+		      
+			},
+			{
+			  header: '제품명',
+			  name: 'prdtNm',
+			  align: 'center'
+	          
+			},
+			{
+			  header: '규격',
+			  name: 'spec',
+			  align: 'center'
+		      
+			},
+			{
+			  header: '단위',
+			  name: 'unit',
+			  align: 'center'
+			      
+			},
+			{
+			  header: '안전 재고',
+			  name: 'safStc',
+			  align: 'center'
+				      
+			}
+
+		]
+});
+
+
+</script>
 </body>
 </html>

@@ -1,5 +1,16 @@
 package com.gelato.app.com.prdtCode.dao;
 
-public class PrdtCodeVO {
+import lombok.Data;
 
+@Data
+public class PrdtCodeVO {
+	
+	String prdtId;   // 제품 코드.
+	String prdtNm;   // 제품명.
+	String spec;     // 규격.
+	String unit;     // 단위.
+	String safStc;   // 안전재고.
+	
+	
+	// join할 때 필요한거. 
 }
