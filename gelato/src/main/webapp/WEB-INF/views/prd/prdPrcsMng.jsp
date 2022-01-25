@@ -23,9 +23,10 @@ th, td {
 	<hr>
 	<div>
 		<h3>진행생산지시</h3>
+		<hr>
 		<div id="IndicaGrid"></div>
 	</div>
-	<hr>
+	<br>
 	<div class="row">
 		<div class="col-sm-6">
 			<h3>공정목록</h3>
@@ -52,11 +53,11 @@ th, td {
 					</tr>
 					<tr>
 						<th>시작시간</th>
-						<td><input type="text" id="startT"></td>
+						<td><input type="time" id="startT" readonly></td>
 					</tr>
 					<tr>
-						<th>종료시간</th>
-						<td><input type="text" id="endT"></td>
+						<th>종료예정시간</th>
+						<td><input type="time" id="endT" readonly></td>
 					</tr>
 					<tr>
 						<th>불량량</th>
@@ -108,11 +109,11 @@ th, td {
 		});
 		
 		// 그리드1
-		const "IndicaGrid" = new Grid({
-			el : document.getElementById('"IndicaGrid"'),
+		const IndicaGrid = new Grid({
+			el : document.getElementById('IndicaGrid'),
 			data : {
 				api : {
-					readData : {url : '${path}',method : 'GET'},
+					readData : {url : '${path}/prd/selectIndica.do',method : 'GET'},
 				},
 				contentType : 'application/json',
 				initialRequest: false
@@ -121,7 +122,7 @@ th, td {
 			selectionUnit : 'row',
 			columns : [ {
 				header : '생산지시코드',
-				name : 'IndicaDetaId'
+				name : 'indicaDetaId'
 			}, {
 				header : '제품명',
 				name : 'prdtNm',
@@ -129,18 +130,85 @@ th, td {
 				header : '제품코드',
 				name : 'prdtId',
 			}, {
-				header : '주문코드',
-				name : 'orderId',
-			}, {
-				header : '계획량',
+				header : '수량',
 				name : 'qy',
 			}, {
-				header : '생산일수',
-				name : 'prodDcnt',
+				header : '라인코드',
+				name : 'lineId',
+			}, {
+				header : '지시순번',
+				name : 'ord',
+			}]
+		});
+		
+		//그리드2
+		const prcsListGrid = new Grid({
+			el : document.getElementById('prcsListGrid'),
+			data : {
+				api : {
+					readData : {url : '${path}/prd/prcsList.do',method : 'GET'},
+				},
+				contentType : 'application/json',
+				initialRequest: false
+			},
+			rowHeaders : ['rowNum' ],
+			selectionUnit : 'row',
+			columns : [ {
+				header : '공정코드',
+				name : 'prcsId'
+			}, {
+				header : '공정명',
+				name : 'nm',
+			}, {
+				header : '설비코드',
+				name : 'eqmId',
+			}, {
+				header : '설비명',
+				name : 'eqmName',
 			}]
 		});
 	
 	
+	// 모달창
+	var nonPrcsDialog = $("#nonPrcsDialog").dialog({
+			modal : true,
+			autoOpen : false,
+			height: 600,
+			width: 1000
+		});
+	
+	$("#btnSearchPlan").on(
+			"click",
+			function() {
+				nonPrcsDialog.dialog("open");
+				$("#nonPrcsDialog").load("${path}/prd/nonPrcsDialog.do",
+						function() {
+							console.log("주문창 로드")
+						})
+			});
+	// indicaId 받아서 readData 넘기기
+	function choosePi(cid,cpn){
+		console.log(cid);
+		console.log(cpn);
+		
+		IndicaGrid.clear();
+		prcsListGrid.clear();
+		
+		IndicaGrid.readData(1, {'IndicaDetaId':cid}, true);
+		prcsListGrid.readData(1, {'prdtNm':cpn}, true);
+		
+		nonPrcsDialog.dialog("close");
+		
+	}
+	
+	// 시간입력
+	btnPrcs.addEventListener('click', function () {
+		
+		let now = new Date();
+		startT.value = ("00"+now.getHours()).slice(-2)+":"+("00"+now.getMinutes()).slice(-2);
+		console.log(startT.value)
+		
+	})
 </script>
 </body>
 </html>
