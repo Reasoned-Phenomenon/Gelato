@@ -16,16 +16,15 @@
 	</select>
 	
 	<!-- 거래처 modal -->
-	<select id="vendList" resultType="RwmatrCodeVO">
+	<select id="vendModalList" resultType="RwmatrCodeVO">
 		SELECT  VEND_ID, VEND_NAME, BIZNO, TELNO
  	    FROM    VEND
 	
 	</select>
-	
-	
+
 	
 	<!-- 자재코드 관리 등록. -->
-	<insert id="insertRwmatrCode" parameterType="RwmatrCodeVO">
+	<insert id="insertrwmatrCode" parameterType="RwmatrCodeVO">
 		<selectKey keyProperty="rwmatrId" resultType="String" order="BEFORE">
 			SELECT 'RML-'||
 					LPAD(MAX(TO_NUMBER(SUBSTR(RWMATR_ID, -5))) +1, 5, 0)
@@ -33,14 +32,14 @@
 			  FROM	RWMATR
 		</selectKey>
 		  INSERT INTO RWMATR (
-		  			RWMATR_ID,
-					VEND_ID,
-					NM,
-					SPEC,
-					WK_UNIT,
-					SAF_STC,
-					FG	
-				  )
+		  			  RWMATR_ID,
+					  VEND_ID,
+					  NM,
+					  SPEC,
+					  WK_UNIT,
+					  SAF_STC,
+					  FG	
+				   )
 			 VALUES (	
 			     	#{rwmatrId},
 			     	#{vendId},
@@ -52,11 +51,19 @@
 			     )      		
 	</insert>
 	
-	<update id="">
+	 <update id="updaterwmatrCode" parameterType="RwmatrCodeVO">
+	 UPDATE RWMATR
+	    SET 
+	    	VEND_ID = #{vendId},
+	    	NM = #{nm},
+	    	SPEC = #{spec},
+	    	WK_UNIT = #{wkUnit},
+	    	SAF_STC = #{safStc},
+	    	FG = #{fg}
+	  WHERE RWMATR_ID = #{rwmatrId}
 	
 	
-	
-	</update>
+	</update> 
 	
 	
 </mapper>

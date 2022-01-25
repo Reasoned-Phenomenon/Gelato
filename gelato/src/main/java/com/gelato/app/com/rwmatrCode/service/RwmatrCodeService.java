@@ -3,7 +3,7 @@ package com.gelato.app.com.rwmatrCode.service;
 import java.util.List;
 
 import com.gelato.app.com.rwmatrCode.dao.RwmatrCodeVO;
-import com.gelato.app.vr.ModifyVO;
+
 
 public interface RwmatrCodeService {
 
@@ -12,9 +12,12 @@ public interface RwmatrCodeService {
 	
 	
 	// rwmatrCode Modal 거래처 조회.
-	List<RwmatrCodeVO> vendList();
+	List<RwmatrCodeVO> vendModalList();
 	
+	// rwmatrCode 등록. 
+	int insertrwmatrCode(RwmatrCodeVO vo);
 	
-	// Modify 등록 
-	public int modifyRwmatrCode (ModifyVO<RwmatrCodeVO>  mvo);
+	// rwmatrCode 수정.
+	int updaterwmatrCode(RwmatrCodeVO vo);
+	
 }

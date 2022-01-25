@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.gelato.app.com.rwmatrCode.dao.RwmatrCodeMapper;
 import com.gelato.app.com.rwmatrCode.dao.RwmatrCodeVO;
 import com.gelato.app.com.rwmatrCode.service.RwmatrCodeService;
-import com.gelato.app.vr.ModifyVO;
+
 
 @Service
 public class RwmatrCodeServiceImpl implements RwmatrCodeService {
@@ -24,24 +24,23 @@ public class RwmatrCodeServiceImpl implements RwmatrCodeService {
 	
 	// modal 거래처 조회.
 	@Override
-	public List<RwmatrCodeVO> vendList() {
+	public List<RwmatrCodeVO> vendModalList() {
 		
-		return rwmatrcodeMapper.vendList();
+		return rwmatrcodeMapper.vendModalList();
 	}
 
+	// 자재코드 등록
 	@Override
-	public int modifyRwmatrCode(ModifyVO<RwmatrCodeVO> mvo) {
+	public int insertrwmatrCode(RwmatrCodeVO vo) {
 		
-		for(RwmatrCodeVO vo : mvo.getCreatedRows()) {
-			System.out.println("rwmatrCode등록.");
-			rwmatrcodeMapper.insertRwmatrCode(vo);
-		}
+		return rwmatrcodeMapper.insertrwmatrCode(vo);
+	}
+	
+	// 자재코드 수정.
+	@Override
+	public int updaterwmatrCode(RwmatrCodeVO vo) {
 		
-		return 0;
+		return rwmatrcodeMapper.updaterwmatrCode(vo);
 	}
 
-	
-
-	
-	
 }

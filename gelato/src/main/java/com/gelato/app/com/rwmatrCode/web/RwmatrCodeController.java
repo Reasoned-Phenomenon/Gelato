@@ -3,19 +3,17 @@ package com.gelato.app.com.rwmatrCode.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gelato.app.com.rwmatrCode.dao.RwmatrCodeVO;
 import com.gelato.app.com.rwmatrCode.service.RwmatrCodeService;
-import com.gelato.app.vr.ModifyVO;
 
 @Controller
 public class RwmatrCodeController {
 
 	@Autowired RwmatrCodeService rwmatrcodeService;
+
 	
 	// 자재코드 관리 페이지로 이동.
 	@RequestMapping("/com/rwmatrCode.do")
@@ -43,19 +41,21 @@ public class RwmatrCodeController {
 	@RequestMapping("/com/vendModalModal.do")
 	public String vendList(Model model) {
 		System.out.println("거래처 검색");
-		model.addAttribute("datas", rwmatrcodeService.vendList());
+		model.addAttribute("datas", rwmatrcodeService.vendModalList());
 		return "grid"; 
 	}
 
-	
-	
-	// Modify 등록
-	@PutMapping("/com/rwmatrCodeModifyData.do")
-	@ResponseBody
-	public boolean modifyData (@RequestBody ModifyVO<RwmatrCodeVO> mvo) {
-		System.out.println(mvo);
-		rwmatrcodeService.modifyRwmatrCode(mvo);
-		return true;
+	// 자재코드 등록.
+	@PostMapping("/com/insertrwmatrCode.do")
+	public String insert(RwmatrCodeVO vo) {
+		rwmatrcodeService.insertrwmatrCode(vo);
+		return "tiles/common/rwmatrCode";
 	}
 	
+	// 자재코드 수정.
+	@PostMapping("/com/updaterwmatrCode.do")
+	public String rwmatrCodeUpdate(RwmatrCodeVO vo) {
+		rwmatrcodeService.updaterwmatrCode(vo);
+		return "tiles/common/rwmatrCode";
+	}
 }

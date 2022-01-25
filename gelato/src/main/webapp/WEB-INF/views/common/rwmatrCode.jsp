@@ -9,33 +9,22 @@
 <title>자재 코드 관리 페이지</title>
 </head>
 <body>
-<form>
-	<div class="container">
 
+	<div class="container">
       <div class="flex row">
-      	
          <div class="col-4">
-          
             <br>
             <h3>자재 코드 관리</h3>
-          
             <div align="right">
-            
-               <button type="button" class="btn cur-p btn-outline-primary" id="AddBtn">저장</button>
-               <button type="button" class="btn cur-p btn-outline-primary" id="DelBtn">삭제</button>
-               <button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
-             
             </div>
             <div id="rwmatrGrid"></div>
          </div>
-
          <div class="col-8">
             <br>
             	<br>
             <table border="1">
                <tbody>
-                  <tr>
-                  
+                  <tr> 
                      <th>자재코드*</th>
                      <td><input type="text" id="rwmatrId" name="rwmatrId" readonly></td>
                      <th>자재명*</th>
@@ -46,19 +35,23 @@
                      <td><input type="text" id="spec" name="spec"></td>
                      <th>작업 단위</th>
                      <td><input type="text" id="wkUnit" name="wkUnit"></td>
+                    
                   </tr>
                   <tr>
                      <th>입고 업체</th>
                      <td><input type="text" id="vendId" name="vendId">
                         <button type="button" id="serachVendIdBtn">검색</button></td>
                      <th>업체명</th>
-                     <td><input type="text" id="vendName" name="vendName"></td>
+                     <td><input type="text" id="vendName" name="vendName" readonly></td>
                   </tr>
                   <tr>
                      <th>제품 구분</th>
-                     <td><input type="text" id="fg" name="fg">
-                        <button type="button" id="serachFgBtn">검색</button> 
-                        <input type="text" id="" name=""></td>
+                     <td><select id="fg" name="fg">
+                     <option value="STEP01">원자재</option>
+                     <option value="STEP02">반제품</option>
+                     </select>
+                      <th>안전 재고</th>
+                     <td><input type="text" id="safStc" name="safStc"></td>
                   </tr>
                   <tr>
                      <th>사용유무</th>
@@ -66,13 +59,16 @@
                   </tr>
                </tbody>
             </table>
+            		<button id="reset" value="초기화"
+						class="btn cur-p btn-outline-dark">초기화</button>
+					<button id="AddBtn" class="btn cur-p btn-outline-dark">저장</button>
+					<button id="UpdateBtn" class="btn cur-p btn-outline-dark">수정</button>
+					
          </div>
-           
       </div>
    </div>
- </form>  
 <div id="vendModal"></div>
-<div id="fgModal"></div>
+
 
 <script>
 let dialog;
@@ -98,8 +94,7 @@ var rwmatrGrid = new Grid({
 	data : {
 	  api: {
 	    readData: 	{ url: '${path}/com/findRwmatrList.do', method: 'GET'},
-	    modifyData:  { url: '${path}/com/rwmatrCodeModifyData.do', method: 'PUT'} 
-	    
+	     
 	  },
 	  contentType: 'application/json',
 	 
@@ -152,7 +147,7 @@ var rwmatrGrid = new Grid({
 			  align: 'center',
 			  hidden: true
 						      
-			   },
+			},
 		   
 		]
 });
@@ -164,7 +159,7 @@ var rwmatrGrid = new Grid({
 			$("#nm").val(rwmatrGrid.getValue(ev["rowKey"],"nm"));
 			$("#spec").val(rwmatrGrid.getValue(ev["rowKey"],"spec"));
 			$("#wkUnit").val(rwmatrGrid.getValue(ev["rowKey"],"wkUnit"));
-		//	$("#vendId").val(rwmatrGrid.getValue(ev["rowKey"],"vendId"));
+			$("#safStc").val(rwmatrGrid.getValue(ev["rowKey"],"safStc"));
 		//	$("#vendName").val(rwmatrGrid.getValue(ev["rowKey"],"vendName"));
 		//	$("#fg").val(rwmatrGrid.getValue(ev["rowKey"],"fg"));
 		/* 	var useYn = $('input:checkbox[id="useYn"]').is(":checked") == true
@@ -182,10 +177,89 @@ var rwmatrGrid = new Grid({
 		});
 	
 		// 저장 (등록) 버튼 이벤트.
-		AddBtn.addEventListener("click", function(){	
-			rwmatrGrid.blur();
-			rwmatrGrid.request('modifyData');
-	});
+		$("#AddBtn").on("click",function(){
+			
+			var rwmatrId = $("#rwmatrId").val();
+			var nm = $("#nm").val();
+			var spec = $("#spec").val();
+			var wkUnit = $("#wkUnit").val();
+			var safStc = $("#safStc").val();
+			var vendId = $("#vendId").val();
+			var vendName = $("#vendName").val();
+			var fg = $("#fg").val();
+			var useYn =$("#useYn").val();
+			
+			
+			$.ajax({
+				url:"${path}/com/insertrwmatrCode.do",
+				method :"post",
+				data: {
+					rwmatrId : rwmatrId ,
+					nm : nm,
+					spec : spec,
+					wkUnit : wkUnit,
+					safStc : safStc,
+					vendId : vendId,
+					vendName : vendName,
+					fg : fg,
+					useYn : useYn
+				},
+				success : function(res) {
+					rwmatrGrid.readData(1,{},true)
+					console.log(res);
+				}
+					
+			})
+		})
+		
+		
+		// 수정 버튼 이벤트.
+		$("#UpdateBtn").on("click", function(){
+			
+			var rwmatrId = $("#rwmatrId").val();
+			var nm = $("#nm").val();
+			var spec = $("#spec").val();
+			var wkUnit = $("#wkUnit").val();
+			var safStc = $("#safStc").val();
+			var vendId = $("#vendId").val();
+			var vendName = $("#vendName").val();
+			var fg = $("#fg").val();
+			var useYn =$("#useYn").val();
+			
+			$.ajax({
+				url:"${path}/com/updaterwmatrCode.do",
+				method :"post",
+				data: {
+					rwmatrId : rwmatrId ,
+					nm : nm,
+					spec : spec,
+					wkUnit : wkUnit,
+					safStc : safStc,
+					vendId : vendId,
+					vendName : vendName,
+					fg : fg,
+					useYn : useYn
+				},
+				success : function(res) {
+					rwmatrGrid.readData(1,{},true)
+					console.log(res);
+				}
+					
+			})
+		})
+		
+		// 초기화 버튼 이벤트.
+		$("#reset").on("click",function(){
+			$("#rwmatrId").val("");
+			$("#nm").val("");
+			$("#spec").val("");
+			$("#wkUnit").val("");
+			$("#vendId").val("");
+			$("#vendName").val("");
+			$("#fg").val("");
+			$("#useYn").val("");
+			
+		})
 		
 		// 모달창 생성 함수.
 		$(function () {
@@ -225,12 +299,6 @@ var rwmatrGrid = new Grid({
 		dialog.dialog("close");
 	}
 		
-
-		
-	
-	</script>
-	
-	
-	
+</script>
 </body>
 </html>
