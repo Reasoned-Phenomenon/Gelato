@@ -93,7 +93,7 @@ public class RwmatrIstOustController {
 	}
 	
 	//원자재Lot 재고조회 페이지로 이동
-	@RequestMapping("/rwmatr/rwmatrLotList.do")
+	@RequestMapping("/rwmatr/rwmatrLot.do")
 	public String rwmatrLotList() {
 		return "tiles/rwmatr/rwmatrLotList";
 	}

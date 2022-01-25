@@ -51,7 +51,6 @@ var endDate;
 var rwmName;
 var vendName;
 
-
 //그리드 테마
 Grid.applyTheme('striped', {
 	  cell: {
@@ -77,7 +76,8 @@ var rwmatrLotList = new Grid({
 	  api: {
 	    readData: { url:'${path}/rwmatr/rwmatrStcMList.do', method: 'GET'}
 	  },
-	  contentType: 'application/json'
+	  contentType: 'application/json',
+	  initialRequest: false
 	},
   	rowHeaders:['rowNum'],
   	selectionUnit: 'row',
