@@ -226,17 +226,12 @@ function callVendModal(){
 				toastr.success( ('자재를 선택해주세요.'),'Gelato',{timeOut:'1000'} );
 				return;
 			}
-		} else if(ev.columnName === 'orderId') {
+		} else if(ev.columnName === 'orderId' || ev.columnName === 'orderDt') {
 			//toastr
 			toastr.clear()
-			toastr.success( ('자동으로 부여되는 값입니다.'),'Gelato',{timeOut:'1000'} );
+			toastr.success( ('저장시 자동으로 기입되는 값입니다.'),'Gelato',{timeOut:'1000'} );
 			return;
-		} else if(ev.columnName === 'orderDt') {
-			//toastr
-			toastr.clear()
-			toastr.success( ('자동으로 부여되는 값입니다.'),'Gelato',{timeOut:'1000'} );
-			return;
-		}
+		} 
 		
 	});
 	

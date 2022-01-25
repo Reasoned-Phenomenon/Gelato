@@ -95,6 +95,17 @@ rwmatrPassListGrid.on('dblclick', (ev) => {
 	      end: [ev.rowKey, rwmatrPassListGrid.getColumns().length-1]
 	  });
 	
+	//입고할 자재주문 중복선택 방지
+	if(selectList.find((x,idx) => selectList[idx] === rwmatrPassListGrid.getRow(ev.rowKey).rwmatrOrderDetaId)) {
+		//toastr
+		toastr.clear()
+		toastr.success( ('이미 선택한 자재입니다.'),'Gelato',{timeOut:'1800'} );
+		return;
+		
+	} else {
+		selectList.push(rwmatrPassListGrid.getRow(ev.rowKey).rwmatrOrderDetaId);
+	}
+	
 	
 	getRwmatrData(rwmatrPassListGrid.getRow(ev.rowKey));
 });

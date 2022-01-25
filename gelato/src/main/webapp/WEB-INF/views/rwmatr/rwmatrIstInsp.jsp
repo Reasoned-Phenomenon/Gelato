@@ -260,7 +260,19 @@ function callrwmatrInferCodeModal(){
 		let totalq = parseInt(rwmatrIstInspList.getValue(rk, "qy"));
 		let passq = parseInt(rwmatrIstInspList.getValue(rk, "passQy"));
 		let inferq = totalq - passq;
-		if(rwmatrIstInspList.getValue(rk, "passQy") != '') {
+		
+		// 숫자 정규식 유효성검사
+		var pattern_num = /[0-9]/;
+		if(rwmatrIstInspList.getValue(rk, "passQy") != ''){
+			if((pattern_num.test(rwmatrIstInspList.getValue(rk, "passQy"))) == false) {
+				rwmatrIstInspList.setValue(rk, "passQy", "", true);
+				toastr.clear()
+				toastr.success( ("숫자만 입력이 가능합니다."),'Gelato',{timeOut:'1000'} );
+				return;
+			}
+		}
+		
+		if( (pattern_num.test(rwmatrIstInspList.getValue(rk, "passQy"))) ) {
 			console.log("불량량 자동계산")
 			if(passq <= totalq){
 				rwmatrIstInspList.setValue(rk, "inferQy", inferq, true);

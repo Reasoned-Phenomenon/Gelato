@@ -51,6 +51,9 @@ let ig;
 //모달에서 선택한 rowKey값 세팅
 let rk = '';
 
+//모달에서 선택했던 리스트 담을배열
+let selectList = [];
+
 //날짜검색 조건
 var startDate;
 var endDate;
@@ -199,13 +202,20 @@ function callrwmatrPassModal(){
 			console.log("검수완료리스트")
 			ig = 'g';
 			callrwmatrPassModal();
-		} else if(ev.columnName === 'lotNo' || ev.columnName === 'expdate') {
+		} else if(ev.columnName === 'expdate' || ev.columnName === 'lotNo' || ev.columnName === 'istOustDttm') {
 			if(rwmatrIstList.getValue(rk, "rwmatrOrderDetaId") == '') {
 				//toastr
 				toastr.clear()
 				toastr.success( ('발주코드를 선택해주세요.'),'Gelato',{timeOut:'1000'} );
 				return;
 			}
+		}
+		
+		if(ev.columnName === 'lotNo' || ev.columnName === 'istOustDttm') {
+			//toastr
+			toastr.clear()
+			toastr.success( ('저장시 자동으로 기입되는 값입니다.'),'Gelato',{timeOut:'1000'} );
+			return;
 		}
 	});
 
