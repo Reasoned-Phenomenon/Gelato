@@ -72,7 +72,6 @@ Grid.applyTheme('striped', {
 	  }
 });
 
-
 //그리드 생성
 var rwmatrStcList = new Grid({
 	el: document.getElementById('rwmatrStcList'),
