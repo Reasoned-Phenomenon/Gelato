@@ -239,6 +239,7 @@ function callrwmatrStcModal(){
 		} 
 	});
 
+	
 	//검수합격리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
 	function getRwmatrData(rwmatrData) {
 		console.log("입고정보 기입")
