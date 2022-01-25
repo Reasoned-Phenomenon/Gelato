@@ -17,7 +17,7 @@
 					<label>점검일자</label> <input id="fromDayCkDate" name="fromDayCkDate"
 						type="date"><label>~</label><input id="toDayCkDate"
 						name="toDayCkDate" type="date">
-					<button class="btn btn-print float-right" id="eqmChck"
+					<button class="btn btn-print float-right" id="eqmDayChck"
 						type="button">설비조회</button>
 				</div>
 			</form>
@@ -30,7 +30,13 @@
 	</div>
 
 	<script>
-
+		
+		//인풋태그 일주일 단위로 설정하기
+		var d = new Date();
+		var nd = new Date(d.getFullYear(), d.getMonth(), d.getDate() - 7);
+		document.getElementById('fromDayCkDate').value = nd.toISOString().slice(0, 10);
+		document.getElementById('toDayCkDate').value = d.toISOString().slice(0, 10);
+	
 		var fromDayCkDate = $("#fromDayCkDate").val();
 		var toDayCkDate = $("#toDayCkDate").val();
 		
@@ -41,6 +47,7 @@
 		}
 		
 		console.log(params)
+		
 		var Grid = tui.Grid;
 		
 		var eqmDayCkGrid = new Grid({
@@ -55,7 +62,7 @@
 				},
 				contentType : 'application/json'
 			},
-			rowHeaders : [ 'checkbox', 'rowNum' ],
+			rowHeaders : ['rowNum' ],
 			selectionUnit : 'row',
 			bodyHeight : 300,
 			columns : [ {
@@ -63,34 +70,56 @@
 				name : 'chckDt'
 			}, {
 				header : '건수', 
-				name : 'count'
+				name : 'total'
 			}]
 		});
 		
+		//설비조회 버튼
+		var toDayCkDate;
+		var fromDayCkDate;
+		$("#eqmDayChck").on("click",function(){
+			toDayCkDate = document.getElementById("toDayCkDate").value;
+			fromDayCkDate = document.getElementById("fromDayCkDate").value;
+			console.log(toDayCkDate);
+			console.log(fromDayCkDate);
+			if(toDayCkDate < fromDayCkDate){
+				alert("날짜가 검색조건에 부합하지 않습니다.");
+				document.getElementById("toDayCkDate").value = null;
+				document.getElementById("fromDayCkDate").value = null;
+				return;
+			}
+			eqmDayCkGrid.readData(1,{'toDayCkDate': toDayCkDate, 'fromDayCkDate': fromDayCkDate}, true);
+		})
+		
+		//점검일자 선택 이벤트
+		eqmDayCkGrid.on('dblclick', (ev) => {	
+				
+				//cell 선택시 row 선택됨.
+				eqmDayCkGrid.setSelectionRange({
+				      start: [ev.rowKey, 0],
+				      end: [ev.rowKey, eqmDayCkGrid.getColumns().length-1]
+				  });
+				
+				//클릭한 row에 해당하는 점검일자를 읽어옴
+				codeParam = eqmDayCkGrid.getValue(ev.rowKey, 'chckDt');
+				console.log(codeParam)
+				
+				eqmInsGrid.readData(1,{'chckDt': codeParam}, true);
+				dialog.dialog("close");
+			});
+		
 		//모달창에서 확인 클릭시 그리드에 선택한 것만 띄우기
 		$("#btnOk").on("click", function(){
-			checked = eqmCkGrid.getCheckedRows();
-			for(let vo of checked){
-				
-				eqmInsGrid.appendRow({});
-				
-				eqmInsGrid.setValue(eqmInsGrid.getRowCount()-1, 'eqmId', vo.eqmId);
-				eqmInsGrid.setValue(eqmInsGrid.getRowCount()-1, 'eqmName', vo.eqmName);
-				eqmInsGrid.setValue(eqmInsGrid.getRowCount()-1, 'chckPerd', vo.chckPerd);
-				eqmInsGrid.setValue(eqmInsGrid.getRowCount()-1, 'chckDt', vo.chckDt);
-				eqmInsGrid.setValue(eqmInsGrid.getRowCount()-1, 'nmCkDt', vo.nmCkDt);
-				eqmInsGrid.setValue(eqmInsGrid.getRowCount()-1, 'judt', vo.judt);
-				eqmInsGrid.setValue(eqmInsGrid.getRowCount()-1, 'chckDeta', vo.chckDeta);
-				eqmInsGrid.setValue(eqmInsGrid.getRowCount()-1, 'inspr', vo.inspr);
-			}
 			
 			dialog.dialog("close");
 		})
+		
 
 		//모달창 취소버튼
 		$("#btnCn").on("click", function(){
 			dialog.dialog("close");
 		})
+		
 		
 	</script>
 </body>

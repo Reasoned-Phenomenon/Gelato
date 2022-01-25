@@ -42,7 +42,12 @@
 			 LEFT OUTER JOIN CHCK C
 			 ON (E.EQM_ID = C.EQM_ID)
 			 <where>
-			 	E.EQM_ID = #{eqmId}
+			 	<if test="eqmId != null and eqmId != ''">
+			 		E.EQM_ID = #{eqmId}
+			 	</if>
+			 	<if test="chckDt != null">
+			 		TO_CHAR(CHCK_DT, 'YYYY-MM-DD') = #{chckDt} 
+			 	</if>
 			 </where>
 	</select>
 	
@@ -52,7 +57,7 @@
 							EQM_ID, 
 							CHCK_DT, 
 							CHCK_DETA, 
-							JUDT, s
+							JUDT, 
 							INSPR
 						)
 				 VALUES(
@@ -73,10 +78,12 @@
 	
 	<!-- 해당일자 점검내역(건수) 조회 -->
 	<select id="eqmDayChck" resultType="EqmInsVO">
-		SELECT CHCK_DT,
-			   COUNT(EQM_ID) 
+		SELECT TO_DATE(TO_CHAR(CHCK_DT,'YYYY-MM-DD')) AS CHCK_DT,
+			   COUNT(EQM_ID) AS TOTAL
 		FROM CHCK 
-		WHERE CHCK_DT=CHCK_DT 
-		GROUP BY CHCK_DT;
+		WHERE CHCK_DT = CHCK_DT
+		<![CDATA[AND #{fromDayCkDate} <= TO_CHAR(CHCK_DT,'YYYY-MM-DD') AND #{toDayCkDate} >= TO_CHAR(CHCK_DT,'YYYY-MM-DD') GROUP BY TO_DATE(TO_CHAR(CHCK_DT,'YYYY-MM-DD'))]]>
 	</select>
+	
+	
 </mapper>

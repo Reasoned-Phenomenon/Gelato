@@ -12,8 +12,8 @@
 <!-- 설비검색 모달 -->
 	<div id="dialog-form" title="설비검색"></div>
 <!-- 해당일자 점검내역 모달 -->
-	<div id="chckDialog-form" title="점검내역검색"></div>
-	
+	<div id="chckDialog-form" title="일 점검자료 관리"></div>
+	   
 	<h2>설비 정기점검 관리</h2>
 	<div class="container">
 		<br> <br>
@@ -70,6 +70,8 @@
 		</div>
 	</div>
 	<script>
+	
+		//인풋태그(우측) 일주일 단위로 설정하기
 		var d = new Date();
 		var nd = new Date(d.getFullYear(), d.getMonth(), d.getDate() - 7);
 		document.getElementById('fromCkDate').value = nd.toISOString().slice(0, 10);
@@ -184,7 +186,7 @@
 		//조회버튼
 		$("#searchBtn").on("click", function(){
 			ckDialog.dialog("open");
-			$("#chckDialog-form").load("${path}/eqm/eqmCkModal.do", function(){
+			$("#chckDialog-form").load("${path}/eqm/eqmDayCkModal.do", function(){
 				console.log("일 관리점검 모달 로드됨");
 			})
 		})
