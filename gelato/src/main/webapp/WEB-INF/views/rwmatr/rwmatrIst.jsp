@@ -51,8 +51,6 @@ let ig;
 //모달에서 선택한 rowKey값 세팅
 let rk = '';
 
-//모달에서 선택했던 리스트 담을배열
-let selectList = [];
 
 //날짜검색 조건
 var startDate;
@@ -285,6 +283,7 @@ function callrwmatrPassModal(){
 	
 	//검색초기화
 	btnReset.addEventListener("click", function(){
+		selectList = [];
 		console.log("검색초기화");
 		document.getElementById("startDate").value = '';
 		document.getElementById("endDate").value = '';
@@ -317,6 +316,7 @@ function callrwmatrPassModal(){
 	
 	//저장
 	btnSave.addEventListener("click", function(){
+		selectList = [];
 		rwmatrIstList.blur();
 		rwmatrIstList.request('modifyData');
 		flag = 'O'

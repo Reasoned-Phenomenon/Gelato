@@ -21,7 +21,8 @@ h1 {
 	
 <script>
 var Grid = tui.Grid;
-//checkOnlyOne(element);
+
+
 //그리드 테마
 Grid.applyTheme('striped', {
 	  cell: {
@@ -96,7 +97,13 @@ rwmatrPassListGrid.on('dblclick', (ev) => {
 	  });
 	
 	//입고할 자재주문 중복선택 방지
-	if(selectList.find((x,idx) => selectList[idx] === rwmatrPassListGrid.getRow(ev.rowKey).rwmatrOrderDetaId)) {
+	//검사할 자재주문 중복선택 방지
+	let rowLength = rwmatrIstList.findRows({
+		rwmatrOrderDetaId: rwmatrPassListGrid.getRow(ev.rowKey).rwmatrOrderDetaId
+	}).length;
+	
+	if(rowLength > 0) {
+		console.log("중복체크1111")
 		//toastr
 		toastr.clear()
 		toastr.success( ('이미 선택한 자재입니다.'),'Gelato',{timeOut:'1800'} );

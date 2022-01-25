@@ -99,15 +99,20 @@ orderDetailListGrid.on('dblclick', (ev) => {
 	  });
 	
 	//검사할 자재주문 중복선택 방지
-	if(selectList.find((x,idx) => selectList[idx] === orderDetailListGrid.getRow(ev.rowKey).rwmatrOrderDetaId)) {
+	let rowLength = rwmatrIstInspList.findRows({
+		rwmatrOrderDetaId: orderDetailListGrid.getRow(ev.rowKey).rwmatrOrderDetaId
+	}).length;
+	
+	if(rowLength > 0) {
+		console.log("중복체크")
 		//toastr
 		toastr.clear()
 		toastr.success( ('이미 선택한 주문입니다.'),'Gelato',{timeOut:'1800'} );
 		return;
 		
-	} else {
+	} /* else {
 		selectList.push(orderDetailListGrid.getRow(ev.rowKey).rwmatrOrderDetaId);
-	}
+	} */
 	
 	
 	getOrderData(orderDetailListGrid.getRow(ev.rowKey));
