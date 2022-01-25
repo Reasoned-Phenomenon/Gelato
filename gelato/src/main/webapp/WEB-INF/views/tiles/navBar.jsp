@@ -39,7 +39,7 @@
                         </li>
                         
                         <li>
-                           <a href="#">> <span>완제품 코드 관리</span></a>
+                           <a href="${path}/com/prdtCode.do">> <span>완제품 코드 관리</span></a>
                         </li>
                         
                         <li>
@@ -47,7 +47,7 @@
                         </li>
                         
                         <li>
-                           <a href="#">> <span>거래처 코드 관리</span></a>
+                           <a href="${path}/com/vendCode.do">> <span>거래처 코드 관리</span></a>
                         </li>
                       
                      </ul>

@@ -15,7 +15,7 @@ public class RwmatrCodeServiceImpl implements RwmatrCodeService {
 	
 	@Autowired RwmatrCodeMapper rwmatrcodeMapper;
 
-	// rwmatr 전체 조회.
+	// rwmatrCode 전체 조회.
 	@Override
 	public List<RwmatrCodeVO> findRwmatrList(RwmatrCodeVO vo) {
 		
@@ -33,7 +33,7 @@ public class RwmatrCodeServiceImpl implements RwmatrCodeService {
 	public int modifyRwmatrCode(ModifyVO<RwmatrCodeVO> mvo) {
 		
 		for(RwmatrCodeVO vo : mvo.getCreatedRows()) {
-			System.out.println("등록.");
+			System.out.println("rwmatrCode등록.");
 			rwmatrcodeMapper.insertRwmatrCode(vo);
 		}
 		

@@ -21,7 +21,7 @@
           
             <div align="right">
             
-               <button type="button" class="btn cur-p btn-outline-primary" id="SaveBtn">저장</button>
+               <button type="button" class="btn cur-p btn-outline-primary" id="AddBtn">저장</button>
                <button type="button" class="btn cur-p btn-outline-primary" id="DelBtn">삭제</button>
                <button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
              
@@ -182,7 +182,7 @@ var rwmatrGrid = new Grid({
 		});
 	
 		// 저장 (등록) 버튼 이벤트.
-		SaveBtn.addEventListener("click", function(){	
+		AddBtn.addEventListener("click", function(){	
 			rwmatrGrid.blur();
 			rwmatrGrid.request('modifyData');
 	});
