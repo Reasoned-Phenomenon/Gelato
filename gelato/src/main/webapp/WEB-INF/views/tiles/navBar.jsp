@@ -123,7 +123,7 @@
                            <a href="${path }/prd/prdIndicaMngFind.do">> <span>생산 지시 조회</span></a>
                         </li>
                         <li>
-                           <a href="#">> <span>생산 관리</span></a>
+                           <a href="${path }/prd/prdPrcsMng.do">> <span>생산 관리</span></a>
                         </li>
                         <li>
                            <a href="#">> <span>공정 실적</span></a>
