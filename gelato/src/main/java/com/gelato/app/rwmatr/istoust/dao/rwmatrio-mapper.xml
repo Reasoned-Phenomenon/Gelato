@@ -118,6 +118,28 @@
 		JOIN RWMATR_IST_OUST RIO
             ON RS.LOT_NO = RIO.LOT_NO
 		<where>
+	       	<if test="rwmName != ''">
+				R.NM LIKE '%'||#{rwmName}||'%'
+			</if>
+        </where>
+		ORDER BY EXPDATE
+ 	</select>
+ 	
+ 	<select id="RwmatrLotList" resultType="RwmatrioVO">
+ 		SELECT DISTINCT RS.LOT_NO AS LOT_NO,
+ 			   RIO.RWMATR_ORDER_DETA_ID,
+ 			   RS.RWMATR_ID AS RWMATR_ID, 
+ 			   R.NM AS NM, 
+ 			   V.VEND_NAME AS VEND_NAME,
+ 			   RS.QY AS QY, 
+ 			   RS.EXPDATE AS EXPDATE
+		FROM RWMATR_STC RS JOIN RWMATR R
+			ON RS.RWMATR_ID = R.RWMATR_ID
+		JOIN VEND V
+			ON R.VEND_ID = V.VEND_ID
+		JOIN RWMATR_IST_OUST RIO
+            ON RS.LOT_NO = RIO.LOT_NO
+		<where>
 			<if test="startDate != ''">
 	    		<![CDATA[TRUNC(RS.EXPDATE) >= to_date(#{startDate})]]>
 	    	</if>

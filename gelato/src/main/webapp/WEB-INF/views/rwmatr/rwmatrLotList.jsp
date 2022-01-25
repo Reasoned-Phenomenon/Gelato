@@ -74,7 +74,7 @@ var rwmatrLotList = new Grid({
 	el: document.getElementById('rwmatrLotList'),
   	data : {
 	  api: {
-	    readData: { url:'${path}/rwmatr/rwmatrStcMList.do', method: 'GET'}
+	    readData: { url:'${path}/rwmatr/RwmatrLotList.do', method: 'GET'}
 	  },
 	  contentType: 'application/json',
 	  initialRequest: false

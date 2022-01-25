@@ -235,6 +235,18 @@ function callVendModal(){
 		
 	});
 	
+	rwmatrOrderList.on('editingStart', (ev) => {
+		if(ev.columnName === 'orderId' || 
+		   ev.columnName === 'nm' || 
+		   ev.columnName === 'rwmatrId' || 
+		   ev.columnName === 'utnprc' || 
+		   ev.columnName === 'qy' || 
+		   ev.columnName === 'orderDt' ||
+		   ev.columnName === 'dudt' ||) {
+			
+		}
+		
+	});
 	
 	rwmatrOrderList.on('editingFinish', (ev) => {
 		console.log(ev);

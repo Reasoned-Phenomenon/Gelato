@@ -83,12 +83,21 @@ public class RwmatrIstOustController {
 		return "grid";
 	}
 	
-	//원자재 현재고 리스트(모달), 원자재LOT 재고조회
+	//원자재 현재고 리스트(모달)
 	@RequestMapping("/rwmatr/rwmatrStcMList.do")
 	public String rwmatrStcMList(RwmatrioVO vo, Model model) {
 		System.out.println("현재고 리스트 조회");
 		model.addAttribute("datas", rwmatrioService.RwmatrStcMList(vo));
 		System.out.println(rwmatrioService.RwmatrStcMList(vo));
+		return "grid";
+	}
+	
+	//원자재LOT 재고조회
+	@RequestMapping("/rwmatr/RwmatrLotList.do")
+	public String RwmatrLotList(RwmatrioVO vo, Model model) {
+		System.out.println("LOT재고 조회");
+		model.addAttribute("datas", rwmatrioService.RwmatrLotList(vo));
+		System.out.println(rwmatrioService.RwmatrLotList(vo));
 		return "grid";
 	}
 	
