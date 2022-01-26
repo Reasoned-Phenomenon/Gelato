@@ -125,6 +125,9 @@ var rwmatrOrderList = new Grid({
 				  formatter({value}) { // 추가
 					  let a = `\${value}`
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+				  	  if(b == 'null'){
+				  		  b = '';
+				  	  }
 				      return b;
 				  }, 
 				  sortable: true,
@@ -140,6 +143,9 @@ var rwmatrOrderList = new Grid({
 				  formatter({value}) { // 추가
 					  let a = `\${value}`
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+				  	  if(b == 'null'){
+				  		  b = '';
+				  	  }
 				      return b;
 				  }, 
 				  sortable: true,
@@ -154,6 +160,9 @@ var rwmatrOrderList = new Grid({
 				  formatter({value}) { // 추가
 					  let a = `\${value}`
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+				  	  if(b == 'null'){
+				  		  b = '';
+				  	  }
 				      return b;
 				  },
 				  sortable: true
