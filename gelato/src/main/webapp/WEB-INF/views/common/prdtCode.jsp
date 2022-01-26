@@ -15,16 +15,19 @@
 	<div>
 		<br>
 		<label>완제품 코드</label>
-			<input type="text" id="" name="">
+			<input type="text" id="prdtId" name="prdtId">
 			
 		<label>제품명</label>
-		    <input type="text" id="" name="">
+		    <input type="text" id="prdtNm" name="prdtNm">
 		  
 		<label>규격</label>
-			<input type="text" id="" name="">
+			<input type="text" id="spec" name="spec">
+			
+		<label>단위</label>
+			<input type="text" id="unit" name="unit">	
 			
 		<label>안전 재고</label>
-			<input type="text" id="" name="">	   
+			<input type="text" id="safStc" name="safStc">	   
 		<br>	 	
 	</div>
 	<div>
@@ -102,6 +105,12 @@ var prdtCodeGrid = new Grid({
 
 		]
 });
+	
+	// 조회버튼 이벤트.
+	SearchBtn.addEventListener("click", function() {
+		console.log("조회버튼 클릭");
+		
+	});
 
 
 </script>
