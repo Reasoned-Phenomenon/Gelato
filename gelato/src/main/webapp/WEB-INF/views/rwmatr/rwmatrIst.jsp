@@ -21,7 +21,6 @@
 		입고일 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
 		<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
-		<button type="button" class="btn cur-p btn-outline-primary" id="btnReset">전체검색</button>
 	</form>
 </div>
 <div style="float: right;">
@@ -153,34 +152,41 @@ var rwmatrIstList = new Grid({
 
 //자재모달
 function callRwmatrModal(){
+	$( "#dialogFrm" ).attr("title", "원자재 목록");
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 400,
+	      height: 500,
 	      width: 600,
 	      modal: true
 	}); 
 	
+    console.log("11111")
     dialog.dialog( "open" );
+    console.log("111112222")
     $("#dialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
 }
 
 //업체명 모달
 function callVendModal(){
+	$( "#dialogFrm" ).attr("title", "업체 목록");
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 400,
+	      height: 500,
 	      width: 600,
 	      modal: true
 	}); 
 
+    console.log("11111")
     dialog.dialog( "open" );
+    console.log("111112222")
     $("#dialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("업체명 목록")})
 }
 
-//검수완료리스트 모달
+//검사완료리스트 모달
 function callrwmatrPassModal(){
+	$( "#dialogFrm" ).attr("title", "입고예정 목록");
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
@@ -288,25 +294,6 @@ function callrwmatrPassModal(){
 									'vendName': vendName}, true);
 	});
 	
-	//검색초기화
-	btnReset.addEventListener("click", function(){
-		selectList = [];
-		console.log("검색초기화");
-		document.getElementById("startDate").value = '';
-		document.getElementById("endDate").value = '';
-		document.getElementById("rwmName").value = '';
-		document.getElementById("vendName").value = '';
-		
-		startDate = document.getElementById("startDate").value;
-		endDate = document.getElementById("endDate").value;
-		rwmName = document.getElementById("rwmName").value;
-		vendName = document.getElementById("vendName").value;
-		
-		rwmatrIstList.readData(1,{'startDate':startDate,
-									'endDate':endDate, 
-									'rwmName':rwmName,
-									'vendName': vendName}, true);
-	});
 	
 	//추가
 	btnAdd.addEventListener("click", function(){

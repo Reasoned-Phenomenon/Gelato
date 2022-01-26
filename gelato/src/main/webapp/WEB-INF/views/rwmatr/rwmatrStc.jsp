@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>원자재 재고관리</title> 
+<title>원자재 재고조회</title> 
 <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
@@ -14,13 +14,12 @@
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head>
 <body>
-<h3>원자재 재고관리</h3>
+<h3>원자재 재고조회</h3>
 <div style="margin: 20px;">
 	<form action="">
 		자재명 : <input type="text" id="rwmName">업체명 : <input type="text" id="vendName"><br>
 		<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
-		<button type="button" class="btn cur-p btn-outline-primary" id="btnReset">전체검색</button>
 	</form>
 </div>
 <!-- <div style="float: right;">
@@ -142,10 +141,11 @@ var rwmatrStcList = new Grid({
 
 //자재모달
 function callRwmatrModal(){
+	$( "#dialogFrm" ).attr("title", "원자재 목록");
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 400,
+	      height: 500,
 	      width: 600,
 	      modal: true
 	}); 
@@ -156,10 +156,11 @@ function callRwmatrModal(){
 
 //업체명 모달
 function callVendModal(){
+	$( "#dialogFrm" ).attr("title", "업체 목록");
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 400,
+	      height: 500,
 	      width: 600,
 	      modal: true
 	}); 
@@ -168,66 +169,18 @@ function callVendModal(){
     $("#dialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("업체명 목록")})
 }
 
-//검수완료리스트 모달
-function callrwmatrPassModal(){
-	dialog = $( "#dialogFrm" ).dialog({
-		  modal:true,
-		  autoOpen:false,
-	      height: 400,
-	      width: 600,
-	      modal: true
-	}); 
-
-    dialog.dialog( "open" );
-    $("#dialogFrm").load("${path}/rwmatr/rwmatrPassModal.do", function(){console.log("검수완료 리스트")})
-}
-
-//현재고 리스트 모달
-function callrwmatrStcModal(){
-	dialog = $( "#dialogFrm" ).dialog({
-		  modal:true,
-		  autoOpen:false,
-	      height: 600,
-	      width: 1200,
-	      modal: true
-	}); 
-
-    dialog.dialog( "open" );
-    $("#dialogFrm").load("${path}/rwmatr/rwmatrStcModal.do", function(){console.log("검수완료 리스트")})
-}
 	
-	//자재명 클릭시 현재고리스트 모달
-	rwmatrStcList.on('click', (ev) => {
-		rk = ev.rowKey;
-		console.log(ev)
-		console.log(ev.columnName)
-		console.log(ev.rowKey)
-	    if (ev.columnName === 'lotNo') {
-			console.log("검수완료리스트")
-			ig = 'g';
-			callrwmatrStcModal();
-		} else {
-			
-		}
-	});
 
 	//검수합격리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
 	function getRwmatrData(rwmatrData) {
 		console.log("입고정보 기입")
-		if(ig == 'g'){
-			rwmatrStcList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
-			rwmatrStcList.setValue(rk, "nm", rwmatrData.nm, true)
-			rwmatrStcList.setValue(rk, "vendName", rwmatrData.vendName, true)
-		} else if(ig == 'i'){
-			document.getElementById("rwmName").value = rwmatrData.nm;
-		}
+		document.getElementById("rwmName").value = rwmatrData.nm;
 		
 		dialog.dialog( "close" );
 	}
 	
 	//자재명 textbox
 	document.getElementById("rwmName").addEventListener("click", function() {
-		  ig = 'i';
 		  callRwmatrModal();
 	});
 	
@@ -256,19 +209,6 @@ function callrwmatrStcModal(){
 
 	//조회
 	btnFind.addEventListener("click", function(){
-		rwmName = document.getElementById("rwmName").value;
-		vendName = document.getElementById("vendName").value;
-		
-		rwmatrStcList.readData(1,{'rwmName':rwmName,
-								  'vendName': vendName}, true);
-	});
-	
-	//검색초기화
-	btnReset.addEventListener("click", function(){
-		console.log("검색초기화");
-		document.getElementById("rwmName").value = '';
-		document.getElementById("vendName").value = '';
-		
 		rwmName = document.getElementById("rwmName").value;
 		vendName = document.getElementById("vendName").value;
 		

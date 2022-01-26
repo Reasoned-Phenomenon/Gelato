@@ -16,7 +16,6 @@
 		검사일자 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
 		<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
-		<button type="button" class="btn cur-p btn-outline-primary" id="btnReset">전체검색</button>
 	</form>
 </div>
 <div style="float: right;">
@@ -187,6 +186,7 @@ var rwmatrIstInspList = new Grid({
 
 //발주 모달
 function callModal(){
+	$( "#dialogFrm" ).attr("title", "검사예정 발주 목록");
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
@@ -202,10 +202,11 @@ function callModal(){
 
 //자재모달
 function callRwmatrModal(){
+	$( "#dialogFrm" ).attr("title", "원자재 목록");
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 400,
+	      height: 500,
 	      width: 600,
 	      modal: true
 	}); 
@@ -218,6 +219,7 @@ function callRwmatrModal(){
 	
 //원자재 불량코드 모달
 function callrwmatrInferCodeModal(){
+	$( "#dialogFrm" ).attr("title", "불량코드 목록");
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
@@ -250,6 +252,7 @@ function callrwmatrInferCodeModal(){
 				return;
 			}
 			if(rwmatrIstInspList.getValue(rk, "qy") > rwmatrIstInspList.getValue(rk, "passQy")) {
+				$( "#dialogFrm" ).attr("title", "불량코드 목록");
 				console.log("불량코드리스트")
 				callrwmatrInferCodeModal();
 			}
@@ -361,25 +364,6 @@ function callrwmatrInferCodeModal(){
 									  'mngr':mngr}, true);
 	});
 	
-	//검색초기화
-	btnReset.addEventListener("click", function(){
-		selectList = [];
-		console.log("검색초기화");
-		document.getElementById("startDate").value = '';
-		document.getElementById("endDate").value = '';
-		document.getElementById("rwmName").value = '';
-		document.getElementById("mngr").value = '';
-		
-		startDate = document.getElementById("startDate").value;
-		endDate = document.getElementById("endDate").value;
-		rwmName = document.getElementById("rwmName").value;
-		mngr = document.getElementById("mngr").value;
-		
-		rwmatrIstInspList.readData(1,{'startDate':startDate,
-									'endDate':endDate, 
-									'rwmName':rwmName,
-									'mngr': mngr}, true);
-	});
 	
 	//추가
 	btnAdd.addEventListener("click", function(){

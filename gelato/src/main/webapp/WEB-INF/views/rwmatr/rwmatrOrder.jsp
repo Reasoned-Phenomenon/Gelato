@@ -21,7 +21,7 @@
 		발주신청일 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
 		<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
-		<button type="button" class="btn cur-p btn-outline-primary" id="btnReset">전체검색</button>
+		<!-- <button type="button" class="btn cur-p btn-outline-primary" id="btnReset">전체검색</button> -->
 	</form>
 </div>
 <div style="float: right;">
@@ -36,7 +36,8 @@
 	<div id="rwmatrOrderList" style="width: 80%"></div>
 
 	<!-- 모달창 -->
-	<div id="dialogFrm"></div>
+	<div id="rwmatrDialogFrm" title="원자재 목록"></div>
+	<div id="vendDialogFrm" title="업체 목록"></div>
 
 
 <script>
@@ -196,10 +197,10 @@ var rwmatrOrderList = new Grid({
 
 //자재모달
 function callRwmatrModal(){
-	dialog = $( "#dialogFrm" ).dialog({
+	dialog = $( "#rwmatrDialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 400,
+	      height: 500,
 	      width: 600,
 	      modal: true
 	}); 
@@ -207,15 +208,15 @@ function callRwmatrModal(){
     console.log("11111")
     dialog.dialog( "open" );
     console.log("111112222")
-    $("#dialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
+    $("#rwmatrDialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
 }
 
 //업체명 모달
 function callVendModal(){
-	dialog = $( "#dialogFrm" ).dialog({
+	dialog = $( "#vendDialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 400,
+	      height: 500,
 	      width: 600,
 	      modal: true
 	}); 
@@ -223,7 +224,7 @@ function callVendModal(){
     console.log("11111")
     dialog.dialog( "open" );
     console.log("111112222")
-    $("#dialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("업체명 목록")})
+    $("#vendDialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("업체명 목록")})
 }
 	
 	
@@ -252,7 +253,7 @@ function callVendModal(){
 			toastr.clear()
 			toastr.success( ('저장시 자동으로 기입되는 값입니다.'),'Gelato',{timeOut:'1000'} );
 			return;
-		} else if(ev.columnName === 'rwmatrId' || ev.columnName === vendName) {
+		} else if(ev.columnName === 'rwmatrId' || ev.columnName === 'vendName') {
 			//toastr
 			toastr.clear()
 			toastr.success( ('자재를 선택해주세요.'),'Gelato',{timeOut:'1000'} );
@@ -377,7 +378,7 @@ function callVendModal(){
 									'vendName': vendName}, true);
 	});
 	
-	//검색초기화
+	/* //검색초기화
 	btnReset.addEventListener("click", function(){
 		console.log("검색초기화");
 		document.getElementById("startDate").value = '';
@@ -394,7 +395,7 @@ function callVendModal(){
 									'endDate':endDate, 
 									'rwmName':rwmName,
 									'vendName': vendName}, true);
-	});
+	}); */
 	
 	//추가
 	btnAdd.addEventListener("click", function(){
@@ -417,14 +418,16 @@ function callVendModal(){
 	//저장
 	btnSave.addEventListener("click", function(){
 		
+		//수정하고 있던 값 저장
 		if(confirm("저장하시겠습니까?")) {
 			rwmatrOrderList.blur();
-			rwmatrOrderList.request('modifyData');
-			flag = 'O'
+			rwmatrOrderList.request('modifyData',{showConfirm:false});
+			flag = 'O';
 			
 			toastr.clear()
 			toastr.success( ('저장되었습니다.'),'Gelato',{timeOut:'1000'} );
 		}
+		
 		
 	});
 

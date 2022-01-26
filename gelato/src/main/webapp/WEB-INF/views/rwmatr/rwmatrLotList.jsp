@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>원자재 출고관리</title>
+<title>원자재LOT 재고조회</title>
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
 <link rel="stylesheet"
@@ -24,7 +24,6 @@
 		유통기한 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
 		<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
-		<button type="button" class="btn cur-p btn-outline-primary" id="btnReset">전체검색</button>
 	</form>
 </div>
 <hr>
@@ -130,10 +129,11 @@ var rwmatrLotList = new Grid({
 
 //자재모달
 function callRwmatrModal(){
+	$( "#dialogFrm" ).attr("title", "원자재 목록");
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 400,
+	      height: 500,
 	      width: 600,
 	      modal: true
 	}); 
@@ -144,10 +144,11 @@ function callRwmatrModal(){
 
 //업체명 모달
 function callVendModal(){
+	$( "#dialogFrm" ).attr("title", "업체 목록");
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 400,
+	      height: 500,
 	      width: 600,
 	      modal: true
 	}); 
@@ -224,26 +225,8 @@ function callrwmatrStcModal(){
 									'endDate':endDate, 
 									'rwmName':rwmName,
 									'vendName': vendName}, true);
-	});
+	}); 
 	
-	//검색초기화
-	btnReset.addEventListener("click", function(){
-		console.log("검색초기화");
-		document.getElementById("startDate").value = '';
-		document.getElementById("endDate").value = '';
-		document.getElementById("rwmName").value = '';
-		document.getElementById("vendName").value = '';
-		
-		startDate = document.getElementById("startDate").value;
-		endDate = document.getElementById("endDate").value;
-		rwmName = document.getElementById("rwmName").value;
-		vendName = document.getElementById("vendName").value;
-		
-		rwmatrLotList.readData(1,{'startDate':startDate,
-									'endDate':endDate, 
-									'rwmName':rwmName,
-									'vendName': vendName}, true);
-	});
 	
 
 </script>
