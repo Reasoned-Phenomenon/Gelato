@@ -41,7 +41,6 @@
 var Grid = tui.Grid;
 let dialog;
 
-
 //모달에서 선택한 rowKey값 세팅
 let rk = '';
 
@@ -74,7 +73,7 @@ var rwmatrLotList = new Grid({
 	el: document.getElementById('rwmatrLotList'),
   	data : {
 	  api: {
-	    readData: { url:'${path}/rwmatr/rwmatrStcMList.do', method: 'GET'}
+	    readData: { url:'${path}/rwmatr/RwmatrLotList.do', method: 'GET'}
 	  },
 	  contentType: 'application/json',
 	  initialRequest: false

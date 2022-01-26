@@ -236,6 +236,26 @@ function callVendModal(){
 	});
 	
 	
+	//구현중..
+	rwmatrOrderList.on('editingStart', (ev) => {
+		/* if(ev.columnName === 'orderId' || 
+		   ev.columnName === 'nm' || 
+		   ev.columnName === 'rwmatrId' || 
+		   ev.columnName === 'utnprc' || 
+		   ev.columnName === 'qy' || 
+		   ev.columnName === 'orderDt' ||
+		   ev.columnName === 'dudt') { */
+		   var getRw = rwmatrOrderList.getRow(ev.rowKey);
+		   if(getRw != '') {
+				//toastr
+				toastr.clear()
+				toastr.success( ('변경불가'),'Gelato',{timeOut:'1000'} );
+				ev.stop();
+		   }
+		
+	});
+	
+	
 	rwmatrOrderList.on('editingFinish', (ev) => {
 		console.log(ev);
 		rk = ev.rowKey;

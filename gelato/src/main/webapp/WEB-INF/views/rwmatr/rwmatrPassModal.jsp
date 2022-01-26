@@ -109,9 +109,7 @@ rwmatrPassListGrid.on('dblclick', (ev) => {
 		toastr.success( ('이미 선택한 자재입니다.'),'Gelato',{timeOut:'1800'} );
 		return;
 		
-	} else {
-		selectList.push(rwmatrPassListGrid.getRow(ev.rowKey).rwmatrOrderDetaId);
-	}
+	} 
 	
 	
 	getRwmatrData(rwmatrPassListGrid.getRow(ev.rowKey));

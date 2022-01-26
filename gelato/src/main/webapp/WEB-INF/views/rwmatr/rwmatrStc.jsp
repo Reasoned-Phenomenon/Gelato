@@ -31,7 +31,6 @@
 <hr>
 <br>
 
-
 	<!-- 입고내역 조회 -->
 	<div id="rwmatrStcList" style="width: 80%"></div>
 
@@ -71,7 +70,6 @@ Grid.applyTheme('striped', {
 	    }
 	  }
 });
-
 
 //그리드 생성
 var rwmatrStcList = new Grid({
