@@ -17,7 +17,7 @@
 	<div>
 		<br>
 		<h2>생산지시관리</h2>
-		<br>
+		<br>  
 	</div>
 	<br>
 	<div class="row">
