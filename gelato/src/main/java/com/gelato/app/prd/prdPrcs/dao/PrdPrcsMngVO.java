@@ -29,4 +29,5 @@ public class PrdPrcsMngVO {
 	String nm;
 	String eqmId;
 	String eqmName;
+	String prcsNowId;
 }

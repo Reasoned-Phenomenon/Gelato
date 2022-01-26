@@ -38,7 +38,8 @@
 	
 	<!-- 그리드2 -->
 	<select id="prcsList" resultType="PrdPrcsMngVO">
-		select l.prcs_id as prcs_id, 
+		select pn_id(#{indicaDetaId}) as prcs_now_id,
+			   l.prcs_id as prcs_id, 
 		       p.nm as nm, 
 		       p.eqm_id as eqm_id, 
 		       e.eqm_name as eqm_name
