@@ -43,8 +43,10 @@
 	      			</li>
 	      			<li>
 	      				<div>
-	      					<label>주문일자</label>
-	      					<input type="date" id="orderDt"> ~ <input type ="date" id="oustDt">
+	      					<label>주문 일자</label>
+	      					<input type="date" id="startDt"> ~ <input type ="date" id="endDt">
+	      					<label>납기 일자</label>
+	      					<input type="date" id="startedDt"> ~ <input type ="date" id="endedDt">
 	      				</div>
 	      			</li>
 	      			<li>
@@ -166,23 +168,28 @@ var ordGrid = new Grid({
 	// 조회 버튼. // 해당날짜 조회 // 거래처 조회 // 제품코드 조회// 진행구분 라디오로 조회 =>  mapper-xml에서 if로 조건으로 나눔.
  	$("#btnFind").on(
  			"click", function choicDate() {
- 			var orderDt = document.getElementById("orderDt").value;
- 			var oustDt = document.getElementById("oustDt").value;
+ 			var startDt = document.getElementById("startDt").value;
+ 			var endDt = document.getElementById("endDt").value;
+ 			
+ 			var startedDt = document.getElementById("startedDt").value;
+ 			var endedDt = document.getElementById("endedDt").value;
  			
  			var vendName = document.getElementById("vendName").value;
  			var prdtNm = document.getElementById("prdtNm").value;
  			
  			var stFg = $('input[name="stFgRadio"]:checked').val();
  			
- 			console.log(orderDt);
- 			console.log(oustDt);
+ 			console.log(startDt);
+ 			console.log(endDt);
+ 			console.log(startedDt);
+ 			console.log(endedDt);
  			console.log(vendName);
  			console.log(prdtNm);
  			console.log(stFg);
  			
  			
  			
- 			ordGrid.readData(1, {'orderDt':orderDt, 'oustDt':oustDt, 'vendName' :vendName, 'prdtNm':prdtNm, 'stFg':stFg }, true);
+ 			ordGrid.readData(1, {'startDt':startDt, 'endDt':endDt, 'startedDt':startedDt, 'endedDt':endedDt,'vendName' :vendName, 'prdtNm':prdtNm, 'stFg':stFg }, true);
  			
  		});
 	

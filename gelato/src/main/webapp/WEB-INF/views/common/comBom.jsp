@@ -57,6 +57,9 @@ let rowkey = '';
 
 let useYn = '';
 
+//modify구분하기위한 변수
+let flag;
+
 var Grid = tui.Grid;
 
 //그리드 테마.
@@ -187,9 +190,18 @@ var bomGrid = new Grid({
 	SaveBtn.addEventListener("click", function(){	
 		bomGrid.blur();
 		bomGrid.request('modifyData');
+		flag = 'O'
 	});
 	
-	
+	//컨트롤러 응답
+	bomGrid.on('response', function (ev) {
+		console.log(ev)
+		if(flag == 'O') {
+			bomGrid.readData(1);
+			flag = 'X';
+		}
+		
+	});
 	
 	// 모달창 생성 함수.
 	$(function () {
