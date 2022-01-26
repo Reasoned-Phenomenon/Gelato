@@ -188,8 +188,7 @@ var rwmatrGrid = new Grid({
 			var vendName = $("#vendName").val();
 			var fg = $("#fg").val();
 			var useYn =$("#useYn").val();
-			
-			
+
 			$.ajax({
 				url:"${path}/com/insertrwmatrCode.do",
 				method :"post",
@@ -210,7 +209,7 @@ var rwmatrGrid = new Grid({
 				}
 					
 			})
-		})
+		});
 		
 		
 		// 수정 버튼 이벤트.
@@ -246,7 +245,7 @@ var rwmatrGrid = new Grid({
 				}
 					
 			})
-		})
+		});
 		
 		// 초기화 버튼 이벤트.
 		$("#reset").on("click",function(){
@@ -259,7 +258,7 @@ var rwmatrGrid = new Grid({
 			$("#fg").val("");
 			$("#useYn").val("");
 			
-		})
+		});
 		
 		// 모달창 생성 함수.
 		$(function () {
