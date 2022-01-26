@@ -97,9 +97,12 @@
 				
 				//클릭한 row에 해당하는 점검일자를 읽어옴
 				codeParam = eqmDayCkGrid.getValue(ev.rowKey, 'chckDt');
-				console.log(codeParam)
+				console.log("codeParam"+codeParam)
 				
-				eqmInsGrid.readData(1,{'chckDt': codeParam}, true);
+				var gubun = $('#gubun option:selected').val(); 
+				
+				eqmInsGrid.readData(1,{'chckDt': codeParam, 'gubun': gubun}, true);
+				abc = codeParam;
 				ckDialog.dialog("close");
 			});
 		
