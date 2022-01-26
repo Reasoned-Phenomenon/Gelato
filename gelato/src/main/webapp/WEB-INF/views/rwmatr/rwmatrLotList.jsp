@@ -41,7 +41,6 @@
 var Grid = tui.Grid;
 let dialog;
 
-
 //모달에서 선택한 rowKey값 세팅
 let rk = '';
 
