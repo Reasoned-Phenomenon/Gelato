@@ -57,11 +57,13 @@
 			  {
 			    header: '현재고',
 			    name: 'qy',
+			    align: 'right',
 			  },
 			  {
 			    header: '사용수량',
 			    name: 'oustQy',
-			    editor : 'text'
+			    editor : 'text',
+		    	align: 'right',
 			  },
 			  {
 			    header: '유통기한',
@@ -95,16 +97,23 @@
 	});
 	
 	chooseRwmatrLotGrid.on("editingFinish", (ev3) => {
-		 let sumVal = chooseRwmatrLotGrid.getSummaryValues('oustQy').sum;
-		 console.log(sumVal);
-		 let rwv = document.getElementById("rwneed").value;
 		 
-		 if(sumVal != rwv) {
-			 $("#btnchoose").hide();
-		 } else {
-			 $("#btnchoose").show();
-		 }
-	 });
+		let cr = chooseRwmatrLotGrid.getCheckedRows().length;
+		console.log(cr);
+		let sumVal = 0;
+		
+		for ( i=0 ; i<cr ; i++) {
+			sumVal = parseInt(sumVal) + parseInt(chooseRwmatrLotGrid.getCheckedRows()[i].oustQy);
+			console.log(sumVal);
+		}
+		let rwv = document.getElementById("rwneed").value;
+		
+		if(sumVal != rwv) {
+			$("#btnchoose").hide();
+		} else {
+			$("#btnchoose").show();
+		}
+	});
 	
 	function chooseRWI(rwi,rwn,rwq,rpi,pdi,pio) {
 		/* chooseRwmatrLotGrid.readData(1,{'rwmatrId':rwi}, true); */

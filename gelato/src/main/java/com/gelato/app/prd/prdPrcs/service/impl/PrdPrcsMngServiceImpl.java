@@ -43,10 +43,7 @@ public class PrdPrcsMngServiceImpl implements PrdPrcsMngService{
 			System.out.println(list.get(i).getPrcsNowId());
 			System.out.println(list.get(i).getPrcsNowId().substring(10));
 			
-			int ln = Integer.parseInt(list.get(i).getPrcsNowId().substring(10))+i;
-			System.out.println(ln);
-			
-			String lnn = "000"+Integer.toString(ln);
+			String lnn = "000"+Integer.toString(i+1);
 			System.out.println(lnn);
 			
 			String pnId = list.get(i).getPrcsNowId().substring(0, 7) + "-" + lnn.substring(lnn.length()-3, lnn.length());

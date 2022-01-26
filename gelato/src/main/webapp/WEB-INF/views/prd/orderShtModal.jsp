@@ -68,6 +68,7 @@ var ordershtGrid = new Grid({
 		  {
 			header: '총량',
 			name:'qy',
+			align: 'right',
 		  }
  		  
 		]

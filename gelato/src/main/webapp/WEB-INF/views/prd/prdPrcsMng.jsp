@@ -67,7 +67,8 @@ th, td {
 						<th>불량사유</th>
 						<td>
 							<select name="infer">
-							  <option value="PDB-00101" selected>불순물 검출</option>
+							  <option value="choose" selected>선택</option>
+							  <option value="PDB-00101">불순물 검출</option>
 							  <option value="PDB-00100">포장지 훼손</option>
 							  <option value="PDB-00102">아이스크림 제형 파손</option>
 							  <option value="PDB-00103">용기 파손</option>
