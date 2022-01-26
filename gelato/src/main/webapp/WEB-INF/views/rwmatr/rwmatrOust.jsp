@@ -132,7 +132,11 @@ var rwmatrOustList = new Grid({
 				  formatter({value}) { // 추가
 					  let a = `\${value}`
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-				      return b;
+					  if(b == null){
+						return '';  
+					  } else {
+				        return b;
+					  }
 				  },
 				  sortable: true,
 			      validation: {
@@ -356,9 +360,14 @@ function callrwmatrStcModal(){
 	//삭제
 	btnDel.addEventListener("click", function(){
 		
-		if(rwmatrOustList.removeCheckedRows(true)){
-			rwmatrOustList.request('modifyData');
+		if(confirm("선택하신 항목을 삭제하시겠습니까?")){ 
+			rwmatrOustList.removeCheckedRows(false)
+			rwmatrOustList.request('modifyData',{showConfirm:false});
+			
+			toastr.clear()
+			toastr.success( ('삭제되었습니다.'),'Gelato',{timeOut:'1000'} );
 		}
+		
 	});
 	
 	//저장

@@ -276,25 +276,6 @@ function callrwmatrStcModal(){
 								  'vendName': vendName}, true);
 	});
 	
-	//추가
-	btnAdd.addEventListener("click", function(){
-		rwmatrStcList.prependRow();
-	});
-	
-	//삭제
-	btnDel.addEventListener("click", function(){
-		
-		if(rwmatrStcList.removeCheckedRows(true)){
-			rwmatrStcList.request('modifyData');
-		}
-	});
-	
-	//저장
-	btnSave.addEventListener("click", function(){
-		rwmatrStcList.blur();
-		rwmatrStcList.request('modifyData');
-		flag = 'O'
-	});
 
 </script>
 </body>

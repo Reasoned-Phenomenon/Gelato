@@ -388,8 +388,13 @@ function callrwmatrInferCodeModal(){
 	
 	//삭제
 	btnDel.addEventListener("click", function(){
-		if(rwmatrIstInspList.removeCheckedRows(true)){
-			rwmatrIstInspList.request('modifyData');
+		
+		if(confirm("선택하신 항목을 삭제하시겠습니까?")){ 
+			rwmatrIstInspList.removeCheckedRows(false)
+			rwmatrIstInspList.request('modifyData',{showConfirm:false});
+			
+			toastr.clear()
+			toastr.success( ('삭제되었습니다.'),'Gelato',{timeOut:'1000'} );
 		}
 	});
 	

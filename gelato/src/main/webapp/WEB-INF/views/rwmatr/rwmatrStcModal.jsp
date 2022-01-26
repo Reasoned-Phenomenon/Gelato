@@ -45,10 +45,6 @@ Grid.applyTheme('striped', {
 	    },
 	    evenRow: {
 	      background: '#fee'
-	    },
-	    invalid: {
-	    	background: 'red',
-	    	text: 'white'
 	    }
 	  }
 	});
