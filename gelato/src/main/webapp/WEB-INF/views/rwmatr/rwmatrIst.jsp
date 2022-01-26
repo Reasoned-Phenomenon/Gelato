@@ -99,7 +99,10 @@ var rwmatrIstList = new Grid({
 				{
 				  header: '발주코드',
 				  name: 'rwmatrOrderDetaId',
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				},
 				{
 				  header: '자재코드',
@@ -140,7 +143,10 @@ var rwmatrIstList = new Grid({
 				  header: '유통기한',
 				  name: 'expdate',
 			      editor: 'datePicker',
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				}
 		]
 });
@@ -200,22 +206,23 @@ function callrwmatrPassModal(){
 			console.log("검수완료리스트")
 			ig = 'g';
 			callrwmatrPassModal();
-		} else if(ev.columnName === 'expdate' || ev.columnName === 'lotNo' || ev.columnName === 'istOustDttm') {
+		} else if(ev.columnName === 'expdate' || 
+				  ev.columnName === 'rwmatrId' || 
+				  ev.columnName === 'nm' || 
+				  ev.columnName === 'vendName' || 
+				  ev.columnName === 'istQy') {
 			if(rwmatrIstList.getValue(rk, "rwmatrOrderDetaId") == '') {
 				//toastr
 				toastr.clear()
 				toastr.success( ('발주코드를 선택해주세요.'),'Gelato',{timeOut:'1000'} );
-				return;
 			}
-		}
-		
-		if(ev.columnName === 'lotNo' || ev.columnName === 'istOustDttm') {
+		} else if(ev.columnName === 'lotNo' || ev.columnName === 'istOustDttm') {
 			//toastr
 			toastr.clear()
 			toastr.success( ('저장시 자동으로 기입되는 값입니다.'),'Gelato',{timeOut:'1000'} );
-			return;
 		}
 	});
+	
 
 	//검수합격리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
 	function getRwmatrData(rwmatrData) {

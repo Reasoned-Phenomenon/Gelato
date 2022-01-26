@@ -100,7 +100,10 @@ var rwmatrOustList = new Grid({
 				{
 				  header: '자재LOT번호',
 				  name: 'lotNo',
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				},
 				{
 				  header: '자재코드',
@@ -131,7 +134,10 @@ var rwmatrOustList = new Grid({
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 				      return b;
 				  },
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				},
 				{
 				  header: '출고일시',
@@ -222,21 +228,42 @@ function callrwmatrStcModal(){
 				toastr.success( ('자재LOT번호를 선택해주세요.'),'Gelato',{timeOut:'1000'} );
 				return;
 			}
+		} else if(ev.columnName === 'istOustDttm') {
+			if(rwmatrOustList.getValue(rk, "lotNo") == '') {
+				//toastr
+				toastr.clear()
+				toastr.success( ('저장시 자동으로 기입되는 값입니다.'),'Gelato',{timeOut:'1000'} );
+				return;
+			}
 		}
 	});
 	
-	//불량량 자동계산
+	//출고량 유효성 검사
 	rwmatrOustList.on('editingFinish', (ev) => {
 		rk = ev.rowKey;
 		let totalq = parseInt(rwmatrOustList.getValue(rk, "qy"));
 		let oustq = parseInt(rwmatrOustList.getValue(rk, "oustQy"))
-		if(rwmatrOustList.getValue(rk, "oustQy") != '') {
-			if(totalq < oustq){
-				rwmatrOustList.setValue(rk, "oustQy", '', true);
+		
+		// 숫자 정규식 유효성검사
+		var pattern_num = /[0-9]/;
+		if(rwmatrOustList.getValue(rk, "oustQy") != ''){
+			if((pattern_num.test(rwmatrOustList.getValue(rk, "oustQy"))) == false) {
+				rwmatrOustList.setValue(rk, "oustQy", "", true);
 				toastr.clear()
-				toastr.success( ('해당 자재의 출고가능항 수량은 ' + totalq + ' 입니다.'),'Gelato',{timeOut:'1800'} );
-			} 
-		} 
+				toastr.success( ("숫자만 입력이 가능합니다."),'Gelato',{timeOut:'1000'} );
+				return;
+				
+			} else {
+				if(rwmatrOustList.getValue(rk, "oustQy") != '') {
+					if(totalq < oustq){
+						rwmatrOustList.setValue(rk, "oustQy", '', true);
+						toastr.clear()
+						toastr.success( ('해당 자재의 출고가능항 수량은 ' + totalq + ' 입니다.'),'Gelato',{timeOut:'1800'} );
+					} 
+				} 
+			}
+		}
+		
 	});
 
 	

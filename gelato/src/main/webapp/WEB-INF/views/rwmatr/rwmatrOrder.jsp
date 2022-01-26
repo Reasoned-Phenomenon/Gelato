@@ -107,7 +107,10 @@ var rwmatrOrderList = new Grid({
 				  header: '자재명',
 				  name: 'nm',
 				  editor: 'text',
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				},
 				{
 				  header: '자재코드',
@@ -124,7 +127,10 @@ var rwmatrOrderList = new Grid({
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 				      return b;
 				  }, 
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				},
 				{
 				  header: '발주량',
@@ -136,7 +142,10 @@ var rwmatrOrderList = new Grid({
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 				      return b;
 				  }, 
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				},
 				{
 				  header: '총액',
@@ -150,7 +159,7 @@ var rwmatrOrderList = new Grid({
 				  sortable: true
 				},
 				{
-				  header: '업체명',
+				  header: '업체코드',
 				  name: 'vendId',
 				  hidden:true
 				},
@@ -168,7 +177,10 @@ var rwmatrOrderList = new Grid({
 				  header: '납기요청일',
 				  name: 'dudt',
 				  editor: 'datePicker',
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				}
 		]
 });
@@ -231,20 +243,25 @@ function callVendModal(){
 			toastr.clear()
 			toastr.success( ('저장시 자동으로 기입되는 값입니다.'),'Gelato',{timeOut:'1000'} );
 			return;
-		} 
+		} else if(ev.columnName === 'rwmatrId' || ev.columnName === vendName) {
+			//toastr
+			toastr.clear()
+			toastr.success( ('자재를 선택해주세요.'),'Gelato',{timeOut:'1000'} );
+			return;
+		}
 		
 	});
 	
 	
 	//구현중..
-	rwmatrOrderList.on('editingStart', (ev) => {
-		/* if(ev.columnName === 'orderId' || 
+	/* rwmatrOrderList.on('editingStart', (ev) => {
+		 if(ev.columnName === 'orderId' || 
 		   ev.columnName === 'nm' || 
 		   ev.columnName === 'rwmatrId' || 
 		   ev.columnName === 'utnprc' || 
 		   ev.columnName === 'qy' || 
 		   ev.columnName === 'orderDt' ||
-		   ev.columnName === 'dudt') { */
+		   ev.columnName === 'dudt') { 
 		   var getRw = rwmatrOrderList.getRow(ev.rowKey);
 		   if(getRw != '') {
 				//toastr
@@ -253,10 +270,10 @@ function callVendModal(){
 				ev.stop();
 		   }
 		
-	});
+	}); */
 	
 	
-	rwmatrOrderList.on('editingFinish', (ev) => {
+	 rwmatrOrderList.on('editingFinish', (ev) => {
 		console.log(ev);
 		rk = ev.rowKey;
 		let untprc = parseInt(rwmatrOrderList.getValue(rk, "untprc"));

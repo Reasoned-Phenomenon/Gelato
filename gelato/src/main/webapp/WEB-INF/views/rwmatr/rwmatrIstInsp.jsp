@@ -89,6 +89,9 @@ var rwmatrIstInspList = new Grid({
 				{
 				  header: '발주코드',  //발주디테일코드
 				  name: 'rwmatrOrderDetaId',
+			      validation: {
+			          required: true
+			      }
 				},
 				{
 				  header: '발주코드', //코드
@@ -127,7 +130,10 @@ var rwmatrIstInspList = new Grid({
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 				      return b;
 				    },
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				},
 				{
 				  header: '불량량',
@@ -144,13 +150,19 @@ var rwmatrIstInspList = new Grid({
 				  header: '담당자',
 				  name: 'mngr',
 				  editor: 'text',
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				},
 				{
 				  header: '검사일자',
 				  name: 'dt',
 				  editor: 'datePicker',
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				},
 				{
 				  header: '비고',
@@ -237,18 +249,27 @@ function callrwmatrInferCodeModal(){
 				toastr.success( ('발주코드를 선택해주세요.'),'Gelato',{timeOut:'1000'} );
 				return;
 			}
-			console.log("불량코드리스트")
-			callrwmatrInferCodeModal();
-		} else if(ev.columnName === 'passQy' || ev.columnName === 'inferQy') {
+			if(rwmatrIstInspList.getValue(rk, "qy") > rwmatrIstInspList.getValue(rk, "passQy")) {
+				console.log("불량코드리스트")
+				callrwmatrInferCodeModal();
+			}
+		} else if(ev.columnName === 'nm' || ev.columnName === 'rwmatrId' || ev.columnName === 'qy' || ev.columnName === 'passQy') {
 			if(rwmatrIstInspList.getValue(rk, "rwmatrOrderDetaId") == '') {
 				//toastr
 				toastr.clear()
 				toastr.success( ('발주코드를 선택해주세요.'),'Gelato',{timeOut:'1000'} );
-				return;
+			}
+		} else if(ev.columnName === 'inferQy') {
+			if(rwmatrIstInspList.getValue(rk, "rwmatrOrderDetaId") == '') {
+				//toastr
+				toastr.clear()
+				toastr.success( ('합격량 입력시 자동입력됩니다.'),'Gelato',{timeOut:'1000'} );
 			}
 		}
 		
 	});
+	
+	
 	//불량량 자동계산
 	rwmatrIstInspList.on('editingFinish', (ev) => {
 		console.log("11111111")
@@ -278,9 +299,10 @@ function callrwmatrInferCodeModal(){
 				rwmatrIstInspList.setValue(rk, "passQy", '', true);
 				//toastr
 				toastr.clear()
-				toastr.success( ('합격량은 발주총량보다 높을수 없습니다.'),'Gelato',{timeOut:'1500'} );
+				toastr.success( ('합격량은 발주총량보다 높을수 없습니다.'),'Gelato',{timeOut:'1800'} );
 			}
 		} 
+		
 	});
 
 	
