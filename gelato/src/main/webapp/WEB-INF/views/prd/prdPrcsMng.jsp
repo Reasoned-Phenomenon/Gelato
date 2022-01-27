@@ -142,7 +142,7 @@ th, td {
 			}]
 		});
 		
-		//그리드2
+		//그리드2  
 		const prcsListGrid = new Grid({
 			el : document.getElementById('prcsListGrid'),
 			data : {
