@@ -143,9 +143,11 @@
 			}, {
 				header : '수량',
 				name : 'qy',
+				align: 'right',
 			}, {
 				header : '생산일수',
 				name : 'prodDcnt',
+				align: 'right',
 			},{
 				header : '확인',
 				name : 'fg',
@@ -174,7 +176,7 @@
 				header : '라인코드',
 				name : 'lineId',
 			}, {
-				header : '착수일자',
+				header : '작업일자',
 				name : 'indicaDt',
 				editor: 'datePicker',
 				//language : 'ko'
@@ -182,10 +184,12 @@
 				header : '작업수량 (Box)',
 				name : 'qy',
 				editor: 'text',
+				align: 'right',
 			}, {
 				header : '일자별 우선순위',
 				name : 'ord',
-				editor: 'text'
+				editor: 'text',
+				align: 'right',
 			},{
 				header : '생산계획디테일코드',
 				name : 'planDetaId',
@@ -236,6 +240,7 @@
 			}, {
 				header : '소모량',
 				name : 'qy',
+				align: 'right',
 			},{
 				header : '생산계획디테일코드',
 				name : 'planDetaId',
@@ -275,6 +280,7 @@
 			}, {
 				header : '사용수량',
 				name : 'oustQy',
+				align: 'right',
 			}, {
 				header : '유통기한',
 				name : 'expdate',
@@ -646,17 +652,7 @@
 		}
 	})
 	
-	// datepicker
-	
 
-
-	
-	
-	
-	
-	
-	
-	
 	
 	
 </script>

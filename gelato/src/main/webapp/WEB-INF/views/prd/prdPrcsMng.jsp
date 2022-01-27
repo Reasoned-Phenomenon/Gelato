@@ -67,7 +67,8 @@ th, td {
 						<th>불량사유</th>
 						<td>
 							<select name="infer">
-							  <option value="PDB-00101" selected>불순물 검출</option>
+							  <option value="choose" selected>선택</option>
+							  <option value="PDB-00101">불순물 검출</option>
 							  <option value="PDB-00100">포장지 훼손</option>
 							  <option value="PDB-00102">아이스크림 제형 파손</option>
 							  <option value="PDB-00103">용기 파손</option>
@@ -141,7 +142,7 @@ th, td {
 			}]
 		});
 		
-		//그리드2
+		//그리드2  
 		const prcsListGrid = new Grid({
 			el : document.getElementById('prcsListGrid'),
 			data : {
@@ -154,6 +155,9 @@ th, td {
 			rowHeaders : ['rowNum' ],
 			selectionUnit : 'row',
 			columns : [ {
+				header : '진행공정코드',
+				name : 'prcsNowId'
+			}, {
 				header : '공정코드',
 				name : 'prcsId'
 			}, {
@@ -195,7 +199,7 @@ th, td {
 		prcsListGrid.clear();
 		
 		IndicaGrid.readData(1, {'IndicaDetaId':cid}, true);
-		prcsListGrid.readData(1, {'prdtNm':cpn}, true);
+		prcsListGrid.readData(1, {'prdtNm':cpn, 'IndicaDetaId':cid}, true);
 		
 		nonPrcsDialog.dialog("close");
 		
@@ -209,6 +213,21 @@ th, td {
 		console.log(startT.value)
 		
 	})
+	
+	function lpad(val, padLength, padString){
+		while(val.length < padLength)
+			{val = padString + val;}
+		    return val;
+		}
+	
+	// 그리드2에 진행공정코드 붙이기
+	if(IndicaGrid.getRowCount() >= 0) {
+		console.log(1212);
+		function pnId() {
+			console.log(prcsListGrid.getRowCount());
+		}
+	}
+		
 </script>
 </body>
 </html>

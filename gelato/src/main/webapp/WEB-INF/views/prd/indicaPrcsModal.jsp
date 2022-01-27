@@ -63,7 +63,7 @@ var Grid = tui.Grid;
 			  },
 			  {
 			    header: '생산량',
-			    name: 'qy'
+			    name: 'qy',
 			  }
 			],
 			 rowHeaders: ['rowNum'],
@@ -79,7 +79,7 @@ var Grid = tui.Grid;
 			indicaD = document.getElementById("indicaD").value;
 			console.log(indicaD);
 			
-			chooseIndicaGrid.readData(1,{'indicaDt':indicaD}, true);
+			chooseIndicaGrid.readData(1,{'indicaD':indicaD}, true);
 		});
 
 	//그리드 이벤트

@@ -24,6 +24,14 @@ th, td {
 		<table>
 			<tbody>
 				<tr>
+					<th>진행 구분</th>
+                    <td>
+                        <input type="radio" id="fgAll" name="fg" value="ALL" checked>전체
+                        <input type="radio" id="fgPro" name="fg" value="PROCEE">진행
+                        <input type="radio" id="fgFin" name="fg" value="FINISH">완료
+                    </td>
+				</tr>
+				<tr>
 					<th>지시 일자</th>
 					<td><input type="date" id="indicaD" required></td>
 					<td><button type="button" class="btn btn-secondary" id="btnSer">검색</button></td>
@@ -39,8 +47,8 @@ th, td {
 
 <script>
 	//생산계획일자 현재날짜 기본 설정
-	document.getElementById('indicaD').value = new Date().toISOString()
-			.substring(0, 10);
+	/* document.getElementById('indicaD').value = new Date().toISOString()
+			.substring(0, 10); */
 	
 	//초기화버튼
 	$("#btnRes").on(
@@ -93,12 +101,15 @@ th, td {
 		},{
 			header : '생산수량',
 			name : 'qy',
+			align: 'right',
 		}, {
 			header : '라인코드',
 			name : 'lineId',
+			align: 'right',
 		}, {
 			header : '지시우선순위',
 			name : 'ord',
+			align: 'right',
 		},{
 			header : '비고',
 			name : 'remk',
@@ -111,7 +122,9 @@ th, td {
 				indicaD = document.getElementById("indicaD").value;
 				console.log(indicaD);
 				
-				IndicaGrid.readData(1,{'indicaD':indicaD}, true);
+				fg = $("input[name=fg]:checked").val();
+				
+				IndicaGrid.readData(1,{'fg':fg, 'indicaD':indicaD}, true);
 			})
 </script>
 </html>

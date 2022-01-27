@@ -115,12 +115,15 @@ th, td {
 		}, {
 			header : '계획량',
 			name : 'qy',
+			align: 'right',
 		}, {
 			header : '작업우선순위',
 			name : 'priort',
+			align: 'right',
 		}, {
 			header : '생산일수',
 			name : 'prodDcnt',
+			align: 'right',
 		},{
 			header : '비고',
 			name : 'remk',
