@@ -153,10 +153,23 @@ var prdtCodeGrid = new Grid({
 		
 	});
 
-	// 저장(등록) 버튼 이벤트.
+	// 저장(등록) 버튼 이벤트. (alert 창 포함.)
 	SaveBtn.addEventListener("click", function() {
-		prdtCodeGrid.blur();
 		prdtCodeGrid.request('modifyData');
+		console.log("이거뭐양?" + prdtCodeGrid.getRow(0))
+		
+		if (prdtCodeGrid.getRow(0) != null) {
+			prdtCodeGrid.blur();
+		 if (confirm("저장하시겠습니까?")) {
+			prdtCodeGrid.request('modifyData',{
+				showConfirm : false
+			});
+		  }
+		} else {
+			alert("선택된 데이터가 없습니다.");
+		}
+		
+		
 		flag = 'O'
 	});
 	
