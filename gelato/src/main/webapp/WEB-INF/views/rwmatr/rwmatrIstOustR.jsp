@@ -80,6 +80,9 @@ var endDateO;
 var rwmNameO;
 var vendNameO;
 
+//텍스트박스 구분자
+let flag;
+
 //토스트옵션
 toastr.options = {
 	positionClass : "toast-top-center",
@@ -280,25 +283,49 @@ function callVendModal(){
     $("#vendDialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("업체명 목록")})
 }
 
-//자재명 textbox
-document.getElementById("rwmName").addEventListener("click", function() {
-	  callRwmatrModal();
-});
+
+$("#rwmNameI, #rwmNameO").click(function() {
+	callRwmatrModal();
+	
+	if( $(this).is("#rwmNameI") ) {
+		console.log($(this).is("#rwmNameI"))
+		flag = 'I';
+	} else if( $(this).is("#rwmNameO") ) {
+		console.log($(this).is("#rwmNameO"))
+		flag = 'O';
+	}
+	
+})
+
+$("#vendNameI, #vendNameO").click(function() {
+	callVendModal();
+	
+	if( $(this).is("#vendNameI") ) {
+		console.log($(this).is("#vendNameI"))
+		flag = 'I';
+	} else if( $(this).is("#vendNameO") ) {
+		console.log($(this).is("#vendNameO"))
+		flag = 'O';
+	}
+})
+
 //모달에서 텍스트박스로
 function getRwmatrData(rwmatrData) {
-	document.getElementById("rwmName").value = rwmatrData.nm;
-	
+	if(flag == 'I') {
+		document.getElementById("rwmNameI").value = rwmatrData.nm;
+	} else if(flag == 'O') {
+		document.getElementById("rwmNameO").value = rwmatrData.nm;
+	}
 	rwmatrDialogFrm.dialog( "close" );
 }
 
-//업체명 textbox
-document.getElementById("vendName").addEventListener("click", function() {
-	callVendModal();
-});
 //업체리스트 모달에서 받아온 텍스트박스에 넣어줌
 function getVendData(vendData) {
-	document.getElementById("vendName").value = vendData.vendName;
-	
+	if(flag == 'I') {
+		document.getElementById("vendNameI").value = vendData.vendName;
+	} else if(flag == 'O') {
+		document.getElementById("rvendNameO").value = vendData.vendName;
+	}
 	vendDialogFrm.dialog( "close" );
 }
 
