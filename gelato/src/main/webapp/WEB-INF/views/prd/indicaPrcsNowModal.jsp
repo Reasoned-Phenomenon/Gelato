@@ -46,7 +46,7 @@ var Grid = tui.Grid;
 		el: document.getElementById('chooseIndicaGrid'),
 	  	data : {
 		  api: {
-		    readData: { url:'${path}/prd/chooseIndica.do', method: 'GET'}
+		    readData: { url:'${path}/prd/chooseIndicaDeta.do', method: 'GET'}
 		  },
 		  contentType: 'application/json',
 		},

@@ -129,7 +129,7 @@
                            <a href="${path }/prd/prdPrcsNow.do">> <span>공정 실적</span></a>
                         </li>
                         <li>
-                           <a href="#">> <span>공정 관리</span></a>
+                           <a href="${path }/prd/prdPrcsMngList.do">> <span>공정 관리</span></a>
                         </li>
                         <li>
                            <a href="#">> <span>제품 공정 흐름도</span></a>

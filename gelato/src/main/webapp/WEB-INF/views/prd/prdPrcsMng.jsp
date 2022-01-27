@@ -17,8 +17,9 @@ th, td {
 		<h2>생산관리</h2>
 		<br>
 	</div>
+	<br>
 	<div>
-		<button type="button" class="btn btn-secondary" id="btnSearchPlan">생산지시조회</button>
+		<button type="button" class="btn btn-secondary" id="btnSearchPlan">생산지시목록</button>
 	</div>
 	<hr>
 	<div>
@@ -47,19 +48,14 @@ th, td {
 						<td><input type="text" id="mngr" required></td>
 					</tr>
 					<tr>
-						<th>작업량*</th>
-						<td><input type="text" id="inptQy" required></td>
-					</tr>
-					</tr>
-					<tr>
 						<th>시작시간</th>
 						<td><input type="time" id="startT" readonly></td>
 					</tr>
 					<tr>
-						<th>종료예정시간</th>
+						<th>종료시간</th>
 						<td><input type="time" id="endT" readonly></td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<th>불량량</th>
 						<td><input type="text" id="inferQy"></td>
 					</tr>
@@ -75,7 +71,7 @@ th, td {
 							  <option value="PDB-00104">용량 미달</option>
 							</select>
 						</td>
-					</tr>
+					</tr> -->
 				</tbody>
 			</table>
 			<br><br>
@@ -198,8 +194,8 @@ th, td {
 		IndicaGrid.clear();
 		prcsListGrid.clear();
 		
-		IndicaGrid.readData(1, {'IndicaDetaId':cid}, true);
-		prcsListGrid.readData(1, {'prdtNm':cpn, 'IndicaDetaId':cid}, true);
+		IndicaGrid.readData(1, {'indicaDetaId':cid}, true);
+		prcsListGrid.readData(1, {'prdtNm':cpn, 'indicaDetaId':cid}, true);
 		
 		nonPrcsDialog.dialog("close");
 		
@@ -222,7 +218,6 @@ th, td {
 	
 	// 그리드2에 진행공정코드 붙이기
 	if(IndicaGrid.getRowCount() >= 0) {
-		console.log(1212);
 		function pnId() {
 			console.log(prcsListGrid.getRowCount());
 		}
