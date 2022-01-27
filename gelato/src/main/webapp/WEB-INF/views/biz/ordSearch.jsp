@@ -43,18 +43,20 @@
 	      			</li>
 	      			<li>
 	      				<div>
-	      					<label>주문일자</label>
-	      					<input type="date" id="orderDt"> ~ <input type ="date" id="oustDt">
+	      					<label>주문 일자</label>
+	      					<input type="date" id="startDt"> ~ <input type ="date" id="endDt">
+	      					<label>납기 일자</label>
+	      					<input type="date" id="startedDt"> ~ <input type ="date" id="endedDt">
 	      				</div>
 	      			</li>
 	      			<li>
 	      				<div>
 	      					<label>거래처</label>
-	      					<input type="text" id="vendName" name="vendName">
+	      					<input type="text" id="vendName" name="vendName" readonly>
 	      					<button type="button" id="BtnVend">찾아보기</button>&ensp;&ensp;&ensp;
 	      					
 	      					<label>제품명</label>
-	      					<input type="text" id="prdtNm" name="prdtNm">
+	      					<input type="text" id="prdtNm" name="prdtNm" readonly>
 	      					<button type="button" id="BtnPrdt">찾아보기</button> &ensp;
 	      					
 	      				<button type="button" class="btn cur-p btn-outline-primary" id="btnRst">새자료</button>
@@ -73,7 +75,7 @@
 	  </div> 
  </main>
 
-	<div id="ordGrid" style="width: 100%"></div>
+	<div id="ordGrid" style="width: 80%"></div>
 	<div id="modal" style="width: 100%"></div>
 
    	 
@@ -108,6 +110,7 @@ var ordGrid = new Grid({
 	},
 	rowHeaders: ['rowNum'],
 	selectionUnit: 'row',
+	bodyHeight: 600,
 	columns:[
 			{
 			  header: '주문코드',
@@ -166,23 +169,28 @@ var ordGrid = new Grid({
 	// 조회 버튼. // 해당날짜 조회 // 거래처 조회 // 제품코드 조회// 진행구분 라디오로 조회 =>  mapper-xml에서 if로 조건으로 나눔.
  	$("#btnFind").on(
  			"click", function choicDate() {
- 			var orderDt = document.getElementById("orderDt").value;
- 			var oustDt = document.getElementById("oustDt").value;
+ 			var startDt = document.getElementById("startDt").value;
+ 			var endDt = document.getElementById("endDt").value;
+ 			
+ 			var startedDt = document.getElementById("startedDt").value;
+ 			var endedDt = document.getElementById("endedDt").value;
  			
  			var vendName = document.getElementById("vendName").value;
  			var prdtNm = document.getElementById("prdtNm").value;
  			
  			var stFg = $('input[name="stFgRadio"]:checked').val();
  			
- 			console.log(orderDt);
- 			console.log(oustDt);
+ 			console.log(startDt);
+ 			console.log(endDt);
+ 			console.log(startedDt);
+ 			console.log(endedDt);
  			console.log(vendName);
  			console.log(prdtNm);
  			console.log(stFg);
  			
  			
  			
- 			ordGrid.readData(1, {'orderDt':orderDt, 'oustDt':oustDt, 'vendName' :vendName, 'prdtNm':prdtNm, 'stFg':stFg }, true);
+ 			ordGrid.readData(1, {'startDt':startDt, 'endDt':endDt, 'startedDt':startedDt, 'endedDt':endedDt,'vendName' :vendName, 'prdtNm':prdtNm, 'stFg':stFg }, true);
  			
  		});
 	

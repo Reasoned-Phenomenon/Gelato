@@ -101,6 +101,7 @@ var rwmatrGrid = new Grid({
 	},
 	rowHeaders: ['rowNum'],
 	selectionUnit: 'row',
+	bodyHeight : 500,
 	columns:[
 			{
 			  header: '자재 코드',
