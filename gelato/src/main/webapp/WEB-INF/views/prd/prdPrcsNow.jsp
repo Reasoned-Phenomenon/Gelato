@@ -13,17 +13,17 @@
 		<br>
 	</div>
 	<div>
-		<button type="button" class="btn btn-secondary" id="btnSearchPlan">생산지시조회</button>
+		<button type="button" class="btn btn-secondary" id="btnSearchPlan">생산지시목록</button>
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-sm-6">
+		<div class="col-sm-5">
 			<h3>공정목록</h3>
 			<hr>
 			<div id="prcsListGrid"></div>
 		</div>
-		<div class="col-sm-6">
-			<h3>공정실적</h3>
+		<div class="col-sm-7">
+			<h3>공정별실적</h3>
 			<hr>
 			<div id="prcsDetaGrid"></div>
 		</div>
@@ -56,7 +56,7 @@
 			el : document.getElementById('prcsListGrid'),
 			data : {
 				api : {
-					readData : {url : '${path}/prd/prcsList.do',method : 'GET'},
+					readData : {url : '${path}/prd/prcsNowList.do',method : 'GET'},
 				},
 				contentType : 'application/json',
 				initialRequest: false
@@ -78,6 +78,10 @@
 			}, {
 				header : '설비명',
 				name : 'eqmName',
+			},{
+				header : '지시디테일',
+				name : 'indicaDetaId',
+				hidden : true
 			}]
 		});
 		
@@ -86,7 +90,7 @@
 			el : document.getElementById('prcsDetaGrid'),
 			data : {
 				api : {
-					readData : {url : '${path}',method : 'GET'},
+					readData : {url : '${path}/prd/prcsDetaList.do',method : 'GET'},
 				},
 				contentType : 'application/json',
 				initialRequest: false
@@ -94,11 +98,14 @@
 			rowHeaders : ['rowNum' ],
 			selectionUnit : 'row',
 			columns : [ {
-				header : '진행공정코드',
-				name : 'prcsNowId'
+				header : '시작시간',
+				name : 'frTm',
 			}, {
-				header : '공정명',
-				name : 'nm',
+				header : '종료시간',
+				name : 'toTm',
+			}, {
+				header : '담당자명',
+				name : 'mngr',
 			}, {
 				header : '지시량',
 				name : 'inptQy',
@@ -134,6 +141,34 @@
 	
 	function choosePi(cid,cpn){
 		nonPrcsDialog.dialog("close");
+		
+		//cid : 선택 지시디테일 아이디
+		//cpn : 선택제품명
+		
+		prcsListGrid.readData(1, {'indicaDetaId':cid}, true);
+	}
+	
+	prcsListGrid.on(
+			"dblclick", (ev) => {
+			
+				prcsListGrid.setSelectionRange({
+			    start: [ev.rowKey, 0],
+			    end: [ev.rowKey, prcsListGrid.getColumns().length-1]
+			});	
+			
+			var pni = prcsListGrid.getRow(ev.rowKey).prcsNowId;
+			console.log(pni);
+			var idi = prcsListGrid.getRow(ev.rowKey).indicaDetaId;
+			console.log(idi);
+			
+			choosePl(pni, idi);
+		});
+	
+	function choosePl(pni, idi) {
+		console.log(pni);
+		console.log(idi);
+		
+		prcsDetaGrid.readData(1, {'prcsNowId':pni, 'indicaDetaId':idi}, true);
 	}
 </script>
 </body>

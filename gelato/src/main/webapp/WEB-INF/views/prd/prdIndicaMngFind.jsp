@@ -55,7 +55,7 @@ th, td {
 			"click",
 			function() {
 				$("#indicaD").val('');
-				document.getElementById('indicaD').value = new Date().toISOString().substring(0, 10);
+				//document.getElementById('indicaD').value = new Date().toISOString().substring(0, 10);
 				IndicaGrid.clear();
 			});
 	

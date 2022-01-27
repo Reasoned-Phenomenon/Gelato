@@ -54,7 +54,7 @@ th, td {
     <div id="PlanSearchGrid"></div>
     
     <!-- 제품 모달창 -->
-    <div id="PrdtDialog"></div>
+    <div id="PrdtDialog" title="제품 목록"></div>
     
     
     <script>

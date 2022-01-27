@@ -18,7 +18,7 @@ th, td {
 		<br>
 	</div>
 	<div>
-		<button type="button" class="btn btn-secondary" id="btnSearchPlan">생산지시조회</button>
+		<button type="button" class="btn btn-secondary" id="btnSearchPlan">생산지시목록</button>
 	</div>
 	<hr>
 	<div>
@@ -198,8 +198,8 @@ th, td {
 		IndicaGrid.clear();
 		prcsListGrid.clear();
 		
-		IndicaGrid.readData(1, {'IndicaDetaId':cid}, true);
-		prcsListGrid.readData(1, {'prdtNm':cpn, 'IndicaDetaId':cid}, true);
+		IndicaGrid.readData(1, {'indicaDetaId':cid}, true);
+		prcsListGrid.readData(1, {'prdtNm':cpn, 'indicaDetaId':cid}, true);
 		
 		nonPrcsDialog.dialog("close");
 		

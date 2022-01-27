@@ -75,7 +75,7 @@ th, td {
 	<div id="OrderShtDialog" title="주문서 목록"></div>
 
 	<!-- 계획조회 모달창 -->
-	<div id="SearchPlanDialog" title="계획조회 결과"></div>
+	<div id="SearchPlanDialog" title="계획조회"></div>
 	
 	<!-- 제품 목록 모달창 -->
 	<div id="PrdtDialog" title="제품 목록"></div>

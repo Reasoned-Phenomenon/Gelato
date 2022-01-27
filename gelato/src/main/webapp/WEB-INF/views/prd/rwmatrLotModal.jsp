@@ -10,7 +10,7 @@
 </head>
 <body>
 	<br>
-	<h1>자재 LOT 조회</h1>
+	<h1>자재 LOT 목록</h1>
 	<br>
 	<div>자재명 : <input type="text" readonly id="rwname"> 필요수량 : <input type="text" readonly id="rwneed"></div>
 	<br>
