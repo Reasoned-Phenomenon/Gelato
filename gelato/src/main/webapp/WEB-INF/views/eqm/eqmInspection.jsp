@@ -4,6 +4,8 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>설비 점검 페이지(점검등록/점검내역조회)</title>
