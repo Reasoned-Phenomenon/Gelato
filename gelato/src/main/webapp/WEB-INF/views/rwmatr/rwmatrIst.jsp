@@ -35,11 +35,13 @@
 	<div id="rwmatrIstList" style="width: 80%"></div>
 
 	<!-- 모달창 -->
-	<div id="dialogFrm"></div>
+	<div id="rwmatrDialogFrm" title="원자재 목록"></div>
+	<div id="vendDialogFrm" title="업체 목록"></div>
+	<div id="rwmatrPassDialogFrm" title="입고예정 목록"></div>
+	
 
 <script>
 var Grid = tui.Grid;
-let dialog;
 
 //modify구분하기위한 변수
 let flag;
@@ -151,52 +153,49 @@ var rwmatrIstList = new Grid({
 });
 
 //자재모달
+let rwmatrDialogFrm = $( "#rwmatrDialogFrm" ).dialog({
+	  modal:true,
+	  autoOpen:false,
+      height: 500,
+      width: 600,
+      modal: true
+});
+
 function callRwmatrModal(){
-	$( "#dialogFrm" ).attr("title", "원자재 목록");
-	dialog = $( "#dialogFrm" ).dialog({
-		  modal:true,
-		  autoOpen:false,
-	      height: 500,
-	      width: 600,
-	      modal: true
-	}); 
 	
-    console.log("11111")
-    dialog.dialog( "open" );
-    console.log("111112222")
-    $("#dialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
+    rwmatrDialogFrm.dialog( "open" );
+    $("#rwmatrDialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
 }
-
+ 
 //업체명 모달
-function callVendModal(){
-	$( "#dialogFrm" ).attr("title", "업체 목록");
-	dialog = $( "#dialogFrm" ).dialog({
-		  modal:true,
-		  autoOpen:false,
-	      height: 500,
-	      width: 600,
-	      modal: true
-	}); 
+let vendDialogFrm = $( "#vendDialogFrm" ).dialog({
+	  modal:true,
+	  autoOpen:false,
+      height: 500,
+      width: 600,
+      modal: true
+});
 
-    console.log("11111")
-    dialog.dialog( "open" );
-    console.log("111112222")
-    $("#dialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("업체명 목록")})
+function callVendModal(){
+
+    vendDialogFrm.dialog( "open" );
+    $("#vendDialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("업체명 목록")})
 }
+
 
 //검사완료리스트 모달
-function callrwmatrPassModal(){
-	$( "#dialogFrm" ).attr("title", "입고예정 목록");
-	dialog = $( "#dialogFrm" ).dialog({
-		  modal:true,
-		  autoOpen:false,
-	      height: 400,
-	      width: 850,
-	      modal: true
-	}); 
+let rwmatrPassDialogFrm = $( "#rwmatrPassDialogFrm" ).dialog({
+	  modal:true,
+	  autoOpen:false,
+      height: 400,
+      width: 850,
+      modal: true
+});
 
-    dialog.dialog( "open" );
-    $("#dialogFrm").load("${path}/rwmatr/rwmatrPassModal.do", function(){console.log("검수완료 리스트")})
+function callrwmatrPassModal(){
+
+	rwmatrPassDialogFrm.dialog( "open" );
+    $("#rwmatrPassDialogFrm").load("${path}/rwmatr/rwmatrPassModal.do", function(){console.log("검수완료 리스트")})
 }
 	
 	//자재명 클릭시 검수완료리스트 모달
@@ -242,11 +241,13 @@ function callrwmatrPassModal(){
 			rwmatrIstList.setValue(rk, "nm", rwmatrData.nm, true)
 			rwmatrIstList.setValue(rk, "vendName", rwmatrData.vendName, true)
 			rwmatrIstList.setValue(rk, "istQy", rwmatrData.passQy, true)
+			
+			rwmatrPassDialogFrm.dialog( "close" );
 		} else if(ig == 'i'){
 			document.getElementById("rwmName").value = rwmatrData.nm;
 		}
 		
-		dialog.dialog( "close" );
+		rwmatrDialogFrm.dialog( "close" );
 	}
 	
 	//자재명 textbox
@@ -259,7 +260,7 @@ function callrwmatrPassModal(){
 	function getVendData(vendData) {
 		document.getElementById("vendName").value = vendData.vendName;
 		
-		dialog.dialog( "close" );
+		vendDialogFrm.dialog( "close" );
 	}
 	
 	//업체명 textbox

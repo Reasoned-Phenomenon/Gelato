@@ -30,10 +30,13 @@
 	<div id="rwmatrIstInspList" style="width: 90%"></div>
 
 	<!-- 모달창 -->
-	<div id="dialogFrm"></div>
+	<div id="rwmatrDialogFrm" title="원자재 목록"></div>
+	<div id="vendDialogFrm" title="업체 목록"></div>
+	
+	<div id="orderDialogFrm" title="검사예정 목록"></div>
+	<div id="inferCodeDialogFrm" title="불량코드 목록"></div>
 
 <script>
-let dialog;
 var Grid = tui.Grid;
 
 //modify구분하기위한 변수
@@ -185,51 +188,62 @@ var rwmatrIstInspList = new Grid({
 
 
 //발주 모달
-function callModal(){
-	$( "#dialogFrm" ).attr("title", "검사예정 발주 목록");
-	dialog = $( "#dialogFrm" ).dialog({
-		  modal:true,
-		  autoOpen:false,
-	      height: 400,
-	      width: 600,
-	      modal: true
-	}); 
+let orderDialogFrm = $( "#orderDialogFrm" ).dialog({
+	  modal:true,
+	  autoOpen:false,
+      height: 400,
+      width: 600,
+      modal: true
+}); 
 
-    dialog.dialog( "open" );
-    console.log("111112222")
-    $("#dialogFrm").load("${path}/rwmatr/searchOrderDialog.do", function(){console.log("발주 목록")})
+function callModal(){
+	orderDialogFrm.dialog( "open" );
+    $("#orderDialogFrm").load("${path}/rwmatr/searchOrderDialog.do", function(){console.log("발주 목록")})
 }
 
 //자재모달
+let rwmatrDialogFrm = $( "#rwmatrDialogFrm" ).dialog({
+	  modal:true,
+	  autoOpen:false,
+      height: 500,
+      width: 600,
+      modal: true
+});
+
 function callRwmatrModal(){
-	$( "#dialogFrm" ).attr("title", "원자재 목록");
-	dialog = $( "#dialogFrm" ).dialog({
-		  modal:true,
-		  autoOpen:false,
-	      height: 500,
-	      width: 600,
-	      modal: true
-	}); 
 	
-    console.log("11111")
-    dialog.dialog( "open" );
-    console.log("111112222")
-    $("#dialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
+    rwmatrDialogFrm.dialog( "open" );
+    $("#rwmatrDialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
 }
+ 
+//업체명 모달
+function callVendModal(){
+
+    vendDialogFrm.dialog( "open" );
+    $("#vendDialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("업체명 목록")})
+}
+
+let vendDialogFrm = $( "#vendDialogFrm" ).dialog({
+	  modal:true,
+	  autoOpen:false,
+      height: 500,
+      width: 600,
+      modal: true
+});
 	
 //원자재 불량코드 모달
-function callrwmatrInferCodeModal(){
-	$( "#dialogFrm" ).attr("title", "불량코드 목록");
-	dialog = $( "#dialogFrm" ).dialog({
-		  modal:true,
-		  autoOpen:false,
-	      height: 400,
-	      width: 600,
-	      modal: true
-	}); 
+let inferCodeDialogFrm = $( "#inferCodeDialogFrm" ).dialog({
+	  modal:true,
+	  autoOpen:false,
+      height: 400,
+      width: 600,
+      modal: true
+}); 
 
-    dialog.dialog( "open" );
-    $("#dialogFrm").load("${path}/rwmatr/rwmatrInferCodeModal.do", function(){console.log("원자재 불합격 리스트")})
+function callrwmatrInferCodeModal(){
+
+	inferCodeDialogFrm.dialog( "open" );
+    $("#inferCodeDialogFrm").load("${path}/rwmatr/rwmatrInferCodeModal.do", function(){console.log("원자재 불합격 리스트")})
 }
 
 	//발주코드 클릭시 모달
@@ -318,7 +332,7 @@ function callrwmatrInferCodeModal(){
 		rwmatrIstInspList.setValue(rk, "rwmatrId", orderData.rwmatrId, true)
 		rwmatrIstInspList.setValue(rk, "qy", orderData.qy, true)
 		
-		dialog.dialog( "close" );
+		orderDialogFrm.dialog( "close" );
 	}
 	
 	//불량코드리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
@@ -326,7 +340,8 @@ function callrwmatrInferCodeModal(){
 		console.log("불량내용 기입")
 		rwmatrIstInspList.setValue(rk, "inferId", inferData.inferId, true)
 		rwmatrIstInspList.setValue(rk, "deta", inferData.deta, true)
-		dialog.dialog( "close" );
+		
+		inferCodeDialogFrm.dialog( "close" );
 	}
 	
 	//자재명 textbox
@@ -339,7 +354,7 @@ function callrwmatrInferCodeModal(){
 		console.log("Rwmatr정보 기입")
 		document.getElementById("rwmName").value = rwmatrData.nm;
 		
-		dialog.dialog( "close" );
+		rwmatrDialogFrm.dialog( "close" );
 	}
 	
 	
