@@ -36,7 +36,8 @@
 	<div id="rwmatrInferList" style="width: 80%"></div>
 
 	<!-- 모달창 -->
-	<div id="dialogFrm"></div>
+	<div id="rwmatrDialogFrm" title="원자재 목록"></div>
+	<div id="vendDialogFrm" title="업체 목록"></div>>
 
 <script>
 var Grid = tui.Grid;
@@ -142,133 +143,42 @@ var rwmatrInferList = new Grid({
 });
 
 //자재모달
+let rwmatrDialogFrm = $( "#rwmatrDialogFrm" ).dialog({
+	  modal:true,
+	  autoOpen:false,
+      height: 500,
+      width: 600,
+      modal: true
+});
+
 function callRwmatrModal(){
-	$( "#dialogFrm" ).attr("title", "원자재 목록");
-	dialog = $( "#dialogFrm" ).dialog({
-		  modal:true,
-		  autoOpen:false,
-	      height: 500,
-	      width: 600,
-	      modal: true
-	}); 
 	
-    dialog.dialog( "open" );
-    $("#dialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
+    rwmatrDialogFrm.dialog( "open" );
+    $("#rwmatrDialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
 }
-
+ 
 //업체명 모달
+let vendDialogFrm = $( "#vendDialogFrm" ).dialog({
+	  modal:true,
+	  autoOpen:false,
+      height: 500,
+      width: 600,
+      modal: true
+});
+
 function callVendModal(){
-	$( "#dialogFrm" ).attr("title", "업체 목록");
-	dialog = $( "#dialogFrm" ).dialog({
-		  modal:true,
-		  autoOpen:false,
-	      height: 500,
-	      width: 600,
-	      modal: true
-	}); 
 
-    dialog.dialog( "open" );
-    $("#dialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("업체명 목록")})
+    vendDialogFrm.dialog( "open" );
+    $("#vendDialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("업체명 목록")})
 }
-
-//검수완료리스트 모달
-function callrwmatrPassModal(){
-	dialog = $( "#dialogFrm" ).dialog({
-		  modal:true,
-		  autoOpen:false,
-	      height: 400,
-	      width: 600,
-	      modal: true
-	}); 
-
-    dialog.dialog( "open" );
-    $("#dialogFrm").load("${path}/rwmatr/rwmatrPassModal.do", function(){console.log("검수완료 리스트")})
-}
-
-//현재고 리스트 모달
-function callrwmatrStcModal(){
-	dialog = $( "#dialogFrm" ).dialog({
-		  modal:true,
-		  autoOpen:false,
-	      height: 400,
-	      width: 600,
-	      modal: true
-	}); 
-
-    dialog.dialog( "open" );
-    $("#dialogFrm").load("${path}/rwmatr/rwmatrStcModal.do", function(){console.log("원자재 현재고 리스트")})
-}
-
-//원자재 불합격리스트 모달
-function callrwmatrFailModal(){
-	dialog = $( "#dialogFrm" ).dialog({
-		  modal:true,
-		  autoOpen:false,
-	      height: 400,
-	      width: 600,
-	      modal: true
-	}); 
-
-    dialog.dialog( "open" );
-    $("#dialogFrm").load("${path}/rwmatr/rwmatrFailModal.do", function(){console.log("원자재 불합격 리스트")})
-}
-
-//원자재 불량코드 모달
-function callrwmatrInferCodeModal(){
-	dialog = $( "#dialogFrm" ).dialog({
-		  modal:true,
-		  autoOpen:false,
-	      height: 400,
-	      width: 600,
-	      modal: true
-	}); 
-
-    dialog.dialog( "open" );
-    $("#dialogFrm").load("${path}/rwmatr/rwmatrInferCodeModal.do", function(){console.log("원자재 불합격 리스트")})
-}
-	
-	//자재명 클릭시 불량리스트 모달 / 불량코드클릭시 원자재불량코드 리스트 모달
-	rwmatrInferList.on('click', (ev) => {
-		rk = ev.rowKey;
-		console.log(ev)
-		console.log(ev.columnName)
-		console.log(ev.rowKey)
-	    if (ev.columnName === 'rwmatrOrderDetaId') {
-			console.log("불량리스트")
-			ig = 'g';
-			//callrwmatrFailModal();
-		} else if(ev.columnName === 'inferId') {
-			console.log("원자재불량코드리스트")
-			ig = 'g';
-			//callrwmatrInferCodeModal();
-		}
-	});
 
 	//불량리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
 	function getRwmatrData(rwmatrData) {
-		console.log("불량정보 기입")
-		if(ig == 'g'){
-			rwmatrInferList.setValue(rk, "rwmatrOrderDetaId", rwmatrData.rwmatrOrderDetaId, true)
-			rwmatrInferList.setValue(rk, "rwmatrId", rwmatrData.rwmatrId, true)
-			rwmatrInferList.setValue(rk, "nm", rwmatrData.nm, true)
-			rwmatrInferList.setValue(rk, "vendName", rwmatrData.vendName, true)
-			rwmatrInferList.setValue(rk, "qy", rwmatrData.inferQy, true)
-		} else if(ig == 'i'){
-			document.getElementById("rwmName").value = rwmatrData.nm;
-		}
+		document.getElementById("rwmName").value = rwmatrData.nm;
 		
-		dialog.dialog( "close" );
+		rwmatrDialogFrm.dialog( "close" );
 	}
 	
-	//불량코드리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
-	function getInferData(inferData) {
-		console.log("불량내용 기입")
-		if(ig == 'g'){
-			rwmatrInferList.setValue(rk, "inferId", inferData.inferId, true)
-			rwmatrInferList.setValue(rk, "deta", inferData.deta, true)
-		}
-		dialog.dialog( "close" );
-	}
 	
 	//자재명 textbox
 	document.getElementById("rwmName").addEventListener("click", function() {
@@ -280,7 +190,7 @@ function callrwmatrInferCodeModal(){
 	function getVendData(vendData) {
 		document.getElementById("vendName").value = vendData.vendName;
 		
-		dialog.dialog( "close" );
+		vendDialogFrm.dialog( "close" );
 	}
 	
 	//업체명 textbox

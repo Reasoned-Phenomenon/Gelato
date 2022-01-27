@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>원자재 발주관리</title> 
+<title>원자재 발주조회</title> 
  <!-- <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
@@ -14,7 +14,7 @@
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script> -->
 </head>
 <body>
-<h3>원자재 발주관리</h3>
+<h3>원자재 발주조회</h3>
 <div style="margin: 20px;">
 	<form action="">
 		자재명 : <input type="text" id="rwmName">업체명 : <input type="text" id="vendName"><br>
@@ -23,11 +23,6 @@
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
 		<!-- <button type="button" class="btn cur-p btn-outline-primary" id="btnReset">전체검색</button> -->
 	</form>
-</div>
-<div style="float: right;">
-	<button type="button" class="btn cur-p btn-outline-primary" id="btnAdd">추가</button>
-	<button type="button" class="btn cur-p btn-outline-primary" id="btnDel">삭제</button>
-	<button type="button" class="btn cur-p btn-outline-primary" id="btnSave">저장</button>
 </div>
 <hr>
 <br>
@@ -374,62 +369,6 @@ let vendDialogFrm = $( "#vendDialogFrm" ).dialog({
 									'vendName': vendName}, true);
 	});
 	
-	/* //검색초기화
-	btnReset.addEventListener("click", function(){
-		console.log("검색초기화");
-		document.getElementById("startDate").value = '';
-		document.getElementById("endDate").value = '';
-		document.getElementById("rwmName").value = '';
-		document.getElementById("vendName").value = '';
-		
-		startDate = document.getElementById("startDate").value;
-		endDate = document.getElementById("endDate").value;
-		rwmName = document.getElementById("rwmName").value;
-		vendName = document.getElementById("vendName").value;
-		
-		rwmatrOrderList.readData(1,{'startDate':startDate,
-									'endDate':endDate, 
-									'rwmName':rwmName,
-									'vendName': vendName}, true);
-	}); */
-	
-	//추가
-	btnAdd.addEventListener("click", function(){
-		rwmatrOrderList.prependRow();
-	});
-	
-	//삭제
-	btnDel.addEventListener("click", function(){
-		
-		if(confirm("선택하신 항목을 삭제하시겠습니까?")){ 
-			rwmatrOrderList.removeCheckedRows(false)
-			rwmatrOrderList.request('modifyData',{showConfirm:false});
-			
-			toastr.clear()
-			toastr.success( ('삭제되었습니다.'),'Gelato',{timeOut:'1000'} );
-		}
-		
-	});
-	
-	//저장
-	btnSave.addEventListener("click", function(){
-		
-		if (rwmatrOrderList.getRow(0) != null) {
-			rwmatrOrderList.blur();
-			if (confirm("저장하시겠습니까?")) {
-				rwmatrOrderList.request('modifyData', {
-					showConfirm : false
-				});
-				flag = 'O';
-				toastr.clear()
-				toastr.success( ('저장되었습니다.'),'Gelato',{timeOut:'1000'} );
-			}
-		} else {
-			toastr.clear()
-			toastr.success( ('저장할 데이터가 없습니다.'),'Gelato',{timeOut:'1000'} );
-		}
-	});
-
 </script>
 </body>
 </html>

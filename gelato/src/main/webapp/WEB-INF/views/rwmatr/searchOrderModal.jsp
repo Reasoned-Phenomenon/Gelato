@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>검사예정 발주 목록</title>
+<title>검사예정 목록</title>
 </head>
 <style>
 h1 {
@@ -15,7 +15,7 @@ h1 {
 </style>
 <body>
 	<br>
-	<h1>검사예정 발주 목록</h1>
+	<h1>검사예정 목록</h1>
 	<br>
 	<div id="orderDetailListGrid" style="width: 100%"></div>
 	
