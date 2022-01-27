@@ -414,17 +414,20 @@ let vendDialogFrm = $( "#vendDialogFrm" ).dialog({
 	//저장
 	btnSave.addEventListener("click", function(){
 		
-		//수정하고 있던 값 저장
-		if(confirm("저장하시겠습니까?")) {
+		if (rwmatrOrderList.getRow(0) != null) {
 			rwmatrOrderList.blur();
-			rwmatrOrderList.request('modifyData',{showConfirm:false});
-			flag = 'O';
-			
+			if (confirm("저장하시겠습니까?")) {
+				rwmatrOrderList.request('modifyData', {
+					showConfirm : false
+				});
+				flag = 'O';
+				toastr.clear()
+				toastr.success( ('저장되었습니다.'),'Gelato',{timeOut:'1000'} );
+			}
+		} else {
 			toastr.clear()
-			toastr.success( ('저장되었습니다.'),'Gelato',{timeOut:'1000'} );
+			toastr.success( ('저장할 데이터가 없습니다.'),'Gelato',{timeOut:'1000'} );
 		}
-		
-		
 	});
 
 </script>

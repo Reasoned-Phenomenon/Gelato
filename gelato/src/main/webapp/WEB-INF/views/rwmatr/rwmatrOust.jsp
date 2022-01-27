@@ -345,9 +345,22 @@ function callrwmatrStcModal(){
 	
 	//저장
 	btnSave.addEventListener("click", function(){
-		rwmatrOustList.blur();
-		rwmatrOustList.request('modifyData');
-		flag = 'O'
+		
+		if (rwmatrOustList.getRow(0) != null) {
+			rwmatrOustList.blur();
+			if (confirm("저장하시겠습니까?")) {
+				rwmatrOustList.request('modifyData', {
+					showConfirm : false
+				});
+				flag = 'O';
+				toastr.clear()
+				toastr.success( ('저장되었습니다.'),'Gelato',{timeOut:'1000'} );
+			}
+		} else {
+			toastr.clear()
+			toastr.success( ('저장할 데이터가 없습니다.'),'Gelato',{timeOut:'1000'} );
+		}
+		
 	});
 
 </script>

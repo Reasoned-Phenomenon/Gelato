@@ -120,7 +120,7 @@ var rwmatrIstGrid = new Grid({
 	},
 	rowHeaders:['rowNum'],
 	selectionUnit: 'row',
-	bodyHeight: 600,
+	bodyHeight: 550,
 	width:1500,
 	columns:[
 				{
@@ -189,7 +189,7 @@ var rwmatrOustGrid = new Grid({
 	},
 	rowHeaders:['rowNum'],
 	selectionUnit: 'row',
-	bodyHeight: 600,
+	bodyHeight: 550,
 	width:1500,
 	columns:[
 			    {

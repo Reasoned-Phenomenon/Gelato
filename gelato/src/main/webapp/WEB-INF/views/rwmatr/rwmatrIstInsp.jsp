@@ -358,10 +358,12 @@ function callrwmatrInferCodeModal(){
 	}
 	
 	
-
-	
 	rwmatrIstInspList.on('response', function (ev) {
-		console.log("1111");
+		console.log(ev)
+		if(flag == 'O') {
+			rwmatrIstInspList.readData(1);
+			flag = 'X';
+		}
 	});
 
 	//조회
@@ -399,10 +401,22 @@ function callrwmatrInferCodeModal(){
 	
 	//저장
 	btnSave.addEventListener("click", function(){
-		selectList = [];
-		rwmatrIstInspList.blur();
-		rwmatrIstInspList.request('modifyData');
-		rwmatrIstInspList.clearModifiedData();
+		if (rwmatrIstInspList.getRow(0) != null) {
+			rwmatrIstInspList.blur();
+			if (confirm("저장하시겠습니까?")) {
+				rwmatrIstInspList.request('modifyData', {
+					showConfirm : false
+				});
+				flag = 'O';
+				toastr.clear()
+				toastr.success( ('저장되었습니다.'),'Gelato',{timeOut:'1000'} );
+			}
+		} else {
+			toastr.clear()
+			toastr.success( ('저장할 데이터가 없습니다.'),'Gelato',{timeOut:'1000'} );
+		}
+		
+		//rwmatrIstInspList.clearModifiedData();
 	});
 
 </script>
