@@ -21,7 +21,7 @@
 		발주신청일 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
 		<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
-		<button type="button" class="btn cur-p btn-outline-primary" id="btnReset">전체검색</button>
+		<!-- <button type="button" class="btn cur-p btn-outline-primary" id="btnReset">전체검색</button> -->
 	</form>
 </div>
 <div style="float: right;">
@@ -36,7 +36,8 @@
 	<div id="rwmatrOrderList" style="width: 80%"></div>
 
 	<!-- 모달창 -->
-	<div id="dialogFrm"></div>
+	<div id="rwmatrDialogFrm" title="원자재 목록"></div>
+	<div id="vendDialogFrm" title="업체 목록"></div>
 
 
 <script>
@@ -107,7 +108,10 @@ var rwmatrOrderList = new Grid({
 				  header: '자재명',
 				  name: 'nm',
 				  editor: 'text',
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				},
 				{
 				  header: '자재코드',
@@ -122,9 +126,15 @@ var rwmatrOrderList = new Grid({
 				  formatter({value}) { // 추가
 					  let a = `\${value}`
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+				  	  if(b == 'null'){
+				  		  b = '';
+				  	  }
 				      return b;
 				  }, 
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				},
 				{
 				  header: '발주량',
@@ -134,9 +144,15 @@ var rwmatrOrderList = new Grid({
 				  formatter({value}) { // 추가
 					  let a = `\${value}`
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+				  	  if(b == 'null'){
+				  		  b = '';
+				  	  }
 				      return b;
 				  }, 
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				},
 				{
 				  header: '총액',
@@ -145,12 +161,15 @@ var rwmatrOrderList = new Grid({
 				  formatter({value}) { // 추가
 					  let a = `\${value}`
 				  	  let b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+				  	  if(b == 'null'){
+				  		  b = '';
+				  	  }
 				      return b;
 				  },
 				  sortable: true
 				},
 				{
-				  header: '업체명',
+				  header: '업체코드',
 				  name: 'vendId',
 				  hidden:true
 				},
@@ -168,17 +187,20 @@ var rwmatrOrderList = new Grid({
 				  header: '납기요청일',
 				  name: 'dudt',
 				  editor: 'datePicker',
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				}
 		]
 });
 
 //자재모달
 function callRwmatrModal(){
-	dialog = $( "#dialogFrm" ).dialog({
+	dialog = $( "#rwmatrDialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 400,
+	      height: 500,
 	      width: 600,
 	      modal: true
 	}); 
@@ -186,15 +208,15 @@ function callRwmatrModal(){
     console.log("11111")
     dialog.dialog( "open" );
     console.log("111112222")
-    $("#dialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
+    $("#rwmatrDialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
 }
 
 //업체명 모달
 function callVendModal(){
-	dialog = $( "#dialogFrm" ).dialog({
+	dialog = $( "#vendDialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 400,
+	      height: 500,
 	      width: 600,
 	      modal: true
 	}); 
@@ -202,9 +224,8 @@ function callVendModal(){
     console.log("11111")
     dialog.dialog( "open" );
     console.log("111112222")
-    $("#dialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("업체명 목록")})
+    $("#vendDialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("업체명 목록")})
 }
-	
 	
 	//자재명 클릭시 모달
 	rwmatrOrderList.on('click', (ev) => {
@@ -231,20 +252,25 @@ function callVendModal(){
 			toastr.clear()
 			toastr.success( ('저장시 자동으로 기입되는 값입니다.'),'Gelato',{timeOut:'1000'} );
 			return;
-		} 
+		} else if(ev.columnName === 'rwmatrId' || ev.columnName === 'vendName') {
+			//toastr
+			toastr.clear()
+			toastr.success( ('자재를 선택해주세요.'),'Gelato',{timeOut:'1000'} );
+			return;
+		}
 		
 	});
 	
 	
 	//구현중..
-	rwmatrOrderList.on('editingStart', (ev) => {
-		/* if(ev.columnName === 'orderId' || 
+	/* rwmatrOrderList.on('editingStart', (ev) => {
+		 if(ev.columnName === 'orderId' || 
 		   ev.columnName === 'nm' || 
 		   ev.columnName === 'rwmatrId' || 
 		   ev.columnName === 'utnprc' || 
 		   ev.columnName === 'qy' || 
 		   ev.columnName === 'orderDt' ||
-		   ev.columnName === 'dudt') { */
+		   ev.columnName === 'dudt') { 
 		   var getRw = rwmatrOrderList.getRow(ev.rowKey);
 		   if(getRw != '') {
 				//toastr
@@ -253,10 +279,10 @@ function callVendModal(){
 				ev.stop();
 		   }
 		
-	});
+	}); */
 	
 	
-	rwmatrOrderList.on('editingFinish', (ev) => {
+	 rwmatrOrderList.on('editingFinish', (ev) => {
 		console.log(ev);
 		rk = ev.rowKey;
 		let untprc = parseInt(rwmatrOrderList.getValue(rk, "untprc"));
@@ -351,7 +377,7 @@ function callVendModal(){
 									'vendName': vendName}, true);
 	});
 	
-	//검색초기화
+	/* //검색초기화
 	btnReset.addEventListener("click", function(){
 		console.log("검색초기화");
 		document.getElementById("startDate").value = '';
@@ -368,7 +394,7 @@ function callVendModal(){
 									'endDate':endDate, 
 									'rwmName':rwmName,
 									'vendName': vendName}, true);
-	});
+	}); */
 	
 	//추가
 	btnAdd.addEventListener("click", function(){
@@ -378,16 +404,30 @@ function callVendModal(){
 	//삭제
 	btnDel.addEventListener("click", function(){
 		
-		if(rwmatrOrderList.removeCheckedRows(true)){
-			rwmatrOrderList.request('modifyData');
+		if(confirm("선택하신 항목을 삭제하시겠습니까?")){ 
+			rwmatrOrderList.removeCheckedRows(false)
+			rwmatrOrderList.request('modifyData',{showConfirm:false});
+			
+			toastr.clear()
+			toastr.success( ('삭제되었습니다.'),'Gelato',{timeOut:'1000'} );
 		}
+		
 	});
 	
 	//저장
 	btnSave.addEventListener("click", function(){
-		rwmatrOrderList.blur();
-		rwmatrOrderList.request('modifyData');
-		flag = 'O'
+		
+		//수정하고 있던 값 저장
+		if(confirm("저장하시겠습니까?")) {
+			rwmatrOrderList.blur();
+			rwmatrOrderList.request('modifyData',{showConfirm:false});
+			flag = 'O';
+			
+			toastr.clear()
+			toastr.success( ('저장되었습니다.'),'Gelato',{timeOut:'1000'} );
+		}
+		
+		
 	});
 
 </script>

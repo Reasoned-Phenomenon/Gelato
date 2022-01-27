@@ -21,7 +21,6 @@
 		입고일 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
 		<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
-		<button type="button" class="btn cur-p btn-outline-primary" id="btnReset">전체검색</button>
 	</form>
 </div>
 <div style="float: right;">
@@ -99,7 +98,10 @@ var rwmatrIstList = new Grid({
 				{
 				  header: '발주코드',
 				  name: 'rwmatrOrderDetaId',
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				},
 				{
 				  header: '자재코드',
@@ -140,41 +142,51 @@ var rwmatrIstList = new Grid({
 				  header: '유통기한',
 				  name: 'expdate',
 			      editor: 'datePicker',
-				  sortable: true
+				  sortable: true,
+			      validation: {
+			          required: true
+			      }
 				}
 		]
 });
 
 //자재모달
 function callRwmatrModal(){
+	$( "#dialogFrm" ).attr("title", "원자재 목록");
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 400,
+	      height: 500,
 	      width: 600,
 	      modal: true
 	}); 
 	
+    console.log("11111")
     dialog.dialog( "open" );
+    console.log("111112222")
     $("#dialogFrm").load("${path}/rwmatr/searchRwmatrDialog.do", function(){console.log("원자재 목록")})
 }
 
 //업체명 모달
 function callVendModal(){
+	$( "#dialogFrm" ).attr("title", "업체 목록");
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 400,
+	      height: 500,
 	      width: 600,
 	      modal: true
 	}); 
 
+    console.log("11111")
     dialog.dialog( "open" );
+    console.log("111112222")
     $("#dialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("업체명 목록")})
 }
 
-//검수완료리스트 모달
+//검사완료리스트 모달
 function callrwmatrPassModal(){
+	$( "#dialogFrm" ).attr("title", "입고예정 목록");
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
@@ -200,22 +212,23 @@ function callrwmatrPassModal(){
 			console.log("검수완료리스트")
 			ig = 'g';
 			callrwmatrPassModal();
-		} else if(ev.columnName === 'expdate' || ev.columnName === 'lotNo' || ev.columnName === 'istOustDttm') {
+		} else if(ev.columnName === 'expdate' || 
+				  ev.columnName === 'rwmatrId' || 
+				  ev.columnName === 'nm' || 
+				  ev.columnName === 'vendName' || 
+				  ev.columnName === 'istQy') {
 			if(rwmatrIstList.getValue(rk, "rwmatrOrderDetaId") == '') {
 				//toastr
 				toastr.clear()
 				toastr.success( ('발주코드를 선택해주세요.'),'Gelato',{timeOut:'1000'} );
-				return;
 			}
-		}
-		
-		if(ev.columnName === 'lotNo' || ev.columnName === 'istOustDttm') {
+		} else if(ev.columnName === 'lotNo' || ev.columnName === 'istOustDttm') {
 			//toastr
 			toastr.clear()
 			toastr.success( ('저장시 자동으로 기입되는 값입니다.'),'Gelato',{timeOut:'1000'} );
-			return;
 		}
 	});
+	
 
 	//검수합격리스트 모달에서 받아온 데이터를 새로운 행에 넣어줌 or 텍스트박스에
 	function getRwmatrData(rwmatrData) {
@@ -281,25 +294,6 @@ function callrwmatrPassModal(){
 									'vendName': vendName}, true);
 	});
 	
-	//검색초기화
-	btnReset.addEventListener("click", function(){
-		selectList = [];
-		console.log("검색초기화");
-		document.getElementById("startDate").value = '';
-		document.getElementById("endDate").value = '';
-		document.getElementById("rwmName").value = '';
-		document.getElementById("vendName").value = '';
-		
-		startDate = document.getElementById("startDate").value;
-		endDate = document.getElementById("endDate").value;
-		rwmName = document.getElementById("rwmName").value;
-		vendName = document.getElementById("vendName").value;
-		
-		rwmatrIstList.readData(1,{'startDate':startDate,
-									'endDate':endDate, 
-									'rwmName':rwmName,
-									'vendName': vendName}, true);
-	});
 	
 	//추가
 	btnAdd.addEventListener("click", function(){
@@ -309,9 +303,14 @@ function callrwmatrPassModal(){
 	//삭제
 	btnDel.addEventListener("click", function(){
 		
-		if(rwmatrIstList.removeCheckedRows(true)){
-			rwmatrIstList.request('modifyData');
+		if(confirm("선택하신 항목을 삭제하시겠습니까?")){ 
+			rwmatrIstList.removeCheckedRows(false)
+			rwmatrIstList.request('modifyData',{showConfirm:false});
+			
+			toastr.clear()
+			toastr.success( ('삭제되었습니다.'),'Gelato',{timeOut:'1000'} );
 		}
+		
 	});
 	
 	//저장

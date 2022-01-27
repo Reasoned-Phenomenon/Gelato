@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>원자재 불량관리</title> 
+<title>원자재 불량조회</title> 
 <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
@@ -14,14 +14,13 @@
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head>
 <body>
-<h3>원자재 불량관리</h3>
+<h3>원자재 불량조회</h3>
 <div style="margin: 20px;">
 	<form action="">
 		자재명 : <input type="text" id="rwmName">업체명 : <input type="text" id="vendName"><br>
 		검사일자 :   <input type="date" id="startDate"> ~ <input type="date" id="endDate">
 		<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 		<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
-		<button type="button" class="btn cur-p btn-outline-primary" id="btnReset">전체검색</button>
 	</form>
 </div>
 <!-- <div style="float: right;">
@@ -144,10 +143,11 @@ var rwmatrInferList = new Grid({
 
 //자재모달
 function callRwmatrModal(){
+	$( "#dialogFrm" ).attr("title", "원자재 목록");
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 400,
+	      height: 500,
 	      width: 600,
 	      modal: true
 	}); 
@@ -158,10 +158,11 @@ function callRwmatrModal(){
 
 //업체명 모달
 function callVendModal(){
+	$( "#dialogFrm" ).attr("title", "업체 목록");
 	dialog = $( "#dialogFrm" ).dialog({
 		  modal:true,
 		  autoOpen:false,
-	      height: 400,
+	      height: 500,
 	      width: 600,
 	      modal: true
 	}); 
@@ -313,44 +314,6 @@ function callrwmatrInferCodeModal(){
 									'vendName': vendName}, true);
 	});
 	
-	//검색초기화
-	btnReset.addEventListener("click", function(){
-		console.log("검색초기화");
-		document.getElementById("startDate").value = '';
-		document.getElementById("endDate").value = '';
-		document.getElementById("rwmName").value = '';
-		document.getElementById("vendName").value = '';
-		
-		startDate = document.getElementById("startDate").value;
-		endDate = document.getElementById("endDate").value;
-		rwmName = document.getElementById("rwmName").value;
-		vendName = document.getElementById("vendName").value;
-		
-		rwmatrInferList.readData(1,{'startDate':startDate,
-								  'endDate':endDate, 
-								  'rwmName':rwmName,
-								  'vendName': vendName}, true);
-	});
-	
-	//추가
-	btnAdd.addEventListener("click", function(){
-		rwmatrInferList.prependRow();
-	});
-	
-	//삭제
-	btnDel.addEventListener("click", function(){
-		
-		if(rwmatrInferList.removeCheckedRows(true)){
-			rwmatrInferList.request('modifyData');
-		}
-	});
-	
-	//저장
-	btnSave.addEventListener("click", function(){
-		rwmatrInferList.blur();
-		rwmatrInferList.request('modifyData');
-		flag = 'O'
-	});
 
 </script>
 </body>
