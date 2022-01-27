@@ -18,7 +18,7 @@ th, td {
 		<h2 id="title">생산계획관리</h2>
 		<br>
 	</div>
-	
+	<br>
 	<div id="tabs">
 		<ul>
 			<li><a href="#ManageTab">관리</a></li>

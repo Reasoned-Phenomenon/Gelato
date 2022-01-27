@@ -12,6 +12,7 @@
 		<h2>공정실적</h2>
 		<br>
 	</div>
+	<br>
 	<div>
 		<button type="button" class="btn btn-secondary" id="btnSearchPlan">생산지시목록</button>
 	</div>

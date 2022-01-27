@@ -17,6 +17,7 @@ th, td {
 		<h2>생산관리</h2>
 		<br>
 	</div>
+	<br>
 	<div>
 		<button type="button" class="btn btn-secondary" id="btnSearchPlan">생산지시목록</button>
 	</div>

@@ -17,6 +17,7 @@ th, td {
         <h2>생산계획조회</h2>
         <br>
     </div>
+    <br>
     <div>
         <table>
             <tbody>
