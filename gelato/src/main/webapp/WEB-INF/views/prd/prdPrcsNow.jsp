@@ -95,7 +95,7 @@
 				contentType : 'application/json',
 				initialRequest: false
 			},
-			rowHeaders : ['rowNum' ],
+			//rowHeaders : ['rowNum' ],
 			selectionUnit : 'row',
 			columns : [ {
 				header : '시작시간',
@@ -115,6 +115,9 @@
 			}, {
 				header : '불량코드',
 				name : 'inferId',
+			},  {
+				header : '불량사유',
+				name : 'deta',
 			}, {
 				header : '불량량',
 				name : 'inferQy',
@@ -133,9 +136,9 @@
 			"click",
 			function() {
 				nonPrcsDialog.dialog("open");
-				$("#nonPrcsDialog").load("${path}/prd/nonPrcsDialog.do",
+				$("#nonPrcsDialog").load("${path}/prd/chooseIndicaDialog.do",
 						function() {
-							console.log("주문창 로드")
+							console.log("모달 로드")
 						})
 			});
 	

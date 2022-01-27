@@ -20,4 +20,7 @@ public class PrdPrcsNowVO {
 	
 	String indicaDetaId;
 	String prdtNm;
+	String indicaD;
+	
+	String deta;
 }
