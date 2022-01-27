@@ -83,7 +83,7 @@
 				eqmInsGrid.appendRow({});
 				
 				eqmInsGrid.setValue(eqmInsGrid.getRowCount()-1, 'eqmId', vo.eqmId);
-				eqmInsGrid.setValue(eqmInsGrid.getRowCount()-1, 'eqmName', vo.eqmName);
+				eqmInsGrid.setValue(eqmInsGrid.getRowCount()-1, 'eqmName', vo.eqmName);   
 				eqmInsGrid.setValue(eqmInsGrid.getRowCount()-1, 'chckPerd', vo.chckPerd);
 				eqmInsGrid.setValue(eqmInsGrid.getRowCount()-1, 'chckDt', vo.chckDt);
 				eqmInsGrid.setValue(eqmInsGrid.getRowCount()-1, 'nmCkDt', vo.nmCkDt);
