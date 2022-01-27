@@ -9,7 +9,7 @@
 <title>설비 점검 페이지(점검등록/점검내역조회)</title>
 <style>
 .tui-grid-btn-filter {
-display : none
+	display: none
 }
 </style>
 </head>
@@ -115,10 +115,10 @@ display : none
 				header : '설비구분',
 				name : 'fg',
 				filter : {
-                    type: 'text',
-                    showApplyBtn: true,
-                    showClearBtn: true
-                  }
+					type : 'text',
+					showApplyBtn : true,
+					showClearBtn : true
+				}
 			}, {
 				header : '점검주기',
 				name : 'chckPerd'
@@ -164,17 +164,18 @@ display : none
 			} ]
 		});
 
-		var abc = '';
 		//드롭다운 선택시 바로 조회
 		function selectGubun() {
 			var gubun = $('#gubun option:selected').val();
-			//eqmInsGrid.readData(1, {'gubun' : gubun, 'chckDt' : abc}, true);
 			if (gubun == '전체') {
 				eqmInsGrid.unfilter('fg');
 			} else {
-				eqmInsGrid.filter('fg',[{code : 'eq', value : gubun}]);
+				eqmInsGrid.filter('fg', [ {
+					code : 'eq',
+					value : gubun
+				} ]);
 			}
-		} 
+		}
 
 		//점검일자 input태그에 현재날짜 띄우기
 		document.getElementById('chckDate').value = new Date().toISOString()
@@ -205,19 +206,49 @@ display : none
 
 		//저장버튼
 		$("#saveBtn").on("click", function() {
-			eqmInsGrid.request('modifyData');
+			console.log("이거뭐야?"+eqmInsGrid.getRow(0))
+			
+			if (eqmInsGrid.getRow(0) != null) {
+				eqmInsGrid.blur();
+				if (confirm("저장하시겠습니까?")) {
+					eqmInsGrid.request('modifyData', {
+						showConfirm : false
+					});
+				}
+			} else {
+				alert("선택된 데이터가 없습니다.");
+			}
 		})
+
+		//일 점검관리 내역 모달에서 값 가져오기
+		function getModalData(str1, str2) {
+			console.log("str1:" + str1)
+			console.log("str2:" + str2)
+			eqmInsGrid.readData(1, {
+				'chckDt' : str1,
+				'gubun' : str2
+			}, true);
+			ckDialog.dialog("close");
+		}
 
 		//삭제버튼
 		$("#removeBtn").on("click", function() {
-			eqmInsGrid.request('modifyData', {
-				'checkedOnly' : true,
-				'modifiedOnly' : false,
-				'showConfirm' : false
-			});
-			eqmInsGrid.removeCheckedRows(true)
-		})
+			if (eqmInsGrid.getRow(0) != null) {
+				eqmInsGrid.blur();
+				if (confirm("삭제하시겠습니까?")) {
+					eqmInsGrid.request('modifyData', {
+						'checkedOnly' : true,
+						'modifiedOnly' : false,
+						'showConfirm' : false
+					});
+					eqmInsGrid.removeCheckedRows(false)  //true -> 확인 받고 삭제 / false는 바로 삭제
+				}
+			} else {
+				alert("선택된 데이터가 없습니다.");
+			}
+		}) 
 
+		
 		//초기화버튼
 		$("#resetBtn").on("click", function() {
 			eqmInsGrid.clear();

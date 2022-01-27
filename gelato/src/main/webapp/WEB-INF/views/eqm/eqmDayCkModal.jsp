@@ -101,9 +101,8 @@
 				
 				var gubun = $('#gubun option:selected').val(); 
 				
-				eqmInsGrid.readData(1,{'chckDt': codeParam, 'gubun': gubun}, true);
-				abc = codeParam;
-				ckDialog.dialog("close");
+				
+				getModalData(codeParam, gubun);
 			});
 		
 		

@@ -17,4 +17,7 @@ public interface EqmInsMapper {
 	
 	//점검삭제
 	int deleteChck(EqmInsVO eqmInsVo);
+	
+	//점검수정
+	int updateChck(EqmInsVO eqmInsVo);
 }
