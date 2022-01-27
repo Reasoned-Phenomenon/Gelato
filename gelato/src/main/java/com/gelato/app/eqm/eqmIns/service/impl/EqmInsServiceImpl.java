@@ -38,6 +38,11 @@ public class EqmInsServiceImpl implements EqmInsService {
 				mapper.deleteChck(vo);
 			}
 		}
+		if (eqmInsVo.getUpdatedRows() != null) {
+			for (EqmInsVO vo : eqmInsVo.getUpdatedRows()) {
+				mapper.updateChck(vo);
+			}
+		}
 		return 1;
 	}
 

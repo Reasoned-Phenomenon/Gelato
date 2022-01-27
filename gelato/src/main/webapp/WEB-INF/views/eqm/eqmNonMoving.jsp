@@ -142,7 +142,7 @@
 		 eqmListGrid.readData(1,{'useYn' : eqmNonYn,'gubun':$("#gubun").val()}, true);
 	})
 	
-	//라디오 버튼 클릭시 바로 조회
+	//라디오 버튼(가동/비가동) 클릭시 바로 조회
 	$("input[name='eqmNonYn']:radio").change(function () {
         //라디오 버튼 값을 가져온다.
         console.log(this);
