@@ -227,7 +227,6 @@ function callVendModal(){
     $("#vendDialogFrm").load("${path}/rwmatr/searchVendDialog.do", function(){console.log("업체명 목록")})
 }
 	
-	
 	//자재명 클릭시 모달
 	rwmatrOrderList.on('click', (ev) => {
 		rk = ev.rowKey;
