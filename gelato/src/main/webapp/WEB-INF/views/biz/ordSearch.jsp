@@ -52,11 +52,11 @@
 	      			<li>
 	      				<div>
 	      					<label>거래처</label>
-	      					<input type="text" id="vendName" name="vendName">
+	      					<input type="text" id="vendName" name="vendName" readonly>
 	      					<button type="button" id="BtnVend">찾아보기</button>&ensp;&ensp;&ensp;
 	      					
 	      					<label>제품명</label>
-	      					<input type="text" id="prdtNm" name="prdtNm">
+	      					<input type="text" id="prdtNm" name="prdtNm" readonly>
 	      					<button type="button" id="BtnPrdt">찾아보기</button> &ensp;
 	      					
 	      				<button type="button" class="btn cur-p btn-outline-primary" id="btnRst">새자료</button>
@@ -75,7 +75,7 @@
 	  </div> 
  </main>
 
-	<div id="ordGrid" style="width: 100%"></div>
+	<div id="ordGrid" style="width: 80%"></div>
 	<div id="modal" style="width: 100%"></div>
 
    	 
@@ -110,6 +110,7 @@ var ordGrid = new Grid({
 	},
 	rowHeaders: ['rowNum'],
 	selectionUnit: 'row',
+	bodyHeight: 600,
 	columns:[
 			{
 			  header: '주문코드',
