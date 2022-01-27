@@ -23,16 +23,16 @@
      	<if test="stFg !='전체'">
      		 and a.st_fg = #{stFg}
      	</if>
-     	<if test="startDt !=null and startDt != null">
+     	<if test="startDt !=null and startDt != ''">
      		 <![CDATA[and trunc(a.order_dt) >= to_date(#{startDt})]]> 
      	</if>
-     	<if test="endDt !=null and endDt != null">
+     	<if test="endDt !=null and endDt != ''">
      		 <![CDATA[and trunc(a.order_dt) <= to_date(#{endDt})]]> 
      	</if>
-     	<if test="startedDt !=null and startedDt != null">
+     	<if test="startedDt !=null and startedDt != ''">
      		 <![CDATA[and trunc(a.oust_dt) >= to_date(#{startedDt})]]> 
      	</if>
-     	<if test="endedDt !=null and endedDt != null">
+     	<if test="endedDt !=null and endedDt != ''">
      		 <![CDATA[and trunc(a.oust_dt) <= to_date(#{endedDt})]]> 
      	</if>
      </where>

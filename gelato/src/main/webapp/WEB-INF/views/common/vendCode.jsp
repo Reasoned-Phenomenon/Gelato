@@ -65,11 +65,10 @@ var vendCodeGrid = new Grid({
 	data : {
 	  api: {
 	    readData: 	{ url: '${path}/com/vendCodeList.do', method: 'GET'},
-	    
+	    modifyData : { url: '${path}/com/vendCodeModifyData.do', method: 'PUT'}
 	  },
 	  contentType: 'application/json',
-	 
-	
+	  initialRequest: false
 	},
 	rowHeaders: ['rowNum'],
 	selectionUnit: 'row',
@@ -138,12 +137,34 @@ var vendCodeGrid = new Grid({
 		 var bizno = document.getElementById("bizno").value;  
 		 var telno = document.getElementById("telno").value;    
 		
-		 vendCodeGrid.readData(1, {'vendId':vendId, 'vendName':vendName,'bizno':bizno,'telno':telno},true);
+		 vendCodeGrid.readData(1, {'vendId':vendId, 'vendName':vendName,'bizno':bizno,'telno':telno}, true);
 	});
  
+ // 그리드 행 추가 버튼 이벤트.
+ 	AddBtn.addEventListener("click", function(){
+ 		vendCodeGrid.prependRow();
+	});
+ 
+	//컨트롤러 응답
+	vendCodeGrid.on('response', function (ev) {
+		console.log(ev)
+		if(flag == 'O') {
+			vendCodeGrid.readData(1);
+			flag = 'X';
+		}
+		
+	});
+ 
+	
   // 등록 버튼 이벤트.
-  
+	SaveBtn.addEventListener("click", function() {
+		vendCodeGrid.blur();
+		vendCodeGrid.request('modifyData');
+		flag = 'O'
+	});
 
+ 
+  
 
 </script>
 

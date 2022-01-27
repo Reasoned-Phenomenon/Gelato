@@ -59,11 +59,11 @@
 	      					<input type="text" id="prdtNm" name="prdtNm" readonly>
 	      					<button type="button" id="BtnPrdt">찾아보기</button> &ensp;
 	      					
-	      				<button type="button" class="btn cur-p btn-outline-primary" id="btnRst">새자료</button>
-	      				<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
+	      			
 	      				<button type="reset" class="btn cur-p btn-outline-primary">초기화</button>
+	      				<button type="button" class="btn cur-p btn-outline-primary" id="btnFind">조회</button>
 						<button type="button" class="btn cur-p btn-outline-primary" id="btnExcel">Excel</button>
-						<button type="button" class="btn cur-p btn-outline-primary" id="btnprint">인쇄</button>
+					
 						
 						  <br>
 	      				</div>
@@ -76,12 +76,15 @@
  </main>
 
 	<div id="ordGrid" style="width: 80%"></div>
-	<div id="modal" style="width: 100%"></div>
+	<div id="prdtListmodal" title="제품 목록"></div>
+	<div id="vendListmodal" title="거래처 목록"></div>
 
    	 
 	
 <script>
 let dialog;
+
+let dialog2;
 
 
 var Grid = tui.Grid;
@@ -196,9 +199,26 @@ var ordGrid = new Grid({
 	
 	// 
 		
-	// 모달창 생성 함수.
+	// 모달창 생성 함수. 거래처
 	$(function () {
-		dialog = $( "#modal" ).dialog({
+		dialog = $( "#vendListmodal" ).dialog({
+			autoOpen: false,
+			height: 500,
+			width: 700,
+			modal: true,
+			buttons: {
+			// 선택하는 버튼 넣어두기!. 옵션? 어떤거 잇는 지 찾아보기.
+			Cancel: function() {
+				
+			}
+		  }
+			
+		})
+	});
+	
+	// 모달창 생성 함수. 제품
+	$(function () {
+		dialog2 = $( "#prdtListmodal" ).dialog({
 			autoOpen: false,
 			height: 500,
 			width: 700,
@@ -214,12 +234,12 @@ var ordGrid = new Grid({
 	
 	// 거래처 찾아보기 버튼 
 	BtnVend.addEventListener("click", function() {
-		console.log("444444");
+		
 		console.log("모달클릭")
 		dialog.dialog( "open" );
 		
 		 // 컨트롤러에 보내주고 따로 모달은 jsp 만들 필요가 없으니깐  
-		 $('#modal').load("${path}/biz/vendModal.do",function () {
+		 $('#vendListmodal').load("${path}/biz/vendModal.do",function () {
 			console.log('로드됨')
 			vendListGrid.readData(1,{}, true);
 		})
@@ -228,12 +248,12 @@ var ordGrid = new Grid({
 	
 	// 제품코드 찾아보기 버튼
 	BtnPrdt.addEventListener("click", function() {
-		console.log("55555");
+		
 		console.log("버튼클릭");
 		dialog.dialog("open");
 	
-		$("#modal").load("${path}/biz/prdtModal.do",function () {
-			console.log("모달로드");
+		$("#prdtListmodal").load("${path}/biz/prdtModal.do",function () {
+			console.log("제품코드 modal");
 			prdtListGrid.readData(1,{}, true);
 		})
 	})
