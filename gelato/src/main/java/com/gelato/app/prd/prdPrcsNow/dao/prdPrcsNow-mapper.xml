@@ -52,7 +52,7 @@
 			   ic.deta as deta
 		from prcs_now pn left outer join prcs_infer_deta pid
 		    on pn.indica_deta_id = pid.indica_deta_id and pn.prcs_now_id = pid.prcs_now_id
-		    join infer_code ic
+		    left outer join infer_code ic
     		on pid.infer_id = ic.infer_id
 		where pn.indica_deta_id = #{indicaDetaId}
 		      AND pn.prcs_now_id = #{prcsNowId}
