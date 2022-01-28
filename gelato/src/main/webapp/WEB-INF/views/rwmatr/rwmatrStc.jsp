@@ -53,7 +53,6 @@ let rk = '';
 var rwmName;
 var vendName;
 
-
 //그리드 테마
 Grid.applyTheme('striped', {
 	  cell: {
