@@ -41,7 +41,7 @@
 	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
 <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
 <link rel="stylesheet" href="${path}/resources/css/gelato_grid.css" />
-
+   
 <!-- 아이콘 -->
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
