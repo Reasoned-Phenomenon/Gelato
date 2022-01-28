@@ -64,6 +64,7 @@
             		<button id="reset" value="초기화"
 						class="btn cur-p btn-outline-dark">초기화</button>
 					<button id="AddBtn" class="btn cur-p btn-outline-dark">저장</button>
+					<!-- <input type="hidden" name="" value=""> -->
 					
 				</div>	
          </div>
@@ -210,9 +211,13 @@ var rwmatrGrid = new Grid({
 					success : function(res) {
 						rwmatrGrid.readData(1,{},true)
 						console.log(res);
-					}
-						
+						alert("등록 되었습니다.");
+					},
+					error : function() {
+						alert("등록 실패했습니다.");
+					}	
 				})
+				
 			} else if (rwmatrId !='') {
 				
 				$.ajax({
@@ -232,6 +237,10 @@ var rwmatrGrid = new Grid({
 					success : function(res) {
 						rwmatrGrid.readData(1,{},true)
 						console.log(res);
+						alert("수정 되었습니다.");
+					},
+					error : function() {
+						alert("수정 실패했습니다.");
 					}
 						
 				})
@@ -239,8 +248,6 @@ var rwmatrGrid = new Grid({
 			}
 			
 		});
-		
-		
 		
 		
 		// 초기화 버튼 이벤트.
@@ -263,13 +270,8 @@ var rwmatrGrid = new Grid({
 				autoOpen: false,
 				height: 500,
 				width: 700,
-				modal: true,
-				buttons: {
-				// 선택하는 버튼 넣어두기!. 옵션? 어떤거 잇는 지 찾아보기.
-				Cancel: function() {
+				modal: true
 				
-				}
-				}
 			})
 		});
 		

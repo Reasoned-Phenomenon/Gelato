@@ -75,7 +75,7 @@
 	  </div> 
  </main>
 
-	<div id="ordGrid" style="width: 80%"></div>
+	<div id="ordGrid" style="width: 90%"></div>
 	<div id="prdtListmodal" title="제품 목록"></div>
 	<div id="vendListmodal" title="거래처 목록"></div>
 
