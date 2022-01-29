@@ -16,7 +16,7 @@
 	</div>
 	<br>
 	<div id="chooseIndicaGrid"></div>
-</body>
+</body> 
 
 <script>
 //생산계획일자 현재날짜 기본 설정
